@@ -1,6 +1,3 @@
-
-/* adm.css */
-
 /* RESET / BASE */
 * {
   margin: 0;
@@ -11,30 +8,46 @@
 body {
   font-family: Arial, sans-serif;
   background: #fafafa;
+  color: #333;
+  min-height: 100vh;
 }
 
+/* --- Estilo para o Header (carregado via header.html) --- */
 header {
-  background: #f2f2f2;
+  background-color: #f2f2f2;
   padding: 20px;
   text-align: center;
 }
 
-nav ul {
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+header nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
-nav ul li {
+header nav ul li {
   display: inline-block;
 }
 
-nav ul li a {
+header nav li a {
   text-decoration: none;
-  color: #333;
   font-weight: bold;
+  padding: 8px 12px;
+  color: #333;
+  background: #e9e9e9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+header nav li a:hover {
+  background: #ddd;
 }
 
 /* Área principal */
