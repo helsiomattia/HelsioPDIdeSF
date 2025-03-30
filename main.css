@@ -1,12 +1,67 @@
-/* main.css - estilos básicos + layout da página inicial */
+/* main.css */
 
-/* Já deve ter seu reset e estilos de body, header, nav etc. 
-   Abaixo adicionamos regras para as novas seções e classes. */
+/* RESET / BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* --- Estilo para o Header (carregado via header.html) --- */
+header {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+header nav ul li {
+  display: inline-block;
+}
+
+header nav li a {
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  color: #333;
+  background: #e9e9e9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+header nav li a:hover {
+  background: #ddd;
+}
+
+/* ---------------------
+   Seções da Página Inicial
+   --------------------- */
+
+/* Seção de perfil */
 .perfil-section {
   text-align: center;
   margin-bottom: 30px;
 }
+
 .perfil-foto {
   width: 120px;
   height: 120px;
@@ -14,19 +69,23 @@
   margin-bottom: 10px;
   object-fit: cover;
 }
+
 .subtitulo {
   font-size: 1.1rem;
   color: #666;
 }
+
 .resumo {
   font-size: 1rem;
   line-height: 1.5;
   max-width: 800px;
   margin: 10px auto;
 }
+
 .badges {
   margin-top: 15px;
 }
+
 .badges span {
   display: inline-block;
   margin: 5px 5px 0 0;
@@ -44,15 +103,18 @@
   padding: 10px;
   border-left: 3px solid #ccc;
 }
+
 .experiencia-section h4 {
   margin: 0 0 5px 0;
   font-size: 1.1rem;
 }
+
 .experiencia-section h4 span {
   font-weight: normal;
   font-size: 0.9rem;
   color: #999;
 }
+
 .experiencia-section p {
   margin: 0;
   line-height: 1.4;
@@ -60,10 +122,16 @@
 }
 
 /* Formação, Certificações, Skills */
-.formacao-section, .certificacoes-section, .skills-section, .contato-section {
+.formacao-section,
+.certificacoes-section,
+.skills-section,
+.contato-section {
   margin-bottom: 30px;
 }
-.formacao-section ul, .certificacoes-section ul, .skills-section ul {
+
+.formacao-section ul,
+.certificacoes-section ul,
+.skills-section ul {
   list-style: disc inside;
   margin-left: 20px;
   color: #444;
@@ -74,6 +142,7 @@
   color: #0066cc;
   text-decoration: none;
 }
+
 .contato-section p a:hover {
   text-decoration: underline;
 }
