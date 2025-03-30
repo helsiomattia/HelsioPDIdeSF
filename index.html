@@ -9,17 +9,154 @@
 </head>
 <body>
 
-  <!-- Aqui será injetado o cabeçalho -->
+  <!-- Cabeçalho carregado via fetch -->
   <div id="common-header"></div>
 
+  <!-- Seção principal de apresentação -->
   <main>
-    <p>Bem-vindo(a)! Selecione uma das áreas no menu acima para visualizar as competências de cada perfil.</p>
+
+    <!-- Seção de Apresentação Pessoal -->
+    <section class="perfil-section">
+      <img class="perfil-foto" src="imagens/perfil.jpg" alt="Minha Foto" />
+      <h2>Helsio Mattia</h2>
+      <p class="subtitulo">
+        Certified Salesforce Professional | CRM Admin, Builder & Analyst |<br>
+        System Analyst | MBA em Engenharia de Software
+      </p>
+      <p class="resumo">
+        Profissional com atuação em <strong>Otimização de CRM</strong>, 
+        especializado em <strong>Salesforce</strong>.
+        Formado em <strong>Administração</strong>, com <strong>MBA em Engenharia 
+        de Software</strong> e graduando em <strong>Sistemas de Informação</strong>.
+        Possuo forte experiência em análise de requisitos, liderança de times 
+        multifuncionais e automação de processos. Fluente em inglês (nível C1),
+        habituado a ambientes diversos e times globais.        
+      </p>
+      <div class="badges">
+        <!-- Exemplo de "tags" (badges) ou palavras-chave -->
+        <span>#Salesforce</span>
+        <span>#BusinessAnalysis</span>
+        <span>#ProcessAutomation</span>
+        <span>#ServiceCloud</span>
+        <span>#DataIntegration</span>
+      </div>
+    </section>
+
+    <!-- Seção de Experiências Profissionais -->
+    <section class="experiencia-section">
+      <h3>Experiências Profissionais</h3>
+
+      <article>
+        <h4>Efí Bank <span>(Agosto 2024 – Presente)</span></h4>
+        <p>
+          <em>Salesforce CRM Analyst</em><br>
+          Responsável por gerenciar e otimizar a plataforma Salesforce, alinhando-a a processos de negócio. 
+          Participação na identificação e resolução de problemas de CRM, com foco em melhorias de performance, 
+          escalabilidade e automação de processos.
+        </p>
+      </article>
+
+      <article>
+        <h4>EQI Investimentos <span>(Março 2022 – Julho 2024)</span></h4>
+        <p>
+          <em>Salesforce CRM Analyst</em><br>
+          Customização de objetos, campos, layouts e automações para atender aos objetivos de negócio. 
+          Interação com diversos departamentos, transformando requisitos em soluções práticas, melhorando 
+          a experiência do usuário e aumentando a produtividade.
+        </p>
+      </article>
+
+      <article>
+        <h4>Cloud11 <span>(Outubro 2021 – Fevereiro 2022)</span></h4>
+        <p>
+          <em>Salesforce CRM Analyst (Exchange no Egito)</em><br>
+          Adaptação da plataforma Salesforce a diferentes realidades regionais, focando na otimização de processos 
+          e melhorias operacionais. Participação na resolução de problemas iniciais de adoção da ferramenta.
+        </p>
+      </article>
+
+      <article>
+        <h4>ControlSoft Assessoria e Desenvolvimento LTDA <span>(Março 2018 – Julho 2019)</span></h4>
+        <p>
+          <em>Software Quality Assurance (QA) Analyst</em><br>
+          Planejamento e execução de testes em sistemas ERP para agronegócio, garantindo qualidade e confiabilidade. 
+          Foco em testes de integração e validação de dados críticos, provendo relatórios detalhados para equipes 
+          de desenvolvimento.
+        </p>
+      </article>
+
+      <article>
+        <h4>PROXSIS Sistemas de Gestão Empresarial <span>(Março 2016 – Julho 2017)</span></h4>
+        <p>
+          <em>Software Consultant</em><br>
+          Implementação de sistemas ERP em empresas industriais, mapeando processos, identificando necessidades 
+          e configurando soluções sob medida. Treinamento e suporte contínuo aos usuários, garantindo estabilidade 
+          e eficiência operacional.
+        </p>
+      </article>
+
+      <!-- Você pode incluir as outras experiências listadas no PDF da mesma forma -->
+    </section>
+
+    <!-- Seção de Formação Acadêmica -->
+    <section class="formacao-section">
+      <h3>Formação Acadêmica</h3>
+      <ul>
+        <li><strong>MBA em Engenharia de Software</strong> – Universidade Tecnológica Federal do Paraná (2023 – 2024)</li>
+        <li><strong>Bacharelado em Sistemas de Informação</strong> – UNIASSELVI (em andamento, desde 2023)</li>
+        <li><strong>MBA em Gestão de Projetos</strong> – UNIASSELVI (2021)</li>
+        <li><strong>MBA em Business Intelligence</strong> – UNIASSELVI (2020 – 2021)</li>
+        <li><strong>Pós-graduação em Gestão de Vendas</strong> – UNIASSELVI (2021)</li>
+        <li><strong>Graduação em Administração</strong> – (mencionado no resumo)</li>
+      </ul>
+    </section>
+
+    <!-- Seção de Certificações -->
+    <section class="certificacoes-section">
+      <h3>Certificações</h3>
+      <ul>
+        <li>Salesforce Certified Administrator</li>
+        <li>Salesforce AI Associate</li>
+        <li>Bootcamp Cloud AWS</li>
+        <li>Git Training</li>
+        <li>Qualificação em Customer Success</li>
+      </ul>
+    </section>
+
+    <!-- Seção de Competências e Idiomas -->
+    <section class="skills-section">
+      <h3>Principais Competências</h3>
+      <ul>
+        <li>SOQL / Administração de Salesforce</li>
+        <li>Sales Cloud, Service Cloud</li>
+        <li>Suporte técnico e atendimento a usuários</li>
+        <li>Process Automation e Integrações</li>
+        <li>Métodos Ágeis (Scrum/Kanban)</li>
+      </ul>
+      <h3>Idiomas</h3>
+      <ul>
+        <li>Inglês: Profissional (C1)</li>
+        <li>Português: Nativo</li>
+      </ul>
+    </section>
+
+    <!-- Seção de Contato / Social -->
+    <section class="contato-section">
+      <h3>Contato</h3>
+      <p>Telefone/WhatsApp: +55 49 9 8814 5714</p>
+      <p>Email: <a href="mailto:helsio_cm7@hotmail.com">helsio_cm7@hotmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/helsiomattia" target="_blank">linkedin.com/in/helsiomattia</a></p>
+      <p>Trailblazer.me: 
+        <a href="https://trailblazer.me/id/helsiomattia" target="_blank">trailblazer.me/id/helsiomattia</a>
+      </p>
+    </section>
+
   </main>
 
-  <!-- Scripts -->
+  <!-- Script principal -->
   <script src="main.js"></script>
+  <!-- Script que carrega o header -->
   <script>
-    // Carrega o header.html e insere no DIV #common-header
     fetch("header.html")
       .then(response => {
         if (!response.ok) {
