@@ -1,1 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Administrador de Salesforce</title>
+  <!-- CSS específico para a página de Admin -->
+  <link rel="stylesheet" href="css/adm.css" />
+</head>
+<body>
+  <header>
+    <h1>Administrador de Salesforce</h1>
+    <nav>
+      <ul>
+        <!-- Ajuste este link para retornar à sua HOME (index.html) ou qualquer outra rota -->
+        <li><a href="index.html">Início</a></li>
+        <!-- Se quiser, links para outras páginas separadas -->
+        <!-- <li><a href="consult.html">Consultor</a></li>
+        <li><a href="architect.html">Architect</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HARD SKILLS -->
+    <section>
+      <h2>Hard Skills do Administrador</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Competência</th>
+            <th>Júnior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Pleno (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Sênior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Especialista (descrição)</th>
+            <th>Nota (1-10)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Configuração Básica (Perfis, Permissões, Usuários)</td>
+            <td>Consegue criar e editar usuários, perfis simples e permissões básicas</td>
+            <td>
+              <select id="adm-hard-config-basic-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Entende regras de compartilhamento, papéis e conjuntos de permissões. Mantém política de segurança alinhada às melhores práticas</td>
+            <td>
+              <select id="adm-hard-config-basic-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento. Integra Single Sign-On quando necessário</td>
+            <td>
+              <select id="adm-hard-config-basic-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance em todo o Salesforce</td>
+            <td>
+              <select id="adm-hard-config-basic-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Criação e Customização de Objetos, Campos e Layouts</td>
+            <td>Cria objetos e campos básicos e faz ajustes simples de layout</td>
+            <td>
+              <select id="adm-hard-obj-fields-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Domina objetos customizados intermediários, relacionamentos (master-detail, lookup) e layouts otimizados</td>
+            <td>
+              <select id="adm-hard-obj-fields-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Planeja estruturas complexas de dados com foco em performance e escalabilidade. Cria fórmulas avançadas</td>
+            <td>
+              <select id="adm-hard-obj-fields-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Lidera revisões de arquitetura e governança de dados. Orienta equipes no uso padronizado de objetos e componentes Lightning</td>
+            <td>
+              <select id="adm-hard-obj-fields-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <!-- Você pode continuar com as demais linhas de Hard Skills do Admin da sua planilha -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SOFT SKILLS -->
+    <section>
+      <h2>Soft Skills do Administrador</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Competência</th>
+            <th>Júnior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Pleno (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Sênior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Especialista (descrição)</th>
+            <th>Nota (1-10)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Suporte a Usuários e Trabalho em Equipe</td>
+            <td>Atende chamados ou tickets básicos e dá orientação simples ao usuário final</td>
+            <td>
+              <select id="adm-soft-suporte-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Resolve problemas comuns de forma sistemática. Desenvolve mini-treinamentos internos</td>
+            <td>
+              <select id="adm-soft-suporte-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Lidera o suporte, cria base de conhecimento e gerencia backlog de melhorias. Reduz incidentes repetitivos</td>
+            <td>
+              <select id="adm-soft-suporte-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Define SLAs e processos de suporte, mede satisfação do usuário e coordena equipes multidisciplinares</td>
+            <td>
+              <select id="adm-soft-suporte-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Comunicação e Documentação</td>
+            <td>Escreve manuais simples para usuários e reporta problemas de modo claro</td>
+            <td>
+              <select id="adm-soft-comunicacao-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Documenta processos de configuração e automação, garantindo reuso e rastreabilidade. Faz apresentações internas simples</td>
+            <td>
+              <select id="adm-soft-comunicacao-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Comunica projetos e resultados para times diversos (usuários, gestão, TI). Redige documentação complexa e políticas oficiais</td>
+            <td>
+              <select id="adm-soft-comunicacao-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+            <td>Participa da governança global, apresentando resultados para níveis executivos. Publica white papers internos ou guias de boas práticas</td>
+            <td>
+              <select id="adm-soft-comunicacao-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5</option><option>6</option><option>7</option><option>8</option>
+                <option>9</option><option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <!-- Continue com as demais Soft Skills do Admin, se quiser reproduzir toda a planilha -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- JS específico para a página de Admin -->
+  <script src="js/adm.js"></script>
+</body>
+</html>
 
