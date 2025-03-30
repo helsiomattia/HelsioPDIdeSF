@@ -4,27 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home - Mapa de Competências Salesforce</title>
-  <!-- CSS da Home -->
-  <link rel="stylesheet" href="css/home.css" />
+  <!-- Link para o CSS principal -->
+  <link rel="stylesheet" href="main.css" />
 </head>
 <body>
   <header>
-    <h1>Mapa de Competências Salesforce</h1>
+    <h1>Bem-vindo ao Mapa de Competências Salesforce</h1>
   </header>
 
   <nav>
-    <!-- Botões ou links que indicam qual conteúdo será carregado -->
-    <button data-page="adm.html">Administrador</button>
-    <button data-page="consult.html">Consultor</button>
-    <button data-page="architect.html">Solution Architect</button>
+    <ul>
+      <!-- Links diretos para cada página -->
+      <li><a href="adm.html">Administrador</a></li>
+      <li><a href="consult.html">Consultor</a></li>
+      <li><a href="architect.html">Solution Architect</a></li>
+    </ul>
   </nav>
 
-  <!-- Aqui será carregado o conteúdo das outras páginas -->
-  <main id="content">
-    <p>Bem-vindo! Clique em uma das opções acima para carregar as competências.</p>
+  <main>
+    <p>Escolha uma das áreas acima para visualizar as competências.</p>
   </main>
 
-  <!-- Script JS que cuida do carregamento -->
-  <script src="js/home.js"></script>
+  <!-- Script principal (se precisar de algo dinâmico) -->
+  <script src="main.js"></script>
 </body>
 </html>
