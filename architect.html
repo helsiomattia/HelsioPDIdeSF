@@ -1,24 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Certified Solution Architect</title>
-  <!-- CSS específico para a página de Architect -->
-  <link rel="stylesheet" href="css/architect.css" />
+  <title>Solution Architect</title>
+  <link rel="stylesheet" href="architect.css" />
 </head>
 <body>
-  <header>
-    <h1>Certified Solution Architect</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="adm.html">Administrador</a></li>
-        <li><a href="consult.html">Consultor</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div id="common-header"></div>
 
   <main>
     <!-- HARD SKILLS -->
@@ -460,7 +449,14 @@
     </section>
   </main>
 
-  <!-- JS específico para Architect -->
-  <script src="js/architect.js"></script>
+ <script src="architect.js"></script>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(headerHTML => {
+        document.getElementById("common-header").innerHTML = headerHTML;
+      })
+      .catch(error => console.error("Erro ao inserir cabeçalho:", error));
+  </script>
 </body>
 </html>
