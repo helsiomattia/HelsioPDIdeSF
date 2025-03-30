@@ -1,1 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consultor de Salesforce</title>
+  <!-- CSS específico para a página de Consultor -->
+  <link rel="stylesheet" href="css/consult.css" />
+</head>
+<body>
+  <header>
+    <h1>Consultor de Salesforce</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="adm.html">Administrador</a></li>
+        <!-- Caso você já tenha a página de Architect pronta, pode listar aqui -->
+        <!-- <li><a href="architect.html">Architect</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HARD SKILLS -->
+    <section>
+      <h2>Hard Skills do Consultor</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Competência</th>
+            <th>Júnior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Pleno (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Sênior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Especialista (descrição)</th>
+            <th>Nota (1-10)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Configuração Intermediária de Salesforce (Consultoria Básica)</td>
+            <td>Conhece objetos padrão (Lead, Account, Contact, Opportunity) e faz automações simples declarativas</td>
+            <td>
+              <select id="consult-hard-config-int-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Configurações mais avançadas, integrando objetos customizados e automações intermediárias. Alinha processos de vendas ou suporte</td>
+            <td>
+              <select id="consult-hard-config-int-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Cria soluções complexas para vários departamentos e produz protótipos ou provas de conceito (POCs)</td>
+            <td>
+              <select id="consult-hard-config-int-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Integra vários módulos avançados (Sales, Service, Experience, Marketing) em ecossistemas completos. É referência em arquitetar soluções multi-cloud</td>
+            <td>
+              <select id="consult-hard-config-int-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Integrações e Ferramentas Complementares</td>
+            <td>Entende a visão geral de APIs e conectores, mas uso ainda limitado</td>
+            <td>
+              <select id="consult-hard-integrations-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Utiliza conectores prontos (Zapier, MuleSoft básicos) e participa de pequenos projetos de integração</td>
+            <td>
+              <select id="consult-hard-integrations-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Planeja integrações robustas com ERPs e sistemas de marketing. Trabalha com middleware avançados (MuleSoft, Dell Boomi etc.)</td>
+            <td>
+              <select id="consult-hard-integrations-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Desenha arquiteturas de integração escaláveis para múltiplas nuvens e sistemas legados, com alta disponibilidade e segurança</td>
+            <td>
+              <select id="consult-hard-integrations-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Customizações Avançadas (Flows, Apex, Lightning Web Components)</td>
+            <td>Conhece a diferença entre configurações declarativas e programáveis, mas sem dominar Apex</td>
+            <td>
+              <select id="consult-hard-custom-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Domina Flow Builder avançado, incluindo sub-flows e automações complexas. Cria triggers ou Apex simples quando necessário</td>
+            <td>
+              <select id="consult-hard-custom-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Projeta soluções que incluem triggers, classes Apex e LWC básicos, avaliando performance e governança</td>
+            <td>
+              <select id="consult-hard-custom-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Trabalha com desenvolvedores para arquitetar soluções otimizadas. Integra Apex, LWC e Einstein/IA em estratégias de negócio</td>
+            <td>
+              <select id="consult-hard-custom-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SOFT SKILLS -->
+    <section>
+      <h2>Soft Skills do Consultor</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Competência</th>
+            <th>Júnior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Pleno (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Sênior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Especialista (descrição)</th>
+            <th>Nota (1-10)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Levantamento de Requisitos e Mapeamento de Processos</td>
+            <td>Participa de reuniões de descoberta e entende fluxos simples de negócio como funil de vendas básico</td>
+            <td>
+              <select id="consult-soft-levant-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Conduz sessões de discovery, coleta requisitos e documenta processos de negócio e principais dores</td>
+            <td>
+              <select id="consult-soft-levant-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Coordena workshops de mapeamento de processos, envolvendo várias áreas (vendas, marketing, finanças) e propõe soluções de alto valor</td>
+            <td>
+              <select id="consult-soft-levant-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Orquestra grandes stakeholders em projetos de transformação digital e define metodologias e governança para processos complexos</td>
+            <td>
+              <select id="consult-soft-levant-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Gerenciamento de Projetos e Metodologias Ágeis</td>
+            <td>Auxilia no planejamento simples e controla prazos curtos</td>
+            <td>
+              <select id="consult-soft-gerenc-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Segue SCRUM ou Kanban, atribuindo tarefas e estimando prazos para backlog de pequeno ou médio porte</td>
+            <td>
+              <select id="consult-soft-gerenc-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Gerencia projetos de maior porte com cronogramas, escopo e riscos. Alinha expectativas com stakeholders</td>
+            <td>
+              <select id="consult-soft-gerenc-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>É referência em projetos complexos que envolvem múltiplas equipes. Define governança, relatórios executivos e padrões de qualidade</td>
+            <td>
+              <select id="consult-soft-gerenc-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Comunicação, Influência e Gestão de Stakeholders</td>
+            <td>Comunica ideias básicas e escuta ativamente para entender problemas. Interage com colegas e supervisores</td>
+            <td>
+              <select id="consult-soft-com-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Apresenta soluções para áreas de negócio em reuniões de escopo. Negocia pequenas alterações de projeto</td>
+            <td>
+              <select id="consult-soft-com-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Conduz reuniões com gerentes e diretores, resolvendo conflitos e alinhando expectativas. Atua de forma consultiva</td>
+            <td>
+              <select id="consult-soft-com-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Influencia decisões em nível C-level e representa consultoria ou empresa em grandes negociações e eventos do mercado</td>
+            <td>
+              <select id="consult-soft-com-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Conhecimento de Negócio (Vendas, Marketing, Suporte)</td>
+            <td>Sabe o básico de funil de vendas e atendimento inicial</td>
+            <td>
+              <select id="consult-soft-negocio-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Reconhece diferenças e recursos-chave de Sales Cloud, Service Cloud e Marketing Cloud em nível geral</td>
+            <td>
+              <select id="consult-soft-negocio-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Propõe melhorias significativas em processos de cross-sell, upsell, SLA de suporte e utiliza métricas de ROI</td>
+            <td>
+              <select id="consult-soft-negocio-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Desenha estratégias unificadas de CRM multi-cloud para jornadas complexas do cliente. Cria frameworks de valor para áreas de negócio</td>
+            <td>
+              <select id="consult-soft-negocio-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Liderança e Mentoria de Equipe</td>
+            <td>Ainda não lidera pessoas, mas colabora e apoia colegas júnior</td>
+            <td>
+              <select id="consult-soft-lider-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Orienta colegas em tarefas simples e repassa boas práticas</td>
+            <td>
+              <select id="consult-soft-lider-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Atua como líder técnico ou de time, delegando tarefas e garantindo a qualidade das entregas</td>
+            <td>
+              <select id="consult-soft-lider-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Exerce liderança estratégica, gerenciando vários times ou squads. Forma novos consultores e desenvolve lideranças internas</td>
+            <td>
+              <select id="consult-soft-lider-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- JS específico para Consultor -->
+  <script src="js/consult.js"></script>
+</body>
+</html>
 
