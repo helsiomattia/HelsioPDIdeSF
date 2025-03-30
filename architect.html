@@ -1,1 +1,466 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certified Solution Architect</title>
+  <!-- CSS específico para a página de Architect -->
+  <link rel="stylesheet" href="css/architect.css" />
+</head>
+<body>
+  <header>
+    <h1>Certified Solution Architect</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="adm.html">Administrador</a></li>
+        <li><a href="consult.html">Consultor</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HARD SKILLS -->
+    <section>
+      <h2>Hard Skills do Architect</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Competência</th>
+            <th>Júnior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Pleno (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Sênior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Especialista (descrição)</th>
+            <th>Nota (1-10)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Arquitetura de Ecossistemas Salesforce</td>
+            <td>Entende componentes básicos como Sales Cloud e Service Cloud, sem grande visão de integração entre eles</td>
+            <td>
+              <select id="arch-hard-ecosystem-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Desenha soluções que envolvem mais de um produto Salesforce e conhece grande parte dos limites e melhores práticas</td>
+            <td>
+              <select id="arch-hard-ecosystem-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Otimiza a arquitetura combinando várias clouds (Sales, Service, Experience, Marketing) com integrações pontuais</td>
+            <td>
+              <select id="arch-hard-ecosystem-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Planeja ecossistemas multi-cloud complexos, orquestrando integrações em larga escala. Atua como referência técnica para múltiplos domínios</td>
+            <td>
+              <select id="arch-hard-ecosystem-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Integrações em Larga Escala</td>
+            <td>Participa de discussões simples sobre APIs e conectores, com noção básica de middleware</td>
+            <td>
+              <select id="arch-hard-large-integ-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Avalia padrões de integração (point-to-point, ESB) e implementa soluções para volume médio de transações</td>
+            <td>
+              <select id="arch-hard-large-integ-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Projeta integrações robustas com governança de API, padrões de mensageria e alta disponibilidade</td>
+            <td>
+              <select id="arch-hard-large-integ-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Lidera soluções de integração distribuídas e escaláveis (microservices, event-driven) suportando grandes volumes em tempo real</td>
+            <td>
+              <select id="arch-hard-large-integ-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Design de Segurança e Governança</td>
+            <td>Conhece princípios gerais de segurança, autenticação, perfis e permissões. Entende compliance de forma básica</td>
+            <td>
+              <select id="arch-hard-sec-gov-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Implementa modelos de segurança mais robustos, definindo SSO, criptografia, segregação de dados e logs de auditoria</td>
+            <td>
+              <select id="arch-hard-sec-gov-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Elabora políticas de governança unificadas e gerencia revisões e auditorias frequentes, cobrindo conformidades GDPR ou ISO</td>
+            <td>
+              <select id="arch-hard-sec-gov-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Define frameworks de segurança e governança em nível enterprise, alinhando Salesforce a padrões globais como SOX, HIPAA, PCI-DSS</td>
+            <td>
+              <select id="arch-hard-sec-gov-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Domínio de Múltiplas Nuvens (Sales, Service, Experience, Marketing, CPQ)</td>
+            <td>Entende os módulos principais, mas sem experiência prática integrada</td>
+            <td>
+              <select id="arch-hard-multicloud-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Configura soluções que mesclam Sales e Service, personalizando portais com Experience Cloud e alguma automação de marketing</td>
+            <td>
+              <select id="arch-hard-multicloud-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Integra CPQ, Experience e Marketing Cloud em estratégias avançadas de ciclo de vida do cliente, considerando automações de Einstein</td>
+            <td>
+              <select id="arch-hard-multicloud-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Orquestra visão 360° do cliente, unindo múltiplas nuvens e produtos Salesforce a sistemas externos. Cria soluções altamente personalizadas e escaláveis</td>
+            <td>
+              <select id="arch-hard-multicloud-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Metodologias de Desenvolvimento e DevOps</td>
+            <td>Conhece repositórios de código, mas sem práticas de versionamento aprofundadas</td>
+            <td>
+              <select id="arch-hard-devops-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Aplica CI/CD básico, com pipelines para mudanças de configuração e código em sandbox e produção</td>
+            <td>
+              <select id="arch-hard-devops-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Garante ciclos de release previsíveis e seguros, com revisões de código, automação de testes e monitoramento de rollback</td>
+            <td>
+              <select id="arch-hard-devops-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Define arquiteturas DevOps enterprise, com testes automatizados, segurança e governança de releases para múltiplos times. Monitora performance em ambientes de alta criticidade</td>
+            <td>
+              <select id="arch-hard-devops-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SOFT SKILLS -->
+    <section>
+      <h2>Soft Skills do Architect</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Competência</th>
+            <th>Júnior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Pleno (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Sênior (descrição)</th>
+            <th>Nota (1-10)</th>
+            <th>Especialista (descrição)</th>
+            <th>Nota (1-10)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Visão de Negócio e Alinhamento Estratégico</td>
+            <td>Compreende a importância de metas de negócio, mas sem grande experiência em planejar soluções focadas em ROI</td>
+            <td>
+              <select id="arch-soft-visao-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Contribui em discussões sobre impacto de cada solução no negócio e propõe melhorias mensuráveis</td>
+            <td>
+              <select id="arch-soft-visao-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Alinha projetos complexos com objetivos estratégicos de alta gerência. Compreende indicadores de sucesso como KPIs e ROI</td>
+            <td>
+              <select id="arch-soft-visao-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Influi na definição de estratégias corporativas, direcionando transformações digitais de longo prazo em nível global</td>
+            <td>
+              <select id="arch-soft-visao-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Liderança de Grandes Projetos e Times</td>
+            <td>Auxilia líderes no controle de projetos, acompanhando status e tarefas internas</td>
+            <td>
+              <select id="arch-soft-lider-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Gerencia equipes de pequeno ou médio porte e aplica SCRUM ou Kanban de forma organizada</td>
+            <td>
+              <select id="arch-soft-lider-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Lidera múltiplos times e projetos simultâneos, atuando com governança e gestão de riscos</td>
+            <td>
+              <select id="arch-soft-lider-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Atua como sponsor ou head de grandes iniciativas e gerencia programas complexos. Define cultura de entrega contínua e excelência</td>
+            <td>
+              <select id="arch-soft-lider-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Apresentação e Influência Executiva</td>
+            <td>Apresenta insights técnicos para colegas ou supervisores diretos</td>
+            <td>
+              <select id="arch-soft-pres-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Conduz reuniões com gerentes e times de negócio, negociando escopo e orçamento inicial</td>
+            <td>
+              <select id="arch-soft-pres-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Convence diretores e VPs sobre investimentos em tecnologia, mostrando valor e ROI. Lida com conflitos em alto nível</td>
+            <td>
+              <select id="arch-soft-pres-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Atua junto a C-level e conselhos em decisões estratégicas. É referência no mercado, palestrando em eventos e conferências</td>
+            <td>
+              <select id="arch-soft-pres-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Gestão de Riscos e Conformidade</td>
+            <td>Compreende riscos técnicos básicos e dependências simples, confiando em terceiros para soluções mais críticas</td>
+            <td>
+              <select id="arch-soft-risco-jr">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Identifica e mitiga riscos de projeto e conformidade como LGPD ou GDPR em nível moderado. Cria planos de contingência</td>
+            <td>
+              <select id="arch-soft-risco-pl">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Mapeia riscos complexos (integrações, segurança, privacidade) e define estratégias robustas de mitigação</td>
+            <td>
+              <select id="arch-soft-risco-sn">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td>Elabora frameworks de risco e conformidade em nível enterprise. Coordena áreas jurídicas, de segurança e TI para alinhamento global, minimizando impactos regulatórios e reputacionais</td>
+            <td>
+              <select id="arch-soft-risco-es">
+                <option value="">Selecione</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- JS específico para Architect -->
+  <script src="js/architect.js"></script>
+</body>
+</html>
