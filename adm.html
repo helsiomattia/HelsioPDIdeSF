@@ -5,21 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Administrador de Salesforce</title>
   <!-- CSS específico para a página de Admin -->
-  <link rel="stylesheet" href="css/adm.css" />
+  <link rel="stylesheet" href="adm.css" />
 </head>
 <body>
-  <header>
-    <h1>Administrador de Salesforce</h1>
-    <nav>
-      <ul>
-        <!-- Ajuste este link para retornar à sua HOME (index.html) ou qualquer outra rota -->
-        <li><a href="index.html">Início</a></li>
-        <!-- Se quiser, links para outras páginas separadas -->
-        <!-- <li><a href="consult.html">Consultor</a></li>
-        <li><a href="architect.html">Architect</a></li> -->
-      </ul>
-    </nav>
-  </header>
+  <!-- Ao invés de <header> aqui, teremos um div vazio -->
+  <div id="common-header"></div>
 
   <main>
     <!-- HARD SKILLS -->
@@ -228,8 +218,27 @@
     </section>
   </main>
 
-  <!-- JS específico para a página de Admin -->
-  <script src="js/adm.js"></script>
+<!-- JS específico da página (salvamento de Local Storage, etc.) -->
+  <script src="adm.js"></script>
+
+  <!-- Script que carrega o header -->
+  <script>
+    fetch("header.html")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro ao carregar header.html. Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(headerHTML => {
+        document.getElementById("common-header").innerHTML = headerHTML;
+      })
+      .catch(error => {
+        console.error("Erro ao inserir o cabeçalho:", error);
+      });
+  </script>
 </body>
 </html>
+
+
 
