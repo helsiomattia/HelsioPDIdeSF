@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home - Mapa de Competências Salesforce</title>
-  <!-- Link para o CSS principal -->
-  <link rel="stylesheet" href="main.css" />
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-  <header>
-    <h1>Bem-vindo ao Mapa de Competências Salesforce</h1>
-  </header>
 
-  <nav>
-    <ul>
-      <!-- Links diretos para cada página -->
-      <li><a href="adm.html">Administrador</a></li>
-      <li><a href="consult.html">Consultor</a></li>
-      <li><a href="architect.html">Solution Architect</a></li>
-    </ul>
-  </nav>
+  <!-- Aqui será injetado o cabeçalho -->
+  <div id="common-header"></div>
 
   <main>
-    <p>Escolha uma das áreas acima para visualizar as competências.</p>
+    <p>Bem-vindo(a)! Selecione uma das áreas no menu acima para visualizar as competências de cada perfil.</p>
   </main>
 
-  <!-- Script principal (se precisar de algo dinâmico) -->
+  <!-- Scripts -->
   <script src="main.js"></script>
+  <script>
+    // Carrega o header.html e insere no DIV #common-header
+    fetch("header.html")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Não foi possível carregar header.html. Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(headerHTML => {
+        document.getElementById("common-header").innerHTML = headerHTML;
+      })
+      .catch(error => {
+        console.error("Erro ao inserir o cabeçalho:", error);
+      });
+  </script>
 </body>
 </html>
