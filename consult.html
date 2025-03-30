@@ -4,21 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Consultor de Salesforce</title>
-  <!-- CSS específico para a página de Consultor -->
-  <link rel="stylesheet" href="css/consult.css" />
+  <link rel="stylesheet" href="consult.css" />
 </head>
 <body>
-  <header>
-    <h1>Consultor de Salesforce</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="adm.html">Administrador</a></li>
-        <!-- Caso você já tenha a página de Architect pronta, pode listar aqui -->
-        <!-- <li><a href="architect.html">Architect</a></li> -->
-      </ul>
-    </nav>
-  </header>
+  <div id="common-header"></div>
 
   <main>
 
@@ -418,8 +407,15 @@
     </section>
   </main>
 
-  <!-- JS específico para Consultor -->
-  <script src="js/consult.js"></script>
+ <script src="consult.js"></script>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(headerHTML => {
+        document.getElementById("common-header").innerHTML = headerHTML;
+      })
+      .catch(error => console.error("Erro ao inserir cabeçalho:", error));
+  </script>
 </body>
 </html>
 
