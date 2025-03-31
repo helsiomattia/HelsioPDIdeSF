@@ -1,3 +1,41 @@
+/* Modo básico de dropdown usando apenas CSS e :hover */
+.dropdown {
+  position: relative; /* para conter o sub-menu absolutamente */
+}
+
+.dropdown-content {
+  display: none;  /* inicialmente escondido */
+  position: absolute;
+  background-color: #f9f9f9;
+  padding: 8px 0;
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.dropdown-content li {
+  display: block;
+  padding: 5px 10px;
+}
+
+/* Mostra ao passar o mouse */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  background: #fff;
+  padding: 5px;
+}
+.dropdown-content li a:hover {
+  background: #ddd;
+}
+
+
+
 /* --- Estilo para o Header (carregado via header.html) --- */
 header {
   background-color: #f2f2f2;
