@@ -9,9 +9,19 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #fafafa;
+  background: #f5f5f5; /* Leve cinza para diferenciar do container central */
   color: #333;
   min-height: 100vh;
+}
+
+/* Container principal que envolve o conteúdo da página (no <main>) */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;    /* Centraliza e dá espaçamento vertical */
+  padding: 30px;        /* Espaço interno */
+  background: #fff;     /* Fundo branco para destacar do body */
+  border-radius: 8px;   /* Cantos arredondados */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra suave */
 }
 
 /* --- Estilo para o Header (carregado via header.html) --- */
@@ -22,8 +32,9 @@ header {
 }
 
 header h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 10px;
+  color: #333;
 }
 
 header nav ul {
@@ -32,6 +43,7 @@ header nav ul {
   justify-content: center;
   gap: 15px;
   margin-top: 10px;
+  padding: 0;
 }
 
 header nav ul li {
@@ -41,93 +53,116 @@ header nav ul li {
 header nav li a {
   text-decoration: none;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 8px 14px;
   color: #333;
   background: #e9e9e9;
   border: 1px solid #ddd;
   border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 header nav li a:hover {
   background: #ddd;
+  transform: translateY(-2px);
 }
 
-/* ---------------------
+/* -----------------------------
    Seções da Página Inicial
-   --------------------- */
+   usando .container no <main>
+   ----------------------------- */
 
 /* Seção de perfil */
 .perfil-section {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px; /* Mais espaço entre o perfil e a próxima seção */
 }
 
 .perfil-foto {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover; /* Mantém proporções ao recortar */
   border: 2px solid #ddd;
+  margin-bottom: 15px;
 }
 
-
 .subtitulo {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #666;
+  margin-bottom: 10px;
 }
 
 .resumo {
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
   max-width: 800px;
-  margin: 10px auto;
+  margin: 0 auto;   /* Centraliza texto */
+  margin-top: 10px;
 }
 
 .badges {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .badges span {
   display: inline-block;
-  margin: 5px 5px 0 0;
-  padding: 5px 8px;
+  margin: 5px 6px 0 0;
+  padding: 6px 10px;
   background: #e0e0e0;
   border-radius: 4px;
   font-size: 0.9rem;
   color: #555;
+  transition: background 0.2s ease;
+}
+
+.badges span:hover {
+  background: #ccc;
+}
+
+/* Títulos de seção (Experiências, Formação, etc.) */
+section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #444;
+  border-left: 4px solid #4a90e2; /* Barra de cor na esquerda */
+  padding-left: 10px;
 }
 
 /* Seção de experiência */
 .experiencia-section article {
   background: #fafafa;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-left: 3px solid #ccc;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-left: 4px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .experiencia-section h4 {
   margin: 0 0 5px 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .experiencia-section h4 span {
   font-weight: normal;
   font-size: 0.9rem;
   color: #999;
+  margin-left: 8px;
 }
 
 .experiencia-section p {
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.6;
   color: #444;
 }
 
-/* Formação, Certificações, Skills */
+/* Seções de Formação, Certificações, Skills, Contato */
 .formacao-section,
 .certificacoes-section,
 .skills-section,
 .contato-section {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .formacao-section ul,
@@ -136,6 +171,7 @@ header nav li a:hover {
   list-style: disc inside;
   margin-left: 20px;
   color: #444;
+  line-height: 1.6;
 }
 
 /* Seção de contato */
@@ -146,4 +182,24 @@ header nav li a:hover {
 
 .contato-section p a:hover {
   text-decoration: underline;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  section h2 {
+    font-size: 1.3rem;
+  }
+  
+  .experiencia-section article {
+    padding: 10px;
+  }
+  
+  .experiencia-section h4 {
+    font-size: 1.1rem;
+  }
 }
