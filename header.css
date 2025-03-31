@@ -40,67 +40,43 @@
 /* Estilo para o Header */
 
 header {
-
   background-color: #4a90e2; /* Azul moderno */
-
   padding: 20px;
-
   text-align: center;
-
   color: white;
-
 }
 
 
 header h1 {
-
   font-size: 2.5rem;
-
   margin-bottom: 10px;
-
 }
 
 
 header nav ul {
-
   list-style: none;
-
   display: flex;
-
   justify-content: center;
-
   gap: 15px;
-
   margin-top: 10px;
-
   padding: 0;
-
 }
 
 
 header nav li a {
-
   text-decoration: none;
-
   font-weight: bold;
-
   padding: 10px 20px;
-
   color: white;
-
   background: #007bb5; /* Azul mais escuro */
-
   border-radius: 4px;
-
   transition: background-color 0.3s ease, transform 0.3s ease;
 
 }
 
 
 header nav li a:hover {
-
   background: #005f8d; /* Azul ainda mais escuro */
-
   transform: translateY(-2px);
 
 }
