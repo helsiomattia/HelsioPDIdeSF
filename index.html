@@ -4,17 +4,14 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home - Mapa de Competências Salesforce</title>
-  <!-- CSS principal -->
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-  <!-- Aqui será injetado o seu header padrão via fetch -->
   <div id="common-header"></div>
 
   <main class="container">
 
-    <!-- Seção de apresentação pessoal em duas colunas -->
     <section class="perfil-section">
       <div class="perfil-col-esquerda">
         <img class="perfil-foto" src="helsio.png" alt="Foto de Perfil" />
@@ -43,10 +40,8 @@
       </div>
     </section>
 
-    <!-- Seção de experiências -->
     <section class="experiencia-section">
       <h2>Experiências Profissionais</h2>
-
       <article>
         <h3>Efí Bank <span>(Ago 2024 – Presente)</span></h3>
         <p class="cargo-local">Salesforce CRM Analyst</p>
@@ -56,46 +51,9 @@
           melhorias de performance, escalabilidade e automação de processos.
         </p>
       </article>
-
-      <article>
-        <h3>EQI Investimentos <span>(Mar 2022 – Jul 2024)</span></h3>
-        <p class="cargo-local">Salesforce CRM Analyst</p>
-        <p>
-          Customização de objetos, campos, layouts e automações para atender aos objetivos de negócio. 
-          Interação com diversos departamentos, transformando requisitos em soluções práticas e 
-          aprimorando a experiência do usuário.
-        </p>
-      </article>
-
-      <article>
-        <h3>Cloud11 <span>(Out 2021 – Fev 2022)</span></h3>
-        <p class="cargo-local">Salesforce CRM Analyst (Exchange no Egito)</p>
-        <p>
-          Adaptação da plataforma Salesforce em diferentes realidades regionais, focando em 
-          melhorias operacionais. Contribuí na resolução de desafios iniciais de adoção da ferramenta.
-        </p>
-      </article>
-
-      <article>
-        <h3>ControlSoft Assessoria e Desenvolvimento <span>(Mar 2018 – Jul 2019)</span></h3>
-        <p class="cargo-local">Software Quality Assurance (QA) Analyst</p>
-        <p>
-          Planejamento e execução de testes em sistemas ERP para agronegócio, garantindo qualidade 
-          e confiabilidade. Foco em testes de integração e validação de dados críticos.
-        </p>
-      </article>
-
-      <article>
-        <h3>PROXSIS Sistemas de Gestão Empresarial <span>(Mar 2016 – Jul 2017)</span></h3>
-        <p class="cargo-local">Software Consultant</p>
-        <p>
-          Implementação de sistemas ERP em indústrias, mapeando processos e configurando soluções 
-          sob medida. Treinamento e suporte contínuo aos usuários, garantindo eficiência operacional.
-        </p>
-      </article>
+      <!-- Adicione os outros artigos aqui -->
     </section>
 
-    <!-- Seção de formação acadêmica -->
     <section class="formacao-section">
       <h2>Formação Acadêmica</h2>
       <ul>
@@ -107,7 +65,6 @@
       </ul>
     </section>
 
-    <!-- Seção de certificações -->
     <section class="certificacoes-section">
       <h2>Certificações</h2>
       <ul>
@@ -119,7 +76,6 @@
       </ul>
     </section>
 
-    <!-- Seção de skills + idiomas -->
     <section class="skills-section">
       <h2>Principais Competências</h2>
       <ul>
@@ -136,7 +92,6 @@
       </ul>
     </section>
 
-    <!-- Seção de contato -->
     <section class="contato-section">
       <h2>Contato</h2>
       <p>Telefone/WhatsApp: +55 49 9 8814 5714</p>
@@ -147,10 +102,7 @@
 
   </main>
 
-  <!-- Scripts -->
   <script src="index.js"></script>
-  
-  
   <script>
     fetch("header.html")
       .then(res => res.text())
