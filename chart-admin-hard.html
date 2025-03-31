@@ -1,0 +1,42 @@
+<!-- admin-hard.html (supondo que você quer exibir um gráfico) -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Admin Hard Skills - com Gráfico</title>
+  <link rel="stylesheet" href="header.css" />
+  <link rel="stylesheet" href="admin-hard.css" />
+</head>
+<body>
+  <div id="common-header"></div>
+  <main>
+    <h2>Hard Skills do Administrador</h2>
+    <!-- ... Tabela de Hard Skills ... -->
+
+    <button id="mostrar-grafico">Mostrar Gráfico de Pontuação</button>
+    <div id="grafico-container"></div>
+  </main>
+
+  <!-- Carrega o header -->
+  <script>
+    fetch("../header.html")
+      .then(r => r.text())
+      .then(h => document.getElementById("common-header").innerHTML = h);
+  </script>
+
+  <!-- JS que cuida do localStorage das notas -->
+  <script src="admin-hard.js"></script>
+
+  <!-- Carrega o componente de gráfico (ex: chart.js) -->
+  <script src="chart-admin-hard.js"></script>
+
+  <!-- Inicializa o gráfico -->
+  <script>
+    document.getElementById("mostrar-grafico").addEventListener("click", () => {
+      // Exemplo de função no chart.js
+      criarGrafico("grafico-container"); 
+      // A "criarGrafico" poderia ler as notas do localStorage e gerar um canvas
+    });
+  </script>
+</body>
+</html>
