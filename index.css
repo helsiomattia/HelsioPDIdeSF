@@ -11,22 +11,24 @@ html, body, h1, h2, h3, h4, h5, h6, p {
   font-family: 'Roboto', sans-serif;
 }
 
-/* Body */
+/* Background para o body */
 body {
-  background: #f0f4f8; /* Fundo leve, como no seu index.css atual */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e6f2ff, #ffffff);
   color: #333;
   min-height: 100vh;
 }
 
-/* Container principal */
+/* Container principal com destaque */
 .container {
   max-width: 1200px;
   margin: 30px auto;
   padding: 30px;
   background: #fff;
-  border-radius: 12px; /* Cantos mais arredondados */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
 
 /* --- Estilo para o Header (carregado via header.html) --- */
 header {
