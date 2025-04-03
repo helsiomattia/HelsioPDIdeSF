@@ -1,155 +1,216 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home - Mapa de Competências Salesforce</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Helsio Mattia - Salesforce Professional</title>
+  <!-- W3.CSS -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- CSS customizado -->
   <link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body class="w3-light-grey">
 
+  <!-- Cabeçalho comum, injetado via header.html -->
   <div id="common-header"></div>
 
-  <main class="container">
+  <!-- Container Principal -->
+  <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-    <section class="perfil-section">
-      <div class="perfil-col-esquerda">
-        <img class="perfil-foto" src="helsio.png" alt="Foto de Perfil" />
-      </div>
-      <div class="perfil-col-direita">
-        <h2 class="nome">Helsio Mattia</h2>
-        <h3 class="cargo">
-          Certified Salesforce Professional <br>
-          CRM Admin, Builder &amp; Analyst | System Analyst
-        </h3>
-        <p class="resumo">
-          Profissional com atuação em <strong>Otimização de CRM</strong>, 
-          especializado em <strong>Salesforce</strong>. Formado em <strong>Administração</strong>, 
-          com <strong>MBA em Engenharia de Software</strong> e graduando em 
-          <strong>Sistemas de Informação</strong>. Experiência sólida em análise 
-          de requisitos, liderança de times multifuncionais e automação de processos.
-          Fluente em inglês (nível C1), habituado a ambientes diversos e times globais.
-        </p>
-        <div class="badges">
-          <span>#Salesforce</span>
-          <span>#BusinessAnalysis</span>
-          <span>#ProcessAutomation</span>
-          <span>#ServiceCloud</span>
-          <span>#DataIntegration</span>
+    <!-- GRID: Dividido em duas colunas -->
+    <div class="w3-row-padding">
+
+      <!-- Coluna Esquerda: Perfil -->
+      <div class="w3-third">
+        <div class="w3-white w3-text-grey w3-card-4">
+          <div class="w3-display-container">
+            <img src="helsio.png" style="width:100%" alt="Foto de Perfil">
+            <div class="w3-display-bottomleft w3-container w3-text-black">
+              <h2>Helsio Mattia</h2>
+            </div>
+          </div>
+          <div class="w3-container">
+            <p>
+              <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              Certified Salesforce Professional
+            </p>
+            <p>
+              <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              helsiomattia@gmail.com
+            </p>
+            <p>
+              <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              +55 49 9 8814 5714
+            </p>
+            <p>
+              <i class="fa fa-linkedin fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              <a href="https://www.linkedin.com/in/helsiomattia" target="_blank">linkedin.com/in/helsiomattia</a>
+            </p>
+            <hr>
+            <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+            <p>Salesforce, CRM Admin, Process Automation</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+              <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
+            </div>
+            <br>
+            <p class="w3-large w3-text-theme"><b>
+              <i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages
+            </b></p>
+            <p>English (C1)</p>
+            <div class="w3-light-grey w3-round-xlarge">
+              <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+            </div>
+            <p>Portuguese (Native)</p>
+            <div class="w3-light-grey w3-round-xlarge">
+              <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+            </div>
+            <br>
+          </div>
         </div>
+        <br>
       </div>
-    </section>
 
-    <section class="experiencia-section">
-      <h2>Experiências Profissionais</h2>
-      <article>
-        <h3>Efí Bank <span>(Ago 2024 – Presente)</span></h3>
-        <p class="cargo-local">Salesforce CRM Analyst</p>
-        <p>
-          Gerencio e otimizo a plataforma Salesforce, alinhando-a a processos de negócio. 
-          Participo da identificação e resolução de problemas de CRM, com foco em 
-          melhorias de performance, escalabilidade e automação de processos.
-        </p>
-      </article>
+      <!-- Coluna Direita: Experiência, Formação, Certificações, Skills e Contato -->
+      <div class="w3-twothird">
       
-  <article>
-    <h3>EQI Investimentos <span>(Mar 2022 – Jul 2024)</span></h3>
-    <p class="cargo-local">Salesforce CRM Analyst</p>
-    <p>
-      Customização de objetos, campos, layouts e automações para atender aos objetivos de negócio. 
-      Interação com diversos departamentos, transformando requisitos em soluções práticas e 
-      aprimorando a experiência do usuário.
-    </p>
+        <!-- Experiências Profissionais -->
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+          <h2 class="w3-text-grey w3-padding-16">
+            <i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
+            Work Experience
+          </h2>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Efí Bank</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>Ago 2024 - Present
+            </h6>
+            <p>Salesforce CRM Analyst – Gerencio e otimizo a plataforma Salesforce, alinhando-a a processos de negócio. Participo da identificação e resolução de problemas de CRM com foco em performance, escalabilidade e automação.</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>EQI Investimentos</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2022 - Jul 2024
+            </h6>
+            <p>Salesforce CRM Analyst – Customização de objetos, campos, layouts e automações para atender aos objetivos de negócio. Trabalho com diversos departamentos para transformar requisitos em soluções práticas e aprimorar a experiência do usuário.</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Cloud11</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>Out 2021 - Fev 2022
+            </h6>
+            <p>Salesforce CRM Analyst – Experiência internacional no Egito, adaptando a plataforma a diferentes realidades regionais e contribuindo para a resolução de desafios iniciais de adoção.</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>ControlSoft Assessoria e Desenvolvimento</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2018 - Jul 2019
+            </h6>
+            <p>Software QA Analyst – Planejamento e execução de testes em sistemas ERP para agronegócio, garantindo qualidade e confiabilidade. Foco em integração e validação de dados críticos.</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>PROXSIS Sistemas de Gestão Empresarial</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2016 - Jul 2017
+            </h6>
+            <p>Software Consultant – Implementação de sistemas ERP em indústrias, mapeando processos e configurando soluções sob medida, com treinamento e suporte contínuo aos usuários.</p>
+            <hr>
+          </div>
+        </div>
+        
+        <!-- Educação e Certificações -->
+        <div class="w3-container w3-card w3-white">
+          <h2 class="w3-text-grey w3-padding-16">
+            <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
+            Education & Certifications
+          </h2>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>MBA em Engenharia de Software</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>2023 - 2024
+            </h6>
+            <p>UTFPR</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Bacharelado em Sistemas de Informação</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>Desde 2023
+            </h6>
+            <p>UNIASSELVI</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>MBA em Gestão de Projetos</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>2021
+            </h6>
+            <p>UNIASSELVI</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>MBA em Business Intelligence</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>2020 - 2021
+            </h6>
+            <p>UNIASSELVI</p>
+            <hr>
+          </div>
+          
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Pós-graduação em Gestão de Vendas</b></h5>
+            <h6 class="w3-text-teal">
+              <i class="fa fa-calendar fa-fw w3-margin-right"></i>2021
+            </h6>
+            <p>UNIASSELVI</p>
+            <br>
+          </div>
+        </div>
+        
+      </div>
+      <!-- End Right Column -->
+      
+    </div>
+    <!-- End Grid -->
+    
+  </div>
+  <!-- End Page Container -->
 
-  </article>
-  <article>
-    <h3>Cloud11 <span>(Out 2021 – Fev 2022)</span></h3>
-    <p class="cargo-local">Salesforce CRM Analyst (Exchange no Egito)</p>
-    <p>
-      Adaptação da plataforma Salesforce em diferentes realidades regionais, focando em 
-      melhorias operacionais. Contribuí na resolução de desafios iniciais de adoção da ferramenta.
-    </p>
-  </article>
+  <!-- Footer -->
+  <footer class="w3-container w3-teal w3-center w3-margin-top">
+    <p>Conecte-se comigo nas redes sociais:</p>
+    <a href="https://www.linkedin.com/in/helsiomattia" target="_blank" class="fa fa-linkedin w3-hover-opacity"></a>
+    <a href="https://twitter.com" target="_blank" class="fa fa-twitter w3-hover-opacity"></a>
+    <a href="https://github.com" target="_blank" class="fa fa-github w3-hover-opacity"></a>
+    <p>© 2025 Helsio Mattia</p>
+  </footer>
 
-
-  <article>
-    <h3>ControlSoft Assessoria e Desenvolvimento <span>(Mar 2018 – Jul 2019)</span></h3>
-    <p class="cargo-local">Software Quality Assurance (QA) Analyst</p>
-    <p>
-      Planejamento e execução de testes em sistemas ERP para agronegócio, garantindo qualidade 
-      e confiabilidade. Foco em testes de integração e validação de dados críticos.
-    </p>
-
-  </article>
-  <article>
-    <h3>PROXSIS Sistemas de Gestão Empresarial <span>(Mar 2016 – Jul 2017)</span></h3>
-    <p class="cargo-local">Software Consultant</p>
-    <p>
-      Implementação de sistemas ERP em indústrias, mapeando processos e configurando soluções 
-      sob medida. Treinamento e suporte contínuo aos usuários, garantindo eficiência operacional.
-    </p>
-
-  </article>
-</section>     
-
-    </section>
-
-    <section class="formacao-section">
-      <h2>Formação Acadêmica</h2>
-      <ul>
-        <li><strong>MBA em Engenharia de Software</strong> – UTFPR (2023 – 2024)</li>
-        <li><strong>Bacharelado em Sistemas de Informação</strong> – UNIASSELVI (desde 2023)</li>
-        <li><strong>MBA em Gestão de Projetos</strong> – UNIASSELVI (2021)</li>
-        <li><strong>MBA em Business Intelligence</strong> – UNIASSELVI (2020 – 2021)</li>
-        <li><strong>Pós-graduação em Gestão de Vendas</strong> – UNIASSELVI (2021)</li>
-      </ul>
-    </section>
-
-    <section class="certificacoes-section">
-      <h2>Certificações</h2>
-      <ul>
-        <li>Salesforce Certified Administrator</li>
-        <li>Salesforce AI Associate</li>
-        <li>Bootcamp Cloud AWS</li>
-        <li>Git Training</li>
-        <li>Qualificação em Customer Success</li>
-      </ul>
-    </section>
-
-    <section class="skills-section">
-      <h2>Principais Competências</h2>
-      <ul>
-        <li>SOQL / Administração de Salesforce</li>
-        <li>Sales Cloud, Service Cloud</li>
-        <li>Suporte técnico e atendimento a usuários</li>
-        <li>Process Automation e Integrações</li>
-        <li>Métodos Ágeis (Scrum/Kanban)</li>
-      </ul>
-      <h2>Idiomas</h2>
-      <ul>
-        <li>Inglês: Profissional (C1)</li>
-        <li>Português: Nativo</li>
-      </ul>
-    </section>
-
-    <section class="contato-section">
-      <h2>Contato</h2>
-      <p>Telefone/WhatsApp: +55 49 9 8814 5714</p>
-      <p>Email: <a href="mailto:helsiomattia@gmail.com">helsiomattia@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/helsiomattia" target="_blank">linkedin.com/in/helsiomattia</a></p>
-      <p>Trailblazer: <a href="https://trailblazer.me/id/helsiomattia" target="_blank">trailblazer.me/id/helsiomattia</a></p>
-    </section>
-
-  </main>
-
+  <!-- Scripts -->
   <script src="index.js"></script>
   <script>
+    // Carrega o header comum
     fetch("header.html")
-      .then(res => res.text())
+      .then(response => response.text())
       .then(html => {
         document.getElementById("common-header").innerHTML = html;
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   </script>
 </body>
 </html>
