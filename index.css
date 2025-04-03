@@ -112,23 +112,19 @@ header nav li a:hover {
   margin: 10px auto 0;
 }
 
-.badges {
-  margin-top: 20px;
-}
-
 .badges span {
   display: inline-block;
   margin: 5px 6px 0 0;
   padding: 6px 10px;
-  background: #007bb5;
+  background: #4a90e2; /* Azul principal */
   border-radius: 20px; /* Bordas arredondadas */
   font-size: 0.9rem;
-  color: #555;
+  color: #fff;         /* Texto branco para contraste */
   transition: background 0.2s ease;
 }
 
 .badges span:hover {
-  background: #4a90e2;
+  background: #3c7dbd; /* Azul um pouco mais escuro no hover */
 }
 
 /* Títulos de seção */
