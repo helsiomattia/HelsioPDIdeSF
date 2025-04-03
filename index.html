@@ -1,148 +1,195 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <title>Helsio Mattia - Salesforce Professional</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Helsio Mattia - Salesforce Professional</title>
   <!-- W3.CSS -->
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
   <!-- Google Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- CSS customizado -->
+
+  <!-- CSS personalizado -->
   <link rel="stylesheet" href="index.css">
+
+  <!-- Sobrescreve o "teal" padrão do W3 para usar #4a90e2 -->
+  <style>
+    .w3-teal {
+      background-color: #4a90e2 !important;
+    }
+    .w3-text-teal {
+      color: #4a90e2 !important;
+    }
+  </style>
 </head>
+
 <body class="w3-light-grey">
 
   <!-- Cabeçalho comum, injetado via header.html -->
   <div id="common-header"></div>
 
-  <!-- Container Principal -->
+  <!-- Container principal (max-width 1400px) -->
   <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-    <!-- GRID: Dividido em duas colunas -->
+    <!-- GRID em duas colunas -->
     <div class="w3-row-padding">
 
-     <!-- Coluna Esquerda (Perfil) -->
-<div class="w3-third">
-  <div class="w3-white w3-text-grey w3-card-4 w3-center">
-    <!-- Foto de Perfil -->
-    <div style="padding-top: 20px;">
-      <img src="helsio.png" alt="Foto de Perfil" class="perfil-foto" />
-    </div>
+      <!-- Coluna Esquerda (Perfil) -->
+      <div class="w3-third">
+        <div class="w3-white w3-text-grey w3-card-4">
+          
+          <!-- Foto de Perfil centralizada -->
+          <div class="w3-center" style="padding: 20px;">
+            <!-- Ajuste a classe/perfil-foto se quiser um CSS extra -->
+            <img src="helsio.png" alt="Foto de Perfil"
+                 style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid #4a90e2;">
+          </div>
+          
+          <div class="w3-container">
+            <h2 class="w3-center" style="margin-bottom:5px;">Helsio Mattia</h2>
+            <p class="w3-center">
+              <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              Certified Salesforce Professional
+            </p>
+            <p class="w3-center">
+              <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              helsiomattia@gmail.com
+            </p>
+            <p class="w3-center">
+              <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              +55 49 9 8814 5714
+            </p>
+            <p class="w3-center">
+              <i class="fa fa-linkedin fa-fw w3-margin-right w3-large w3-text-teal"></i>
+              <a href="https://www.linkedin.com/in/helsiomattia" target="_blank">
+                linkedin.com/in/helsiomattia
+              </a>
+            </p>
+            <hr>
 
-    <!-- Informações Básicas -->
-    <div class="w3-container">
-      <h2>Helsio Mattia</h2>
-      <p>
-        <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>
-        Certified Salesforce Professional
-      </p>
-      <p>
-        <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>
-        helsiomattia@gmail.com
-      </p>
-      <p>
-        <i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>
-        +55 49 9 8814 5714
-      </p>
-      <p>
-        <i class="fa fa-linkedin fa-fw w3-margin-right w3-large w3-text-teal"></i>
-        <a href="https://www.linkedin.com/in/helsiomattia" target="_blank">linkedin.com/in/helsiomattia</a>
-      </p>
-      <hr>
+            <!-- Skills de Exemplo -->
+            <p class="w3-large">
+              <b>
+                <i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills
+              </b>
+            </p>
+            <p>Salesforce, CRM Admin, Process Automation</p>
+            <div class="w3-light-grey w3-round-xlarge w3-small">
+              <!-- Barra de Progresso -->
+              <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">
+                90%
+              </div>
+            </div>
+            <br>
 
-      <!-- Exemplo de Skills/Idiomas, se quiser manter -->
-      <p class="w3-large">
-        <b>
-          <i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills
-        </b>
-      </p>
-      <p>Salesforce, CRM Admin, Process Automation</p>
-      <div class="w3-light-grey w3-round-xlarge w3-small">
-        <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
+            <!-- Idiomas de Exemplo -->
+            <p class="w3-large w3-text-theme">
+              <b>
+                <i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages
+              </b>
+            </p>
+            <p>English (C1)</p>
+            <div class="w3-light-grey w3-round-xlarge">
+              <div class="w3-round-xlarge w3-teal" style="height:24px; width:100%"></div>
+            </div>
+            <p>Portuguese (Native)</p>
+            <div class="w3-light-grey w3-round-xlarge">
+              <div class="w3-round-xlarge w3-teal" style="height:24px; width:100%"></div>
+            </div>
+            <br>
+          </div>
+        </div>
+        <br>
       </div>
-      <br>
-      <p class="w3-large w3-text-theme">
-        <b>
-          <i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages
-        </b>
-      </p>
-      <p>English (C1)</p>
-      <div class="w3-light-grey w3-round-xlarge">
-        <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
-      </div>
-      <p>Portuguese (Native)</p>
-      <div class="w3-light-grey w3-round-xlarge">
-        <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
-      </div>
-      <br>
-    </div>
-  </div>
-  <br>
-</div>
-      
-        <!-- Experiências Profissionais -->
+      <!-- Fim da Coluna Esquerda -->
+
+      <!-- Coluna Direita -->
+      <div class="w3-twothird">
+        
+        <!-- Work Experience -->
         <div class="w3-container w3-card w3-white w3-margin-bottom">
           <h2 class="w3-text-grey w3-padding-16">
             <i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
             Work Experience
           </h2>
-          
+
+          <!-- Exemplo de experiência 1 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>Efí Bank</b></h5>
             <h6 class="w3-text-teal">
               <i class="fa fa-calendar fa-fw w3-margin-right"></i>Ago 2024 - Present
             </h6>
-            <p>Salesforce CRM Analyst – Gerencio e otimizo a plataforma Salesforce, alinhando-a a processos de negócio. Participo da identificação e resolução de problemas de CRM com foco em performance, escalabilidade e automação.</p>
+            <p>
+              Salesforce CRM Analyst – Gerencio e otimizo a plataforma Salesforce, alinhando-a a processos de negócio. 
+              Participo da identificação e resolução de problemas de CRM com foco em performance, escalabilidade e automação.
+            </p>
             <hr>
           </div>
-          
+
+          <!-- Experiência 2 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>EQI Investimentos</b></h5>
             <h6 class="w3-text-teal">
               <i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2022 - Jul 2024
             </h6>
-            <p>Salesforce CRM Analyst – Customização de objetos, campos, layouts e automações para atender aos objetivos de negócio. Trabalho com diversos departamentos para transformar requisitos em soluções práticas e aprimorar a experiência do usuário.</p>
+            <p>
+              Salesforce CRM Analyst – Customização de objetos, campos, layouts e automações para atender aos objetivos de negócio. 
+              Transformo requisitos em soluções práticas, aprimorando a experiência do usuário.
+            </p>
             <hr>
           </div>
-          
+
+          <!-- Experiência 3 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>Cloud11</b></h5>
             <h6 class="w3-text-teal">
               <i class="fa fa-calendar fa-fw w3-margin-right"></i>Out 2021 - Fev 2022
             </h6>
-            <p>Salesforce CRM Analyst – Experiência internacional no Egito, adaptando a plataforma a diferentes realidades regionais e contribuindo para a resolução de desafios iniciais de adoção.</p>
+            <p>
+              Salesforce CRM Analyst (Exchange no Egito) – Adaptei a plataforma a diferentes realidades regionais e 
+              contribui para a resolução de desafios iniciais de adoção.
+            </p>
             <hr>
           </div>
-          
+
+          <!-- Experiência 4 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>ControlSoft Assessoria e Desenvolvimento</b></h5>
             <h6 class="w3-text-teal">
               <i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2018 - Jul 2019
             </h6>
-            <p>Software QA Analyst – Planejamento e execução de testes em sistemas ERP para agronegócio, garantindo qualidade e confiabilidade. Foco em integração e validação de dados críticos.</p>
+            <p>
+              Software QA Analyst – Planejamento e execução de testes em sistemas ERP para agronegócio, 
+              garantindo qualidade e confiabilidade. Foco em integração e validação de dados críticos.
+            </p>
             <hr>
           </div>
-          
+
+          <!-- Experiência 5 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>PROXSIS Sistemas de Gestão Empresarial</b></h5>
             <h6 class="w3-text-teal">
               <i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2016 - Jul 2017
             </h6>
-            <p>Software Consultant – Implementação de sistemas ERP em indústrias, mapeando processos e configurando soluções sob medida, com treinamento e suporte contínuo aos usuários.</p>
-            <hr>
+            <p>
+              Software Consultant – Implementação de sistemas ERP em indústrias, mapeando processos e 
+              configurando soluções sob medida, com treinamento e suporte contínuo aos usuários.
+            </p>
+            <br>
           </div>
         </div>
-        
-        <!-- Educação e Certificações -->
+        <!-- Fim Work Experience -->
+
+        <!-- Education & Certifications -->
         <div class="w3-container w3-card w3-white">
           <h2 class="w3-text-grey w3-padding-16">
             <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
             Education & Certifications
           </h2>
-          
+
+          <!-- Exemplo de Formação 1 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>MBA em Engenharia de Software</b></h5>
             <h6 class="w3-text-teal">
@@ -151,7 +198,8 @@
             <p>UTFPR</p>
             <hr>
           </div>
-          
+
+          <!-- Formação 2 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>Bacharelado em Sistemas de Informação</b></h5>
             <h6 class="w3-text-teal">
@@ -160,7 +208,8 @@
             <p>UNIASSELVI</p>
             <hr>
           </div>
-          
+
+          <!-- Formação 3 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>MBA em Gestão de Projetos</b></h5>
             <h6 class="w3-text-teal">
@@ -169,7 +218,8 @@
             <p>UNIASSELVI</p>
             <hr>
           </div>
-          
+
+          <!-- Formação 4 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>MBA em Business Intelligence</b></h5>
             <h6 class="w3-text-teal">
@@ -178,7 +228,8 @@
             <p>UNIASSELVI</p>
             <hr>
           </div>
-          
+
+          <!-- Formação 5 -->
           <div class="w3-container">
             <h5 class="w3-opacity"><b>Pós-graduação em Gestão de Vendas</b></h5>
             <h6 class="w3-text-teal">
@@ -188,17 +239,18 @@
             <br>
           </div>
         </div>
-        
-      </div>
-      <!-- End Right Column -->
-      
-    </div>
-    <!-- End Grid -->
-    
-  </div>
-  <!-- End Page Container -->
+        <!-- Fim Education & Certifications -->
 
-  <!-- Footer -->
+      </div>
+      <!-- Fim Coluna Direita -->
+
+    </div>
+    <!-- Fim GRID -->
+
+  </div>
+  <!-- Fim Container Principal -->
+
+  <!-- Rodapé -->
   <footer class="w3-container w3-teal w3-center w3-margin-top">
     <p>Conecte-se comigo nas redes sociais:</p>
     <a href="https://www.linkedin.com/in/helsiomattia" target="_blank" class="fa fa-linkedin w3-hover-opacity"></a>
@@ -220,6 +272,3 @@
   </script>
 </body>
 </html>
-
-
-
