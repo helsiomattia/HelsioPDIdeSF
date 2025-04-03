@@ -1,3 +1,5 @@
+/* Combined index.css */
+
 /* RESET / BASE */
 * {
   margin: 0;
@@ -5,9 +7,13 @@
   box-sizing: border-box;
 }
 
+html, body, h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Body */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f0f4f8; /* Leve cinza para diferenciar do container central */
+  background: #f0f4f8; /* Fundo leve, como no seu index.css atual */
   color: #333;
   min-height: 100vh;
 }
@@ -19,10 +25,10 @@ body {
   padding: 30px;
   background: #fff;
   border-radius: 12px; /* Cantos mais arredondados */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
-/* Estilo para o Header */
+/* --- Estilo para o Header (carregado via header.html) --- */
 header {
   background-color: #4a90e2; /* Azul moderno */
   padding: 20px;
@@ -58,6 +64,10 @@ header nav li a:hover {
   background: #005f8d; /* Azul ainda mais escuro */
   transform: translateY(-2px);
 }
+
+/* ---------------------------
+   Seções da Página Inicial
+   --------------------------- */
 
 /* Seção de perfil */
 .perfil-section {
@@ -100,8 +110,7 @@ header nav li a:hover {
   font-size: 1rem;
   line-height: 1.6;
   max-width: 800px;
-  margin: 0 auto;
-  margin-top: 10px;
+  margin: 10px auto 0;
 }
 
 .badges {
@@ -188,7 +197,48 @@ section h2 {
   text-decoration: underline;
 }
 
-/* Responsividade */
+/* ---------------------------
+   Ajustes Inspirados no Modelo W3.CSS
+   --------------------------- */
+
+/* Define a fonte padrão para elementos W3.CSS, se necessário */
+.w3-light-grey {
+  background-color: #f5f5f5;
+}
+
+/* Ajustes no container da W3.CSS */
+.w3-content {
+  padding: 20px;
+}
+
+/* Personalize os títulos com a classe w3-padding-16 */
+.w3-padding-16 {
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+/* Ajusta os <hr> dentro de .w3-container */
+.w3-container hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 16px 0;
+}
+
+/* Footer customizado */
+footer {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+/* Pequenos ajustes para links no footer */
+footer a {
+  color: white;
+  margin: 0 5px;
+}
+
+/* ---------------------------
+   Responsividade
+   --------------------------- */
 @media (max-width: 768px) {
   .container {
     margin: 20px auto;
