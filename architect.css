@@ -7,9 +7,22 @@
   box-sizing: border-box;
 }
 
+/* Background para o body */
 body {
-  font-family: Arial, sans-serif;
-  background: #fafafa;
+  background-color: #4a90e2;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+/* Container principal com destaque */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 header {
