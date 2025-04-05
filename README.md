@@ -46,24 +46,27 @@ Utilizando uma interface moderna e responsiva, o site apresenta:
 
 ## Estrutura do Projeto 🌟
 
-📁 meu-projeto/ ├── 📄 index.html # Página inicial com perfil, experiências, formação, certificações e contato
-├── 📄 header.html # Cabeçalho reutilizável com menu dropdown (Início, Admin, Consultor, Architect)
-├── 📄 adm.html # Página do Administrador (mapa de Hard e Soft Skills)
-├── 📄 consult.html # Página do Consultor (mapa de Hard e Soft Skills)
-├── 📄 architect.html # Página do Architect (mapa de Hard e Soft Skills)
-├── 📁 css/
-│ ├── 📄 main.css # Estilos globais para a página inicial e elementos comuns
-│ ├── 📄 header.css # Estilos específicos para o cabeçalho/menu
-│ ├── 📄 adm.css # Estilos específicos para a página do Administrador
-│ ├── 📄 consult.css # Estilos específicos para a página do Consultor
-│ └── 📄 architect.css # Estilos específicos para a página do Architect
-├── 📁 js/
-│ ├── 📄 main.js # Lógica global (ex: fetch do header)
-│ ├── 📄 adm.js # Lógica específica para a página do Administrador
-│ ├── 📄 consult.js # Lógica específica para a página do Consultor
-│ └── 📄 architect.js # Lógica específica para a página do Architect
-├── 📁 imagens/ # Recursos gráficos (fotos, logos, etc.)
-└── 📄 README.md # Documentação e introdução do projeto
+```plaintext
+📁 **meu-projeto/**
+├── 📄 **index.html**           — Página inicial (perfil, experiências, formação, certificações e contato)
+├── 📄 **header.html**          — Cabeçalho reutilizável (Início, Admin, Consultor, Architect)
+├── 📄 **adm.html**             — Página do Administrador (Hard e Soft Skills)
+├── 📄 **consult.html**         — Página do Consultor (Hard e Soft Skills)
+├── 📄 **architect.html**       — Página do Architect (Hard e Soft Skills)
+├── 📁 **css/**
+│   ├── 📄 **main.css**         — Estilos globais (página inicial e elementos comuns)
+│   ├── 📄 **header.css**       — Estilos específicos do cabeçalho/menu
+│   ├── 📄 **adm.css**          — Estilos específicos da página do Administrador
+│   ├── 📄 **consult.css**      — Estilos específicos da página do Consultor
+│   └── 📄 **architect.css**    — Estilos específicos da página do Architect
+├── 📁 **js/**
+│   ├── 📄 **main.js**          — Lógica global (fetch do header, etc.)
+│   ├── 📄 **adm.js**           — Lógica específica para o Admin
+│   ├── 📄 **consult.js**       — Lógica específica para o Consultor
+│   └── 📄 **architect.js**     — Lógica específica para o Architect
+├── 📁 **imagens/**             — Recursos gráficos (fotos, logos, etc.)
+└── 📄 **README.md**            — Documentação e introdução do projeto
+
 
 ## Sobre Mim 💼
 
