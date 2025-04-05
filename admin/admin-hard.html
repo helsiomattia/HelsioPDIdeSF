@@ -1,4 +1,3 @@
-<!-- admin-hard.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,115 +5,132 @@
   <title>Admin - Hard Skills</title>
   <link rel="stylesheet" href="../header.css" />
   <link rel="stylesheet" href="admin-hard.css" />
+  <!-- Plotly CDN -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
   <div id="common-header"></div>
   <main>
     <h2>Hard Skills do Administrador</h2>
-    <!-- ... Tabela ou listas de Hard Skills ... -->
-     <table>
-        <thead>
-          <tr>
-            <th>Competência</th>
-            <th>Júnior </th>
-            <th>Nota (1-10)</th>
-            <th>Pleno </th>
-            <th>Nota (1-10)</th>
-            <th>Sênior </th>
-            <th>Nota (1-10)</th>
-            <th>Especialista </th>
-            <th>Nota (1-10)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Configuração Básica (Perfis, Permissões, Usuários)</td>
-            <td>Consegue criar e editar usuários, perfis simples e permissões básicas</td>
-            <td>
-              <select id="adm-hard-config-basic-jr">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-            <td>Entende regras de compartilhamento, papéis e conjuntos de permissões. Mantém política de segurança alinhada às melhores práticas</td>
-            <td>
-              <select id="adm-hard-config-basic-pl">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-            <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento. Integra Single Sign-On quando necessário</td>
-            <td>
-              <select id="adm-hard-config-basic-sn">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-            <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance em todo o Salesforce</td>
-            <td>
-              <select id="adm-hard-config-basic-es">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Criação e Customização de Objetos, Campos e Layouts</td>
-            <td>Cria objetos e campos básicos e faz ajustes simples de layout</td>
-            <td>
-              <select id="adm-hard-obj-fields-jr">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-            <td>Domina objetos customizados intermediários, relacionamentos (master-detail, lookup) e layouts otimizados</td>
-            <td>
-              <select id="adm-hard-obj-fields-pl">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-            <td>Planeja estruturas complexas de dados com foco em performance e escalabilidade. Cria fórmulas avançadas</td>
-            <td>
-              <select id="adm-hard-obj-fields-sn">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-            <td>Lidera revisões de arquitetura e governança de dados. Orienta equipes no uso padronizado de objetos e componentes Lightning</td>
-            <td>
-              <select id="adm-hard-obj-fields-es">
-                <option value="">Selecione</option>
-                <option>1</option><option>2</option><option>3</option><option>4</option>
-                <option>5</option><option>6</option><option>7</option><option>8</option>
-                <option>9</option><option>10</option>
-              </select>
-            </td>
-          </tr>
+    <!-- Tabela de competências -->
+    <table>
+      <thead>
+        <tr>
+          <th>Competência</th>
+          <th>Júnior (descrição)</th>
+          <th>Nota (1-10)</th>
+          <th>Pleno (descrição)</th>
+          <th>Nota (1-10)</th>
+          <th>Sênior (descrição)</th>
+          <th>Nota (1-10)</th>
+          <th>Especialista (descrição)</th>
+          <th>Nota (1-10)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Configuração Básica (Perfis, Permissões, Usuários)</td>
+          <td>Consegue criar e editar usuários, perfis simples e permissões básicas</td>
+          <td>
+            <select id="adm-hard-config-basic-jr">
+              <option value="">Selecione</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+              <option>9</option><option>10</option>
+            </select>
+          </td>
+          <td>Entende regras de compartilhamento, papéis e conjuntos de permissões. Mantém política de segurança alinhada às melhores práticas</td>
+          <td>
+            <select id="adm-hard-config-basic-pl">
+              <option value="">Selecione</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+              <option>9</option><option>10</option>
+            </select>
+          </td>
+          <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento. Integra Single Sign-On quando necessário</td>
+          <td>
+            <select id="adm-hard-config-basic-sn">
+              <option value="">Selecione</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+              <option>9</option><option>10</option>
+            </select>
+          </td>
+          <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance em todo o Salesforce</td>
+          <td>
+            <select id="adm-hard-config-basic-es">
+              <option value="">Selecione</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+              <option>9</option><option>10</option>
+            </select>
+          </td>
+        </tr>
+        <!-- Outras linhas de competências podem ser adicionadas aqui -->
+      </tbody>
+    </table>
+    
+    <!-- Botão para atualizar o gráfico -->
+    <button id="updateChartBtn">Atualizar Gráfico</button>
+    <!-- Container para o gráfico -->
+    <div id="myPlot" style="width:100%;max-width:700px; margin-top:20px;"></div>
+    
   </main>
 
+  <!-- Carrega o header -->
   <script>
-    // Carrega o menu
     fetch("../header.html")
       .then(res => res.text())
       .then(html => {
         document.getElementById("common-header").innerHTML = html;
-      });
+      })
+      .catch(err => console.error(err));
   </script>
+  
+  <!-- Script específico para a página de Admin Hard Skills -->
   <script src="admin-hard.js"></script>
+  
+  <!-- Script para criar o gráfico -->
+  <script>
+    // Função que lê as notas da primeira linha e plota o gráfico
+    function updateChart() {
+      // Definindo os labels para os níveis
+      const levels = ["Júnior", "Pleno", "Sênior", "Especialista"];
+
+      // Coleta os valores selecionados (ou define 0 se não selecionado)
+      const valJr = parseInt(document.getElementById("adm-hard-config-basic-jr").value) || 0;
+      const valPl = parseInt(document.getElementById("adm-hard-config-basic-pl").value) || 0;
+      const valSn = parseInt(document.getElementById("adm-hard-config-basic-sn").value) || 0;
+      const valEs = parseInt(document.getElementById("adm-hard-config-basic-es").value) || 0;
+
+      // Cria o array de valores
+      const scores = [valJr, valPl, valSn, valEs];
+
+      // Define os dados para o gráfico de barras
+      const data = [{
+        x: levels,
+        y: scores,
+        type: "bar",
+        marker: { color: "#4a90e2" }
+      }];
+
+      // Define o layout do gráfico
+      const layout = {
+        title: "Evolução de Pontuação - Configuração Básica",
+        xaxis: { title: "Nível" },
+        yaxis: { title: "Nota (1-10)", range: [0, 10] }
+      };
+
+      // Plota o gráfico no container "myPlot"
+      Plotly.newPlot("myPlot", data, layout);
+    }
+
+    // Adiciona um listener ao botão para atualizar o gráfico
+    document.getElementById("updateChartBtn").addEventListener("click", updateChart);
+    
+    // Opcional: atualizar o gráfico automaticamente ao carregar a página (se houver valores salvos)
+    window.addEventListener("load", updateChart);
+  </script>
 </body>
 </html>
