@@ -66,7 +66,7 @@ Utilizando uma interface moderna e responsiva, o site apresenta:
 │   └── 📄 **architect.js**     — Lógica específica para o Architect
 ├── 📁 **imagens/**             — Recursos gráficos (fotos, logos, etc.)
 └── 📄 **README.md**            — Documentação e introdução do projeto
-
+```
 
 ## Sobre Mim 💼
 
