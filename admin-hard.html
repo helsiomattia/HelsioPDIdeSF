@@ -3,31 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <title>Admin - Hard Skills</title>
-  <link rel="stylesheet" href="header.css" />
   <link rel="stylesheet" href="admin-hard.css" />
-  <!-- Carrega o Google Charts -->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- Google Charts -->
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
   <div id="common-header"></div>
   <main>
     <h2>Hard Skills do Administrador</h2>
-    
-    <!-- Wrapper para tabela e gráfico lado a lado -->
-    <div class="skills-chart-container">
-      <!-- Container da Tabela -->
-      <div class="table-container">
+
+    <!-- Container flex para tabela e gráfico -->
+    <div class="admin-hard-wrapper">
+      <!-- Seção da Tabela -->
+      <div class="table-section">
         <table>
           <thead>
             <tr>
               <th>Competência</th>
-              <th>Júnior</th>
+              <th>Júnior (descrição)</th>
               <th>Nota (1-10)</th>
-              <th>Pleno</th>
+              <th>Pleno (descrição)</th>
               <th>Nota (1-10)</th>
-              <th>Sênior</th>
+              <th>Sênior (descrição)</th>
               <th>Nota (1-10)</th>
-              <th>Especialista</th>
+              <th>Especialista (descrição)</th>
               <th>Nota (1-10)</th>
             </tr>
           </thead>
@@ -43,7 +42,7 @@
                   <option>9</option><option>10</option>
                 </select>
               </td>
-              <td>Entende regras de compartilhamento, papéis e conjuntos de permissões. Mantém política de segurança alinhada às melhores práticas</td>
+              <td>Entende regras de compartilhamento, papéis e conjuntos de permissões...</td>
               <td>
                 <select id="adm-hard-config-basic-pl">
                   <option value="">Selecione</option>
@@ -52,7 +51,7 @@
                   <option>9</option><option>10</option>
                 </select>
               </td>
-              <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento. Integra Single Sign-On quando necessário</td>
+              <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento...</td>
               <td>
                 <select id="adm-hard-config-basic-sn">
                   <option value="">Selecione</option>
@@ -61,7 +60,7 @@
                   <option>9</option><option>10</option>
                 </select>
               </td>
-              <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance em todo o Salesforce</td>
+              <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance...</td>
               <td>
                 <select id="adm-hard-config-basic-es">
                   <option value="">Selecione</option>
@@ -71,48 +70,41 @@
                 </select>
               </td>
             </tr>
-            <!-- Outras linhas de competências podem ser adicionadas aqui -->
+            <!-- Outras linhas se quiser -->
           </tbody>
         </table>
       </div>
-      
-      <!-- Container do Gráfico -->
-      <div class="chart-container">
+
+      <!-- Seção do Gráfico -->
+      <div class="chart-section">
         <h3>Evolução de Pontuação</h3>
-        <div id="myChart" style="width:100%; height:400px;"></div>
+        <div id="myChart"></div>
       </div>
     </div>
   </main>
 
-  <!-- Carrega o header -->
+  <!-- Script para carregar o header -->
   <script>
     fetch("header.html")
-  .then(response => response.text())
-  .then(html => {
-    document.getElementById("common-header").innerHTML = html;
-  })
-  .catch(err => console.error(err));
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("common-header").innerHTML = html;
+      })
+      .catch(err => console.error(err));
   </script>
 
-  <!-- Script específico para a página Admin Hard Skills -->
-  <script src="admin-hard.js"></script>
-
-  <!-- Script para Google Charts com atualização dinâmica -->
-  <script type="text/javascript">
+  <!-- Script do Google Charts + Atualização Dinâmica -->
+  <script>
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-    
+
     function drawChart() {
-      // Obtém os valores dos selects (ou usa 0 se vazio)
       const valJr = parseInt(document.getElementById("adm-hard-config-basic-jr").value) || 0;
       const valPl = parseInt(document.getElementById("adm-hard-config-basic-pl").value) || 0;
       const valSn = parseInt(document.getElementById("adm-hard-config-basic-sn").value) || 0;
       const valEs = parseInt(document.getElementById("adm-hard-config-basic-es").value) || 0;
-      
-      // Calcula a média
       const avg = (valJr + valPl + valSn + valEs) / 4;
-      
-      // Cria a DataTable
+
       const data = new google.visualization.DataTable();
       data.addColumn('number', 'Nível');
       data.addColumn('number', 'Nota');
@@ -123,8 +115,7 @@
         [3, valSn, avg],
         [4, valEs, avg]
       ]);
-      
-      // Define as opções do gráfico
+
       const options = {
         title: 'Configuração Básica - Notas Selecionadas',
         hAxis: {
@@ -150,23 +141,16 @@
         chartArea: { width: '80%', height: '70%' }
       };
 
-      // Desenha o gráfico no container "myChart"
       const chart = new google.visualization.ComboChart(document.getElementById('myChart'));
       chart.draw(data, options);
     }
-    
-    // Atualiza o gráfico dinamicamente ao alterar os selects
-    const selects = [
-      "adm-hard-config-basic-jr",
-      "adm-hard-config-basic-pl",
-      "adm-hard-config-basic-sn",
-      "adm-hard-config-basic-es"
-    ];
-    
-    selects.forEach(id => {
-      document.getElementById(id).addEventListener("change", drawChart);
-    });
-    
+
+    // Sempre que o usuário mudar um select, atualiza o gráfico
+    ["adm-hard-config-basic-jr","adm-hard-config-basic-pl","adm-hard-config-basic-sn","adm-hard-config-basic-es"]
+      .forEach(id => {
+        document.getElementById(id).addEventListener("change", drawChart);
+      });
+
     window.addEventListener("load", drawChart);
   </script>
 </body>
