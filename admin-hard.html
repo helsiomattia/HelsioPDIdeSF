@@ -3,17 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <title>Admin - Hard Skills</title>
+  <!-- CSS geral do header/menu, se existir -->
+  <link rel="stylesheet" href="header.css" />
+  <!-- CSS específico para a página de Admin Hard -->
   <link rel="stylesheet" href="admin-hard.css" />
   <!-- Google Charts -->
   <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
+  <!-- Header comum (menu) será carregado dinamicamente -->
   <div id="common-header"></div>
-  <main>
-    <h2>Hard Skills do Administrador</h2>
+  
+  <!-- Container principal -->
+  <main class="container">
+    <h2 class="page-title">Hard Skills do Administrador</h2>
 
-    <!-- Container flex para tabela e gráfico -->
+    <!-- Wrapper flex para Tabela e Gráfico lado a lado -->
     <div class="admin-hard-wrapper">
+      
       <!-- Seção da Tabela -->
       <div class="table-section">
         <table>
@@ -60,7 +67,7 @@
                   <option>9</option><option>10</option>
                 </select>
               </td>
-              <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance...</td>
+              <td>É referência em segurança e governança avançada (GDPR, LGPD)...</td>
               <td>
                 <select id="adm-hard-config-basic-es">
                   <option value="">Selecione</option>
@@ -70,52 +77,56 @@
                 </select>
               </td>
             </tr>
-            <!-- Outras linhas se quiser -->
+            <!-- Outras linhas de competências podem ser adicionadas aqui -->
           </tbody>
         </table>
       </div>
-
+      
       <!-- Seção do Gráfico -->
       <div class="chart-section">
         <h3>Evolução de Pontuação</h3>
         <div id="myChart"></div>
       </div>
-    </div>
+
+    </div> <!-- Fim admin-hard-wrapper -->
   </main>
 
-  <!-- Script para carregar o header -->
+  <!-- Script para carregar o menu (header.html) -->
   <script>
-    fetch("header.html")
-      .then(res => res.text())
+    fetch("../header.html")
+      .then(response => response.text())
       .then(html => {
         document.getElementById("common-header").innerHTML = html;
       })
       .catch(err => console.error(err));
   </script>
 
-  <!-- Script do Google Charts + Atualização Dinâmica -->
+  <!-- Script de Google Charts + lógica dinâmica -->
   <script>
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      const valJr = parseInt(document.getElementById("adm-hard-config-basic-jr").value) || 0;
-      const valPl = parseInt(document.getElementById("adm-hard-config-basic-pl").value) || 0;
-      const valSn = parseInt(document.getElementById("adm-hard-config-basic-sn").value) || 0;
-      const valEs = parseInt(document.getElementById("adm-hard-config-basic-es").value) || 0;
-      const avg = (valJr + valPl + valSn + valEs) / 4;
+      // Pega os valores (ou 0 se estiver vazio)
+      const jr = parseInt(document.getElementById("adm-hard-config-basic-jr").value) || 0;
+      const pl = parseInt(document.getElementById("adm-hard-config-basic-pl").value) || 0;
+      const sn = parseInt(document.getElementById("adm-hard-config-basic-sn").value) || 0;
+      const es = parseInt(document.getElementById("adm-hard-config-basic-es").value) || 0;
+      const avg = (jr + pl + sn + es) / 4;
 
+      // Cria DataTable
       const data = new google.visualization.DataTable();
       data.addColumn('number', 'Nível');
       data.addColumn('number', 'Nota');
       data.addColumn('number', 'Média');
       data.addRows([
-        [1, valJr, avg],
-        [2, valPl, avg],
-        [3, valSn, avg],
-        [4, valEs, avg]
+        [1, jr,  avg],
+        [2, pl,  avg],
+        [3, sn,  avg],
+        [4, es,  avg]
       ]);
 
+      // Opções do gráfico
       const options = {
         title: 'Configuração Básica - Notas Selecionadas',
         hAxis: {
@@ -141,16 +152,22 @@
         chartArea: { width: '80%', height: '70%' }
       };
 
+      // Desenha o ComboChart
       const chart = new google.visualization.ComboChart(document.getElementById('myChart'));
       chart.draw(data, options);
     }
 
-    // Sempre que o usuário mudar um select, atualiza o gráfico
-    ["adm-hard-config-basic-jr","adm-hard-config-basic-pl","adm-hard-config-basic-sn","adm-hard-config-basic-es"]
-      .forEach(id => {
-        document.getElementById(id).addEventListener("change", drawChart);
-      });
+    // Atualiza o gráfico quando mudar o valor de qualquer select
+    [
+      "adm-hard-config-basic-jr",
+      "adm-hard-config-basic-pl",
+      "adm-hard-config-basic-sn",
+      "adm-hard-config-basic-es"
+    ].forEach(id => {
+      document.getElementById(id).addEventListener("change", drawChart);
+    });
 
+    // Desenha o gráfico ao carregar a página
     window.addEventListener("load", drawChart);
   </script>
 </body>
