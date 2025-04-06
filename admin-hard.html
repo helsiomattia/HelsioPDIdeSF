@@ -49,7 +49,7 @@
                   <option>9</option><option>10</option>
                 </select>
               </td>
-              <td>Entende regras de compartilhamento, papéis e conjuntos de permissões...</td>
+              <td>Entende regras de compartilhamento, papéis e conjuntos de permissões. Mantém política de segurança alinhada...</td>
               <td>
                 <select id="adm-hard-config-basic-pl">
                   <option value="">Selecione</option>
@@ -58,7 +58,7 @@
                   <option>9</option><option>10</option>
                 </select>
               </td>
-              <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento...</td>
+              <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento. Integra Single Sign-On...</td>
               <td>
                 <select id="adm-hard-config-basic-sn">
                   <option value="">Selecione</option>
@@ -77,7 +77,7 @@
                 </select>
               </td>
             </tr>
-            <!-- Outras linhas de competências podem ser adicionadas aqui -->
+            <!-- Outras linhas se quiser -->
           </tbody>
         </table>
       </div>
@@ -91,7 +91,7 @@
     </div> <!-- Fim admin-hard-wrapper -->
   </main>
 
-  <!-- Script para carregar o menu (header.html) -->
+  <!-- Script para carregar o header (header.html) -->
   <script>
     fetch("header.html")
       .then(response => response.text())
@@ -101,7 +101,7 @@
       .catch(err => console.error(err));
   </script>
 
-  <!-- Script de Google Charts + lógica dinâmica -->
+  <!-- Google Charts + Lógica -->
   <script>
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
@@ -152,7 +152,6 @@
         chartArea: { width: '80%', height: '70%' }
       };
 
-      // Desenha o ComboChart
       const chart = new google.visualization.ComboChart(document.getElementById('myChart'));
       chart.draw(data, options);
     }
