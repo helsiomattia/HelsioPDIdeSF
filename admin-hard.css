@@ -1,6 +1,6 @@
 /* admin-hard.css */
 
-/* Corpo (caso não esteja no main.css) */
+/* Exemplo de fundo global e tipografia se não estiverem em outro CSS */
 body {
   background: #f0f4f8;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -10,9 +10,10 @@ body {
   min-height: 100vh;
 }
 
-/* Container principal */
+/* Container principal - aumenta max-width para ficar mais largo */
 .container {
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1600px; /* Ajuste se quiser ainda maior */
   margin: 30px auto;
   padding: 30px;
   background: #fff;
@@ -29,23 +30,26 @@ body {
   padding-left: 10px;
 }
 
-/* Wrapper que contém a Tabela e o Gráfico */
+/* Wrapper que contém a Tabela e o Gráfico na mesma linha */
 .admin-hard-wrapper {
   display: flex;
-  flex-wrap: wrap;       /* Permite quebra em telas menores */
+  flex-wrap: nowrap;      /* Mantém na mesma linha */
   gap: 20px;
   align-items: flex-start;
+  margin-top: 20px;
 }
 
 /* Seção da Tabela */
 .table-section {
-  flex: 1 1 60%;
-  overflow-x: auto;      /* Se a tabela for muito larga, rola horizontalmente */
+  flex: 0 0 70%;          /* 70% da largura */
+  max-width: 70%;
+  overflow-x: auto;       /* rolagem horizontal se a tabela for muito larga */
 }
 
 /* Seção do Gráfico */
 .chart-section {
-  flex: 1 1 40%;
+  flex: 0 0 30%;          /* 30% da largura */
+  max-width: 30%;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -53,7 +57,7 @@ body {
   padding: 10px;
 }
 
-/* Título do Gráfico */
+/* Título do gráfico */
 .chart-section h3 {
   text-align: center;
   margin-bottom: 10px;
@@ -84,15 +88,14 @@ table td {
   vertical-align: top;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
+/* Responsividade: se a tela ficar muito estreita, gráfico e tabela vão empilhar */
+@media (max-width: 992px) {
   .admin-hard-wrapper {
-    flex-direction: column; /* Gráfico vai para baixo da tabela em telas pequenas */
+    flex-wrap: wrap; /* Quebra linha se a tela for menor que 70% + 30% */
   }
-  
   .chart-section {
+    flex: 0 0 100%;
+    max-width: 100%;
     margin-top: 20px;
-    flex: none;
-    width: 100%;
   }
 }
