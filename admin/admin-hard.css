@@ -77,3 +77,37 @@ select {
     white-space: nowrap;
   }
 }
+
+
+/* admin-hard.css */
+
+/* Wrapper para a tabela e o gráfico */
+.skills-chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Container da tabela */
+.table-container {
+  flex: 1 1 60%; /* Ocupa 60% do espaço disponível */
+}
+
+/* Container do gráfico */
+.chart-container {
+  flex: 1 1 35%; /* Ocupa 35% do espaço disponível */
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Se preferir centralizar o título do gráfico */
+.chart-container h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #444;
+}
+
