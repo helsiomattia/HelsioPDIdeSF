@@ -81,33 +81,44 @@ select {
 
 /* admin-hard.css */
 
-/* Wrapper para a tabela e o gráfico */
-.skills-chart-container {
+/* Wrapper principal para tabela e gráfico lado a lado */
+.admin-hard-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-start;
+  flex-wrap: nowrap;     /* Não quebra linha, se couber na tela */
+  gap: 20px;             /* Espaço entre a tabela e o gráfico */
+  align-items: flex-start; /* Alinha ao topo */
+  margin-top: 20px;
 }
 
-/* Container da tabela */
-.table-container {
-  flex: 1 1 60%; /* Ocupa 60% do espaço disponível */
+/* Área da tabela */
+.table-section {
+  flex: 0 1 60%;         /* A tabela ocupa ~60% da largura */
+  max-width: 60%;        /* Evita crescer além de 60% */
+  overflow-x: auto;      /* Se a tabela for muito larga, rola horizontalmente */
 }
 
-/* Container do gráfico */
-.chart-container {
-  flex: 1 1 35%; /* Ocupa 35% do espaço disponível */
-  padding: 10px;
+/* Área do gráfico */
+.chart-section {
+  flex: 0 1 40%;         /* O gráfico ocupa ~40% da largura */
+  max-width: 40%;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 10px;
 }
 
-/* Se preferir centralizar o título do gráfico */
-.chart-container h3 {
+/* Ajusta o container do gráfico */
+#myChart {
+  width: 100%;
+  height: 350px; /* Ajuste conforme quiser */
+}
+
+/* Título do gráfico */
+.chart-section h3 {
   text-align: center;
   margin-bottom: 10px;
   color: #444;
 }
+
 
