@@ -5,132 +5,169 @@
   <title>Admin - Hard Skills</title>
   <link rel="stylesheet" href="../header.css" />
   <link rel="stylesheet" href="admin-hard.css" />
-  <!-- Plotly CDN -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- Carrega o Google Charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
   <div id="common-header"></div>
   <main>
     <h2>Hard Skills do Administrador</h2>
-    <!-- Tabela de competências -->
-    <table>
-      <thead>
-        <tr>
-          <th>Competência</th>
-          <th>Júnior (descrição)</th>
-          <th>Nota (1-10)</th>
-          <th>Pleno (descrição)</th>
-          <th>Nota (1-10)</th>
-          <th>Sênior (descrição)</th>
-          <th>Nota (1-10)</th>
-          <th>Especialista (descrição)</th>
-          <th>Nota (1-10)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Configuração Básica (Perfis, Permissões, Usuários)</td>
-          <td>Consegue criar e editar usuários, perfis simples e permissões básicas</td>
-          <td>
-            <select id="adm-hard-config-basic-jr">
-              <option value="">Selecione</option>
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option>
-            </select>
-          </td>
-          <td>Entende regras de compartilhamento, papéis e conjuntos de permissões. Mantém política de segurança alinhada às melhores práticas</td>
-          <td>
-            <select id="adm-hard-config-basic-pl">
-              <option value="">Selecione</option>
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option>
-            </select>
-          </td>
-          <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento. Integra Single Sign-On quando necessário</td>
-          <td>
-            <select id="adm-hard-config-basic-sn">
-              <option value="">Selecione</option>
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option>
-            </select>
-          </td>
-          <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance em todo o Salesforce</td>
-          <td>
-            <select id="adm-hard-config-basic-es">
-              <option value="">Selecione</option>
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option>
-            </select>
-          </td>
-        </tr>
-        <!-- Outras linhas de competências podem ser adicionadas aqui -->
-      </tbody>
-    </table>
     
-    <!-- Botão para atualizar o gráfico -->
-    <button id="updateChartBtn">Atualizar Gráfico</button>
-    <!-- Container para o gráfico -->
-    <div id="myPlot" style="width:100%;max-width:700px; margin-top:20px;"></div>
-    
+    <!-- Wrapper para tabela e gráfico lado a lado -->
+    <div class="skills-chart-container">
+      <!-- Container da Tabela -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Competência</th>
+              <th>Júnior</th>
+              <th>Nota (1-10)</th>
+              <th>Pleno</th>
+              <th>Nota (1-10)</th>
+              <th>Sênior</th>
+              <th>Nota (1-10)</th>
+              <th>Especialista</th>
+              <th>Nota (1-10)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Configuração Básica (Perfis, Permissões, Usuários)</td>
+              <td>Consegue criar e editar usuários, perfis simples e permissões básicas</td>
+              <td>
+                <select id="adm-hard-config-basic-jr">
+                  <option value="">Selecione</option>
+                  <option>1</option><option>2</option><option>3</option><option>4</option>
+                  <option>5</option><option>6</option><option>7</option><option>8</option>
+                  <option>9</option><option>10</option>
+                </select>
+              </td>
+              <td>Entende regras de compartilhamento, papéis e conjuntos de permissões. Mantém política de segurança alinhada às melhores práticas</td>
+              <td>
+                <select id="adm-hard-config-basic-pl">
+                  <option value="">Selecione</option>
+                  <option>1</option><option>2</option><option>3</option><option>4</option>
+                  <option>5</option><option>6</option><option>7</option><option>8</option>
+                  <option>9</option><option>10</option>
+                </select>
+              </td>
+              <td>Desenha estratégias de segurança organizacional com auditoria e monitoramento. Integra Single Sign-On quando necessário</td>
+              <td>
+                <select id="adm-hard-config-basic-sn">
+                  <option value="">Selecione</option>
+                  <option>1</option><option>2</option><option>3</option><option>4</option>
+                  <option>5</option><option>6</option><option>7</option><option>8</option>
+                  <option>9</option><option>10</option>
+                </select>
+              </td>
+              <td>É referência em segurança e governança avançada (GDPR, LGPD). Coordena revisões de compliance em todo o Salesforce</td>
+              <td>
+                <select id="adm-hard-config-basic-es">
+                  <option value="">Selecione</option>
+                  <option>1</option><option>2</option><option>3</option><option>4</option>
+                  <option>5</option><option>6</option><option>7</option><option>8</option>
+                  <option>9</option><option>10</option>
+                </select>
+              </td>
+            </tr>
+            <!-- Outras linhas de competências podem ser adicionadas aqui -->
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Container do Gráfico -->
+      <div class="chart-container">
+        <h3>Evolução de Pontuação</h3>
+        <div id="myChart" style="width:100%; height:400px;"></div>
+      </div>
+    </div>
   </main>
 
   <!-- Carrega o header -->
   <script>
     fetch("../header.html")
-      .then(res => res.text())
+      .then(response => response.text())
       .then(html => {
         document.getElementById("common-header").innerHTML = html;
       })
       .catch(err => console.error(err));
   </script>
-  
-  <!-- Script específico para a página de Admin Hard Skills -->
-  <script src="admin-hard.js"></script>
-  
-  <!-- Script para criar o gráfico -->
-  <script>
-    // Função que lê as notas da primeira linha e plota o gráfico
-    function updateChart() {
-      // Definindo os labels para os níveis
-      const levels = ["Júnior", "Pleno", "Sênior", "Especialista"];
 
-      // Coleta os valores selecionados (ou define 0 se não selecionado)
+  <!-- Script específico para a página Admin Hard Skills -->
+  <script src="admin-hard.js"></script>
+
+  <!-- Script para Google Charts com atualização dinâmica -->
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    
+    function drawChart() {
+      // Obtém os valores dos selects (ou usa 0 se vazio)
       const valJr = parseInt(document.getElementById("adm-hard-config-basic-jr").value) || 0;
       const valPl = parseInt(document.getElementById("adm-hard-config-basic-pl").value) || 0;
       const valSn = parseInt(document.getElementById("adm-hard-config-basic-sn").value) || 0;
       const valEs = parseInt(document.getElementById("adm-hard-config-basic-es").value) || 0;
-
-      // Cria o array de valores
-      const scores = [valJr, valPl, valSn, valEs];
-
-      // Define os dados para o gráfico de barras
-      const data = [{
-        x: levels,
-        y: scores,
-        type: "bar",
-        marker: { color: "#4a90e2" }
-      }];
-
-      // Define o layout do gráfico
-      const layout = {
-        title: "Evolução de Pontuação - Configuração Básica",
-        xaxis: { title: "Nível" },
-        yaxis: { title: "Nota (1-10)", range: [0, 10] }
+      
+      // Calcula a média
+      const avg = (valJr + valPl + valSn + valEs) / 4;
+      
+      // Cria a DataTable
+      const data = new google.visualization.DataTable();
+      data.addColumn('number', 'Nível');
+      data.addColumn('number', 'Nota');
+      data.addColumn('number', 'Média');
+      data.addRows([
+        [1, valJr, avg],
+        [2, valPl, avg],
+        [3, valSn, avg],
+        [4, valEs, avg]
+      ]);
+      
+      // Define as opções do gráfico
+      const options = {
+        title: 'Configuração Básica - Notas Selecionadas',
+        hAxis: {
+          title: 'Nível',
+          ticks: [
+            { v: 1, f: 'Júnior' },
+            { v: 2, f: 'Pleno' },
+            { v: 3, f: 'Sênior' },
+            { v: 4, f: 'Especialista' }
+          ]
+        },
+        vAxis: {
+          title: 'Nota (1-10)',
+          minValue: 0,
+          maxValue: 10
+        },
+        legend: { position: 'bottom' },
+        seriesType: 'scatter',
+        series: {
+          1: { type: 'line', color: '#4a90e2', lineWidth: 2, pointSize: 0 }
+        },
+        backgroundColor: '#fff',
+        chartArea: { width: '80%', height: '70%' }
       };
 
-      // Plota o gráfico no container "myPlot"
-      Plotly.newPlot("myPlot", data, layout);
+      // Desenha o gráfico no container "myChart"
+      const chart = new google.visualization.ComboChart(document.getElementById('myChart'));
+      chart.draw(data, options);
     }
-
-    // Adiciona um listener ao botão para atualizar o gráfico
-    document.getElementById("updateChartBtn").addEventListener("click", updateChart);
     
-    // Opcional: atualizar o gráfico automaticamente ao carregar a página (se houver valores salvos)
-    window.addEventListener("load", updateChart);
+    // Atualiza o gráfico dinamicamente ao alterar os selects
+    const selects = [
+      "adm-hard-config-basic-jr",
+      "adm-hard-config-basic-pl",
+      "adm-hard-config-basic-sn",
+      "adm-hard-config-basic-es"
+    ];
+    
+    selects.forEach(id => {
+      document.getElementById(id).addEventListener("change", drawChart);
+    });
+    
+    window.addEventListener("load", drawChart);
   </script>
 </body>
 </html>
