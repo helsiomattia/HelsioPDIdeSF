@@ -36,16 +36,25 @@ const NAV_LINKS = [
 const SECTION_IDS = ['home', ...NAV_LINKS.map((link) => link.id)];
 const HASH_ALIASES = { projects: 'credentials', skills: 'expertise' };
 const PATH_ALIASES = { projects: 'credentials', skills: 'expertise', '': 'home' };
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function stripBasePath(pathname) {
+  if (!BASE_PATH) return pathname;
+  if (pathname === BASE_PATH) return '/';
+  if (pathname.startsWith(`${BASE_PATH}/`)) return pathname.slice(BASE_PATH.length) || '/';
+  return pathname;
+}
 
 function getSectionPath(id) {
-  return id === 'home' ? '/' : `/${id}`;
+  return id === 'home' ? `${BASE_PATH || ''}/` : `${BASE_PATH || ''}/${id}`;
 }
 
 function getSectionFromLocation() {
   const hashId = window.location.hash.replace('#', '');
   if (hashId) return HASH_ALIASES[hashId] || hashId;
 
-  const pathId = window.location.pathname.split('/').filter(Boolean).pop() || 'home';
+  const pathname = stripBasePath(window.location.pathname);
+  const pathId = pathname.split('/').filter(Boolean).pop() || 'home';
   return PATH_ALIASES[pathId] || pathId;
 }
 
