@@ -50,6 +50,13 @@ function getSectionPath(id) {
 }
 
 function getSectionFromLocation() {
+  const redirectedPath = window.sessionStorage.getItem('personal-page-redirect');
+  if (redirectedPath) {
+    window.sessionStorage.removeItem('personal-page-redirect');
+    const redirectedId = redirectedPath.split('/').filter(Boolean).pop() || 'home';
+    return PATH_ALIASES[redirectedId] || redirectedId;
+  }
+
   const hashId = window.location.hash.replace('#', '');
   if (hashId) return HASH_ALIASES[hashId] || hashId;
 

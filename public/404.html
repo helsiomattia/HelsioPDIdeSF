@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecionando...</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        var basePath = '/personal-page';
+        var path = window.location.pathname.replace(basePath, '').replace(/^\/+|\/+$/g, '');
+
+        if (path) {
+          window.sessionStorage.setItem('personal-page-redirect', path);
+        }
+
+        window.location.replace(basePath + '/');
+      })();
+    </script>
+  </body>
+</html>
