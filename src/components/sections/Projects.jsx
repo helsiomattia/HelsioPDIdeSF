@@ -1,7 +1,5 @@
-import { useMemo, useState } from 'react';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   Chip,
@@ -20,7 +18,7 @@ import ForkRightOutlinedIcon from '@mui/icons-material/ForkRightOutlined';
 import { useTranslation } from 'react-i18next';
 import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
-import { projects, projectFilters } from '../../data/projects';
+import { projects } from '../../data/projects';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
 
 /* ── Project card ──────────────────────────────────────── */
@@ -145,7 +143,7 @@ function ProjectCard({ project, index, lang, t }) {
           {/* Description */}
           <Typography
             variant="body2"
-            sx={{ color: 'text.secondary', mb: 1.6, flex: 1, lineHeight: 1.55, fontSize: '0.84rem' }}
+            sx={{ color: 'text.primary', mb: 1.6, flex: 1, lineHeight: 1.55, fontSize: '0.84rem', fontWeight: 500 }}
           >
             {getLocalizedString(project.description, lang)}
           </Typography>
@@ -160,9 +158,10 @@ function ProjectCard({ project, index, lang, t }) {
                 sx={{
                   bgcolor: 'rgba(11,92,171,0.08)',
                   border: '1px solid rgba(11,92,171,0.2)',
-                  color: 'primary.main',
+                  color: 'primary.dark',
                   fontFamily: '"Fira Code", monospace',
                   fontSize: '0.66rem',
+                  fontWeight: 700,
                   height: 24,
                   maxWidth: '100%',
                   '& .MuiChip-label': {
@@ -179,7 +178,7 @@ function ProjectCard({ project, index, lang, t }) {
               {project.stars !== null && (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                   <StarOutlineIcon sx={{ fontSize: '0.9rem', color: '#B7791F' }} />
-                  <Typography variant="caption" sx={{ color: 'text.secondary', fontFamily: '"Fira Code", monospace' }}>
+                  <Typography variant="caption" sx={{ color: 'text.primary', fontFamily: '"Fira Code", monospace', fontWeight: 700 }}>
                     {project.stars}
                   </Typography>
                 </Box>
@@ -187,7 +186,7 @@ function ProjectCard({ project, index, lang, t }) {
               {project.forks !== null && (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                   <ForkRightOutlinedIcon sx={{ fontSize: '0.9rem', color: 'text.secondary' }} />
-                  <Typography variant="caption" sx={{ color: 'text.secondary', fontFamily: '"Fira Code", monospace' }}>
+                  <Typography variant="caption" sx={{ color: 'text.primary', fontFamily: '"Fira Code", monospace', fontWeight: 700 }}>
                     {project.forks}
                   </Typography>
                 </Box>
@@ -204,12 +203,6 @@ function ProjectCard({ project, index, lang, t }) {
 export default function Projects() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
-  const [activeFilter, setActiveFilter] = useState('all');
-
-  const filtered = useMemo(() => {
-    if (activeFilter === 'all') return projects;
-    return projects.filter((p) => p.categories.includes(activeFilter));
-  }, [activeFilter]);
 
   return (
     <Box
@@ -231,61 +224,14 @@ export default function Projects() {
           subtitle={t('projects.subtitle')}
         />
 
-        {/* Filter buttons */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 0.75,
-            justifyContent: 'center',
-            mb: { xs: 3, md: 2.5 },
-          }}
-        >
-          {projectFilters.map((f) => (
-            <Button
-              key={f.value}
-              variant={activeFilter === f.value ? 'contained' : 'outlined'}
-              color="primary"
-              size="small"
-              onClick={() => setActiveFilter(f.value)}
-              sx={{
-                fontFamily: '"Fira Code", monospace',
-                fontSize: '0.72rem',
-                py: 0.45,
-                px: 1.45,
-                minWidth: 0,
-                ...(activeFilter !== f.value && {
-                  borderColor: 'rgba(15,37,55,0.18)',
-                  color: 'text.secondary',
-                  '&:hover': {
-                    borderColor: 'primary.main',
-                    color: 'primary.main',
-                    bgcolor: alpha('#0B5CAB', 0.1),
-                  },
-                }),
-              }}
-            >
-              {getLocalizedString(f.label, lang)}
-            </Button>
-          ))}
-        </Box>
-
         {/* Cards grid */}
         <Grid container spacing={{ xs: 2, md: 2.25 }}>
-          {filtered.map((project, index) => (
-            <Grid item xs={12} sm={6} md={4} key={`${activeFilter}-${project.id}`}>
+          {projects.map((project, index) => (
+            <Grid item xs={12} sm={6} md={4} key={project.id}>
               <ProjectCard project={project} index={index} lang={lang} t={t} />
             </Grid>
           ))}
         </Grid>
-
-        {filtered.length === 0 && (
-          <Box sx={{ textAlign: 'center', py: 8 }}>
-            <Typography color="text.secondary">
-              {t('projects.noResults')}
-            </Typography>
-          </Box>
-        )}
       </Container>
     </Box>
   );

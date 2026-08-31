@@ -1,13 +1,19 @@
+import { useState } from 'react';
 import {
   Box,
   Card,
   CardContent,
   Chip,
   Container,
+  Dialog,
+  DialogContent,
   Grid,
+  IconButton,
   Typography,
   alpha,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import OpenInFullOutlinedIcon from '@mui/icons-material/OpenInFullOutlined';
 import WebIcon from '@mui/icons-material/Web';
 import StorageIcon from '@mui/icons-material/Storage';
 import TableChartIcon from '@mui/icons-material/TableChart';
@@ -29,9 +35,35 @@ const ICON_MAP = {
   Build: BuildIcon,
 };
 
-function SkillCard({ category, cardIndex, lang }) {
+const UI_LABELS = {
+  open: {
+    pt: 'Ver detalhes',
+    en: 'View details',
+    es: 'Ver detalles',
+  },
+  close: {
+    pt: 'Fechar detalhes',
+    en: 'Close details',
+    es: 'Cerrar detalles',
+  },
+  dialogIntro: {
+    pt: 'Como aplico esses conhecimentos em CRM, Salesforce e operações.',
+    en: 'How I apply these capabilities across CRM, Salesforce and operations.',
+    es: 'Cómo aplico estos conocimientos en CRM, Salesforce y operaciones.',
+  },
+};
+
+function SkillCard({ category, cardIndex, lang, onOpen }) {
   const IconComponent = ICON_MAP[category.icon] || BuildIcon;
   const skills = getLocalizedStringArray(category.skills, lang);
+  const openLabel = getLocalizedString(UI_LABELS.open, lang);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onOpen(category);
+    }
+  };
 
   return (
     <AnimatedBox
@@ -39,13 +71,25 @@ function SkillCard({ category, cardIndex, lang }) {
       style={{ height: '100%' }}
     >
       <Card
+        role="button"
+        tabIndex={0}
+        aria-haspopup="dialog"
+        aria-label={`${openLabel}: ${getLocalizedString(category.title, lang)}`}
+        onClick={() => onOpen(category)}
+        onKeyDown={handleKeyDown}
         sx={{
           height: '100%',
           background: category.gradient,
           borderTop: `2px solid ${alpha(category.color, 0.5)}`,
+          cursor: 'pointer',
+          outline: 'none',
           '&:hover': {
             borderTop: `2px solid ${category.color}`,
             boxShadow: `0 10px 26px ${alpha(category.color, 0.13)}`,
+          },
+          '&:focus-visible': {
+            boxShadow: `0 0 0 3px ${alpha(category.color, 0.24)}`,
+            borderColor: alpha(category.color, 0.48),
           },
         }}
       >
@@ -73,10 +117,12 @@ function SkillCard({ category, cardIndex, lang }) {
                 fontWeight: 700,
                 fontSize: '1rem',
                 color: 'text.primary',
+                flex: 1,
               }}
             >
               {getLocalizedString(category.title, lang)}
             </Typography>
+            <OpenInFullOutlinedIcon sx={{ color: category.color, fontSize: '1rem', opacity: 0.82 }} />
           </Box>
 
           {/* Skills */}
@@ -90,12 +136,13 @@ function SkillCard({ category, cardIndex, lang }) {
                   maxWidth: '100%',
                   bgcolor: alpha(category.color, 0.1),
                   border: `1px solid ${alpha(category.color, 0.22)}`,
-                  color: alpha(category.color, 0.9),
+                  color: alpha(category.color, 1),
                   fontFamily: '"Fira Code", monospace',
                   fontSize: '0.68rem',
+                  fontWeight: 700,
                   height: 25,
                   transition: 'all 0.2s ease',
-                  cursor: 'default',
+                  cursor: 'pointer',
                   '& .MuiChip-label': {
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -110,15 +157,161 @@ function SkillCard({ category, cardIndex, lang }) {
               />
             ))}
           </Box>
+
+          <Typography
+            variant="caption"
+            sx={{
+              display: 'block',
+              mt: 1.35,
+              color: category.color,
+              fontFamily: '"Fira Code", monospace',
+              fontSize: '0.66rem',
+              fontWeight: 800,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}
+          >
+            {openLabel}
+          </Typography>
         </CardContent>
       </Card>
     </AnimatedBox>
   );
 }
 
+function ExpertiseDialog({ category, lang, onClose }) {
+  if (!category) return null;
+
+  const IconComponent = ICON_MAP[category.icon] || BuildIcon;
+  const skills = getLocalizedStringArray(category.skills, lang);
+  const details = getLocalizedStringArray(category.details, lang);
+  const title = getLocalizedString(category.title, lang);
+  const closeLabel = getLocalizedString(UI_LABELS.close, lang);
+
+  return (
+    <Dialog
+      open={Boolean(category)}
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      aria-labelledby="expertise-dialog-title"
+      PaperProps={{
+        sx: {
+          borderRadius: '24px',
+          bgcolor: 'var(--site-surface)',
+          border: `1px solid ${alpha(category.color, 0.28)}`,
+          backgroundImage: `linear-gradient(135deg, ${alpha(category.color, 0.1)} 0%, rgba(224,236,245,0.98) 42%, rgba(193,212,227,0.96) 100%)`,
+          boxShadow: `0 24px 80px ${alpha('#061827', 0.28)}`,
+          overflow: 'hidden',
+        },
+      }}
+      BackdropProps={{
+        sx: {
+          bgcolor: alpha('#061827', 0.42),
+          backdropFilter: 'blur(3px)',
+        },
+      }}
+    >
+      <Box
+        sx={{
+          height: 8,
+          background: `linear-gradient(90deg, ${category.color} 0%, #0E8198 100%)`,
+        }}
+      />
+
+      <DialogContent sx={{ p: { xs: 2.4, sm: 3, md: 3.5 } }}>
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, mb: 2.5 }}>
+          <Box
+            sx={{
+              width: 46,
+              height: 46,
+              borderRadius: '14px',
+              bgcolor: alpha(category.color, 0.13),
+              border: `1px solid ${alpha(category.color, 0.28)}`,
+              color: category.color,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <IconComponent sx={{ fontSize: '1.35rem' }} />
+          </Box>
+
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Typography
+              id="expertise-dialog-title"
+              variant="h4"
+              component="h3"
+              sx={{ color: 'text.primary', fontSize: { xs: '1.35rem', md: '1.7rem' }, fontWeight: 850, lineHeight: 1.2 }}
+            >
+              {title}
+            </Typography>
+            <Typography variant="body2" sx={{ color: 'text.primary', mt: 0.65, lineHeight: 1.55, fontWeight: 500 }}>
+              {getLocalizedString(UI_LABELS.dialogIntro, lang)}
+            </Typography>
+          </Box>
+
+          <IconButton
+            onClick={onClose}
+            aria-label={closeLabel}
+            sx={{
+              color: 'text.primary',
+              bgcolor: alpha(category.color, 0.08),
+              border: `1px solid ${alpha(category.color, 0.16)}`,
+              '&:hover': { bgcolor: alpha(category.color, 0.14) },
+            }}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
+            gap: { xs: 1.25, md: 1.5 },
+          }}
+        >
+          {skills.map((skill, index) => (
+            <Box
+              key={skill}
+              sx={{
+                p: { xs: 1.55, md: 1.75 },
+                borderRadius: '16px',
+                bgcolor: alpha('#E0ECF5', 0.72),
+                border: `1px solid ${alpha(category.color, 0.16)}`,
+                boxShadow: `0 8px 22px ${alpha('#061827', 0.055)}`,
+              }}
+            >
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: category.color,
+                  fontFamily: '"Fira Code", monospace',
+                  fontSize: '0.78rem',
+                  fontWeight: 850,
+                  lineHeight: 1.35,
+                  mb: 0.6,
+                }}
+              >
+                {skill}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'text.primary', fontSize: '0.86rem', lineHeight: 1.58, fontWeight: 500 }}>
+                {details[index] || ''}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 export default function Skills() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
+  const [activeCategory, setActiveCategory] = useState(null);
 
   return (
     <Box
@@ -143,10 +336,21 @@ export default function Skills() {
         <Grid container spacing={{ xs: 2, md: 2.25 }}>
           {skillCategories.map((category, index) => (
             <Grid item xs={12} sm={6} md={4} key={category.id}>
-              <SkillCard category={category} cardIndex={index} lang={lang} />
+              <SkillCard
+                category={category}
+                cardIndex={index}
+                lang={lang}
+                onOpen={setActiveCategory}
+              />
             </Grid>
           ))}
         </Grid>
+
+        <ExpertiseDialog
+          category={activeCategory}
+          lang={lang}
+          onClose={() => setActiveCategory(null)}
+        />
       </Container>
     </Box>
   );

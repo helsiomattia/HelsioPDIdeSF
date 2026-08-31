@@ -37,6 +37,9 @@ export default function AnimatedBox({ children, delay = 0, viewport, style, ...r
             once: viewport?.once !== false,
             toggleActions: viewport?.once === false ? 'play none none reverse' : 'play none none none',
           },
+          onComplete: () => {
+            gsap.set(el, { clipPath: 'none', willChange: 'auto' });
+          },
         },
       );
     }, el);

@@ -181,14 +181,14 @@ function ContactCard({ contact, index, t }) {
             <Typography
               variant="caption"
               sx={{
-                color: 'text.secondary',
+                color: 'text.primary',
                 display: 'block',
                 mb: 0.3,
                 fontFamily: '"Fira Code", monospace',
                 fontSize: '0.72rem',
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                fontWeight: 700,
+                fontWeight: 800,
               }}
             >
               {contact.label}
@@ -197,7 +197,7 @@ function ContactCard({ contact, index, t }) {
               variant="body2"
               sx={{
                 color: 'text.primary',
-                fontWeight: 600,
+                fontWeight: 750,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
@@ -376,7 +376,7 @@ export default function Contact() {
               </Box>
             </Typography>
 
-            <Typography variant="body1" sx={{ color: 'text.secondary', maxWidth: 540, mx: 'auto', lineHeight: 1.6 }}>
+            <Typography variant="body1" sx={{ color: 'text.primary', maxWidth: 540, mx: 'auto', lineHeight: 1.6, fontWeight: 500 }}>
               {t('contact.body')}
             </Typography>
           </Box>

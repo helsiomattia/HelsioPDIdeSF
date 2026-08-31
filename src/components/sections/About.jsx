@@ -160,7 +160,7 @@ export default function About() {
                     }}
                   >
                     <LocationOnOutlinedIcon sx={{ fontSize: '0.9rem', color: 'primary.main' }} />
-                    <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
+                    <Typography variant="caption" color="text.primary" sx={{ fontWeight: 700 }}>
                       {getLocalizedString(profile.location, lang)}
                     </Typography>
                   </Box>
@@ -207,8 +207,8 @@ export default function About() {
                         </Typography>
                         <Typography
                           variant="caption"
-                          color="text.secondary"
-                          sx={{ lineHeight: 1.25, fontSize: '0.7rem', fontWeight: 600 }}
+                          color="text.primary"
+                          sx={{ lineHeight: 1.25, fontSize: '0.7rem', fontWeight: 700 }}
                         >
                           {getLocalizedString(stat.label, lang)}
                         </Typography>
@@ -227,7 +227,9 @@ export default function About() {
               <Paper
                 elevation={0}
                 sx={{
-                  p: { xs: 2.35, sm: 3, md: 3.25 },
+                  height: '100%',
+                  px: { xs: 2.5, sm: 3, md: 'clamp(24px, 3vw, 40px)' },
+                  py: { xs: 2.35, sm: 3, md: 3.25 },
                   mb: 'var(--card-gap)',
                   borderRadius: 'var(--card-radius)',
                   bgcolor: 'rgba(224,236,245,0.78)',
@@ -236,18 +238,24 @@ export default function About() {
                 }}
               >
                 {getLocalizedStringArray(profile.about, lang).map((paragraph, i) => (
-                  <Typography
-                    key={i}
-                    variant="body1"
-                    sx={{
-                      color: 'text.secondary',
-                      maxWidth: '680px',
-                      mb: 1.6,
-                      '&:last-of-type': { mb: 0 },
-                      lineHeight: 1.72,
-                      fontSize: { xs: '0.96rem', md: '1rem' },
-                    }}
-                  >
+                    <Typography
+                      key={i}
+                      variant="body1"
+                      sx={{
+                        color: 'text.primary',
+                        fontWeight: 500,
+                        width: '100%',
+                        maxWidth: 'none',
+                        mb: 1.6,
+                        '&:last-of-type': { mb: 0 },
+                        lineHeight: 1.72,
+                        fontSize: { xs: '0.96rem', md: '1rem' },
+                        textAlign: 'left',
+                        hyphens: 'none',
+                        wordBreak: 'normal',
+                        overflowWrap: { xs: 'break-word', sm: 'normal' },
+                      }}
+                    >
                     {paragraph}
                   </Typography>
                 ))}
@@ -289,10 +297,10 @@ export default function About() {
                         maxWidth: '100%',
                         bgcolor: alpha(badgeColors[i % badgeColors.length], 0.08),
                         border: `1px solid ${alpha(badgeColors[i % badgeColors.length], 0.18)}`,
-                        color: alpha(badgeColors[i % badgeColors.length], 0.95),
+                        color: alpha(badgeColors[i % badgeColors.length], 1),
                         fontFamily: '"Fira Code", monospace',
                         fontSize: '0.74rem',
-                        fontWeight: 600,
+                        fontWeight: 700,
                         height: 32,
                         px: 0.75,
                         borderRadius: '999px',

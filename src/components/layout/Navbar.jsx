@@ -189,7 +189,7 @@ export default function Navbar() {
                 sx={{
                   fontWeight: 700,
                   fontSize: '1rem',
-                  background: 'linear-gradient(90deg, #0F2537 40%, #40586D 100%)',
+                  background: 'linear-gradient(90deg, #061827 35%, #17364F 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -227,10 +227,10 @@ export default function Navbar() {
                   sx={{
                     border: 0,
                     background: 'transparent',
-                    color: activeSection === link.id ? 'primary.main' : 'text.secondary',
+                    color: activeSection === link.id ? 'primary.dark' : 'text.primary',
                     fontFamily: '"Fira Code", monospace',
                     fontSize: { xs: '0.72rem', sm: '0.76rem', md: '0.8rem' },
-                    fontWeight: 600,
+                    fontWeight: activeSection === link.id ? 800 : 700,
                     py: { xs: 0.75, md: 1 },
                     px: { xs: 1, sm: 1.2, md: 1.5 },
                     flexShrink: 0,
@@ -242,7 +242,7 @@ export default function Navbar() {
                     textDecoration: 'none',
                     '&::before': {
                       content: `"0${index + 1}."`,
-                      color: 'primary.main',
+                      color: 'primary.dark',
                       fontSize: '0.7rem',
                       mr: 0.5,
                       fontWeight: 600,

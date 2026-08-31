@@ -11,7 +11,6 @@ import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import { profile } from '../../data/profile';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
-import { scrollToSection } from '../../utils/scrollToSection';
 
 /* ── Gradient orb helper ─────────────────────────────────── */
 function Orb({ sx }) {
@@ -58,13 +57,6 @@ export default function Hero() {
         },
       );
 
-      gsap.to('.hero-scroll-arrow', {
-        y: 6,
-        duration: 0.75,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
     }, sectionRef.current);
 
     return () => ctx.revert();
@@ -189,9 +181,9 @@ export default function Hero() {
                 component="span"
                 sx={{
                   display: 'block',
-                  color: 'text.secondary',
+                  color: 'text.primary',
                   fontSize: { xs: '1rem', md: '1.15rem' },
-                  fontWeight: 400,
+                  fontWeight: 650,
                   fontFamily: '"Fira Code", monospace',
                   mb: 1,
                   letterSpacing: '0.05em',
@@ -202,7 +194,7 @@ export default function Hero() {
               <Box
                 component="span"
                 sx={{
-                  background: 'linear-gradient(135deg, #0F2537 30%, #284B68 100%)',
+                  background: 'linear-gradient(135deg, #061827 24%, #17364F 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -247,7 +239,8 @@ export default function Hero() {
               variant="body1"
               sx={{
                 maxWidth: { xs: '100%', md: '580px' },
-                color: 'text.secondary',
+                color: 'text.primary',
+                fontWeight: 500,
                 mb: 2.25,
                 fontSize: { xs: '1rem', md: '1.1rem' },
                 lineHeight: 1.75,
@@ -278,10 +271,10 @@ export default function Hero() {
                     borderRadius: '999px',
                     border: '1px solid rgba(11,92,171,0.24)',
                     bgcolor: 'rgba(224,236,245,0.72)',
-                    color: 'text.secondary',
+                    color: 'text.primary',
                     fontFamily: '"Fira Code", monospace',
                     fontSize: { xs: '0.68rem', sm: '0.72rem' },
-                    fontWeight: 600,
+                    fontWeight: 700,
                     lineHeight: 1.4,
                     boxShadow: '0 8px 24px rgba(15,37,55,0.06)',
                     overflow: 'hidden',
@@ -320,59 +313,6 @@ export default function Hero() {
             </Box>
           )}
 
-          {/* Location & code flavor */}
-          <Box component="div" className="hero-gsap-item">
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1.5,
-                flexWrap: 'wrap',
-              }}
-            >
-              <Typography
-                variant="caption"
-                sx={{ color: 'text.secondary', fontFamily: '"Fira Code", monospace' }}
-              >
-                {'{'} {t('hero.locationKey')}: "{getLocalizedString(profile.location, lang)}" {'}'}
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-
-        {/* Scroll down indicator */}
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: { xs: 16, md: 24 },
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 0.5,
-            opacity: 0.5,
-            cursor: 'pointer',
-            '&:hover': { opacity: 1 },
-            transition: 'opacity 0.3s',
-          }}
-          onClick={() => scrollToSection('about')}
-        >
-          <Typography variant="caption" sx={{ fontFamily: '"Fira Code", monospace', fontSize: '0.65rem', letterSpacing: '0.1em' }}>
-            {t('hero.scroll')}
-          </Typography>
-          <Box component="div" className="hero-scroll-arrow">
-            <Box
-              aria-hidden="true"
-              sx={{
-                width: 12,
-                height: 12,
-                borderRight: '2px solid currentColor',
-                borderBottom: '2px solid currentColor',
-                transform: 'rotate(45deg)',
-              }}
-            />
-          </Box>
         </Box>
       </Container>
     </Box>

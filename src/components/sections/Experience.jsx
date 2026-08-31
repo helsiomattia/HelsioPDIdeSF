@@ -131,14 +131,14 @@ function ExperienceCard({ exp, index, lang }) {
             />
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.45, minWidth: 0 }}>
               <PlaceOutlinedIcon sx={{ fontSize: '0.78rem', color: 'text.secondary', flexShrink: 0 }} />
-              <Typography variant="caption" color="text.secondary" sx={{ lineHeight: 1.35 }}>
+              <Typography variant="caption" color="text.primary" sx={{ lineHeight: 1.35, fontWeight: 650 }}>
                 {getLocalizedString(exp.location, lang)} · {getLocalizedString(exp.type, lang)}
               </Typography>
             </Box>
           </Box>
 
           {/* Description */}
-          <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1.1, lineHeight: 1.45, fontSize: '0.79rem' }}>
+          <Typography variant="body2" sx={{ color: 'text.primary', mb: 1.1, lineHeight: 1.45, fontSize: '0.79rem', fontWeight: 500 }}>
             {getLocalizedString(exp.description, lang)}
           </Typography>
 
@@ -147,7 +147,7 @@ function ExperienceCard({ exp, index, lang }) {
             {getLocalizedStringArray(exp.achievements, lang).map((item) => (
               <Box key={item} sx={{ display: 'flex', gap: 0.65, alignItems: 'flex-start', mb: 0.45 }}>
                 <CheckCircleOutlineIcon sx={{ fontSize: '0.82rem', color: exp.color, mt: '2px', flexShrink: 0 }} />
-                <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.4, fontSize: '0.76rem' }}>
+                <Typography variant="body2" sx={{ color: 'text.primary', lineHeight: 1.4, fontSize: '0.76rem', fontWeight: 500 }}>
                   {item}
                 </Typography>
               </Box>
@@ -164,9 +164,10 @@ function ExperienceCard({ exp, index, lang }) {
                 sx={{
                   bgcolor: 'rgba(11,92,171,0.08)',
                   border: '1px solid rgba(11,92,171,0.18)',
-                  color: 'text.secondary',
+                  color: 'text.primary',
                   fontFamily: '"Fira Code", monospace',
                   fontSize: '0.64rem',
+                  fontWeight: 700,
                   height: 22,
                   maxWidth: '100%',
                   '& .MuiChip-label': {

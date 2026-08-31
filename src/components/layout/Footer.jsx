@@ -57,9 +57,10 @@ export default function Footer() {
           <Typography
             variant="caption"
             sx={{
-              color: 'text.secondary',
+              color: 'text.primary',
               fontFamily: '"Fira Code", monospace',
               fontSize: '0.72rem',
+              fontWeight: 700,
             }}
           >
             © {year}

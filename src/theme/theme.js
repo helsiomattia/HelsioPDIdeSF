@@ -5,7 +5,7 @@ const SECONDARY = '#0E8198';
 const BG = '#C7D9E8';
 const SURFACE = '#E0ECF5';
 const SURFACE_2 = '#B8CDDD';
-const TEXT = '#0B2133';
+const TEXT = '#061827';
 
 const theme = createTheme({
   palette: {
@@ -28,8 +28,8 @@ const theme = createTheme({
     },
     text: {
       primary: TEXT,
-      secondary: '#2F4A60',
-      disabled: '#647E93',
+      secondary: '#17364F',
+      disabled: '#4E6A80',
     },
     divider: 'rgba(11, 33, 51, 0.18)',
     success: { main: '#0B8F61' },
@@ -39,16 +39,16 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-    h1: { fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.08 },
-    h2: { fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.18 },
-    h3: { fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.3 },
-    h4: { fontWeight: 600, lineHeight: 1.4 },
-    h5: { fontWeight: 600, lineHeight: 1.5 },
-    h6: { fontWeight: 600, lineHeight: 1.6 },
-    body1: { lineHeight: 1.8 },
-    body2: { lineHeight: 1.7 },
-    button: { textTransform: 'none', fontWeight: 600, letterSpacing: '0.01em' },
-    overline: { letterSpacing: '0.15em', fontWeight: 600, fontSize: '0.7rem' },
+    h1: { fontWeight: 850, letterSpacing: '-0.035em', lineHeight: 1.08 },
+    h2: { fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.18 },
+    h3: { fontWeight: 780, letterSpacing: '-0.01em', lineHeight: 1.3 },
+    h4: { fontWeight: 730, lineHeight: 1.4 },
+    h5: { fontWeight: 720, lineHeight: 1.5 },
+    h6: { fontWeight: 720, lineHeight: 1.55 },
+    body1: { fontWeight: 450, lineHeight: 1.8 },
+    body2: { fontWeight: 450, lineHeight: 1.7 },
+    button: { textTransform: 'none', fontWeight: 700, letterSpacing: '0.01em' },
+    overline: { letterSpacing: '0.15em', fontWeight: 750, fontSize: '0.7rem' },
   },
   shape: { borderRadius: 12 },
   components: {

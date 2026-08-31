@@ -94,19 +94,19 @@ export const profile = {
 
   about: {
     pt: [
-      'Atua no Efí Bank liderando melhorias em operações de atendimento, fluxos de automação e eficiência do CRM com Sales e Service Cloud.',
-      'Combina configuração Salesforce, leitura de processos e visão de negócio para transformar requisitos em soluções sustentáveis e fáceis de adotar.',
-      'Traz uma base anterior em consultoria ERP e QA, fortalecendo a visão ponta a ponta de processos, qualidade, dados e continuidade operacional.',
+      'Atua no Efí Bank na evolução de operações de CRM em Salesforce, conectando Sales Cloud, Service Cloud, automação, suporte a usuários e eficiência operacional com foco em impacto prático para o negócio, melhoria de processos e maior previsibilidade operacional.',
+      'Combina experiência profissional em CRM, ERP e QA com uma base acadêmica em Sistemas de Informação, Engenharia de Software, Gestão de Projetos, Business Intelligence e Administração para traduzir processos complexos em soluções sustentáveis, bem documentadas e alinhadas à estratégia.',
+      'Une visão técnica, leitura de negócio e mentalidade de melhoria contínua para estruturar dados, documentar decisões, apoiar adoção da plataforma e entregar soluções confiáveis, escaláveis e fáceis de manter, sempre considerando pessoas, processos e tecnologia como parte da mesma operação.',
     ],
     en: [
-      'Works at Efí Bank leading improvements in service operations, automation flows and CRM efficiency with Sales and Service Cloud.',
-      'Combines Salesforce configuration, process understanding and business perspective to translate requirements into sustainable, easy-to-adopt solutions.',
-      'Brings a previous background in ERP consulting and QA, strengthening an end-to-end view of processes, quality, data and operational continuity.',
+      'Works at Efí Bank evolving Salesforce CRM operations, connecting Sales Cloud, Service Cloud, automation, user support and operational efficiency with a practical business impact mindset, process improvement and greater operational predictability.',
+      'Combines professional experience in CRM, ERP and QA with an academic background in Information Systems, Software Engineering, Project Management, Business Intelligence and Business Administration to translate complex processes into sustainable, well-documented solutions aligned with strategy.',
+      'Brings together technical perspective, business understanding and a continuous improvement mindset to structure data, document decisions, support platform adoption and deliver reliable, scalable and maintainable solutions, always considering people, processes and technology as part of the same operation.',
     ],
     es: [
-      'Trabaja en Efí Bank liderando mejoras en operaciones de atención, flujos de automatización y eficiencia del CRM con Sales y Service Cloud.',
-      'Combina configuración Salesforce, lectura de procesos y visión de negocio para transformar requisitos en soluciones sostenibles y fáciles de adoptar.',
-      'Aporta una base previa en consultoría ERP y QA, fortaleciendo la visión punta a punta de procesos, calidad, datos y continuidad operacional.',
+      'Trabaja en Efí Bank evolucionando operaciones de CRM en Salesforce, conectando Sales Cloud, Service Cloud, automatización, soporte a usuarios y eficiencia operacional con foco en impacto práctico para el negocio, mejora de procesos y mayor previsibilidad operacional.',
+      'Combina experiencia profesional en CRM, ERP y QA con una base académica en Sistemas de Información, Ingeniería de Software, Gestión de Proyectos, Business Intelligence y Administración para traducir procesos complejos en soluciones sostenibles, bien documentadas y alineadas con la estrategia.',
+      'Une visión técnica, lectura de negocio y mentalidad de mejora continua para estructurar datos, documentar decisiones, apoyar adopción de la plataforma y entregar soluciones confiables, escalables y fáciles de mantener, siempre considerando personas, procesos y tecnología como parte de la misma operación.',
     ],
   },
 
