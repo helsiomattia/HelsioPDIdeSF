@@ -1,26 +1,26 @@
 import { createTheme, alpha } from '@mui/material/styles';
 
-const PRIMARY = '#0B5CAB';
-const SECONDARY = '#159DB3';
-const BG = '#EAF2F8';
-const SURFACE = '#F8FBFE';
-const SURFACE_2 = '#DCEAF4';
-const TEXT = '#0F2537';
+const PRIMARY = '#084C8F';
+const SECONDARY = '#0E8198';
+const BG = '#C7D9E8';
+const SURFACE = '#E0ECF5';
+const SURFACE_2 = '#B8CDDD';
+const TEXT = '#0B2133';
 
 const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
       main: PRIMARY,
-      light: '#2E94D8',
-      dark: '#073E75',
-      contrastText: '#F8FBFE',
+      light: '#2479B8',
+      dark: '#063763',
+      contrastText: '#EAF3F9',
     },
     secondary: {
       main: SECONDARY,
-      light: '#4EC5D5',
-      dark: '#087482',
-      contrastText: '#F8FBFE',
+      light: '#3BAFC2',
+      dark: '#075F6B',
+      contrastText: '#EAF3F9',
     },
     background: {
       default: BG,
@@ -28,10 +28,10 @@ const theme = createTheme({
     },
     text: {
       primary: TEXT,
-      secondary: '#40586D',
-      disabled: '#7C91A4',
+      secondary: '#2F4A60',
+      disabled: '#647E93',
     },
-    divider: 'rgba(15, 37, 55, 0.14)',
+    divider: 'rgba(11, 33, 51, 0.18)',
     success: { main: '#0B8F61' },
     error: { main: '#D94A5F' },
     warning: { main: '#B7791F' },
@@ -117,12 +117,12 @@ const theme = createTheme({
           backgroundImage: 'none',
           backgroundColor: SURFACE,
           border: `1px solid ${alpha(TEXT, 0.12)}`,
-          borderRadius: '16px',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          borderRadius: '18px',
+          transition: 'all 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
             border: `1px solid ${alpha(PRIMARY, 0.28)}`,
-            transform: 'translateY(-5px)',
-            boxShadow: `0 14px 34px ${alpha(PRIMARY, 0.1)}`,
+            transform: 'translateY(-3px)',
+            boxShadow: `0 12px 28px ${alpha(PRIMARY, 0.09)}`,
           },
         },
       },
@@ -160,7 +160,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           transition: 'all 0.2s ease',
-          '&:hover': { transform: 'scale(1.1)' },
+          '&:hover': { transform: 'scale(1.04)' },
         },
       },
     },

@@ -16,18 +16,25 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { profile } from '../../data/profile';
-import { getScrollBehavior, scrollToSection } from '../../utils/scrollToSection';
+import { scrollToSection } from '../../utils/scrollToSection';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NAV_LINKS = [
   { labelKey: 'nav.about', id: 'about' },
   { labelKey: 'nav.experience', id: 'experience' },
-  { labelKey: 'nav.projects', id: 'projects' },
-  { labelKey: 'nav.skills', id: 'skills' },
+  { labelKey: 'nav.projects', id: 'credentials' },
+  { labelKey: 'nav.skills', id: 'expertise' },
   { labelKey: 'nav.contact', id: 'contact' },
 ];
+
+const SECTION_IDS = ['home', ...NAV_LINKS.map((link) => link.id)];
+const HASH_ALIASES = { projects: 'credentials', skills: 'expertise' };
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -36,54 +43,77 @@ export default function Navbar() {
 
   const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
 
-  /* Active section tracker via IntersectionObserver */
+  /* Active section tracker via GSAP ScrollTrigger */
   useEffect(() => {
-    const ids = NAV_LINKS.map((l) => l.id);
-    let observers = [];
+    let triggers = [];
     let retryTimer;
     let attempts = 0;
 
-    const cleanupObservers = () => {
-      observers.forEach((observer) => observer.disconnect());
-      observers = [];
+    const setRouteState = (id) => {
+      setActiveSection(id === 'home' ? '' : id);
+
+      const nextUrl = id === 'home'
+        ? `${window.location.pathname}${window.location.search}`
+        : `${window.location.pathname}${window.location.search}#${id}`;
+      const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+      if (currentUrl !== nextUrl) {
+        window.history.replaceState(null, '', nextUrl);
+      }
     };
 
-    const setupObservers = () => {
-      cleanupObservers();
+    const cleanupTriggers = () => {
+      triggers.forEach((trigger) => trigger.kill());
+      triggers = [];
+    };
+
+    const setupTriggers = () => {
+      cleanupTriggers();
       let hasMissingSection = false;
 
-      ids.forEach((id) => {
+      SECTION_IDS.forEach((id) => {
         const el = document.getElementById(id);
         if (!el) {
           hasMissingSection = true;
           return;
         }
 
-        const obs = new IntersectionObserver(
-          ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
-          { threshold: 0.4 },
-        );
-        obs.observe(el);
-        observers.push(obs);
+        triggers.push(ScrollTrigger.create({
+          trigger: el,
+          start: 'top center',
+          end: 'bottom center',
+          onEnter: () => setRouteState(id),
+          onEnterBack: () => setRouteState(id),
+        }));
       });
 
       if (hasMissingSection && attempts < 20) {
         attempts += 1;
-        retryTimer = window.setTimeout(setupObservers, 100);
+        retryTimer = window.setTimeout(setupTriggers, 100);
+        return;
+      }
+
+      const rawHashId = window.location.hash.replace('#', '');
+      const hashId = HASH_ALIASES[rawHashId] || rawHashId;
+      if (SECTION_IDS.includes(hashId)) {
+        window.setTimeout(() => scrollToSection(hashId), 0);
       }
     };
 
-    setupObservers();
+    setupTriggers();
 
     return () => {
       window.clearTimeout(retryTimer);
-      cleanupObservers();
+      cleanupTriggers();
     };
   }, []);
 
-  const handleNavClick = (id) => {
+  const handleNavClick = (event, id) => {
+    event?.preventDefault();
     setMobileOpen(false);
-    window.setTimeout(() => scrollToSection(id), 0);
+    setActiveSection(id);
+    window.history.pushState(null, '', `#${id}`);
+    scrollToSection(id);
   };
 
   return (
@@ -94,30 +124,46 @@ export default function Navbar() {
         sx={{
           transition: 'all 0.35s ease',
           backgroundColor: scrolled
-            ? alpha('#F8FBFE', 0.92)
-            : 'transparent',
-          backdropFilter: scrolled ? 'blur(8px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(8px)' : 'none',
+            ? alpha('#E0ECF5', 0.92)
+            : alpha('#D3E2EE', 0.74),
+          backdropFilter: scrolled ? 'blur(8px)' : 'blur(5px)',
+          WebkitBackdropFilter: scrolled ? 'blur(8px)' : 'blur(5px)',
           borderBottom: scrolled
             ? '1px solid rgba(15,37,55,0.12)'
-            : '1px solid transparent',
+            : '1px solid rgba(15,37,55,0.06)',
           '@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))': {
-            backgroundColor: scrolled ? alpha('#F8FBFE', 0.98) : 'transparent',
+            backgroundColor: scrolled ? alpha('#E0ECF5', 0.98) : alpha('#D3E2EE', 0.94),
           },
         }}
       >
         <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ py: 0.5 }}>
+          <Toolbar
+            disableGutters
+            sx={{
+              minHeight: { xs: 92, md: 64 },
+              py: { xs: 0.6, md: 0.25 },
+              flexWrap: { xs: 'wrap', md: 'nowrap' },
+              rowGap: { xs: 0.45, md: 0 },
+            }}
+          >
             {/* Logo / name */}
             <Box
-              onClick={() => window.scrollTo({ top: 0, behavior: getScrollBehavior() })}
+              component="a"
+              href="#home"
+              onClick={(event) => {
+                event.preventDefault();
+                setActiveSection('');
+                window.history.pushState(null, '', window.location.pathname + window.location.search);
+                scrollToSection('home');
+              }}
               sx={{
                 cursor: 'pointer',
+                textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 1,
                 flexGrow: { xs: 1, md: 0 },
-                mr: { md: 5 },
+                mr: { md: 4 },
               }}
             >
               <Box
@@ -132,7 +178,7 @@ export default function Navbar() {
                   fontFamily: '"Fira Code", monospace',
                   fontWeight: 700,
                   fontSize: '0.85rem',
-                  color: '#F8FBFE',
+                  color: '#EAF3F9',
                   flexShrink: 0,
                 }}
               >
@@ -158,26 +204,42 @@ export default function Navbar() {
             </Box>
 
             {/* Desktop nav links */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5, flexGrow: 1 }}>
+            <Box
+              sx={{
+                order: { xs: 3, md: 0 },
+                width: { xs: '100%', md: 'auto' },
+                display: 'flex',
+                alignItems: 'center',
+                gap: { xs: 0.35, md: 0.5 },
+                flexGrow: 1,
+                overflowX: { xs: 'auto', md: 'visible' },
+                scrollbarWidth: 'none',
+                '&::-webkit-scrollbar': { display: 'none' },
+              }}
+            >
               {NAV_LINKS.map((link, index) => (
                 <Box
-                  component="button"
+                  component="a"
+                  href={`#${link.id}`}
                   key={link.id}
-                  onClick={() => handleNavClick(link.id)}
+                  onClick={(event) => handleNavClick(event, link.id)}
+                  aria-current={activeSection === link.id ? 'page' : undefined}
                   sx={{
                     border: 0,
                     background: 'transparent',
                     color: activeSection === link.id ? 'primary.main' : 'text.secondary',
                     fontFamily: '"Fira Code", monospace',
-                    fontSize: '0.8rem',
+                    fontSize: { xs: '0.72rem', sm: '0.76rem', md: '0.8rem' },
                     fontWeight: 600,
-                    py: 1,
-                    px: 1.5,
+                    py: { xs: 0.75, md: 1 },
+                    px: { xs: 1, sm: 1.2, md: 1.5 },
+                    flexShrink: 0,
                     borderRadius: '8px',
                     position: 'relative',
                     cursor: 'pointer',
                     transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
                     appearance: 'none',
+                    textDecoration: 'none',
                     '&::before': {
                       content: `"0${index + 1}."`,
                       color: 'primary.main',
@@ -185,7 +247,20 @@ export default function Navbar() {
                       mr: 0.5,
                       fontWeight: 600,
                     },
-                    '&:hover': { color: 'primary.main', bgcolor: alpha('#0B5CAB', 0.1) },
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      left: { xs: 8, md: 12 },
+                      right: { xs: 8, md: 12 },
+                      bottom: 5,
+                      height: 2,
+                      borderRadius: 2,
+                      bgcolor: 'primary.main',
+                      opacity: activeSection === link.id ? 1 : 0,
+                      transform: activeSection === link.id ? 'scaleX(1)' : 'scaleX(0.45)',
+                      transition: 'opacity 0.22s ease, transform 0.22s ease',
+                    },
+                    '&:hover': { color: 'primary.main', bgcolor: alpha('#0B5CAB', 0.08) },
                     '&:focus-visible': {
                       outline: `3px solid ${alpha('#0B5CAB', 0.26)}`,
                       outlineOffset: 2,
@@ -253,7 +328,7 @@ export default function Navbar() {
         PaperProps={{
           sx: {
             width: 280,
-            bgcolor: '#F8FBFE',
+            bgcolor: 'var(--site-surface)',
             borderLeft: '1px solid rgba(15,37,55,0.12)',
             px: 2,
             py: 3,
@@ -272,7 +347,9 @@ export default function Navbar() {
           {NAV_LINKS.map((link, index) => (
             <ListItem key={link.id} disablePadding sx={{ mb: 1 }}>
               <ListItemButton
-                onClick={() => handleNavClick(link.id)}
+                component="a"
+                href={`#${link.id}`}
+                onClick={(event) => handleNavClick(event, link.id)}
                 sx={{
                   borderRadius: '8px',
                   color: activeSection === link.id ? 'primary.main' : 'text.secondary',

@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import AnimatedBox from './AnimatedBox';
 
 /**
  * Título de seção padronizado com linha de destaque gradiente.
@@ -18,8 +17,8 @@ export default function SectionTitle({
   dividerWidth = 56,
 }) {
   return (
-    <AnimatedBox>
-      <Box sx={{ textAlign: align, mb: { xs: 4.5, md: 5.5 } }}>
+    <Box className="sr-only" aria-label={overline || title}>
+      <Box sx={{ textAlign: align }}>
         {overline && (
           <Typography
             component="span"
@@ -41,6 +40,7 @@ export default function SectionTitle({
 
         <Typography
           variant="h2"
+          component="h2"
           sx={{
             color: 'text.primary',
             fontSize: { xs: '1.9rem', sm: '2.25rem', md: '2.75rem' },
@@ -80,6 +80,6 @@ export default function SectionTitle({
           }}
         />
       </Box>
-    </AnimatedBox>
+    </Box>
   );
 }

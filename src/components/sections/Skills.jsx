@@ -14,8 +14,8 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import CloudIcon from '@mui/icons-material/Cloud';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import BuildIcon from '@mui/icons-material/Build';
-import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { skillCategories } from '../../data/skills';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
@@ -34,31 +34,28 @@ function SkillCard({ category, cardIndex, lang }) {
   const skills = getLocalizedStringArray(category.skills, lang);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.55, delay: cardIndex * 0.08, ease: [0.22, 1, 0.36, 1] }}
+    <AnimatedBox
+      delay={cardIndex * 0.08}
       style={{ height: '100%' }}
     >
       <Card
         sx={{
           height: '100%',
           background: category.gradient,
-          borderTop: `2px solid ${alpha(category.color, 0.6)}`,
+          borderTop: `2px solid ${alpha(category.color, 0.5)}`,
           '&:hover': {
             borderTop: `2px solid ${category.color}`,
-            boxShadow: `0 12px 32px ${alpha(category.color, 0.16)}`,
+            boxShadow: `0 10px 26px ${alpha(category.color, 0.13)}`,
           },
         }}
       >
-        <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
+        <CardContent sx={{ p: { xs: 2.15, md: 2.35 } }}>
           {/* Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2.5 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.6 }}>
             <Box
               sx={{
-                width: 40,
-                height: 40,
+                width: 38,
+                height: 38,
                 borderRadius: '10px',
                 bgcolor: alpha(category.color, 0.15),
                 border: `1px solid ${alpha(category.color, 0.3)}`,
@@ -83,7 +80,7 @@ function SkillCard({ category, cardIndex, lang }) {
           </Box>
 
           {/* Skills */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.9 }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.65 }}>
             {skills.map((skill) => (
               <Chip
                 key={skill}
@@ -95,8 +92,8 @@ function SkillCard({ category, cardIndex, lang }) {
                   border: `1px solid ${alpha(category.color, 0.22)}`,
                   color: alpha(category.color, 0.9),
                   fontFamily: '"Fira Code", monospace',
-                  fontSize: '0.73rem',
-                  height: 28,
+                  fontSize: '0.68rem',
+                  height: 25,
                   transition: 'all 0.2s ease',
                   cursor: 'default',
                   '& .MuiChip-label': {
@@ -106,7 +103,7 @@ function SkillCard({ category, cardIndex, lang }) {
                   '&:hover': {
                     bgcolor: alpha(category.color, 0.2),
                     borderColor: category.color,
-                    color: '#F8FBFE',
+                    color: '#EAF3F9',
                     transform: 'translateY(-2px)',
                   },
                 }}
@@ -115,7 +112,7 @@ function SkillCard({ category, cardIndex, lang }) {
           </Box>
         </CardContent>
       </Card>
-    </motion.div>
+    </AnimatedBox>
   );
 }
 
@@ -125,23 +122,27 @@ export default function Skills() {
 
   return (
     <Box
-      id="skills"
+      id="expertise"
+      data-section="expertise"
       component="section"
       sx={{
-        py: { xs: 8, md: 10 },
-        background: 'linear-gradient(180deg, #F3F8FC 0%, #EAF2F8 100%)',
+        minHeight: { md: 'calc(100dvh - var(--header-height))' },
+        display: 'flex',
+        alignItems: 'center',
+        py: { xs: 6, md: 'var(--section-block-padding)' },
+        background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-mid) 100%)',
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)' }}>
         <SectionTitle
           overline={t('skills.overline')}
           title={t('skills.title')}
           subtitle={t('skills.subtitle')}
         />
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 2.25 }}>
           {skillCategories.map((category, index) => (
-            <Grid item xs={12} sm={6} lg={4} key={category.id}>
+            <Grid item xs={12} sm={6} md={4} key={category.id}>
               <SkillCard category={category} cardIndex={index} lang={lang} />
             </Grid>
           ))}

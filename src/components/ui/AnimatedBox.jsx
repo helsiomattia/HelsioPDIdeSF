@@ -1,42 +1,56 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Wrapper que aplica fade-up ao entrar na viewport.
- * Aceita todas as props do motion.div.
+ * Aceita props nativas de div.
  * @param {number} delay - Atraso em segundos
- * @param {{ once?: boolean, margin?: string }} viewport
+ * @param {{ once?: boolean }} viewport
  */
 export default function AnimatedBox({ children, delay = 0, viewport, style, ...rest }) {
-  const reduceMotion = useReducedMotion();
+  const elRef = useRef(null);
 
-  if (reduceMotion) {
-    return (
-      <div style={style} {...rest}>
-        {children}
-      </div>
-    );
-  }
+  useLayoutEffect(() => {
+    const el = elRef.current;
+    if (!el) return undefined;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return undefined;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { autoAlpha: 0, y: 18, clipPath: 'inset(10% 0 0 0)' },
+        {
+          autoAlpha: 1,
+          y: 0,
+          clipPath: 'inset(0% 0 0 0)',
+          duration: 0.58,
+          delay,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 86%',
+            once: viewport?.once !== false,
+            toggleActions: viewport?.once === false ? 'play none none reverse' : 'play none none none',
+          },
+        },
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, [delay, viewport?.once]);
 
   return (
-    <motion.div
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-60px', ...viewport }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      style={style}
+    <div
+      ref={elRef}
+      style={{ willChange: 'transform, opacity', ...style }}
       {...rest}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

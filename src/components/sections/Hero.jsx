@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import {
   Box,
   Button,
@@ -7,7 +7,7 @@ import {
   Typography,
   alpha,
 } from '@mui/material';
-import { motion } from 'framer-motion';
+import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import { profile } from '../../data/profile';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
@@ -29,61 +29,52 @@ function Orb({ sx }) {
   );
 }
 
-/* ── Typewriter hook ─────────────────────────────────────── */
-function useTypewriter(words, typingSpeed = 90, deletingSpeed = 50, pauseDuration = 2200) {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    if (!words.length) return undefined;
-
-    const fullText = words[roleIndex];
-    let delay;
-
-    if (!isDeleting && text === fullText) {
-      delay = pauseDuration;
-      const t = setTimeout(() => setIsDeleting(true), delay);
-      return () => clearTimeout(t);
-    }
-
-    if (isDeleting && text === '') {
-      setIsDeleting(false);
-      setRoleIndex((i) => (i + 1) % words.length);
-      return;
-    }
-
-    delay = isDeleting ? deletingSpeed : typingSpeed;
-    const t = setTimeout(() => {
-      setText(isDeleting ? fullText.slice(0, text.length - 1) : fullText.slice(0, text.length + 1));
-    }, delay);
-    return () => clearTimeout(t);
-  }, [text, isDeleting, roleIndex, words, typingSpeed, deletingSpeed, pauseDuration]);
-
-  return text;
-}
-
-/* ── Framer variants ─────────────────────────────────────── */
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
-};
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-};
-
 /* ── Hero component ──────────────────────────────────────── */
 export default function Hero() {
+  const sectionRef = useRef(null);
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
-  const roles = getLocalizedStringArray(profile.roles, lang);
   const valuePillars = getLocalizedStringArray(profile.valuePillars, lang);
-  const typedRole = useTypewriter(roles);
+  const roleText = getLocalizedString(profile.title, lang);
+
+  useLayoutEffect(() => {
+    if (!sectionRef.current) return undefined;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return undefined;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.hero-gsap-item',
+        { autoAlpha: 0, y: 24, clipPath: 'inset(12% 0 0 0)' },
+        {
+          autoAlpha: 1,
+          y: 0,
+          clipPath: 'inset(0% 0 0 0)',
+          duration: 0.78,
+          stagger: 0.12,
+          delay: 0.18,
+          ease: 'power3.out',
+        },
+      );
+
+      gsap.to('.hero-scroll-arrow', {
+        y: 6,
+        duration: 0.75,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+    }, sectionRef.current);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <Box
+      ref={sectionRef}
       id="home"
+      data-section="home"
       component="section"
       sx={{
         minHeight: '100vh',
@@ -98,7 +89,7 @@ export default function Hero() {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(180deg, #EAF2F8 0%, #DCEAF4 100%)',
+        background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-end) 100%)',
         pt: { xs: 9, md: 8 },
         pb: { xs: 6, md: 7 },
       }}
@@ -143,7 +134,7 @@ export default function Hero() {
           position: 'absolute',
           inset: 0,
           backgroundImage:
-            'radial-gradient(rgba(11,92,171,0.14) 1px, transparent 1px)',
+            'radial-gradient(rgba(8,76,143,0.11) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
           pointerEvents: 'none',
         }}
@@ -151,10 +142,10 @@ export default function Hero() {
 
       {/* ── Main content ── */}
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        <motion.div variants={containerVariants} initial="hidden" animate="visible">
+        <Box component="div">
           {/* Available badge */}
           {profile.available && (
-            <motion.div variants={itemVariants}>
+            <Box component="div" className="hero-gsap-item">
               <Chip
                 icon={
                   <Box
@@ -181,11 +172,11 @@ export default function Hero() {
                   cursor: 'default',
                 }}
               />
-            </motion.div>
+            </Box>
           )}
 
           {/* Name */}
-          <motion.div variants={itemVariants}>
+          <Box component="div" className="hero-gsap-item">
             <Typography
               variant="h1"
               sx={{
@@ -220,10 +211,10 @@ export default function Hero() {
                 {profile.name}
               </Box>
             </Typography>
-          </motion.div>
+          </Box>
 
-          {/* Typed role */}
-          <motion.div variants={itemVariants}>
+          {/* Role */}
+          <Box component="div" className="hero-gsap-item">
             <Typography
               variant="h2"
               sx={{
@@ -245,26 +236,13 @@ export default function Hero() {
                   backgroundClip: 'text',
                 }}
               >
-                {typedRole}
+                {roleText}
               </Box>
-              <Box
-                component="span"
-                sx={{
-                  display: 'inline-block',
-                  width: '3px',
-                  height: { xs: '1.4rem', md: '2rem' },
-                  bgcolor: 'primary.main',
-                  borderRadius: '2px',
-                  animation: 'blink-cursor 1s ease-in-out infinite',
-                  verticalAlign: 'middle',
-                  ml: 0.5,
-                }}
-              />
             </Typography>
-          </motion.div>
+          </Box>
 
           {/* Description */}
-          <motion.div variants={itemVariants}>
+          <Box component="div" className="hero-gsap-item">
             <Typography
               variant="body1"
               sx={{
@@ -277,9 +255,9 @@ export default function Hero() {
             >
               {getLocalizedString(profile.description, lang)}
             </Typography>
-          </motion.div>
+          </Box>
 
-          <motion.div variants={itemVariants}>
+          <Box component="div" className="hero-gsap-item">
             <Box
               sx={{
                 display: 'flex',
@@ -299,7 +277,7 @@ export default function Hero() {
                     maxWidth: '100%',
                     borderRadius: '999px',
                     border: '1px solid rgba(11,92,171,0.24)',
-                    bgcolor: 'rgba(248,251,254,0.72)',
+                    bgcolor: 'rgba(224,236,245,0.72)',
                     color: 'text.secondary',
                     fontFamily: '"Fira Code", monospace',
                     fontSize: { xs: '0.68rem', sm: '0.72rem' },
@@ -315,10 +293,10 @@ export default function Hero() {
                 </Box>
               ))}
             </Box>
-          </motion.div>
+          </Box>
 
           {profile.resume && (
-            <motion.div variants={itemVariants}>
+            <Box component="div" className="hero-gsap-item">
               <Box
                 sx={{
                   display: 'flex',
@@ -339,11 +317,11 @@ export default function Hero() {
                   {t('hero.downloadResume')}
                 </Button>
               </Box>
-            </motion.div>
+            </Box>
           )}
 
           {/* Location & code flavor */}
-          <motion.div variants={itemVariants}>
+          <Box component="div" className="hero-gsap-item">
             <Box
               sx={{
                 display: 'flex',
@@ -359,8 +337,8 @@ export default function Hero() {
                 {'{'} {t('hero.locationKey')}: "{getLocalizedString(profile.location, lang)}" {'}'}
               </Typography>
             </Box>
-          </motion.div>
-        </motion.div>
+          </Box>
+        </Box>
 
         {/* Scroll down indicator */}
         <Box
@@ -383,10 +361,7 @@ export default function Hero() {
           <Typography variant="caption" sx={{ fontFamily: '"Fira Code", monospace', fontSize: '0.65rem', letterSpacing: '0.1em' }}>
             {t('hero.scroll')}
           </Typography>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-          >
+          <Box component="div" className="hero-scroll-arrow">
             <Box
               aria-hidden="true"
               sx={{
@@ -397,7 +372,7 @@ export default function Hero() {
                 transform: 'rotate(45deg)',
               }}
             />
-          </motion.div>
+          </Box>
         </Box>
       </Container>
     </Box>

@@ -25,18 +25,22 @@ export default function About() {
   return (
     <Box
       id="about"
+      data-section="about"
       component="section"
       sx={{
-        py: { xs: 8, md: 10 },
+        minHeight: { md: 'calc(100dvh - var(--header-height))' },
+        display: 'flex',
+        alignItems: 'center',
+        py: { xs: 6, md: 'var(--section-block-padding)' },
         background:
-          'linear-gradient(180deg, #DCEAF4 0%, #EAF2F8 48%, #F3F8FC 100%)',
+          'linear-gradient(180deg, var(--site-bg-end) 0%, var(--site-bg-mid) 48%, var(--site-bg-start) 100%)',
       }}
     >
       <Container
         maxWidth={false}
         sx={{
-          maxWidth: '1160px',
-          px: { xs: 2.5, sm: 3, md: 4 },
+          maxWidth: 'var(--page-max-width)',
+          px: 'var(--section-inline-padding)',
         }}
       >
         <SectionTitle
@@ -51,8 +55,8 @@ export default function About() {
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: '360px minmax(0, 1fr)' },
-            gap: { xs: 3.5, md: 6, lg: 8 },
+            gridTemplateColumns: { xs: '1fr', md: 'minmax(300px, 360px) minmax(0, 1fr)' },
+            gap: 'var(--card-gap)',
             alignItems: 'stretch',
             mx: 'auto',
           }}
@@ -63,15 +67,15 @@ export default function About() {
               elevation={0}
               sx={{
                 height: '100%',
-                p: { xs: 2.5, sm: 3, md: 3.25 },
-                borderRadius: '24px',
-                bgcolor: 'rgba(248,251,254,0.9)',
-                border: '1px solid rgba(11,92,171,0.18)',
+                p: { xs: 2.25, sm: 2.75, md: 3 },
+                borderRadius: 'var(--card-radius)',
+                bgcolor: 'rgba(224,236,245,0.9)',
+                border: '1px solid rgba(8,76,143,0.2)',
                 boxShadow: '0 16px 44px rgba(15,37,55,0.08)',
                 backdropFilter: 'blur(6px)',
                 WebkitBackdropFilter: 'blur(6px)',
                 '@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))': {
-                  bgcolor: 'rgba(248,251,254,0.98)',
+                  bgcolor: 'rgba(224,236,245,0.98)',
                 },
                 position: 'relative',
                 overflow: 'hidden',
@@ -91,7 +95,7 @@ export default function About() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  gap: 2.5,
+                  gap: { xs: 2, md: 2.25 },
                 }}
               >
                 {/* Avatar */}
@@ -109,14 +113,14 @@ export default function About() {
                     src={profile.avatar || undefined}
                     alt={profile.name}
                     sx={{
-                      width: { xs: 132, md: 148 },
-                      height: { xs: 132, md: 148 },
+                      width: { xs: 124, md: 136 },
+                      height: { xs: 124, md: 136 },
                       position: 'relative',
                       zIndex: 1,
-                      border: '4px solid #F8FBFE',
+                      border: '4px solid var(--site-surface)',
                       fontSize: { xs: '2.75rem', md: '3rem' },
                       fontWeight: 700,
-                      background: 'linear-gradient(135deg, #F8FBFE 0%, #DCEAF4 100%)',
+                      background: 'linear-gradient(135deg, var(--site-surface) 0%, var(--site-surface-muted) 100%)',
                       color: 'primary.main',
                       boxShadow: '0 12px 32px rgba(11,92,171,0.16)',
                     }}
@@ -163,20 +167,20 @@ export default function About() {
                 </Box>
 
                 {/* Stats grid */}
-                <Grid container spacing={1.25} sx={{ mt: 0.5, width: '100%' }}>
+                <Grid container spacing={1.1} sx={{ mt: 0.25, width: '100%' }}>
                   {profile.stats.map((stat, index) => (
                     <Grid item xs={6} key={index}>
                       <Paper
                         elevation={0}
                         sx={{
-                          minHeight: 94,
-                          p: { xs: 1.5, sm: 1.75 },
+                          minHeight: { xs: 82, md: 78 },
+                          p: { xs: 1.25, sm: 1.5 },
                           textAlign: 'center',
                           display: 'flex',
                           flexDirection: 'column',
                           justifyContent: 'center',
-                          bgcolor: 'rgba(234,242,248,0.82)',
-                          border: '1px solid rgba(15,37,55,0.1)',
+                          bgcolor: 'rgba(193,212,227,0.72)',
+                          border: '1px solid rgba(11,33,51,0.13)',
                           borderRadius: '16px',
                           transition: 'all 0.25s ease',
                           '&:hover': {
@@ -223,11 +227,11 @@ export default function About() {
               <Paper
                 elevation={0}
                 sx={{
-                  p: { xs: 2.75, sm: 3.5, md: 4 },
-                  mb: 3,
-                  borderRadius: '22px',
-                  bgcolor: 'rgba(248,251,254,0.78)',
-                  border: '1px solid rgba(15,37,55,0.1)',
+                  p: { xs: 2.35, sm: 3, md: 3.25 },
+                  mb: 'var(--card-gap)',
+                  borderRadius: 'var(--card-radius)',
+                  bgcolor: 'rgba(224,236,245,0.78)',
+                  border: '1px solid rgba(11,33,51,0.14)',
                   boxShadow: '0 14px 38px rgba(15,37,55,0.06)',
                 }}
               >
@@ -238,10 +242,10 @@ export default function About() {
                     sx={{
                       color: 'text.secondary',
                       maxWidth: '680px',
-                      mb: 2,
+                      mb: 1.6,
                       '&:last-of-type': { mb: 0 },
-                      lineHeight: 1.82,
-                      fontSize: { xs: '0.98rem', md: '1.04rem' },
+                      lineHeight: 1.72,
+                      fontSize: { xs: '0.96rem', md: '1rem' },
                     }}
                   >
                     {paragraph}
@@ -255,14 +259,14 @@ export default function About() {
               <Paper
                 elevation={0}
                 sx={{
-                  p: { xs: 2.5, sm: 3, md: 3.25 },
-                  borderRadius: '22px',
-                  bgcolor: 'rgba(248,251,254,0.74)',
+                  p: { xs: 2.25, sm: 2.75, md: 3 },
+                  borderRadius: 'var(--card-radius)',
+                  bgcolor: 'rgba(224,236,245,0.78)',
                   border: '1px solid rgba(11,92,171,0.16)',
                   boxShadow: '0 12px 34px rgba(15,37,55,0.055)',
                 }}
               >
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
                   <CodeOutlinedIcon sx={{ color: 'primary.main', fontSize: '1.1rem' }} />
                   <Typography
                     variant="overline"

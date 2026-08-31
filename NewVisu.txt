@@ -1,0 +1,1767 @@
+Você será responsável por realizar uma REFATORAÇÃO VISUAL E DE EXPERIÊNCIA completa
+do meu portfólio pessoal em React.
+
+IMPORTANTE:
+Não quero reconstruir o projeto do zero.
+Quero evoluir a interface existente preservando:
+- identidade visual;
+- cores;
+- tipografia;
+- conteúdo;
+- responsividade;
+- sistema PT / EN / ES;
+- links;
+- componentes existentes;
+- funcionalidades existentes.
+
+O objetivo desta tarefa é transformar o site atual em uma experiência moderna
+de PORTFÓLIO FULL-PAGE / SECTION BASED, em que cada área principal do site
+funcione praticamente como uma tela independente.
+
+===========================================================
+1. CONTEXTO DO PROJETO
+===========================================================
+
+O site atualmente possui aproximadamente estas áreas:
+
+00. Hero / Home
+01. Sobre
+02. Experiência
+03. Credenciais
+04. Expertise
+05. Contato
+
+Existe um menu superior persistente com:
+
+01. Sobre
+02. Experiência
+03. Credenciais
+04. Expertise
+05. Contato
+
+Também existe seletor de idioma:
+
+PT
+EN
+ES
+
+GSAP JÁ ESTÁ INSTALADO NO PROJETO.
+
+Antes de alterar qualquer coisa:
+
+1. Analise a estrutura atual do projeto.
+2. Identifique os componentes responsáveis por cada seção.
+3. Identifique o CSS / Tailwind / CSS Modules / Styled Components usado.
+4. Identifique o sistema atual de tradução.
+5. Identifique como o menu superior funciona.
+6. Identifique breakpoints e regras responsivas existentes.
+7. Identifique animações existentes.
+8. Preserve o máximo possível da arquitetura atual.
+
+Não faça uma recriação desnecessária do projeto.
+
+===========================================================
+2. OBJETIVO PRINCIPAL
+===========================================================
+
+Quero transformar o site em uma experiência semelhante a:
+
+"ONE PAGE / FULL PAGE PORTFOLIO"
+
+onde:
+
+1 section = aproximadamente 1 viewport.
+
+Cada grande seção deve ocupar visualmente uma tela.
+
+Ao utilizar:
+
+- scroll do mouse;
+- trackpad;
+- teclado;
+- menu superior;
+
+o usuário deve navegar naturalmente entre essas grandes seções.
+
+A experiência deve transmitir:
+
+- tecnologia;
+- Salesforce;
+- CRM;
+- engenharia;
+- organização;
+- profissionalismo;
+- modernidade;
+- precisão.
+
+NÃO quero um site extremamente animado.
+
+Quero uma estética:
+
+clean
+premium
+tecnológica
+corporativa
+minimalista
+fluida
+
+===========================================================
+3. PROBLEMA ATUAL MAIS IMPORTANTE
+===========================================================
+
+Atualmente todas as seções possuem grandes cabeçalhos repetitivos como:
+
+// 01. SOBRE MIM
+
+Quem Sou
+
+Como conecto tecnologia, processos e negócio para evoluir
+operações de CRM com Salesforce.
+
+---
+
+// 02. EXPERIÊNCIA
+
+Trajetória Profissional
+
+...
+
+---
+
+// 03. CREDENCIAIS
+
+Formação & Conquistas
+
+...
+
+Isso ocupa MUITO espaço vertical.
+
+Como o menu superior já informa onde o usuário está,
+esses cabeçalhos se tornam visualmente redundantes.
+
+QUERO REMOVER ESSES GRANDES CABEÇALHOS DAS SEÇÕES.
+
+Não remover semântica HTML.
+
+Por acessibilidade/SEO, mantenha headings adequados no DOM quando necessário,
+podendo utilizar uma classe visualmente oculta como:
+
+.sr-only
+
+A identificação visual da seção deve ocorrer principalmente através de:
+
+- menu superior;
+- estado ativo do menu;
+- conteúdo;
+- eventualmente micro-labels discretos dentro dos componentes.
+
+Não criar novamente outro grande título ocupando a tela.
+
+===========================================================
+4. NOVA ESTRUTURA FULL PAGE
+===========================================================
+
+Quero aproximadamente esta arquitetura:
+
+<App>
+
+  <Header />
+
+  <main>
+
+    <section id="home" data-section="home">
+      HERO
+    </section>
+
+    <section id="about" data-section="about">
+      SOBRE
+    </section>
+
+    <section id="experience" data-section="experience">
+      EXPERIÊNCIA
+    </section>
+
+    <section id="credentials" data-section="credentials">
+      CREDENCIAIS
+    </section>
+
+    <section id="expertise" data-section="expertise">
+      EXPERTISE
+    </section>
+
+    <section id="contact" data-section="contact">
+      CONTATO
+    </section>
+
+  </main>
+
+</App>
+
+Cada section deve ser tratada como uma unidade visual.
+
+Desktop:
+
+min-height: calc(100dvh - altura-do-header)
+
+ou solução equivalente.
+
+Evite simplesmente usar:
+
+height: 100vh
+
+caso isso provoque corte de conteúdo.
+
+Use:
+
+100dvh
+min-height
+clamp()
+CSS Grid
+Flexbox
+
+de maneira inteligente.
+
+===========================================================
+5. HEADER / MENU SUPERIOR
+===========================================================
+
+O menu superior passa a ser o principal sistema de navegação do site.
+
+Mantenha o header fixo ou sticky.
+
+Quero:
+
+[ HM Helsio.crm ]
+
+01. Sobre
+02. Experiência
+03. Credenciais
+04. Expertise
+05. Contato
+
+                    PT EN ES
+
+Melhore discretamente o header.
+
+NÃO faça um redesign radical.
+
+Sugestões:
+
+- altura compacta;
+- fundo levemente translúcido;
+- backdrop-filter extremamente sutil;
+- borda inferior fina;
+- excelente contraste;
+- espaçamento mais refinado.
+
+O menu deve mostrar claramente qual seção está ativa.
+
+Exemplo:
+
+01. Sobre
+    ─────
+
+ou
+
+01. Sobre
+com mudança sutil de cor.
+
+Utilize GSAP ScrollTrigger ou IntersectionObserver
+para sincronizar a seção atual com o menu.
+
+===========================================================
+6. NAVEGAÇÃO PELO MENU
+===========================================================
+
+Ao clicar:
+
+Sobre
+Experiência
+Credenciais
+Expertise
+Contato
+
+o site deve navegar diretamente para a respectiva section.
+
+Utilize preferencialmente:
+
+GSAP ScrollToPlugin
+
+Exemplo conceitual:
+
+gsap.to(window, {
+  duration: 0.8,
+  scrollTo: section,
+  ease: "power3.inOut"
+})
+
+Não copiar literalmente sem analisar a arquitetura existente.
+
+A URL pode continuar utilizando anchors:
+
+#about
+#experience
+#credentials
+#expertise
+#contact
+
+se isso fizer sentido no projeto.
+
+===========================================================
+7. SCROLL ENTRE SEÇÕES
+===========================================================
+
+Quero uma sensação próxima de:
+
+1 scroll = próxima section.
+
+Ao descer o scroll:
+
+Hero
+↓
+Sobre
+↓
+Experiência
+↓
+Credenciais
+↓
+Expertise
+↓
+Contato
+
+Ao subir:
+
+Contato
+↑
+Expertise
+↑
+Credenciais
+↑
+Experiência
+↑
+Sobre
+↑
+Hero
+
+Mas existe uma regra MUITO IMPORTANTE:
+
+NÃO torne a navegação irritante.
+
+NÃO bloqueie agressivamente o scroll.
+
+NÃO crie aquele efeito de sites que parecem impedir o usuário
+de controlar a página.
+
+Analise a melhor estratégia utilizando:
+
+GSAP ScrollTrigger
+GSAP Observer
+GSAP ScrollToPlugin
+
+e/ou CSS scroll-snap.
+
+Para DESKTOP, quero um comportamento mais próximo de full-page navigation.
+
+Para MOBILE/TABLET, prefira scroll natural quando isso produzir melhor UX.
+
+Não force Observer em mobile caso prejudique touch scrolling.
+
+===========================================================
+8. GSAP
+===========================================================
+
+GSAP já está instalado.
+
+Priorize os plugins existentes no pacote GSAP:
+
+ScrollTrigger
+ScrollToPlugin
+Observer
+
+Exemplo de imports, se aplicável à versão instalada:
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { Observer } from "gsap/Observer";
+
+gsap.registerPlugin(
+  ScrollTrigger,
+  ScrollToPlugin,
+  Observer
+);
+
+NÃO instale biblioteca adicional inicialmente.
+
+Somente instale nova dependência se houver justificativa técnica real.
+
+Não adicionar bibliotecas apenas para pequenos efeitos visuais.
+
+Quero manter:
+- bundle enxuto;
+- performance;
+- manutenção simples;
+- pouca dependência externa.
+
+===========================================================
+9. TRANSIÇÃO ENTRE SEÇÕES
+===========================================================
+
+Quero uma animação discreta quando uma nova section entra na tela.
+
+A ideia visual é algo semelhante a:
+
+"limpar → escrever → estabilizar"
+
+ou
+
+"wipe → reveal"
+
+SEM parecer apresentação PowerPoint.
+
+Não quero:
+- zoom exagerado;
+- rotations;
+- partículas;
+- movimentos constantes;
+- parallax pesado;
+- elementos voando;
+- animações longas.
+
+Quero algo refinado.
+
+Exemplo de sequência:
+
+PASSO 1
+
+A section anterior começa a sair discretamente:
+
+opacity: 1 → 0.92
+y: 0 → -10px
+
+PASSO 2
+
+Uma máscara ou clip-path revela a nova seção.
+
+Exemplo conceitual:
+
+clip-path:
+inset(100% 0 0 0)
+→
+inset(0% 0 0 0)
+
+PASSO 3
+
+O conteúdo principal entra:
+
+opacity: 0 → 1
+y: 16px → 0
+
+PASSO 4
+
+Cards entram com stagger muito curto:
+
+0.04 – 0.08 segundos
+
+Todo o movimento deve durar aproximadamente:
+
+500ms – 900ms.
+
+Utilizar easings elegantes como:
+
+power2.out
+power3.out
+power3.inOut
+
+Evitar:
+
+elastic
+bounce
+
+===========================================================
+10. EFEITO "ESCREVENDO / REVELANDO"
+===========================================================
+
+Não quero um typewriter tradicional caractere por caractere.
+
+Quero uma sensação mais sofisticada.
+
+Por exemplo:
+
+texto revelado por:
+
+overflow: hidden
+
+com:
+
+translateY
+opacity
+clip-path
+
+Possível estrutura conceitual:
+
+<div class="reveal-line">
+   <span>Texto</span>
+</div>
+
+onde:
+
+.reveal-line {
+    overflow: hidden;
+}
+
+e GSAP anima:
+
+yPercent: 110
+→
+0
+
+Isso gera sensação de texto sendo "escrito/revelado"
+sem parecer terminal hacker.
+
+===========================================================
+11. HERO
+===========================================================
+
+O Hero atual funciona bem visualmente.
+
+Não quero que ele seja redesenhado do zero.
+
+Ele deve continuar sendo a seção de maior impacto visual.
+
+Preservar aproximadamente:
+
+Olá, eu sou
+
+Helsio Mattia
+
+Especialista CRM |
+
+texto introdutório
+
+badges
+
+Brasil
+
+O Hero pode manter mais espaço negativo do que as outras telas.
+
+Mas ajuste verticalmente para aproveitar melhor diferentes resoluções.
+
+O conteúdo precisa ficar visualmente centralizado na área disponível
+abaixo do header.
+
+Não quero que o conteúdo fique excessivamente baixo ou excessivamente alto.
+
+===========================================================
+12. SOBRE
+===========================================================
+
+Remover o grande bloco:
+
+// 01. SOBRE MIM
+Quem Sou
+descrição
+
+A própria section deve começar diretamente pelo conteúdo.
+
+Hoje existe aproximadamente:
+
+CARD PERFIL
+
+HM
+Helsio Mattia
+Salesforce CRM Specialist
+Brasil
+
+5+ anos
+3 certificações
+5 empresas
+2 idiomas
+
++
+
+CARD TEXTO
+
++
+
+EXPERTISE TAGS
+
+Quero aproveitar praticamente toda a altura disponível.
+
+Layout desktop sugerido:
+
+┌─────────────────────┬────────────────────────────────┐
+│                     │                                │
+│    PERFIL           │    TEXTO PROFISSIONAL          │
+│                     │                                │
+│                     ├────────────────────────────────┤
+│                     │    EXPERTISE / TAGS            │
+│                     │                                │
+└─────────────────────┴────────────────────────────────┘
+
+Faça o conjunto ficar centralizado verticalmente.
+
+Reduza espaços vazios excessivos.
+
+Não aumente excessivamente os cards.
+
+===========================================================
+13. EXPERIÊNCIA
+===========================================================
+
+Remover:
+
+// 02. EXPERIÊNCIA
+Trajetória Profissional
+descrição
+
+O conteúdo deve começar praticamente após o header.
+
+Essa section é diferente das demais porque a timeline profissional
+pode possuir MAIS conteúdo do que cabe em 1 viewport.
+
+Portanto:
+
+NÃO cortar conteúdo.
+
+NÃO diminuir fontes absurdamente.
+
+NÃO esconder experiências.
+
+Quero um comportamento híbrido inteligente.
+
+Opção preferencial:
+
+a section Experience pode ultrapassar 100dvh quando necessário.
+
+Enquanto houver conteúdo interno a percorrer,
+o scroll continua dentro da experiência.
+
+Somente depois disso ocorre snap/transição para a próxima section.
+
+Não utilizar nested scrollbar visível em cards.
+
+Evitar:
+
+overflow-y: scroll
+
+em pequenas caixas.
+
+O scroll deve continuar sendo da própria página.
+
+===========================================================
+14. CREDENCIAIS
+===========================================================
+
+Remover:
+
+// 03. CREDENCIAIS
+Formação & Conquistas
+descrição
+
+Manter filtros:
+
+Todos
+Salesforce
+Certificações
+Formação
+Aprendizado
+Negócio
+Agile
+
+Mas torná-los mais compactos.
+
+O grid precisa aproveitar melhor a área horizontal e vertical.
+
+Os cards atuais podem ser levemente compactados:
+
+- padding;
+- gaps;
+- line-height;
+- badges;
+- altura mínima.
+
+NÃO diminuir legibilidade.
+
+Quero que mais conteúdo apareça simultaneamente no viewport.
+
+Se houver 6 cards, busque mostrar os 6 quando o tamanho da tela permitir.
+
+Desktop grande:
+
+3 colunas × 2 linhas
+
+preferencialmente dentro do viewport.
+
+===========================================================
+15. EXPERTISE
+===========================================================
+
+Remover:
+
+// 04. EXPERTISE
+Especialidades
+descrição
+
+Essa é uma excelente candidata a uma section 100% viewport.
+
+Hoje existe algo semelhante a:
+
+┌────────────┬────────────┬────────────┐
+│ Salesforce │ Estratégia │ Automação  │
+├────────────┼────────────┼────────────┤
+│ Dados      │ Qualidade  │ Métodos    │
+└────────────┴────────────┴────────────┘
+
+Quero preservar essa organização.
+
+Mas utilizar melhor toda a área disponível.
+
+Os seis cards devem aparecer ao mesmo tempo em desktop.
+
+Manter suas diferentes tonalidades.
+
+Refinar:
+
+- gap;
+- border radius;
+- sombras;
+- contraste;
+- padding;
+- badges.
+
+A aparência deve continuar sofisticada e leve.
+
+===========================================================
+16. CONTATO
+===========================================================
+
+ESSA É UMA DAS PRINCIPAIS SEÇÕES A SER CORRIGIDA.
+
+Atualmente parte do conteúdo fica fora da área inicial da tela.
+
+Ao entrar na seção Contato quero visualizar praticamente toda a composição.
+
+Remover:
+
+// 05. CONTATO
+Vamos Conversar
+descrição
+
+Começar diretamente pelo CTA.
+
+Estrutura aproximada desejada:
+
+┌─────────────────────────────────────────────┐
+│                                             │
+│       Pronto para evoluir seu CRM?          │
+│                                             │
+└─────────────────────────────────────────────┘
+
+┌──────────────────────┬──────────────────────┐
+│ EMAIL                │ LINKEDIN             │
+├──────────────────────┼──────────────────────┤
+│ GITHUB               │ TRAILBLAZER          │
+├──────────────────────┼──────────────────────┤
+│ ...                  │ ...                  │
+└──────────────────────┴──────────────────────┘
+
+Se existem atualmente 6 cards de contato,
+os SEIS precisam ser considerados no layout.
+
+Não quero que apenas os primeiros quatro pareçam fazer parte da tela.
+
+Objetivo desktop:
+
+CTA
++
+grid completo de contatos
+
+visíveis em aproximadamente um viewport.
+
+Utilizar técnicas como:
+
+clamp()
+grid-auto-rows
+gap responsivo
+padding responsivo
+
+em vez de simplesmente diminuir tudo.
+
+===========================================================
+17. MELHOR APROVEITAMENTO DE TELA
+===========================================================
+
+Hoje existe muito espaço consumido por:
+
+- títulos repetidos;
+- margens verticais;
+- paddings excessivos;
+- seções começando muito abaixo do header.
+
+Faça uma revisão global.
+
+Use valores responsivos.
+
+Exemplo:
+
+padding-inline:
+clamp(24px, 5vw, 96px)
+
+padding-block:
+clamp(24px, 4vh, 56px)
+
+gap:
+clamp(12px, 1.4vw, 24px)
+
+Esses números são apenas referência.
+
+Analise o projeto real.
+
+O conteúdo principal deve utilizar algo próximo de:
+
+max-width: 1200px – 1400px
+
+dependendo do breakpoint.
+
+Em monitores grandes,
+não deixar o conteúdo excessivamente pequeno no centro da tela.
+
+===========================================================
+18. CSS GRID
+===========================================================
+
+Priorize CSS Grid para os grandes layouts.
+
+Exemplo:
+
+.credentials-grid
+.expertise-grid
+.contact-grid
+
+Evitar resolver tudo com widths fixas.
+
+Usar:
+
+repeat()
+minmax()
+auto-fit
+auto-fill
+clamp()
+
+quando fizer sentido.
+
+Exemplo conceitual:
+
+grid-template-columns:
+repeat(3, minmax(0, 1fr));
+
+===========================================================
+19. RESPONSIVIDADE
+===========================================================
+
+O conceito "1 tela = 1 seção" é principalmente para desktop.
+
+Não force isso artificialmente em telas pequenas.
+
+Estratégia:
+
+DESKTOP LARGE
+>= 1440px
+
+- experiência full-page;
+- grids completos;
+- excelente aproveitamento horizontal.
+
+DESKTOP
+1024 – 1439px
+
+- manter conceito full-page quando possível;
+- pequenos ajustes de densidade.
+
+TABLET
+
+- permitir que section cresça verticalmente;
+- scroll natural.
+
+MOBILE
+
+- scroll totalmente natural;
+- cards empilhados;
+- evitar snapping obrigatório;
+- evitar Observer bloqueando touch;
+- menu adaptado adequadamente.
+
+Nunca esconder conteúdo para fazer caber em 100vh.
+
+===========================================================
+20. VIEWPORT MODERNO
+===========================================================
+
+Evitar depender somente de:
+
+100vh
+
+Utilizar quando adequado:
+
+100dvh
+100svh
+
+para lidar melhor com browsers modernos e mobile.
+
+Exemplo conceitual:
+
+min-height:
+calc(100dvh - var(--header-height));
+
+===========================================================
+21. ACESSIBILIDADE
+===========================================================
+
+OBRIGATÓRIO.
+
+Respeitar:
+
+@media (prefers-reduced-motion: reduce)
+
+Nesse modo:
+
+- remover wipe complexo;
+- remover smooth scrolling prolongado;
+- remover stagger;
+- navegação deve continuar funcionando.
+
+Manter:
+
+- foco por teclado;
+- tab order;
+- aria-labels;
+- contraste;
+- headings semânticos;
+- links funcionais.
+
+Não permitir que GSAP prejudique navegação por teclado.
+
+Também suportar:
+
+PageUp
+PageDown
+Home
+End
+
+quando fizer sentido.
+
+===========================================================
+22. GSAP + REACT
+===========================================================
+
+Implementar GSAP corretamente em React.
+
+Utilizar preferencialmente:
+
+gsap.context()
+
+ou
+
+useGSAP()
+
+caso @gsap/react já esteja disponível ou seja justificável.
+
+Garantir cleanup de:
+
+ScrollTriggers
+Observers
+timelines
+
+quando componentes desmontarem.
+
+NÃO criar event listeners globais sem cleanup.
+
+NÃO provocar:
+
+memory leaks
+duplicate ScrollTriggers
+duplicated animations durante hot reload
+
+===========================================================
+23. PERFORMANCE
+===========================================================
+
+Objetivo:
+
+60fps em desktop comum.
+
+Priorizar animações usando:
+
+transform
+opacity
+clip-path com moderação
+
+Evitar animar continuamente:
+
+width
+height
+top
+left
+
+quando transform resolver.
+
+Evitar:
+
+box-shadow gigante animada
+blur pesado animado
+backdrop-filter excessivo
+parallax complexo
+
+Não transformar todo card em animação.
+
+===========================================================
+24. MICROINTERAÇÕES
+===========================================================
+
+Melhorar discretamente os cards.
+
+Hover desktop:
+
+translateY(-2px ou -3px)
+
+borda levemente mais forte
+
+shadow levemente elevada
+
+transição ~180–250ms
+
+Nada exagerado.
+
+Badges podem ganhar:
+
+background ligeiramente mais intenso
+border
+mudança pequena de contraste
+
+Não quero efeito neon.
+
+===========================================================
+25. FUNDO
+===========================================================
+
+O fundo pontilhado atual é parte interessante da identidade visual.
+
+Preserve-o.
+
+Mas revise intensidade.
+
+O pattern deve ser:
+
+- perceptível;
+- extremamente discreto;
+- não competir com conteúdo.
+
+Podem existir gradientes radiais muito leves por section
+para dar profundidade.
+
+Não transformar o site em estética cyberpunk.
+
+===========================================================
+26. TRANSIÇÃO VISUAL ENTRE SEÇÕES
+===========================================================
+
+Quero que haja sensação de mudança de "tela".
+
+Uma opção interessante:
+
+SECTION A
+
+conteúdo reduz levemente opacity
+
+↓
+
+uma camada muito sutil atravessa a tela verticalmente
+
+↓
+
+SECTION B
+
+cards/textos são revelados
+
+Pode usar um elemento global como:
+
+.section-transition-overlay
+
+com:
+
+position: fixed;
+pointer-events: none;
+
+e GSAP.
+
+Entretanto:
+
+somente implemente se não prejudicar fluidez.
+
+Quero animação sutil.
+
+===========================================================
+27. NÃO FAZER
+===========================================================
+
+NÃO:
+
+- reconstruir a identidade;
+- trocar paleta completamente;
+- trocar tipografia sem justificativa;
+- criar sidebar;
+- adicionar carrossel;
+- adicionar partículas;
+- adicionar 3D;
+- adicionar Three.js;
+- adicionar Framer Motion apenas por animação;
+- adicionar Lenis sem necessidade;
+- adicionar ScrollMagic;
+- adicionar AOS;
+- adicionar biblioteca de UI inteira;
+- usar animações bounce;
+- usar zoom exagerado;
+- adicionar glassmorphism em tudo;
+- transformar tudo em gradient;
+- esconder conteúdo;
+- diminuir fonte excessivamente;
+- quebrar PT / EN / ES.
+
+GSAP já resolve praticamente toda necessidade desta tarefa.
+
+===========================================================
+28. LIBRARIES
+===========================================================
+
+Antes de instalar qualquer pacote novo,
+analise se GSAP já resolve.
+
+Minha preferência é NÃO instalar dependência adicional.
+
+Utilizar:
+
+GSAP
+ScrollTrigger
+ScrollToPlugin
+Observer
+
++
+
+CSS nativo.
+
+Somente se existir uma necessidade concreta não atendida,
+explique a razão antes da dependência.
+
+===========================================================
+29. MENU ATIVO
+===========================================================
+
+Implemente detecção da section atual.
+
+Exemplo:
+
+Hero → nenhum item ou logo ativo
+
+Sobre → Sobre ativo
+
+Experiência → Experiência ativa
+
+Credenciais → Credenciais ativa
+
+Expertise → Expertise ativa
+
+Contato → Contato ativo
+
+A transição do indicador deve ser elegante.
+
+Uma possibilidade:
+
+um underline que se move entre os itens usando GSAP.
+
+Não é obrigatório.
+
+Faça somente se ficar sofisticado.
+
+===========================================================
+30. SCROLL INDICATOR
+===========================================================
+
+O Hero atualmente possui indicação:
+
+VER TRAJETÓRIA
+↓
+
+
+Isso pode permanecer.
+
+Ao clicar nele:
+
+navegar para Sobre.
+
+Depois disso não preciso repetir indicadores grandes em cada seção.
+
+Opcionalmente pode existir um indicador extremamente discreto de progresso:
+
+01 / 05
+
+ou uma linha vertical/horizontal fina.
+
+Somente implemente se realmente melhorar UX.
+
+===========================================================
+31. ESTADO DA URL
+===========================================================
+
+Se possível e sem complicar arquitetura:
+
+ao entrar em uma section,
+atualizar o hash da URL:
+
+#about
+#experience
+#credentials
+#expertise
+#contact
+
+SEM provocar novo scroll.
+
+Isso ajuda:
+
+- compartilhamento;
+- deep-link;
+- voltar/avançar no navegador.
+
+===========================================================
+32. RESULTADO VISUAL ESPERADO
+===========================================================
+
+Quero que a sensação seja:
+
+HOME
+──────────────────────────────
+        Helsio Mattia
+        Especialista CRM
+──────────────────────────────
+
+             ↓ scroll
+
+SOBRE
+──────────────────────────────
+ PERFIL       BIOGRAFIA
+              EXPERTISE
+──────────────────────────────
+
+             ↓ scroll
+
+EXPERIÊNCIA
+──────────────────────────────
+       TIMELINE
+──────────────────────────────
+
+             ↓ scroll
+
+CREDENCIAIS
+──────────────────────────────
+ FILTROS
+ [CARD][CARD][CARD]
+ [CARD][CARD][CARD]
+──────────────────────────────
+
+             ↓ scroll
+
+EXPERTISE
+──────────────────────────────
+ [CARD][CARD][CARD]
+ [CARD][CARD][CARD]
+──────────────────────────────
+
+             ↓ scroll
+
+CONTATO
+──────────────────────────────
+      CTA
+
+ [CARD][CARD]
+ [CARD][CARD]
+ [CARD][CARD]
+──────────────────────────────
+
+
+O usuário deve sentir que está navegando por "telas",
+e não lendo uma página HTML extremamente longa.
+
+===========================================================
+33. DENSIDADE VISUAL
+===========================================================
+
+Quero aumentar a densidade de informação SEM deixar apertado.
+
+Hoje o site possui bastante espaço negativo vertical.
+
+Depois da refatoração quero:
+
+ANTES
+
+header
+↓
+muito espaço
+↓
+título
+↓
+subtítulo
+↓
+espaço
+↓
+conteúdo
+
+
+DEPOIS
+
+header
+↓
+respiro controlado
+↓
+conteúdo principal
+↓
+respiro controlado
+
+Isso sozinho deverá liberar uma quantidade significativa
+da altura disponível.
+
+===========================================================
+34. DESIGN TOKENS
+===========================================================
+
+Se ainda não existir,
+centralize dimensões importantes em variáveis CSS.
+
+Exemplo:
+
+:root {
+  --header-height: ...;
+
+  --page-max-width: ...;
+
+  --section-inline-padding: ...;
+  --section-block-padding: ...;
+
+  --card-radius: ...;
+  --card-gap: ...;
+
+  --transition-fast: ...;
+  --transition-normal: ...;
+}
+
+Não criar dezenas de tokens desnecessários.
+
+===========================================================
+35. REFATORAÇÃO RESPONSIVA DOS CARDS
+===========================================================
+
+Verifique TODOS os cards existentes.
+
+Reduza alturas artificiais como:
+
+height fixa
+
+quando o conteúdo pode utilizar:
+
+height: auto
+
+ou grid stretch.
+
+Revise:
+
+min-height
+padding
+line-height
+gap
+margin
+
+Muitos cards atualmente podem estar ficando maiores do que o necessário
+por causa dessas propriedades.
+
+Corrigir isso globalmente.
+
+===========================================================
+36. IMPORTANTE: EXPERIÊNCIA DE SCROLL
+===========================================================
+
+Antes de finalizar,
+teste diferentes velocidades de wheel.
+
+Cenários:
+
+scroll pequeno
+scroll rápido
+trackpad
+PageDown
+PageUp
+clique no menu
+clique repetido em menus diferentes
+
+A aplicação nunca deve entrar em:
+
+loop
+section errada
+scroll travado
+duplo avanço
+animações simultâneas
+
+Se utilizar GSAP Observer,
+crie controle de estado como:
+
+isAnimating
+
+e ignore novos eventos durante a curta transição.
+
+===========================================================
+37. NÃO INTERCEPTAR SCROLL QUANDO NÃO DEVE
+===========================================================
+
+Se a section possuir conteúdo maior que o viewport,
+como possivelmente Experiência:
+
+o usuário deve conseguir percorrer esse conteúdo normalmente.
+
+Somente executar a navegação para a próxima section
+quando atingir o limite inferior.
+
+Da mesma maneira ao subir.
+
+Não deixe conteúdo inacessível.
+
+===========================================================
+38. TESTES OBRIGATÓRIOS
+===========================================================
+
+Testar pelo menos aproximadamente:
+
+1920×1080
+1600×900
+1440×900
+1366×768
+1280×720
+1024×768
+
+tablet
+
+mobile ~390px
+
+O layout precisa continuar coerente.
+
+Dê atenção especial a:
+
+1366×768
+
+porque é exatamente em resoluções menores
+que o problema de altura tende a aparecer.
+
+===========================================================
+39. CRITÉRIO ESPECÍFICO DA TELA CONTATO
+===========================================================
+
+Em 1920×1080 e 1600×900:
+
+quero visualizar:
+
+CTA
+
++
+
+TODOS os cards principais de contato
+
+sem precisar fazer um segundo scroll dentro da section,
+caso tecnicamente possível sem prejudicar legibilidade.
+
+Em 1366×768:
+
+compacte responsivamente.
+
+Se ainda assim não couber,
+permitir crescimento natural da section.
+
+NUNCA esconder os últimos cards.
+
+===========================================================
+40. CRITÉRIO ESPECÍFICO DA TELA EXPERTISE
+===========================================================
+
+Em desktop:
+
+os seis cards devem aparecer juntos.
+
+3 × 2.
+
+Sem necessidade de scroll adicional apenas para revelar
+a segunda linha.
+
+===========================================================
+41. CRITÉRIO ESPECÍFICO DA TELA CREDENCIAIS
+===========================================================
+
+Quando o filtro "Todos" estiver ativo,
+quero maximizar a quantidade de cards visíveis.
+
+Se existirem seis principais:
+
+preferir 3 × 2 em desktop.
+
+Não transformar os cards em componentes minúsculos.
+
+===========================================================
+42. DETALHES VISUAIS
+===========================================================
+
+Preserve o estilo atual baseado em:
+
+azul
+cyan
+verde
+tons claros
+bordas delicadas
+fundo azul muito claro
+
+Mas torne tudo um pouco mais refinado.
+
+Revisar:
+
+border radius
+border opacity
+shadow
+hover
+spacing
+
+Evitar redesign radical.
+
+===========================================================
+43. ANIMAÇÃO DE ENTRADA DOS CARDS
+===========================================================
+
+Dentro de cada section:
+
+cards podem entrar aproximadamente assim:
+
+opacity 0 → 1
+y 12 → 0
+
+com stagger:
+
+0.05
+
+duration:
+
+0.45 – 0.65
+
+ease:
+
+power3.out
+
+Somente executar quando a section realmente entra.
+
+Evitar reanimar incessantemente
+se o usuário fizer pequenos movimentos de scroll.
+
+===========================================================
+44. TRANSIÇÃO DO HERO
+===========================================================
+
+Ao sair do Hero:
+
+nome e conteúdo podem subir alguns pixels e perder pequena opacity.
+
+A próxima section entra simultaneamente.
+
+Não fazer scale grande.
+
+Exemplo conceitual:
+
+Hero:
+
+y: 0 → -20
+opacity: 1 → 0.8
+
+Sobre:
+
+y: 20 → 0
+opacity: 0 → 1
+
+Tudo muito suave.
+
+===========================================================
+45. CÓDIGO
+===========================================================
+
+Além do visual,
+quero código bem organizado.
+
+Se necessário criar componentes auxiliares como:
+
+FullPageSection
+SectionTransition
+useSectionNavigation
+useGsapSectionReveal
+
+pode criar.
+
+MAS:
+
+não faça abstração excessiva.
+
+Primeiro verifique se a arquitetura atual já possui
+componentes reutilizáveis adequados.
+
+===========================================================
+46. FASE DE IMPLEMENTAÇÃO
+===========================================================
+
+Execute nesta ordem:
+
+FASE 1
+Auditar projeto atual.
+
+FASE 2
+Refatorar layout / spacing sem animações.
+
+FASE 3
+Garantir que todas as sections funcionam corretamente.
+
+FASE 4
+Implementar navegação pelo menu.
+
+FASE 5
+Implementar scroll full-page no desktop.
+
+FASE 6
+Implementar GSAP section transitions.
+
+FASE 7
+Implementar reduced motion.
+
+FASE 8
+Revisar tablet/mobile.
+
+FASE 9
+Executar lint/build/testes existentes.
+
+FASE 10
+Corrigir regressões.
+
+Não comece pelas animações antes de resolver o layout.
+
+===========================================================
+47. VALIDAÇÃO FINAL
+===========================================================
+
+Antes de considerar a tarefa terminada:
+
+confirme que:
+
+[ ] Hero funciona.
+[ ] Sobre funciona.
+[ ] Experiência funciona.
+[ ] Credenciais funciona.
+[ ] Expertise funciona.
+[ ] Contato funciona.
+
+[ ] PT funciona.
+[ ] EN funciona.
+[ ] ES funciona.
+
+[ ] Links continuam funcionando.
+
+[ ] Header permanece funcionando.
+
+[ ] Menu indica section atual.
+
+[ ] Menu navega para cada section.
+
+[ ] Wheel navega corretamente.
+
+[ ] Scroll reverso funciona.
+
+[ ] Mobile possui scroll natural.
+
+[ ] Nenhum conteúdo está escondido.
+
+[ ] Contato mostra todos os cards.
+
+[ ] Expertise mostra seus 6 cards em desktop.
+
+[ ] Credenciais aproveita melhor o viewport.
+
+[ ] prefers-reduced-motion funciona.
+
+[ ] Não há erro no console.
+
+[ ] Não há warning importante no React.
+
+[ ] npm run build funciona.
+
+[ ] lint funciona, se existir.
+
+===========================================================
+48. IMPORTANTE SOBRE O RESULTADO
+===========================================================
+
+Não quero apenas sugestões.
+
+QUERO QUE VOCÊ IMPLEMENTE AS ALTERAÇÕES NO PROJETO.
+
+Analise os arquivos existentes e modifique diretamente
+os componentes, CSS e lógica necessários.
+
+Não pare para pedir aprovação entre pequenas mudanças.
+
+Tome decisões de UX/UI coerentes com os requisitos acima.
+
+Se encontrar uma implementação existente melhor do que
+a solução sugerida neste prompt, pode adaptá-la.
+
+O resultado visual tem prioridade sobre seguir literalmente
+qualquer exemplo de código apresentado aqui.
+
+===========================================================
+49. RESUMO DA DIREÇÃO
+===========================================================
+
+A transformação principal é:
+
+SITE ATUAL:
+
+Página longa
++
+grandes headings repetitivos
++
+muito espaço vertical
++
+conteúdo abaixo do viewport
+
+
+PARA:
+
+
+SITE NOVO:
+
+Header fixo
++
+1 section ≈ 1 viewport
++
+conteúdo como protagonista
++
+menu indicando seção
++
+scroll section-to-section
++
+GSAP wipe/reveal discreto
++
+alta densidade visual
++
+todas as informações acessíveis
++
+experiência premium.
+
+
+Use as telas atuais como referência visual e preserve
+a identidade já construída.

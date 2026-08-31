@@ -17,8 +17,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import ForkRightOutlinedIcon from '@mui/icons-material/ForkRightOutlined';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { projects, projectFilters } from '../../data/projects';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
@@ -29,12 +29,8 @@ function ProjectCard({ project, index, lang, t }) {
   const technologies = getLocalizedStringArray(project.technologies, lang);
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.92 }}
-      transition={{ duration: 0.45, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+    <AnimatedBox
+      delay={index * 0.06}
       style={{ height: '100%' }}
     >
       <Card
@@ -45,14 +41,14 @@ function ProjectCard({ project, index, lang, t }) {
           position: 'relative',
           overflow: 'hidden',
           cursor: 'default',
-          bgcolor: 'rgba(248,251,254,0.94)',
+          bgcolor: 'rgba(224,236,245,0.94)',
           borderColor: project.featured ? alpha('#0B5CAB', 0.26) : 'rgba(15,37,55,0.12)',
-          boxShadow: project.featured ? '0 14px 34px rgba(11,92,171,0.1)' : undefined,
+          boxShadow: project.featured ? '0 10px 26px rgba(11,92,171,0.09)' : undefined,
           '&:hover .project-overlay': { opacity: 1 },
           '&:hover .project-gradient': { opacity: 0.9 },
           '&:hover': {
             borderColor: alpha('#0B5CAB', 0.36),
-            boxShadow: '0 16px 38px rgba(11,92,171,0.12)',
+            boxShadow: '0 12px 30px rgba(11,92,171,0.11)',
           },
         }}
       >
@@ -66,9 +62,9 @@ function ProjectCard({ project, index, lang, t }) {
           }}
         />
 
-        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
+        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: { xs: 2.25, md: 2.35 } }}>
           {/* Top row: status + links */}
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.35 }}>
             <Chip
               label={status}
               size="small"
@@ -142,20 +138,20 @@ function ProjectCard({ project, index, lang, t }) {
           </Box>
 
           {/* Title */}
-          <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, fontSize: '1rem', color: 'text.primary' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.75, fontSize: '0.98rem', lineHeight: 1.35, color: 'text.primary' }}>
             {getLocalizedString(project.title, lang)}
           </Typography>
 
           {/* Description */}
           <Typography
             variant="body2"
-            sx={{ color: 'text.secondary', mb: 2.5, flex: 1, lineHeight: 1.7, fontSize: '0.88rem' }}
+            sx={{ color: 'text.secondary', mb: 1.6, flex: 1, lineHeight: 1.55, fontSize: '0.84rem' }}
           >
             {getLocalizedString(project.description, lang)}
           </Typography>
 
           {/* Tech chips */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.7, mb: 2.5 }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.55, mb: 1.6 }}>
             {technologies.map((tech) => (
               <Chip
                 key={tech}
@@ -166,7 +162,8 @@ function ProjectCard({ project, index, lang, t }) {
                   border: '1px solid rgba(11,92,171,0.2)',
                   color: 'primary.main',
                   fontFamily: '"Fira Code", monospace',
-                  fontSize: '0.7rem',
+                  fontSize: '0.66rem',
+                  height: 24,
                   maxWidth: '100%',
                   '& .MuiChip-label': {
                     overflow: 'hidden',
@@ -178,7 +175,7 @@ function ProjectCard({ project, index, lang, t }) {
           </Box>
 
           {(project.stars !== null || project.forks !== null) && (
-            <Stack direction="row" spacing={2} sx={{ pt: 1.5, borderTop: '1px solid rgba(15,37,55,0.12)' }}>
+            <Stack direction="row" spacing={1.5} sx={{ pt: 1.1, borderTop: '1px solid rgba(15,37,55,0.12)' }}>
               {project.stars !== null && (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                   <StarOutlineIcon sx={{ fontSize: '0.9rem', color: '#B7791F' }} />
@@ -199,7 +196,7 @@ function ProjectCard({ project, index, lang, t }) {
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </AnimatedBox>
   );
 }
 
@@ -216,14 +213,18 @@ export default function Projects() {
 
   return (
     <Box
-      id="projects"
+      id="credentials"
+      data-section="credentials"
       component="section"
       sx={{
-        py: { xs: 8, md: 10 },
-        background: 'linear-gradient(180deg, #EAF2F8 0%, #F3F8FC 100%)',
+        minHeight: { md: 'calc(100dvh - var(--header-height))' },
+        display: 'flex',
+        alignItems: 'center',
+        py: { xs: 6, md: 'var(--section-block-padding)' },
+        background: 'linear-gradient(180deg, var(--site-bg-mid) 0%, var(--site-bg-start) 100%)',
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)' }}>
         <SectionTitle
           overline={t('projects.overline')}
           title={t('projects.title')}
@@ -235,9 +236,9 @@ export default function Projects() {
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 1,
+            gap: 0.75,
             justifyContent: 'center',
-            mb: 4,
+            mb: { xs: 3, md: 2.5 },
           }}
         >
           {projectFilters.map((f) => (
@@ -249,9 +250,9 @@ export default function Projects() {
               onClick={() => setActiveFilter(f.value)}
               sx={{
                 fontFamily: '"Fira Code", monospace',
-                fontSize: '0.78rem',
-                py: 0.6,
-                px: 2,
+                fontSize: '0.72rem',
+                py: 0.45,
+                px: 1.45,
                 minWidth: 0,
                 ...(activeFilter !== f.value && {
                   borderColor: 'rgba(15,37,55,0.18)',
@@ -270,14 +271,12 @@ export default function Projects() {
         </Box>
 
         {/* Cards grid */}
-        <Grid container spacing={3}>
-          <AnimatePresence mode="wait">
-            {filtered.map((project, index) => (
-              <Grid item xs={12} sm={6} lg={4} key={project.id}>
-                <ProjectCard project={project} index={index} lang={lang} t={t} />
-              </Grid>
-            ))}
-          </AnimatePresence>
+        <Grid container spacing={{ xs: 2, md: 2.25 }}>
+          {filtered.map((project, index) => (
+            <Grid item xs={12} sm={6} md={4} key={`${activeFilter}-${project.id}`}>
+              <ProjectCard project={project} index={index} lang={lang} t={t} />
+            </Grid>
+          ))}
         </Grid>
 
         {filtered.length === 0 && (

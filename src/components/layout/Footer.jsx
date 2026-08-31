@@ -8,8 +8,8 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        bgcolor: 'rgba(248,251,254,0.94)',
-        borderTop: '1px solid rgba(15,37,55,0.12)',
+        bgcolor: 'rgba(224,236,245,0.94)',
+        borderTop: '1px solid rgba(11,33,51,0.14)',
         py: { xs: 2.5, md: 3 },
       }}
     >
@@ -34,7 +34,7 @@ export default function Footer() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#F8FBFE',
+                color: '#EAF3F9',
                 fontFamily: '"Fira Code", monospace',
                 fontSize: '0.7rem',
                 fontWeight: 700,
