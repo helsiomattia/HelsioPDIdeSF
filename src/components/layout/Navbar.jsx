@@ -35,6 +35,19 @@ const NAV_LINKS = [
 
 const SECTION_IDS = ['home', ...NAV_LINKS.map((link) => link.id)];
 const HASH_ALIASES = { projects: 'credentials', skills: 'expertise' };
+const PATH_ALIASES = { projects: 'credentials', skills: 'expertise', '': 'home' };
+
+function getSectionPath(id) {
+  return id === 'home' ? '/' : `/${id}`;
+}
+
+function getSectionFromLocation() {
+  const hashId = window.location.hash.replace('#', '');
+  if (hashId) return HASH_ALIASES[hashId] || hashId;
+
+  const pathId = window.location.pathname.split('/').filter(Boolean).pop() || 'home';
+  return PATH_ALIASES[pathId] || pathId;
+}
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -52,9 +65,7 @@ export default function Navbar() {
     const setRouteState = (id) => {
       setActiveSection(id === 'home' ? '' : id);
 
-      const nextUrl = id === 'home'
-        ? `${window.location.pathname}${window.location.search}`
-        : `${window.location.pathname}${window.location.search}#${id}`;
+      const nextUrl = `${getSectionPath(id)}${window.location.search}`;
       const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
 
       if (currentUrl !== nextUrl) {
@@ -93,16 +104,24 @@ export default function Navbar() {
         return;
       }
 
-      const rawHashId = window.location.hash.replace('#', '');
-      const hashId = HASH_ALIASES[rawHashId] || rawHashId;
-      if (SECTION_IDS.includes(hashId)) {
-        window.setTimeout(() => scrollToSection(hashId), 0);
+      const initialSectionId = getSectionFromLocation();
+      if (SECTION_IDS.includes(initialSectionId)) {
+        window.setTimeout(() => scrollToSection(initialSectionId), 0);
       }
     };
 
+    const handlePopState = () => {
+      const id = getSectionFromLocation();
+      if (!SECTION_IDS.includes(id)) return;
+      setActiveSection(id === 'home' ? '' : id);
+      scrollToSection(id);
+    };
+
     setupTriggers();
+    window.addEventListener('popstate', handlePopState);
 
     return () => {
+      window.removeEventListener('popstate', handlePopState);
       window.clearTimeout(retryTimer);
       cleanupTriggers();
     };
@@ -112,7 +131,7 @@ export default function Navbar() {
     event?.preventDefault();
     setMobileOpen(false);
     setActiveSection(id);
-    window.history.pushState(null, '', `#${id}`);
+    window.history.pushState(null, '', getSectionPath(id));
     scrollToSection(id);
   };
 
@@ -149,11 +168,11 @@ export default function Navbar() {
             {/* Logo / name */}
             <Box
               component="a"
-              href="#home"
+              href="/"
               onClick={(event) => {
                 event.preventDefault();
                 setActiveSection('');
-                window.history.pushState(null, '', window.location.pathname + window.location.search);
+                window.history.pushState(null, '', getSectionPath('home'));
                 scrollToSection('home');
               }}
               sx={{
@@ -220,7 +239,7 @@ export default function Navbar() {
               {NAV_LINKS.map((link, index) => (
                 <Box
                   component="a"
-                  href={`#${link.id}`}
+                  href={getSectionPath(link.id)}
                   key={link.id}
                   onClick={(event) => handleNavClick(event, link.id)}
                   aria-current={activeSection === link.id ? 'page' : undefined}
@@ -348,7 +367,7 @@ export default function Navbar() {
             <ListItem key={link.id} disablePadding sx={{ mb: 1 }}>
               <ListItemButton
                 component="a"
-                href={`#${link.id}`}
+                href={getSectionPath(link.id)}
                 onClick={(event) => handleNavClick(event, link.id)}
                 sx={{
                   borderRadius: '8px',
