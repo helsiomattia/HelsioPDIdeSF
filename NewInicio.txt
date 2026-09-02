@@ -1,0 +1,403 @@
+Quero melhorar visualmente a seção INÍCIO / HERO do meu portfólio React.
+
+IMPORTANTE:
+Não quero alterar a estrutura principal do conteúdo textual.
+Não quero mudar o texto.
+Não quero mudar a hierarquia atual do Hero.
+Não quero transformar a seção em algo poluído.
+Quero apenas enriquecer o visual da página inicial, que hoje está seca demais graficamente.
+
+===========================================================
+1. OBJETIVO
+===========================================================
+
+Quero deixar a section INÍCIO mais rica visualmente, com uma identidade
+mais forte de:
+
+- tecnologia
+- dados
+- CRM
+- automação
+- programação
+- sistemas
+- arquitetura
+- Salesforce / operações
+
+A sensação atual é muito "vazia" e "seca".
+Quero manter o layout e o conteúdo, mas adicionar elementos visuais sutis
+de fundo e microanimações elegantes.
+
+O resultado deve transmitir algo como:
+
+"profissional de CRM, dados, processos e tecnologia"
+
+sem parecer um site genérico ou um tema hacker exagerado.
+
+===========================================================
+2. O QUE DEVE SER PRESERVADO
+===========================================================
+
+Preservar a estrutura principal já existente da HERO:
+
+- badge superior ("Salesforce CRM no Efi Bank")
+- texto "Olá, eu sou"
+- nome "Helsio Mattia"
+- linha de título/cargo
+- parágrafo descritivo
+- badges/chips
+- CTA "Ver trajetória"
+- navegação lateral atual
+- header atual
+- idioma PT/EN/ES
+- identidade visual geral
+- cores base
+- tipografia atual
+
+NÃO reposicionar radicalmente o conteúdo.
+NÃO quebrar a responsividade.
+NÃO substituir o Hero existente.
+
+A ideia é:
+manter o Hero como está
++
+adicionar uma camada visual / gráfica mais sofisticada ao fundo e ao entorno.
+
+===========================================================
+3. DIREÇÃO VISUAL
+===========================================================
+
+Quero uma estética clean, premium e tecnológica.
+
+Referências conceituais:
+- interfaces editoriais de tecnologia
+- dashboards elegantes
+- visual de dados abstrato
+- sistemas / nodes / grids
+- fluxos de automação
+- snippets de código sutis
+- etiquetas técnicas
+- conexões entre blocos
+- elementos que lembrem arquitetura de informação
+
+Mas tudo isso deve ser:
+- sutil
+- leve
+- sem excesso
+- sem roubar o foco do conteúdo principal
+
+===========================================================
+4. O QUE ADICIONAR
+===========================================================
+
+Quero que você proponha e implemente uma ou mais camadas gráficas no Hero,
+por exemplo:
+
+A) ELEMENTOS DE FUNDO ABSTRATOS
+- linhas finas de conexão
+- pequenos nodes/pontos conectados
+- mini diagramas técnicos
+- wireframes leves
+- retângulos técnicos com bordas finas
+- grids secundários
+- traços geométricos suaves
+- arcos / linhas / orbitais discretas
+- microcards decorativos de fundo
+
+B) ELEMENTOS RELACIONADOS A DADOS / PROGRAMAÇÃO
+- snippets curtos de código decorativo
+- labels técnicas flutuantes
+- pseudo comandos / pseudo estruturas JSON
+- tags como:
+  CRM
+  FLOW
+  DATA
+  API
+  QA
+  ERP
+  OMNI
+  CASE
+  SALES
+  SERVICE
+  AUTOMATION
+- pequenos blocos visuais que lembrem terminal / schema / nodes
+
+C) ELEMENTOS COM LINGUAGEM DE DADOS
+- mini barras
+- mini linhas de gráfico
+- pequenos pontos conectados
+- badges com valores fictícios ou labels conceituais
+- indicadores sutis
+- data streams abstratos
+
+D) CAMADAS SUAVES DE PROFUNDIDADE
+- glow muito leve
+- blur muito sutil
+- gradientes radiais discretos
+- halos de luz muito suaves
+- overlays técnicos
+
+===========================================================
+5. IMPORTANTE SOBRE O ESTILO
+===========================================================
+
+NÃO quero:
+- efeito hacker verde exagerado
+- chuva de código
+- matrix
+- excesso de números animados
+- visual cyberpunk
+- brilho neon forte
+- elementos piscando
+- fundo confuso
+- poluição visual
+- qualquer coisa que atrapalhe a leitura
+
+Quero um resultado mais próximo de:
+"tecnologia corporativa premium"
+
+===========================================================
+6. ANIMAÇÕES COM GSAP
+===========================================================
+
+GSAP já está instalado.
+Use GSAP para criar microanimações leves, elegantes e contínuas.
+
+Sugestões de animações permitidas:
+- fade in suave de elementos técnicos de fundo
+- flutuação muito leve de microcards/snippets
+- motion lento em linhas ou nodes
+- reveal suave de pequenos elementos decorativos
+- movimentação sutil de opacidade
+- deslocamento mínimo de alguns elementos no eixo Y ou X
+- animações em loop muito discretas
+- pequenas transições entre snippets de tecnologia
+
+Exemplos de comportamento:
+- um mini bloco de código surge suavemente, fica visível e some
+- chips de tecnologia aparecem em transição leve
+- pequenos nodes conectados pulsam discretamente
+- linhas ou pontos se movem de forma quase imperceptível
+
+Animações devem ser:
+- elegantes
+- lentas
+- discretas
+- não intrusivas
+
+===========================================================
+7. IDEIA DE ELEMENTOS ANIMADOS
+===========================================================
+
+Você pode implementar, por exemplo:
+
+1. SNIPPETS DECORATIVOS FLUTUANTES
+Blocos muito sutis nas áreas vazias do Hero contendo textos curtos como:
+
+{ object: "CRM" }
+flow: automation.active
+status: scalable
+channel: service_cloud
+data_model: enabled
+api.sync = true
+case.route("support")
+omni.queue = "active"
+
+Esses snippets NÃO devem virar o conteúdo principal.
+Devem funcionar apenas como textura visual.
+
+2. TAGS TECNOLÓGICAS ANIMADAS
+Pequenas tags flutuantes ou aparecendo em sequência suave:
+
+Salesforce
+Service Cloud
+Sales Cloud
+Flow Builder
+CRM Ops
+Automation
+Data Model
+Business Analysis
+API
+QA
+
+3. DIAGRAMAS/NODES ABSTRATOS
+Pequenos nodes com linhas conectando pontos,
+em áreas vazias da direita ou do fundo do Hero.
+
+4. MINI DATA WIDGETS DECORATIVOS
+Pequenos widgets abstratos com:
+- linhas
+- pontos
+- barras
+- labels técnicas
+
+Sempre com baixa opacidade e baixa competição visual.
+
+===========================================================
+8. ONDE POSICIONAR ESSES ELEMENTOS
+===========================================================
+
+Aproveitar especialmente as áreas vazias do Hero, como:
+- lado direito
+- canto inferior direito
+- fundo atrás do nome/título, com bastante discrição
+- áreas periféricas do viewport
+
+O conteúdo principal deve continuar dominante.
+Os elementos decorativos devem preencher o vazio sem atrapalhar.
+
+Quero melhor aproveitamento do espaço negativo.
+
+===========================================================
+9. COMPOSIÇÃO RECOMENDADA
+===========================================================
+
+Estruture mentalmente assim:
+
+CAMADA 1
+fundo principal já existente
+
+CAMADA 2
+pattern / grid / glow / linhas abstratas
+
+CAMADA 3
+elementos decorativos técnicos estáticos
+
+CAMADA 4
+microelementos animados com GSAP
+
+CAMADA 5
+conteúdo principal do Hero
+
+A prioridade visual deve continuar sendo o texto principal.
+
+===========================================================
+10. RESPONSIVIDADE
+===========================================================
+
+Muito importante:
+
+Desktop:
+- pode ter composição visual mais rica
+- explorar melhor o espaço vazio
+
+Tablet:
+- reduzir quantidade de elementos
+- manter elegância
+
+Mobile:
+- simplificar bastante
+- talvez remover parte dos elementos decorativos
+- manter performance e legibilidade
+- não deixar o Hero pesado
+
+Ou seja:
+a camada gráfica deve ser responsiva/adaptativa.
+
+===========================================================
+11. PERFORMANCE
+===========================================================
+
+Não quero pesar o site.
+
+Priorizar:
+- CSS + GSAP
+- poucos elementos
+- animações com transform e opacity
+- loops leves
+- sem renderização excessiva
+
+Evitar:
+- dezenas de elementos simultâneos
+- animações pesadas
+- canvas desnecessário
+- bibliotecas extras desnecessárias
+
+NÃO instalar outra biblioteca de animação.
+Use apenas o que já existe, preferencialmente:
+- gsap
+- ScrollTrigger apenas se realmente necessário
+
+Se a animação for puramente decorativa de Hero,
+não precisa complicar com excesso de plugins.
+
+===========================================================
+12. POSSÍVEIS COMPONENTES
+===========================================================
+
+Se fizer sentido, você pode criar algo como:
+
+- HeroBackgroundDecor.tsx
+- HeroTechOverlay.tsx
+- HeroDataAmbient.tsx
+- HeroAnimatedLabels.tsx
+
+Mas sem abstração excessiva.
+
+Se der para resolver com 1 ou 2 componentes auxiliares, melhor.
+
+===========================================================
+13. ACESSIBILIDADE
+===========================================================
+
+- Os elementos decorativos não devem atrapalhar leitura
+- Não devem interceptar cliques
+- Usar pointer-events: none quando adequado
+- Respeitar prefers-reduced-motion
+- Se reduced motion estiver ativo, reduzir ou remover loops/animações
+
+===========================================================
+14. NÃO FAZER
+===========================================================
+
+NÃO:
+- alterar textos do Hero
+- mudar o nome
+- mudar o cargo
+- mover drasticamente os blocos
+- criar ilustrações caricatas
+- adicionar foto/avatar
+- adicionar um dashboard enorme real
+- transformar em landing page comercial
+- usar efeito hacker
+- encher a tela de código
+- comprometer a leitura
+- adicionar dependência nova sem necessidade
+
+===========================================================
+15. ENTREGA ESPERADA
+===========================================================
+
+Quero que você IMPLEMENTE a melhoria no projeto,
+não apenas sugira.
+
+Ordem sugerida:
+
+1. analisar a estrutura atual do Hero
+2. criar uma camada de background decorativa
+3. adicionar elementos técnicos sutis
+4. adicionar microanimações com GSAP
+5. revisar responsividade
+6. revisar reduced motion
+7. validar performance
+8. garantir que o conteúdo principal continua intacto
+9. rodar build/lint se existir
+10. corrigir regressões
+
+===========================================================
+16. CRITÉRIO DE SUCESSO
+===========================================================
+
+Considere a tarefa concluída somente se:
+
+[ ] O Hero continua com o mesmo conteúdo principal
+[ ] O layout principal não foi destruído
+[ ] A página Início ficou visualmente mais rica
+[ ] O fundo remete a dados / programação / tecnologia / CRM
+[ ] As animações com GSAP são discretas e elegantes
+[ ] O visual não ficou poluído
+[ ] A leitura continua excelente
+[ ] O lado direito/vazios do Hero estão melhor aproveitados
+[ ] Mobile continua funcional
+[ ] prefers-reduced-motion foi respeitado
+[ ] Nenhuma biblioteca desnecessária foi adicionada
+[ ] O projeto builda corretamente

@@ -15,7 +15,7 @@
           window.sessionStorage.setItem('personal-page-redirect', path);
         }
 
-        window.location.replace(basePath + '/');
+        window.location.replace(basePath + '/' + window.location.search);
       })();
     </script>
   </body>

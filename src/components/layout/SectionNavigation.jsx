@@ -23,8 +23,8 @@ function stripBasePath(pathname) {
 }
 
 function getSectionUrl(id) {
-  const path = `${BASE_PATH || ''}/`;
-  return `${path}${window.location.search}${id === 'home' ? '' : `#${id}`}`;
+  const path = id === 'home' ? `${BASE_PATH || ''}/` : `${BASE_PATH || ''}/${id}`;
+  return `${path}${window.location.search}`;
 }
 
 function getSectionFromLocation() {
@@ -65,19 +65,6 @@ function getCurrentIndex(sectionIds) {
   });
 
   return currentIndex;
-}
-
-function canLeaveSection(section, direction) {
-  const headerHeight = getHeaderHeight();
-  const sectionTop = section.offsetTop - headerHeight;
-  const sectionBottom = section.offsetTop + section.offsetHeight;
-  const viewportBottom = window.scrollY + window.innerHeight;
-  const availableHeight = window.innerHeight - headerHeight;
-  const isTallerThanViewport = section.offsetHeight > availableHeight + 80;
-
-  if (!isTallerThanViewport) return true;
-  if (direction > 0) return viewportBottom >= sectionBottom - 18;
-  return window.scrollY <= sectionTop + 18;
 }
 
 function isInteractiveTarget(target) {
@@ -213,12 +200,10 @@ export default function SectionNavigation() {
         if (pageSections.length < 2 || stateRef.current.isAnimating) return false;
 
         const currentIndex = getCurrentIndex(sectionIds);
-        const currentSection = pageSections[currentIndex];
         const nextIndex = Math.min(Math.max(currentIndex + direction, 0), pageSections.length - 1);
         const nextSection = pageSections[nextIndex];
 
-        if (!currentSection || !nextSection || nextIndex === currentIndex) return false;
-        if (!canLeaveSection(currentSection, direction)) return false;
+        if (!nextSection || nextIndex === currentIndex) return false;
 
         stateRef.current.isAnimating = true;
         setRouteState(nextSection.id || nextSection.dataset.section, 'replaceState');
@@ -237,22 +222,18 @@ export default function SectionNavigation() {
       const handleWheel = (event) => {
         if (isInteractiveTarget(event.target)) return;
 
+        event.preventDefault();
+
         const absDelta = Math.abs(event.deltaY);
         if (absDelta < 22) return;
 
-        if (stateRef.current.isAnimating) {
-          event.preventDefault();
-          return;
-        }
+        if (stateRef.current.isAnimating) return;
 
         const now = Date.now();
         if (now - stateRef.current.lastWheelAt < 360) return;
 
         const didNavigate = navigateByDirection(event.deltaY > 0 ? 1 : -1);
-        if (didNavigate) {
-          stateRef.current.lastWheelAt = now;
-          event.preventDefault();
-        }
+        if (didNavigate) stateRef.current.lastWheelAt = now;
       };
 
       const handleKeyDown = (event) => {
@@ -274,8 +255,9 @@ export default function SectionNavigation() {
         const direction = keyMap[event.key];
         if (!direction) return;
 
+        event.preventDefault();
         const didNavigate = navigateByDirection(direction);
-        if (didNavigate) event.preventDefault();
+        if (!didNavigate) stateRef.current.isAnimating = false;
       };
 
       window.addEventListener('wheel', handleWheel, { passive: false });

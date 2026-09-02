@@ -4,7 +4,6 @@ import {
   Box,
   Chip,
   Container,
-  Grid,
   Paper,
   Typography,
   alpha,
@@ -133,7 +132,7 @@ export default function About() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  gap: { xs: 2, md: 2.25 },
+                  gap: { xs: 2.25, md: 2.75 },
                 }}
               >
                 {/* Avatar */}
@@ -150,12 +149,12 @@ export default function About() {
                   <Avatar
                     aria-label={profile.name}
                     sx={{
-                      width: { xs: 124, md: 136 },
-                      height: { xs: 124, md: 136 },
+                      width: { xs: 176, md: 216 },
+                      height: { xs: 176, md: 216 },
                       position: 'relative',
                       zIndex: 1,
                       border: '4px solid var(--site-surface)',
-                      fontSize: { xs: '2.75rem', md: '3rem' },
+                      fontSize: { xs: '3.2rem', md: '3.7rem' },
                       fontWeight: 700,
                       background: 'linear-gradient(135deg, var(--site-surface) 0%, var(--site-surface-muted) 100%)',
                       color: 'primary.main',
@@ -198,7 +197,7 @@ export default function About() {
                 </Box>
 
                 {/* Name + location */}
-                <Box sx={{ textAlign: 'center', maxWidth: 300 }}>
+                <Box sx={{ textAlign: 'center', maxWidth: 300, mt: { xs: 1, md: 1.4 } }}>
                   <Typography variant="h5" sx={{ fontWeight: 800, mb: 0.5, letterSpacing: '-0.02em' }}>
                     {profile.name}
                   </Typography>
@@ -234,56 +233,6 @@ export default function About() {
                   </Box>
                 </Box>
 
-                {/* Stats grid */}
-                <Grid container spacing={1.1} sx={{ mt: 0.25, width: '100%' }}>
-                  {profile.stats.map((stat, index) => (
-                    <Grid item xs={6} key={index}>
-                      <Paper
-                        elevation={0}
-                        sx={{
-                          minHeight: { xs: 82, md: 78 },
-                          p: { xs: 1.25, sm: 1.5 },
-                          textAlign: 'center',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'center',
-                          bgcolor: 'rgba(193,212,227,0.72)',
-                          border: '1px solid rgba(11,33,51,0.13)',
-                          borderRadius: '16px',
-                          transition: 'all 0.25s ease',
-                          '&:hover': {
-                            bgcolor: alpha('#0B5CAB', 0.1),
-                            borderColor: alpha('#0B5CAB', 0.24),
-                            transform: 'translateY(-2px)',
-                          },
-                        }}
-                      >
-                        <Typography
-                          variant="h5"
-                          sx={{
-                            fontWeight: 800,
-                            fontSize: { xs: '1.4rem', md: '1.55rem' },
-                            background: 'linear-gradient(90deg, #0B5CAB, #159DB3)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                            lineHeight: 1.05,
-                            mb: 0.5,
-                          }}
-                        >
-                          {stat.value}
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          color="text.primary"
-                          sx={{ lineHeight: 1.25, fontSize: '0.7rem', fontWeight: 700 }}
-                        >
-                          {getLocalizedString(stat.label, lang)}
-                        </Typography>
-                      </Paper>
-                    </Grid>
-                  ))}
-                </Grid>
               </Box>
             </Paper>
           </AnimatedBox>

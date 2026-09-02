@@ -13,6 +13,212 @@ import { profile } from '../../data/profile';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
 import { scrollToSection } from '../../utils/scrollToSection';
 
+const ambientSnippets = [
+  '{ object: "CRM" }',
+  'flow: automation.active',
+  'api.sync = true',
+  'case.route("support")',
+];
+
+const ambientTags = ['Salesforce', 'Service Cloud', 'Flow Builder', 'CRM Ops', 'API'];
+
+/* ── Technical ambient layer ─────────────────────────────── */
+function HeroTechAmbient() {
+  return (
+    <Box
+      aria-hidden="true"
+      sx={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}
+    >
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: { xs: '11% -20% 6% -16%', md: '8% 5% 5% 38%' },
+          opacity: { xs: 0.28, md: 0.5 },
+          backgroundImage: [
+            'linear-gradient(rgba(11,92,171,0.11) 1px, transparent 1px)',
+            'linear-gradient(90deg, rgba(11,92,171,0.11) 1px, transparent 1px)',
+          ].join(', '),
+          backgroundSize: { xs: '46px 46px', md: '56px 56px' },
+          maskImage: 'radial-gradient(circle at 64% 44%, black 0%, transparent 72%)',
+          WebkitMaskImage: 'radial-gradient(circle at 64% 44%, black 0%, transparent 72%)',
+        }}
+      />
+
+      <Box
+        className="hero-ambient-item hero-ambient-float"
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          position: 'absolute',
+          top: '18%',
+          right: { md: '7%', lg: '10%' },
+          width: { md: 330, lg: 390 },
+          p: 2,
+          borderRadius: '22px',
+          border: '1px solid rgba(11,92,171,0.15)',
+          bgcolor: 'rgba(255,255,255,0.45)',
+          boxShadow: '0 24px 80px rgba(15,37,55,0.08)',
+          backdropFilter: 'blur(10px)',
+          opacity: 'var(--hero-ambient-opacity)',
+          '--hero-ambient-opacity': 0.72,
+          color: 'rgba(20,29,46,0.62)',
+          fontFamily: '"Fira Code", monospace',
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.4 }}>
+          <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: 'rgba(41,163,102,0.72)' }} />
+          <Typography component="span" sx={{ fontFamily: 'inherit', fontSize: '0.66rem', fontWeight: 800, letterSpacing: '0.12em' }}>
+            CRM_PIPELINE
+          </Typography>
+          <Box sx={{ ml: 'auto', fontSize: '0.64rem', color: 'rgba(13,77,165,0.68)' }}>LIVE</Box>
+        </Box>
+
+        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1 }}>
+          {ambientTags.map((tag) => (
+            <Box
+              key={tag}
+              sx={{
+                borderRadius: '999px',
+                border: '1px solid rgba(30,172,184,0.2)',
+                bgcolor: 'rgba(231,244,248,0.48)',
+                px: 1,
+                py: 0.7,
+                fontSize: '0.62rem',
+                fontWeight: 800,
+                textAlign: 'center',
+                letterSpacing: '0.04em',
+              }}
+            >
+              {tag}
+            </Box>
+          ))}
+        </Box>
+
+        <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 0.7, height: 46, mt: 2 }}>
+          {[42, 68, 54, 82, 60, 74, 50, 88, 66].map((height, index) => (
+            <Box
+              key={`${height}-${index}`}
+              className="hero-data-bar"
+              sx={{
+                flex: 1,
+                height: `${height}%`,
+                borderRadius: '6px 6px 2px 2px',
+                background: index % 3 === 0
+                  ? 'linear-gradient(180deg, rgba(30,172,184,0.58), rgba(30,172,184,0.16))'
+                  : 'linear-gradient(180deg, rgba(13,77,165,0.5), rgba(13,77,165,0.12))',
+              }}
+            />
+          ))}
+        </Box>
+      </Box>
+
+      <Box
+        className="hero-ambient-item hero-ambient-float"
+        component="svg"
+        viewBox="0 0 420 260"
+        sx={{
+          display: { xs: 'none', sm: 'block' },
+          position: 'absolute',
+          right: { sm: '-84px', md: '5%' },
+          bottom: { sm: '12%', md: '13%' },
+          width: { sm: 320, md: 420 },
+          height: 'auto',
+          opacity: 'var(--hero-ambient-opacity)',
+          '--hero-ambient-opacity': { sm: 0.34, md: 0.62 },
+          '& line, & path': {
+            stroke: 'rgba(13,77,165,0.28)',
+            strokeWidth: 1.3,
+            fill: 'none',
+          },
+          '& circle': {
+            fill: 'rgba(255,255,255,0.76)',
+            stroke: 'rgba(30,172,184,0.45)',
+            strokeWidth: 1.4,
+          },
+        }}
+      >
+        <path d="M58 180 C120 92 196 226 270 102 S354 92 392 38" />
+        <line x1="86" y1="72" x2="174" y2="138" />
+        <line x1="174" y1="138" x2="264" y2="82" />
+        <line x1="174" y1="138" x2="304" y2="184" />
+        <line x1="264" y1="82" x2="354" y2="126" />
+        <circle className="hero-node" cx="58" cy="180" r="5" />
+        <circle className="hero-node" cx="86" cy="72" r="6" />
+        <circle className="hero-node" cx="174" cy="138" r="8" />
+        <circle className="hero-node" cx="264" cy="82" r="6" />
+        <circle className="hero-node" cx="304" cy="184" r="7" />
+        <circle className="hero-node" cx="354" cy="126" r="5" />
+        <circle className="hero-node" cx="392" cy="38" r="6" />
+      </Box>
+
+      {ambientSnippets.map((snippet, index) => (
+        <Box
+          key={snippet}
+          className="hero-ambient-item hero-ambient-float"
+          sx={{
+            display: { xs: index > 0 ? 'none' : 'block', md: 'block' },
+            position: 'absolute',
+            right: [null, '7%', '15%', '5%'][index],
+            bottom: [null, '9%', '38%', '57%'][index],
+            top: ['18%', null, null, null][index],
+            left: ['6%', null, null, null][index],
+            maxWidth: { xs: 190, md: 230 },
+            px: 1.2,
+            py: 0.85,
+            borderRadius: '12px',
+            border: '1px solid rgba(11,92,171,0.13)',
+            bgcolor: 'rgba(255,255,255,0.38)',
+            boxShadow: '0 12px 42px rgba(15,37,55,0.055)',
+            backdropFilter: 'blur(8px)',
+            opacity: 'var(--hero-ambient-opacity)',
+            '--hero-ambient-opacity': { xs: 0.42, md: 0.64 },
+            color: 'rgba(20,29,46,0.44)',
+            fontFamily: '"Fira Code", monospace',
+            fontSize: { xs: '0.58rem', md: '0.64rem' },
+            fontWeight: 750,
+            letterSpacing: '0.02em',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {snippet}
+        </Box>
+      ))}
+
+      <Box
+        className="hero-ambient-item hero-data-stream"
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          position: 'absolute',
+          right: '17%',
+          top: '44%',
+          width: 210,
+          height: 1,
+          opacity: 'var(--hero-ambient-opacity)',
+          '--hero-ambient-opacity': 0.68,
+          background: 'linear-gradient(90deg, transparent, rgba(30,172,184,0.42), transparent)',
+          '&::before, &::after': {
+            content: '""',
+            position: 'absolute',
+            top: -3,
+            width: 7,
+            height: 7,
+            borderRadius: '50%',
+            bgcolor: 'rgba(30,172,184,0.5)',
+            boxShadow: '0 0 16px rgba(30,172,184,0.25)',
+          },
+          '&::before': { left: '22%' },
+          '&::after': { right: '18%' },
+        }}
+      />
+    </Box>
+  );
+}
+
 /* ── Gradient orb helper ─────────────────────────────────── */
 function Orb({ sx }) {
   return (
@@ -58,6 +264,61 @@ export default function Hero() {
         },
       );
 
+      gsap.fromTo(
+        '.hero-ambient-item',
+        { opacity: 0, y: 14 },
+        {
+          opacity: (_, target) => Number.parseFloat(
+            getComputedStyle(target).getPropertyValue('--hero-ambient-opacity'),
+          ) || 1,
+          y: 0,
+          duration: 1.1,
+          stagger: 0.08,
+          delay: 0.45,
+          ease: 'power2.out',
+        },
+      );
+
+      gsap.to('.hero-ambient-float', {
+        y: -10,
+        x: 5,
+        duration: 5.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: { each: 0.45, from: 'random' },
+      });
+
+      gsap.to('.hero-node', {
+        scale: 1.32,
+        opacity: 0.82,
+        transformOrigin: 'center',
+        duration: 2.4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: 0.24,
+      });
+
+      gsap.to('.hero-data-bar', {
+        scaleY: 0.72,
+        transformOrigin: 'bottom',
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: 0.16,
+      });
+
+      gsap.to('.hero-data-stream', {
+        x: 18,
+        opacity: 0.48,
+        duration: 4.2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+
     }, sectionRef.current);
 
     return () => ctx.revert();
@@ -77,6 +338,7 @@ export default function Hero() {
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
+        isolation: 'isolate',
         overflow: 'hidden',
         background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-end) 100%)',
         pt: { xs: 'calc(var(--header-height) + 24px)', md: 'calc(var(--header-height) + 16px)' },
@@ -125,9 +387,13 @@ export default function Hero() {
           backgroundImage:
             'radial-gradient(rgba(8,76,143,0.11) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
+          maskImage: 'linear-gradient(180deg, rgba(0,0,0,0.82), rgba(0,0,0,0.22))',
+          WebkitMaskImage: 'linear-gradient(180deg, rgba(0,0,0,0.82), rgba(0,0,0,0.22))',
           pointerEvents: 'none',
         }}
       />
+
+      <HeroTechAmbient />
 
       {/* ── Main content ── */}
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
