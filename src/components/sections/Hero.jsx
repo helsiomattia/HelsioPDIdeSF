@@ -161,7 +161,7 @@ function HeroTechAmbient() {
           key={snippet}
           className="hero-ambient-item hero-ambient-float"
           sx={{
-            display: { xs: index > 0 ? 'none' : 'block', md: 'block' },
+            display: { xs: 'none', md: 'block' },
             position: 'absolute',
             right: [null, '7%', '15%', '5%'][index],
             bottom: [null, '9%', '38%', '57%'][index],
@@ -215,6 +215,92 @@ function HeroTechAmbient() {
           '&::after': { right: '18%' },
         }}
       />
+
+      <Box
+        className="hero-ambient-item hero-ambient-float"
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          position: 'absolute',
+          left: { md: '-120px', lg: '-72px', xl: '1%' },
+          top: { md: '38%', lg: '42%' },
+          width: { md: 144, lg: 168 },
+          px: 1.15,
+          py: 1,
+          borderRadius: '16px',
+          border: '1px solid rgba(11,92,171,0.12)',
+          bgcolor: 'rgba(255,255,255,0.32)',
+          boxShadow: '0 18px 58px rgba(15,37,55,0.06)',
+          backdropFilter: 'blur(8px)',
+          opacity: 'var(--hero-ambient-opacity)',
+          '--hero-ambient-opacity': 0.42,
+          color: 'rgba(20,29,46,0.38)',
+          fontFamily: '"Fira Code", monospace',
+          fontSize: { md: '0.56rem', lg: '0.6rem' },
+          fontWeight: 800,
+          letterSpacing: '0.03em',
+        }}
+      >
+        {['lead.score +18', 'sla.watch()', 'qa.pass = 99%'].map((line) => (
+          <Box
+            key={line}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.75,
+              py: 0.55,
+              borderBottom: '1px solid rgba(11,92,171,0.08)',
+              '&:last-of-type': { borderBottom: 0 },
+              '&::before': {
+                content: '""',
+                width: 6,
+                height: 6,
+                borderRadius: '50%',
+                flex: '0 0 auto',
+                bgcolor: 'rgba(30,172,184,0.48)',
+                boxShadow: '0 0 12px rgba(30,172,184,0.2)',
+              },
+            }}
+          >
+            {line}
+          </Box>
+        ))}
+      </Box>
+
+      <Box
+        className="hero-ambient-item hero-ambient-float"
+        component="svg"
+        viewBox="0 0 280 150"
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          position: 'absolute',
+          left: { md: '72%', lg: '76%' },
+          bottom: { md: '7%', lg: '9%' },
+          width: { md: 230, lg: 280 },
+          height: 'auto',
+          opacity: 'var(--hero-ambient-opacity)',
+          '--hero-ambient-opacity': 0.42,
+          '& path': {
+            fill: 'none',
+            stroke: 'rgba(30,172,184,0.28)',
+            strokeWidth: 1.5,
+          },
+          '& circle': {
+            fill: 'rgba(255,255,255,0.7)',
+            stroke: 'rgba(11,92,171,0.36)',
+            strokeWidth: 1.3,
+          },
+        }}
+      >
+        <path d="M24 104 C74 34 118 124 166 72 S236 48 256 18" />
+        <path d="M52 126 C98 92 136 144 190 104 S238 88 264 120" />
+        <circle className="hero-node" cx="24" cy="104" r="5" />
+        <circle className="hero-node" cx="86" cy="62" r="6" />
+        <circle className="hero-node" cx="166" cy="72" r="7" />
+        <circle className="hero-node" cx="256" cy="18" r="5" />
+        <circle className="hero-node" cx="52" cy="126" r="4" />
+        <circle className="hero-node" cx="190" cy="104" r="6" />
+        <circle className="hero-node" cx="264" cy="120" r="4" />
+      </Box>
     </Box>
   );
 }
@@ -371,9 +457,8 @@ export default function Hero() {
           width: { xs: 180, md: 300 },
           height: { xs: 180, md: 300 },
           background: 'radial-gradient(circle, rgba(11,92,171,0.13) 0%, transparent 70%)',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          top: '58%',
+          right: { xs: '-120px', md: '8%' },
           animation: 'float3 25s ease-in-out infinite',
         }}
       />

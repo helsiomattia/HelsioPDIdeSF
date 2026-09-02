@@ -23,6 +23,93 @@ import AnimatedBox from '../ui/AnimatedBox';
 import { profile } from '../../data/profile';
 import { getLocalizedString } from '../../utils/i18nHelper';
 
+function ContactAmbient() {
+  const pulsePoints = [
+    { left: { xs: '-44px', md: '-28px', lg: '1%' }, top: '22%', delay: '0s' },
+    { right: { xs: '-44px', md: '-28px', lg: '1%' }, top: '18%', delay: '-1.6s' },
+    { left: { md: '-36px', lg: '3%' }, bottom: '14%', delay: '-3.2s' },
+    { right: { md: '-36px', lg: '3%' }, bottom: '12%', delay: '-4.8s' },
+  ];
+
+  return (
+    <Box
+      aria-hidden="true"
+      sx={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}
+    >
+      {['left', 'right'].map((side) => (
+        <Box
+          key={side}
+          component="svg"
+          viewBox="0 0 900 420"
+          sx={{
+            display: { xs: 'none', md: 'block' },
+            position: 'absolute',
+            left: side === 'left' ? { md: '-650px', lg: '-590px', xl: '-500px' } : 'auto',
+            right: side === 'right' ? { md: '-650px', lg: '-590px', xl: '-500px' } : 'auto',
+            top: '50%',
+            width: { md: 780, lg: 900 },
+            transform: side === 'left' ? 'translateY(-50%)' : 'translateY(-50%) scaleX(-1)',
+            opacity: { md: 0.28, xl: 0.38 },
+            '& path': {
+              fill: 'none',
+              stroke: 'rgba(11,92,171,0.22)',
+              strokeWidth: 1.5,
+              strokeDasharray: '10 12',
+              animation: 'contactRouteDash 12s linear infinite',
+            },
+            '& circle': {
+              fill: 'rgba(255,255,255,0.62)',
+              stroke: 'rgba(21,157,179,0.34)',
+              strokeWidth: 1.4,
+            },
+          }}
+        >
+          <path d="M72 212 C210 72 330 312 450 176 S690 78 820 214" />
+          <path d="M112 318 C256 242 348 382 502 288 S694 216 808 304" />
+          <circle cx="72" cy="212" r="6" />
+          <circle cx="282" cy="184" r="5" />
+          <circle cx="450" cy="176" r="7" />
+          <circle cx="642" cy="128" r="5" />
+          <circle cx="820" cy="214" r="6" />
+        </Box>
+      ))}
+
+      {pulsePoints.map((point, index) => (
+        <Box
+          key={`${point.left || point.right}-${point.top || point.bottom}`}
+          sx={{
+            display: { xs: index > 1 ? 'none' : 'block', md: 'block' },
+            position: 'absolute',
+            left: point.left,
+            right: point.right,
+            top: point.top,
+            bottom: point.bottom,
+            width: { xs: 86, md: 118 },
+            height: { xs: 86, md: 118 },
+            borderRadius: '50%',
+            border: '1px solid rgba(21,157,179,0.26)',
+            animation: `contactSignalPulse 5.8s ease-out ${point.delay} infinite`,
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              inset: '31%',
+              borderRadius: '50%',
+              bgcolor: 'rgba(21,157,179,0.2)',
+              boxShadow: '0 0 22px rgba(21,157,179,0.16)',
+            },
+          }}
+        />
+      ))}
+    </Box>
+  );
+}
+
 function ContactCard({ contact, index, t }) {
   const [copied, setCopied] = useState(false);
   const isExternal = contact.href && !contact.href.startsWith('mailto') && !contact.href.startsWith('tel');
@@ -321,22 +408,7 @@ export default function Contact() {
         overflow: 'hidden',
       }}
     >
-      {/* Background orb */}
-      <Box
-        aria-hidden="true"
-        sx={{
-          position: 'absolute',
-          width: { xs: 260, md: 420 },
-          height: { xs: 260, md: 420 },
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(21,157,179,0.2) 0%, transparent 70%)',
-          bottom: '-100px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          filter: { xs: 'blur(28px)', md: 'blur(34px)' },
-          pointerEvents: 'none',
-        }}
-      />
+      <ContactAmbient />
 
       <Container maxWidth={false} sx={{ maxWidth: 1160, px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle

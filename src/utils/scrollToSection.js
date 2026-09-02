@@ -44,13 +44,13 @@ export function scrollToSection(id, attemptOrOptions = 0, maybeOptions = {}) {
     document.documentElement.classList.add('is-programmatic-scroll');
     gsap.killTweensOf(window);
     gsap.to(window, {
-      duration: options.duration ?? 0.56,
+      duration: options.duration ?? 0.42,
       scrollTo: { y: el, offsetY, autoKill: false },
-      ease: options.ease || 'power3.inOut',
+      ease: options.ease || 'power2.out',
       overwrite: 'auto',
       onComplete: () => {
         const distance = Math.abs(el.getBoundingClientRect().top - offsetY);
-        if (distance > 4) window.scrollTo({ top: fallbackY, behavior: 'auto' });
+        if (distance > 8) window.scrollTo({ top: fallbackY, behavior: 'auto' });
         finishProgrammaticScroll();
         options.onComplete?.();
       },

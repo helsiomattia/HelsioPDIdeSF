@@ -43,6 +43,54 @@ const profilePhotos = [
   { src: mepic11, position: '50% 34%', scale: 1.26 },
 ];
 
+function AboutAmbient() {
+  const backgroundPhotos = [
+    { src: mepic4, top: '11%', right: { md: '-74px', lg: '-34px', xl: '2%' }, rotate: '-10deg', delay: '0s' },
+    { src: mepic8, bottom: '8%', left: { md: '-82px', lg: '-44px', xl: '2%' }, rotate: '8deg', delay: '-4s' },
+    { src: mepic10, bottom: '18%', right: { md: '-118px', lg: '-84px', xl: '-18px' }, rotate: '13deg', delay: '-8s' },
+  ];
+
+  return (
+    <Box
+      aria-hidden="true"
+      sx={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}
+    >
+      {backgroundPhotos.map((photo) => (
+        <Box
+          key={photo.src}
+          component="img"
+          src={photo.src}
+          alt=""
+          sx={{
+            display: { xs: 'none', md: 'block' },
+            position: 'absolute',
+            top: photo.top,
+            right: photo.right,
+            bottom: photo.bottom,
+            left: photo.left,
+            width: { md: 132, lg: 168 },
+            height: { md: 176, lg: 218 },
+            objectFit: 'cover',
+            borderRadius: '24px',
+            border: '1px solid rgba(255,255,255,0.42)',
+            boxShadow: '0 26px 80px rgba(15,37,55,0.08)',
+            opacity: 0.16,
+            filter: 'saturate(0.9) contrast(1.05)',
+            '--about-photo-rotate': photo.rotate,
+            animation: `aboutPhotoTrail 18s ease-in-out ${photo.delay} infinite`,
+          }}
+        />
+      ))}
+    </Box>
+  );
+}
+
 export default function About() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
@@ -71,13 +119,19 @@ export default function About() {
         py: { xs: 6, md: 'var(--section-block-padding)' },
         background:
           'linear-gradient(180deg, var(--site-bg-end) 0%, var(--site-bg-mid) 48%, var(--site-bg-start) 100%)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
+      <AboutAmbient />
+
       <Container
         maxWidth={false}
         sx={{
           maxWidth: 'var(--page-max-width)',
           px: 'var(--section-inline-padding)',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         <SectionTitle

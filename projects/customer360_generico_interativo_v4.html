@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Customer 360 — Demo Interativa</title>
+<style>
+:root{
+  --brand:#0176d3;--brand-dark:#032d60;--brand-soft:#eef4ff;
+  --bg:#f4f6f9;--card:#fff;--line:#e2e7ee;--text:#181818;--muted:#67758b;
+  --good:#2e844a;--good-soft:#eef9f1;--warn:#a86403;--warn-soft:#fff5e6;
+  --bad:#ba0517;--bad-soft:#fff0f2;--shadow:0 2px 10px rgba(21,41,68,.06);--r:12px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);font-family:var(--font);color:var(--text);font-size:13px}
+button,input{font:inherit}
+button{cursor:pointer}
+.topbar{height:56px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 14px;gap:14px;position:sticky;top:0;z-index:30;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.brandmark{width:32px;height:32px;border-radius:9px;background:var(--brand-dark);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
+.appname{font-weight:800;padding-right:16px;border-right:1px solid var(--line)}
+.search{flex:1;max-width:520px;margin:auto;position:relative}
+.search input{width:100%;height:34px;border:1px solid #bcc4ce;border-radius:8px;padding:0 35px 0 12px;background:#fff;outline:none}
+.search span{position:absolute;right:12px;top:8px;color:var(--muted)}
+.tools{margin-left:auto;display:flex;gap:6px;align-items:center}
+.iconbtn{border:0;background:#fff;width:30px;height:30px;border-radius:8px;color:#516173}
+.iconbtn:hover{background:#f3f6f9}
+.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#40566f;color:#fff;font-size:11px;font-weight:800}
+.page{max-width:1340px;margin:auto;padding:12px}
+.record{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.record-main{padding:12px 14px;display:flex;align-items:flex-start;gap:12px}
+.objicon{width:34px;height:34px;border-radius:8px;background:#5867e8;color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}
+.record-meta small{color:var(--muted);font-size:10px}
+.record-meta h1{margin:3px 0 6px;font-size:18px}
+.record-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{padding:3px 8px;border-radius:999px;background:#f4f5f7;font-size:10px;font-weight:700}
+.tag.good{background:var(--good-soft);color:var(--good)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.actions{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.btn{height:30px;border:1px solid #b8c0ca;border-radius:7px;background:#fff;color:var(--brand);padding:0 10px;font-weight:650;font-size:12px}
+.btn:hover{background:#f8fbff}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.compact-info{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line)}
+.compact-info>div{padding:9px 12px;border-right:1px solid var(--line);min-width:0}
+.compact-info>div:last-child{border-right:0}
+.label{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.045em}
+.value{font-weight:750;margin-top:3px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px}
+.decisionbar{margin-top:10px;background:linear-gradient(115deg,#032d60,#0b5cab);color:#fff;border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:1.7fr .9fr .9fr .9fr;gap:12px;align-items:center;box-shadow:var(--shadow)}
+.decision-main .eyebrow{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#b9dcff}
+.decision-main h2{font-size:14px;margin:5px 0}
+.decision-main p{margin:0;color:#dceeff;font-size:11px;line-height:1.4}
+.decision-stat{padding-left:12px;border-left:1px solid rgba(255,255,255,.18)}
+.decision-stat small{color:#b9dcff;font-size:10px}
+.decision-stat strong{display:block;font-size:18px;margin-top:4px}
+.decision-stat span{font-size:10px;color:#dceeff}
+.section-tabs{background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px;display:flex;gap:4px;overflow:auto;margin-top:10px;position:sticky;top:64px;z-index:20;box-shadow:var(--shadow)}
+.section-tab{border:0;background:transparent;color:#334a62;padding:8px 12px;border-radius:10px;font-weight:700;white-space:nowrap;font-size:12px}
+.section-tab.active{background:var(--brand-soft);color:var(--brand-dark)}
+.panel{display:none}
+.panel.active{display:block}
+.toolbar{display:flex;align-items:center;margin:10px 0 8px}
+.toolbar h2{font-size:13px;margin:0}
+.toolbar p{font-size:10px;color:var(--muted);margin:3px 0 0}
+.toolbar-right{margin-left:auto;display:flex;gap:6px}
+.dashboard-group{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;margin-bottom:10px;align-items:stretch}
+.component{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;height:100%;min-width:0}
+.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-12{grid-column:span 12}
+.ch{height:38px;padding:0 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.ci{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand);font-weight:800;font-size:10px}
+.ch h3{font-size:11px;margin:0}
+.ch small{margin-left:auto;color:var(--muted);font-size:9px}
+.cb{padding:11px}
+.metric{min-height:132px}
+.metric .big{font-size:22px;font-weight:700;margin:4px 0 3px}
+.metric .delta{font-size:10px;color:var(--good);font-weight:700}
+.metric .sub{font-size:10px;color:var(--muted);margin-top:7px;line-height:1.4}
+.meter{height:6px;border-radius:999px;background:#edf0f4;overflow:hidden;margin-top:10px}
+.meter i{height:100%;display:block;border-radius:999px;background:#fe9339}
+.scorewrap{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:center;min-height:128px}
+.score{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--good) 0 76%,#e8ecf1 76%)}
+.score:after{content:"";position:absolute;width:52px;height:52px;border-radius:50%;background:#fff}
+.score b{z-index:1;font-size:18px;color:#032d60}
+.scoreline{display:flex;justify-content:space-between;margin:5px 0;font-size:10px}
+.scoreline span:first-child{color:var(--muted)}
+.next-actions{display:flex;flex-direction:column;gap:7px}
+.nba{border-left:4px solid var(--brand);background:#f7fbff;border-radius:8px;padding:9px}
+.nba .rank{font-size:9px;color:var(--brand);font-weight:800;text-transform:uppercase}
+.nba h4{font-size:12px;margin:4px 0}
+.nba p{font-size:10px;color:#58697b;margin:0 0 8px;line-height:1.4}
+.mini-actions{display:flex;gap:5px;flex-wrap:wrap}
+.mini-actions button{height:26px;border-radius:6px;border:1px solid #b9c2cc;background:#fff;color:var(--brand);font-size:10px;padding:0 8px}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;min-height:128px}
+.product{border:1px solid var(--line);border-radius:9px;padding:10px;min-width:0}
+.product b{font-size:10px}
+.product strong{display:block;font-size:14px;margin:6px 0 2px}
+.product small{font-size:9px;color:var(--muted);line-height:1.35}
+.pill{font-size:8px;padding:3px 6px;border-radius:999px;background:#f1f3f5;display:inline-block;margin-top:6px;font-weight:700}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.statuslist{display:grid;gap:0;min-height:128px}
+.row{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid #edf0f3}
+.row:last-child{border-bottom:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--good);flex:none}
+.dot.blue{background:var(--brand)}
+.row .main{flex:1;min-width:0}
+.row .main b{display:block;font-size:10.5px}
+.row .main span{display:block;font-size:9px;color:var(--muted);margin-top:2px}
+.row .num{font-weight:700;font-size:11px}
+.table-wrap{overflow:auto}
+.no-pad{padding:0!important}
+.table{width:100%;border-collapse:collapse;min-width:560px}
+.table th{font-size:8px;text-transform:uppercase;color:var(--muted);text-align:left;background:#f8fafc;padding:7px 8px;border-bottom:1px solid var(--line)}
+.table td{font-size:10px;padding:8px;border-bottom:1px solid #edf0f3}
+.table tr:last-child td{border-bottom:0}
+.badge{font-size:8px;font-weight:700;padding:3px 6px;border-radius:999px;white-space:nowrap}
+.b-good{color:var(--good);background:var(--good-soft)}
+.b-warn{color:var(--warn);background:var(--warn-soft)}
+.b-bad{color:var(--bad);background:var(--bad-soft)}
+.b-blue{color:var(--brand);background:var(--brand-soft)}
+.timeline{display:grid;gap:8px;min-height:178px}
+.event{display:grid;grid-template-columns:26px 1fr;gap:8px;position:relative}
+.event:not(:last-child):after{content:"";position:absolute;left:12px;top:26px;bottom:-6px;width:1px;background:#dce2e8}
+.eventicon{width:26px;height:26px;border-radius:50%;background:var(--brand-soft);display:grid;place-items:center;color:var(--brand);font-size:10px;z-index:1}
+.event b{font-size:10.5px}
+.event p{font-size:9px;color:var(--muted);margin:2px 0}
+.event time{font-size:8px;color:#8996a5}
+.object-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.object-card{border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff;text-align:left;color:inherit}
+.object-card:hover{border-color:#9dcdf7;background:#fbfdff}
+.object-card .top{display:flex;align-items:center;gap:7px}
+.object-card .oi{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:10px}
+.object-card b{font-size:9px}
+.object-card strong{margin-left:auto;font-size:14px}
+.object-card p{font-size:8.8px;color:var(--muted);margin:6px 0 0;line-height:1.35}
+.account{background:#0b5cab}.contact{background:#9050e9}.opportunity{background:#2e844a}.lead{background:#b85d00}.case{background:#ba0517}.messaging{background:#0176d3}
+.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.detail-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.detail-card .head{padding:11px 13px;border-bottom:1px solid var(--line);font-weight:700;font-size:12px}
+.detail-card .body{padding:12px}
+.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 14px}
+.field{padding-bottom:8px;border-bottom:1px dashed #e5eaf0}
+.field b{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.field span{display:block;margin-top:4px;font-size:11px;font-weight:700}
+.single-panel{margin-top:10px}
+.footer{padding:16px;text-align:center;color:#8a97a7;font-size:9px}
+.extra-compact .dashboard-group{gap:7px;margin-bottom:7px}
+.extra-compact .cb{padding:8px}
+.extra-compact .ch{height:34px}
+.extra-compact .metric{min-height:118px}
+.toast{position:fixed;right:18px;bottom:18px;z-index:80;background:#172033;color:#fff;border-radius:10px;padding:10px 12px;font-size:11px;box-shadow:0 10px 30px rgba(0,0,0,.18);opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1100px){.span-3,.span-4,.span-5,.span-6,.span-7{grid-column:span 6}.decisionbar{grid-template-columns:1fr 1fr}.compact-info{grid-template-columns:repeat(3,1fr)}.product-grid,.object-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.search{display:none}.page{padding:8px}.record-main{flex-wrap:wrap}.actions{margin-left:0}.compact-info,.decisionbar,.detail-grid,.fields,.product-grid,.object-strip{grid-template-columns:1fr 1fr}.span-3,.span-4,.span-5,.span-6,.span-7,.span-12{grid-column:span 12}}
+@media(max-width:560px){.compact-info,.decisionbar,.detail-grid,.fields,.product-grid,.object-strip{grid-template-columns:1fr}.tools .iconbtn{display:none}.appname{border-right:0}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brandmark">360</div>
+  <div class="appname">Customer 360</div>
+  <div class="search">
+    <input id="globalSearch" aria-label="Buscar" placeholder="Buscar cliente, conta, case, oportunidade..." />
+    <span>⌕</span>
+  </div>
+  <div class="tools">
+    <button class="iconbtn demo-action" data-message="Ação de favoritos demonstrativa." aria-label="Favoritos">☆</button>
+    <button class="iconbtn demo-action" data-message="Ação de criação demonstrativa." aria-label="Novo">＋</button>
+    <button class="iconbtn demo-action" data-message="Configurações demonstrativas." aria-label="Configurações">⚙</button>
+    <button class="iconbtn demo-action" data-message="Nenhuma nova notificação nesta demonstração." aria-label="Notificações">🔔</button>
+    <div class="avatar">US</div>
+  </div>
+</header>
+
+<main class="page">
+  <section class="record">
+    <div class="record-main">
+      <div class="objicon">▦</div>
+      <div class="record-meta">
+        <small>Account • Visão 360 do cliente</small>
+        <h1>Empresa Exemplo S.A.</h1>
+        <div class="record-tags">
+          <span class="tag good">Cliente ativo</span>
+          <span class="tag">Empresas · Grande</span>
+          <span class="tag warn">Alto potencial / média penetração</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn demo-action" data-message="Ação de acompanhamento demonstrativa.">Acompanhar</button>
+        <button class="btn primary demo-action" data-message="Criação de ticket demonstrativa.">Novo ticket</button>
+        <button class="btn demo-action" data-message="Criação de oportunidade demonstrativa.">Nova oportunidade</button>
+        <button class="btn demo-action" data-message="Registro de contato demonstrativo.">Registrar contato</button>
+      </div>
+    </div>
+    <div class="compact-info">
+      <div><span class="label">Responsável</span><span class="value">Gerente de Conta</span></div>
+      <div><span class="label">Segmentação</span><span class="value">Empresas · Grande</span></div>
+      <div><span class="label">Classificação</span><span class="value">B · Relacionamento ativo</span></div>
+      <div><span class="label">Relacionamento</span><span class="value">3 anos e 8 meses</span></div>
+      <div><span class="label">Contas ativas</span><span class="value">4 de 4</span></div>
+      <div><span class="label">Documento</span><span class="value">00.000.000/0001-00</span></div>
+    </div>
+  </section>
+
+  <section class="decisionbar">
+    <div class="decision-main">
+      <div class="eyebrow">Resumo para decisão</div>
+      <h2>Cliente saudável, com oportunidade de expansão</h2>
+      <p>Relacionamento ativo e bom engajamento, com espaço para ampliar a utilização de produtos. Prioridade comercial: qualificar a principal oportunidade antes do próximo contato.</p>
+    </div>
+    <div class="decision-stat"><small>Valor do cliente</small><strong>76/100</strong><span>Potencial alto</span></div>
+    <div class="decision-stat"><small>Pipeline aberto</small><strong>R$ 320 mil</strong><span>3 oportunidades</span></div>
+    <div class="decision-stat"><small>Risco imediato</small><strong>1 SLA</strong><span>Case em atenção</span></div>
+  </section>
+
+  <nav class="section-tabs" aria-label="Navegação Customer 360">
+    <button class="section-tab active" data-tab="overview">Visão geral</button>
+    <button class="section-tab" data-tab="account">Account</button>
+    <button class="section-tab" data-tab="contact">Contact</button>
+    <button class="section-tab" data-tab="opportunity">Opportunity</button>
+    <button class="section-tab" data-tab="lead">Lead</button>
+    <button class="section-tab" data-tab="case">Case</button>
+    <button class="section-tab" data-tab="messaging">Messaging Session</button>
+  </nav>
+
+  <section id="overview" class="panel active">
+    <div class="toolbar">
+      <div>
+        <h2>Visão geral</h2>
+        <p>Componentes compactos, independentes e orientados à tomada de decisão.</p>
+      </div>
+      <div class="toolbar-right"><button class="btn" id="compactBtn">Compactar</button></div>
+    </div>
+
+    <div class="dashboard-group">
+      <article class="component span-3 metric">
+        <div class="ch"><span class="ci">R$</span><h3>Valor do cliente</h3><small>Score</small></div>
+        <div class="cb"><span class="label">Customer value score</span><div class="big">76</div><div class="delta">▲ Engajamento alto</div><div class="sub">Cliente saudável, com boa recorrência e potencial de expansão.</div></div>
+      </article>
+
+      <article class="component span-3 metric">
+        <div class="ch"><span class="ci">◆</span><h3>Pipeline comercial</h3><small>Opportunity</small></div>
+        <div class="cb"><span class="label">Valor em aberto</span><div class="big">R$ 320 mil</div><div class="delta">3 oportunidades ativas</div><div class="sub">A principal oportunidade representa mais da metade do pipeline.</div></div>
+      </article>
+
+      <article class="component span-3 metric">
+        <div class="ch"><span class="ci">!</span><h3>Cases & SLA</h3><small>Service</small></div>
+        <div class="cb"><span class="label">Cases abertos</span><div class="big">2</div><div class="delta" style="color:#a86403">1 exige atenção</div><div class="sub">O Case #001284 já consumiu 75% do prazo.</div><div class="meter"><i style="width:75%"></i></div></div>
+      </article>
+
+      <article class="component span-3 metric">
+        <div class="ch"><span class="ci">💬</span><h3>Relacionamento digital</h3><small>Messaging</small></div>
+        <div class="cb"><span class="label">Interações nos últimos 30d</span><div class="big">9</div><div class="delta">CSAT médio 4,7 / 5</div><div class="sub">A maior parte das interações recentes ocorreu em canal digital.</div></div>
+      </article>
+    </div>
+
+    <div class="dashboard-group">
+      <article class="component span-4">
+        <div class="ch"><span class="ci">◎</span><h3>Valor do cliente</h3><small>Score</small></div>
+        <div class="cb scorewrap">
+          <div class="score"><b>76</b></div>
+          <div>
+            <div class="scoreline"><span>Engajamento</span><b>Alto</b></div>
+            <div class="scoreline"><span>Penetração</span><b>Média</b></div>
+            <div class="scoreline"><span>Recência</span><b>Hoje</b></div>
+            <div class="scoreline"><span>Saúde financeira</span><b>Boa</b></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="component span-4">
+        <div class="ch"><span class="ci">⚡</span><h3>Próxima melhor ação</h3><small>AI / regras</small></div>
+        <div class="cb next-actions">
+          <div class="nba">
+            <div class="rank">Prioridade 1</div>
+            <h4>Qualificar expansão de crédito</h4>
+            <p>Oportunidade em proposta, R$ 180 mil, 65% de probabilidade. Decisor já mapeado.</p>
+            <div class="mini-actions">
+              <button class="demo-action" data-message="Agendamento de contato demonstrativo.">Agendar contato</button>
+              <button class="jump-action" data-target="opportunity">Ver oportunidade</button>
+            </div>
+          </div>
+          <div class="nba">
+            <div class="rank">Prioridade 2</div>
+            <h4>Resolver SLA do Case #001284</h4>
+            <p>Atendimento em 75% do SLA. Recomenda-se revisar antes do vencimento.</p>
+            <div class="mini-actions"><button class="jump-action" data-target="case">Abrir case</button></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="component span-4">
+        <div class="ch"><span class="ci">▣</span><h3>Produtos e uso</h3><small>Penetração</small></div>
+        <div class="cb product-grid">
+          <div class="product"><b>Pagamentos</b><strong>Alto uso</strong><small>Movimentação recorrente</small><br><span class="pill good">Forte</span></div>
+          <div class="product"><b>Cobrança</b><strong>Moderado</strong><small>Potencial de crescimento</small><br><span class="pill good">Ativo</span></div>
+          <div class="product"><b>Crédito</b><strong>Baixo</strong><small>Oportunidade aberta</small><br><span class="pill warn">Expandir</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="dashboard-group">
+      <article class="component span-5">
+        <div class="ch"><span class="ci">👥</span><h3>Relacionamentos-chave</h3><small>Contacts</small></div>
+        <div class="cb statuslist">
+          <div class="row"><span class="dot blue"></span><div class="main"><b>Contato Executivo A</b><span>Diretoria Financeira · Decisor</span></div><div class="num">Alta</div></div>
+          <div class="row"><span class="dot blue"></span><div class="main"><b>Contato Executivo B</b><span>Diretoria Geral · Sponsor</span></div><div class="num">Alta</div></div>
+          <div class="row"><span class="dot"></span><div class="main"><b>Contato Financeiro</b><span>Controladoria · Influenciador</span></div><div class="num">Média</div></div>
+          <div class="row"><span class="dot"></span><div class="main"><b>Contato Operacional</b><span>Financeiro · Operacional</span></div><div class="num">Média</div></div>
+        </div>
+      </article>
+
+      <article class="component span-7">
+        <div class="ch"><span class="ci">◆</span><h3>Oportunidades prioritárias</h3><small>Opportunity</small></div>
+        <div class="cb table-wrap no-pad">
+          <table class="table">
+            <thead><tr><th>Oportunidade</th><th>Stage</th><th>Valor</th><th>Prob.</th></tr></thead>
+            <tbody>
+              <tr><td><b>Expansão de Crédito</b></td><td><span class="badge b-blue">Proposta</span></td><td>R$ 180 mil</td><td>65%</td></tr>
+              <tr><td><b>Automação de Cobrança</b></td><td><span class="badge b-blue">Negociação</span></td><td>R$ 90 mil</td><td>45%</td></tr>
+              <tr><td><b>Expansão de Pagamentos</b></td><td><span class="badge b-warn">Qualificação</span></td><td>R$ 50 mil</td><td>25%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+
+    <div class="dashboard-group">
+      <article class="component span-6">
+        <div class="ch"><span class="ci">▤</span><h3>Atendimentos que exigem atenção</h3><small>Cases</small></div>
+        <div class="cb table-wrap no-pad">
+          <table class="table">
+            <thead><tr><th>Case</th><th>Assunto</th><th>Status</th><th>SLA</th></tr></thead>
+            <tbody>
+              <tr><td><b>#001284</b></td><td>Limite operacional</td><td><span class="badge b-blue">Aguardando cliente</span></td><td><span class="badge b-bad">75%</span></td></tr>
+              <tr><td><b>#001271</b></td><td>Integração via API</td><td><span class="badge b-blue">Em análise</span></td><td><span class="badge b-good">No prazo</span></td></tr>
+              <tr><td><b>#001249</b></td><td>Conciliação financeira</td><td><span class="badge b-good">Encerrado</span></td><td><span class="badge b-good">Cumprido</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="component span-6">
+        <div class="ch"><span class="ci">◷</span><h3>Últimas interações</h3><small>Timeline 360</small></div>
+        <div class="cb timeline">
+          <div class="event"><div class="eventicon">💬</div><div><b>Messaging Session encerrada</b><p>Atendimento digital sobre limite operacional.</p><time>Hoje · 16:42</time></div></div>
+          <div class="event"><div class="eventicon">▤</div><div><b>Case #001284 atualizado</b><p>Status alterado para Aguardando cliente.</p><time>Hoje · 15:58</time></div></div>
+          <div class="event"><div class="eventicon">◆</div><div><b>Oportunidade avançou</b><p>Expansão de Crédito passou para Proposta.</p><time>Ontem · 11:22</time></div></div>
+          <div class="event"><div class="eventicon">👤</div><div><b>Contato principal revisado</b><p>Decisor financeiro confirmado.</p><time>24/08 · 09:15</time></div></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="dashboard-group">
+      <article class="component span-12">
+        <div class="ch"><span class="ci">360</span><h3>Objetos relacionados</h3><small>Navegação rápida</small></div>
+        <div class="cb object-strip">
+          <button class="object-card jump-action" data-target="account"><div class="top"><span class="oi account">A</span><b>Account</b><strong>1</strong></div><p>Cadastro e segmentação.</p></button>
+          <button class="object-card jump-action" data-target="contact"><div class="top"><span class="oi contact">C</span><b>Contact</b><strong>4</strong></div><p>Decisores e influenciadores.</p></button>
+          <button class="object-card jump-action" data-target="opportunity"><div class="top"><span class="oi opportunity">O</span><b>Opportunity</b><strong>3</strong></div><p>R$ 320 mil em pipeline.</p></button>
+          <button class="object-card jump-action" data-target="lead"><div class="top"><span class="oi lead">L</span><b>Lead</b><strong>2</strong></div><p>Potenciais contatos.</p></button>
+          <button class="object-card jump-action" data-target="case"><div class="top"><span class="oi case">C</span><b>Case</b><strong>12</strong></div><p>2 em aberto.</p></button>
+          <button class="object-card jump-action" data-target="messaging"><div class="top"><span class="oi messaging">M</span><b>Messaging</b><strong>27</strong></div><p>Interações digitais.</p></button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="account" class="panel">
+    <div class="detail-grid single-panel">
+      <div class="detail-card">
+        <div class="head">Account — dados principais</div>
+        <div class="body">
+          <div class="fields">
+            <div class="field"><b>Name</b><span>Empresa Exemplo S.A.</span></div>
+            <div class="field"><b>Type</b><span>Customer - Direct</span></div>
+            <div class="field"><b>Industry</b><span>Serviços</span></div>
+            <div class="field"><b>Annual Revenue</b><span>R$ 12.000.000</span></div>
+            <div class="field"><b>Employees</b><span>120</span></div>
+            <div class="field"><b>Owner</b><span>Gerente de Conta</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-card">
+        <div class="head">Resumo de relacionamento</div>
+        <div class="body">
+          <div class="fields">
+            <div class="field"><b>Segmentação</b><span>Empresas · Grande</span></div>
+            <div class="field"><b>Classificação</b><span>B</span></div>
+            <div class="field"><b>Relacionamento</b><span>Ativo recorrente</span></div>
+            <div class="field"><b>Saúde da conta</b><span>Boa</span></div>
+            <div class="field"><b>Contas ativas</b><span>4</span></div>
+            <div class="field"><b>Cross-sell</b><span>Alto potencial</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="panel">
+    <div class="detail-card single-panel">
+      <div class="head">Contacts relacionados</div>
+      <div class="body no-pad table-wrap">
+        <table class="table">
+          <thead><tr><th>Nome</th><th>Cargo</th><th>Papel</th><th>Email</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>Contato Executivo A</b></td><td>Diretoria Financeira</td><td>Decisor</td><td>contato.a@example.com</td><td>Ativo</td></tr>
+            <tr><td><b>Contato Executivo B</b></td><td>Diretoria Geral</td><td>Sponsor</td><td>contato.b@example.com</td><td>Ativo</td></tr>
+            <tr><td><b>Contato Financeiro</b></td><td>Controladoria</td><td>Influenciador</td><td>financeiro@example.com</td><td>Engajado</td></tr>
+            <tr><td><b>Contato Operacional</b></td><td>Financeiro</td><td>Operacional</td><td>operacional@example.com</td><td>Engajado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="opportunity" class="panel">
+    <div class="detail-card single-panel">
+      <div class="head">Opportunity</div>
+      <div class="body no-pad table-wrap">
+        <table class="table">
+          <thead><tr><th>Oportunidade</th><th>Produto</th><th>Stage</th><th>Valor</th><th>Probabilidade</th></tr></thead>
+          <tbody>
+            <tr><td><b>Expansão de Crédito</b></td><td>Crédito Empresarial</td><td>Proposta</td><td>R$ 180 mil</td><td>65%</td></tr>
+            <tr><td><b>Automação de Cobrança</b></td><td>Cobrança / API</td><td>Negociação</td><td>R$ 90 mil</td><td>45%</td></tr>
+            <tr><td><b>Expansão de Pagamentos</b></td><td>Pagamentos</td><td>Qualificação</td><td>R$ 50 mil</td><td>25%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="lead" class="panel">
+    <div class="detail-card single-panel">
+      <div class="head">Leads relacionados</div>
+      <div class="body no-pad table-wrap">
+        <table class="table">
+          <thead><tr><th>Nome</th><th>Empresa</th><th>Origem</th><th>Interesse</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>Lead Exemplo A</b></td><td>Empresa Exemplo</td><td>Evento</td><td>Integração via API</td><td>Em contato</td></tr>
+            <tr><td><b>Lead Exemplo B</b></td><td>Empresa Exemplo</td><td>Indicação</td><td>Produto Empresarial</td><td>Novo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="case" class="panel">
+    <div class="detail-card single-panel">
+      <div class="head">Cases</div>
+      <div class="body no-pad table-wrap">
+        <table class="table">
+          <thead><tr><th>Case</th><th>Assunto</th><th>Canal</th><th>Status</th><th>SLA</th></tr></thead>
+          <tbody>
+            <tr><td><b>#001284</b></td><td>Limite operacional</td><td>Canal digital</td><td>Aguardando cliente</td><td>75%</td></tr>
+            <tr><td><b>#001271</b></td><td>Integração via API</td><td>Web</td><td>Em análise</td><td>No prazo</td></tr>
+            <tr><td><b>#001249</b></td><td>Conciliação financeira</td><td>Email</td><td>Encerrado</td><td>Cumprido</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="messaging" class="panel">
+    <div class="detail-card single-panel">
+      <div class="head">Messaging Sessions</div>
+      <div class="body no-pad table-wrap">
+        <table class="table">
+          <thead><tr><th>Sessão</th><th>Canal</th><th>Contato</th><th>Espera</th><th>Conversa</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>MS-100284</b></td><td>Canal digital</td><td>Contato Executivo A</td><td>1m05s</td><td>12m20s</td><td>Encerrada</td></tr>
+            <tr><td><b>MS-100271</b></td><td>Web Messaging</td><td>Contato Operacional</td><td>42s</td><td>8m10s</td><td>Encerrada</td></tr>
+            <tr><td><b>MS-100249</b></td><td>Canal digital</td><td>Contato Financeiro</td><td>2m03s</td><td>17m45s</td><td>Encerrada</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">Customer 360 — demonstração genérica com dados totalmente fictícios.</div>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const tabButtons = Array.from(document.querySelectorAll('.section-tab'));
+  const panels = Array.from(document.querySelectorAll('.panel'));
+  const compactBtn = document.getElementById('compactBtn');
+  const toast = document.getElementById('toast');
+  let toastTimer;
+
+  function activateTab(id){
+    tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === id));
+    panels.forEach(panel => panel.classList.toggle('active', panel.id === id));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function showToast(message){
+    clearTimeout(toastTimer);
+    toast.textContent = message;
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  tabButtons.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
+
+  document.querySelectorAll('.jump-action').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.target));
+  });
+
+  compactBtn.addEventListener('click', () => {
+    document.body.classList.toggle('extra-compact');
+    compactBtn.textContent = document.body.classList.contains('extra-compact') ? 'Expandir' : 'Compactar';
+  });
+
+  document.querySelectorAll('.demo-action').forEach(btn => {
+    btn.addEventListener('click', () => showToast(btn.dataset.message || 'Ação demonstrativa.'));
+  });
+
+  document.getElementById('globalSearch').addEventListener('keydown', (event) => {
+    if(event.key !== 'Enter') return;
+    const query = event.target.value.trim().toLowerCase();
+    if(!query){ showToast('Digite um termo para pesquisar na demonstração.'); return; }
+
+    const mapping = [
+      ['case', ['case', '#001', 'limite', 'sla', 'integração']],
+      ['opportunity', ['oportunidade', 'crédito', 'cobrança', 'pagamentos', 'pipeline']],
+      ['contact', ['contato', 'diretoria', 'financeiro', 'sponsor']],
+      ['lead', ['lead', 'evento', 'indicação']],
+      ['messaging', ['messaging', 'sessão', 'canal digital', 'conversa']],
+      ['account', ['empresa', 'account', 'segmentação', 'responsável']]
+    ];
+
+    const match = mapping.find(([, terms]) => terms.some(term => query.includes(term)));
+    if(match){
+      activateTab(match[0]);
+      showToast('Resultado demonstrativo aberto na aba correspondente.');
+    }else{
+      showToast('Nenhum resultado fictício encontrado para "' + event.target.value + '".');
+    }
+  });
+})();
+</script>
+</body>
+</html>

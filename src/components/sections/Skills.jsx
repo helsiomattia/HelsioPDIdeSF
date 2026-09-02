@@ -52,6 +52,109 @@ const UI_LABELS = {
   },
 };
 
+function SkillsAmbient({ lang }) {
+  const codeColumns = ['CRM', 'SQL', 'QA', 'API', 'FLOW'];
+
+  return (
+    <Box
+      aria-hidden="true"
+      sx={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}
+    >
+      <Box
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          position: 'absolute',
+          right: { md: '-150px', lg: '-96px', xl: '0%' },
+          top: { md: '10%', lg: '14%' },
+          width: { md: 250, lg: 300 },
+          height: { md: 250, lg: 300 },
+          opacity: { md: 0.58, xl: 0.78 },
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '50%',
+            border: '1px solid rgba(11,92,171,0.14)',
+            animation: 'skillsRadarSpin 38s linear infinite',
+            '&::before, &::after': {
+              content: '""',
+              position: 'absolute',
+              borderRadius: '50%',
+              border: '1px dashed rgba(21,157,179,0.18)',
+            },
+            '&::before': { inset: 42 },
+            '&::after': { inset: 92 },
+          }}
+        />
+
+        {skillCategories.slice(0, 6).map((category, index) => {
+          const angle = index * 60 - 20;
+
+          return (
+            <Box
+              key={category.id}
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                width: 88,
+                height: 26,
+                ml: '-44px',
+                mt: '-13px',
+                borderRadius: '999px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                bgcolor: alpha(category.color, 0.08),
+                border: `1px solid ${alpha(category.color, 0.2)}`,
+                color: alpha(category.color, 0.58),
+                fontFamily: '"Fira Code", monospace',
+                fontSize: '0.56rem',
+                fontWeight: 900,
+                letterSpacing: '0.05em',
+                transform: `rotate(${angle}deg) translateX(124px) rotate(${-angle}deg)`,
+              }}
+            >
+              {getLocalizedString(category.title, lang).slice(0, 11)}
+            </Box>
+          );
+        })}
+      </Box>
+
+      {codeColumns.map((token, index) => (
+        <Box
+          key={token}
+          sx={{
+            display: { xs: 'none', lg: 'block' },
+            position: 'absolute',
+            left: `${-1 + index * 2.2}%`,
+            top: `${16 + (index % 2) * 18}%`,
+            color: 'rgba(11,92,171,0.18)',
+            fontFamily: '"Fira Code", monospace',
+            fontSize: '0.64rem',
+            fontWeight: 850,
+            lineHeight: 1.9,
+            letterSpacing: '0.12em',
+            animation: `skillsCodeRain ${9 + index}s linear ${index * -1.6}s infinite`,
+          }}
+        >
+          {Array.from({ length: 5 }).map((_, row) => (
+            <Box key={`${token}-${row}`}>{`${token}_${row + 1}`}</Box>
+          ))}
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
 function SkillCard({ category, cardIndex, lang, onOpen }) {
   const IconComponent = ICON_MAP[category.icon] || BuildIcon;
   const skills = getLocalizedStringArray(category.skills, lang);
@@ -324,9 +427,13 @@ export default function Skills() {
         alignItems: 'center',
         py: { xs: 6, md: 'var(--section-block-padding)' },
         background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-mid) 100%)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)' }}>
+      <SkillsAmbient lang={lang} />
+
+      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle
           overline={t('skills.overline')}
           title={t('skills.title')}

@@ -20,6 +20,85 @@ import SectionTitle from '../ui/SectionTitle';
 import { projects } from '../../data/projects';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
 
+function CredentialsAmbient() {
+  const certificates = [
+    { label: 'MBA', right: { md: '-88px', lg: '-48px', xl: '2%' }, top: '13%', rotate: '7deg', delay: '0s' },
+    { label: 'BI', left: { md: '-96px', lg: '-54px', xl: '2%' }, bottom: '12%', rotate: '-9deg', delay: '-5s' },
+    { label: 'QA', right: { md: '-118px', lg: '-82px', xl: '-12px' }, bottom: '8%', rotate: '-4deg', delay: '-9s' },
+  ];
+
+  return (
+    <Box
+      aria-hidden="true"
+      sx={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}
+    >
+      {certificates.map((certificate) => (
+        <Box
+          key={certificate.label}
+          sx={{
+            display: { xs: 'none', md: 'block' },
+            position: 'absolute',
+            top: certificate.top,
+            right: certificate.right,
+            bottom: certificate.bottom,
+            left: certificate.left,
+            width: { md: 154, lg: 190 },
+            height: { md: 104, lg: 124 },
+            p: 1.4,
+            borderRadius: '18px',
+            border: '1px solid rgba(11,92,171,0.14)',
+            bgcolor: 'rgba(255,255,255,0.22)',
+            boxShadow: '0 22px 70px rgba(15,37,55,0.055)',
+            opacity: { md: 0.44, xl: 0.6 },
+            '--credential-rotate': certificate.rotate,
+            animation: `credentialStampFloat 20s ease-in-out ${certificate.delay} infinite`,
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              inset: 10,
+              borderRadius: '12px',
+              border: '1px dashed rgba(21,157,179,0.18)',
+            },
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              right: 18,
+              bottom: 14,
+              width: 34,
+              height: 34,
+              borderRadius: '50%',
+              border: '2px solid rgba(183,121,31,0.2)',
+              boxShadow: 'inset 0 0 0 6px rgba(183,121,31,0.055)',
+            },
+          }}
+        >
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 1,
+              fontFamily: '"Fira Code", monospace',
+              fontSize: { md: '0.76rem', lg: '0.84rem' },
+              fontWeight: 900,
+              color: 'rgba(11,92,171,0.34)',
+              letterSpacing: '0.16em',
+            }}
+          >
+            CERT.{certificate.label}
+          </Box>
+          <Box sx={{ position: 'absolute', left: 24, right: 74, top: 58, height: 1, bgcolor: 'rgba(11,92,171,0.13)' }} />
+          <Box sx={{ position: 'absolute', left: 24, right: 96, top: 78, height: 1, bgcolor: 'rgba(21,157,179,0.15)' }} />
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
 /* ── Project card ──────────────────────────────────────── */
 function ProjectCard({ project, index, lang, t }) {
   const status = getLocalizedString(project.status, lang);
@@ -214,9 +293,13 @@ export default function Projects() {
         alignItems: 'center',
         py: { xs: 6, md: 'var(--section-block-padding)' },
         background: 'linear-gradient(180deg, var(--site-bg-mid) 0%, var(--site-bg-start) 100%)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)' }}>
+      <CredentialsAmbient />
+
+      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle
           overline={t('projects.overline')}
           title={t('projects.title')}

@@ -1,10 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { ThemeProvider, CssBaseline, GlobalStyles, Box } from '@mui/material';
 import theme from './theme/theme';
 import Navbar from './components/layout/Navbar';
 import SectionNavigation from './components/layout/SectionNavigation';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
+import ProjectDetailPage from './components/sections/ProjectDetailPage';
 
 const About = lazy(() => import('./components/sections/About'));
 const Experience = lazy(() => import('./components/sections/Experience'));
@@ -12,6 +13,27 @@ const Credentials = lazy(() => import('./components/sections/Projects'));
 const Skills = lazy(() => import('./components/sections/Skills'));
 const PortfolioProjects = lazy(() => import('./components/sections/PortfolioProjects'));
 const Contact = lazy(() => import('./components/sections/Contact'));
+const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function stripBasePath(pathname) {
+  if (!BASE_PATH) return pathname;
+  if (pathname === BASE_PATH) return '/';
+  if (pathname.startsWith(`${BASE_PATH}/`)) return pathname.slice(BASE_PATH.length) || '/';
+  return pathname;
+}
+
+function getProjectRouteId() {
+  const redirectedPath = window.sessionStorage.getItem('personal-page-redirect');
+
+  if (redirectedPath?.startsWith('projects/')) {
+    window.sessionStorage.removeItem('personal-page-redirect');
+    return redirectedPath.split('/')[1] || null;
+  }
+
+  const pathname = stripBasePath(window.location.pathname);
+  const [, route, projectId] = pathname.split('/');
+  return route === 'projects' && projectId ? projectId : null;
+}
 
 const globalStyles = `
   :root {
@@ -88,21 +110,6 @@ const globalStyles = `
     position: relative;
   }
 
-  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-snap-type: y proximity;
-    }
-
-    html.is-programmatic-scroll {
-      scroll-snap-type: none;
-    }
-
-    main > section[data-section] {
-      scroll-snap-align: start;
-      scroll-snap-stop: normal;
-    }
-  }
-
   @keyframes float1 {
     0%, 100% { transform: translate(0, 0) scale(1); }
     33%       { transform: translate(35px, -55px) scale(1.06); }
@@ -123,6 +130,48 @@ const globalStyles = `
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 hsl(var(--ring) / 0); }
   }
 
+  @keyframes aboutPhotoTrail {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--about-photo-rotate)); }
+    50%      { transform: translate3d(18px, -14px, 0) rotate(calc(var(--about-photo-rotate) + 4deg)); }
+  }
+
+  @keyframes experienceTimelineScan {
+    0%   { transform: translateY(-16%); opacity: 0; }
+    18%  { opacity: 0.72; }
+    72%  { opacity: 0.72; }
+    100% { transform: translateY(116%); opacity: 0; }
+  }
+
+  @keyframes credentialStampFloat {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--credential-rotate)); }
+    50%      { transform: translate3d(-14px, 16px, 0) rotate(calc(var(--credential-rotate) - 3deg)); }
+  }
+
+  @keyframes skillsRadarSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes skillsCodeRain {
+    0%   { transform: translateY(-28px); opacity: 0.12; }
+    45%  { opacity: 0.42; }
+    100% { transform: translateY(82px); opacity: 0.12; }
+  }
+
+  @keyframes projectsBlueprintShift {
+    0%, 100% { background-position: 0 0, 0 0; }
+    50%      { background-position: 30px 18px, -18px 30px; }
+  }
+
+  @keyframes contactSignalPulse {
+    0%   { transform: scale(0.78); opacity: 0.46; }
+    70%  { transform: scale(1.18); opacity: 0; }
+    100% { transform: scale(1.18); opacity: 0; }
+  }
+
+  @keyframes contactRouteDash {
+    to { stroke-dashoffset: -64; }
+  }
+
   @supports (overflow-x: clip) {
     body { overflow-x: clip; }
   }
@@ -140,24 +189,39 @@ const globalStyles = `
 `;
 
 export default function App() {
+  const [projectRouteId, setProjectRouteId] = useState(() => getProjectRouteId());
+
+  useEffect(() => {
+    const handleRouteChange = () => setProjectRouteId(getProjectRouteId());
+
+    window.addEventListener('popstate', handleRouteChange);
+    return () => window.removeEventListener('popstate', handleRouteChange);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyles styles={globalStyles} />
       <Box sx={{ overflowX: 'hidden', '@supports (overflow-x: clip)': { overflowX: 'clip' } }}>
         <Navbar />
-        <SectionNavigation />
-        <main>
-          <Hero />
-          <Suspense fallback={null}>
-            <About />
-            <Experience />
-            <Credentials />
-            <Skills />
-            <PortfolioProjects />
-            <Contact />
-          </Suspense>
-        </main>
+        {projectRouteId ? (
+          <ProjectDetailPage projectId={projectRouteId} />
+        ) : (
+          <>
+            <SectionNavigation />
+            <main>
+              <Hero />
+              <Suspense fallback={null}>
+                <About />
+                <Experience />
+                <Credentials />
+                <Skills />
+                <PortfolioProjects />
+                <Contact />
+              </Suspense>
+            </main>
+          </>
+        )}
         <Footer />
       </Box>
     </ThemeProvider>

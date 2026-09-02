@@ -53,9 +53,9 @@
   "portfolioProjects": {
     "overline": "05. projetos",
     "title": "Projetos",
-    "subtitle": "Projetos selecionados e estudos práticos em preparação.",
+    "subtitle": "Projetos selecionados, sites externos e views HTML preparadas para demonstrações.",
     "status": "Em construção",
-    "body": "Esta seção está sendo organizada para apresentar projetos com contexto, objetivo, stack e resultados."
+    "body": "Os cards com view interna já estão prontos para receber o HTML real dos seus próximos projetos."
   },
   "contact": {
     "overline": "06. contato",

@@ -14,6 +14,8 @@ const REDUCE_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const HASH_ALIASES = { skills: 'expertise' };
 const PATH_ALIASES = { skills: 'expertise', '': 'home' };
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+const CLICK_SCROLL_DURATION = 0.38;
+const STEP_SCROLL_DURATION = 0.45;
 
 function stripBasePath(pathname) {
   if (!BASE_PATH) return pathname;
@@ -71,13 +73,17 @@ function isInteractiveTarget(target) {
   return Boolean(target?.closest?.('input, textarea, select, button, a, [role="button"], [role="dialog"]'));
 }
 
+function isProgrammaticScroll() {
+  return document.documentElement.classList.contains('is-programmatic-scroll');
+}
+
 export default function SectionNavigation() {
   const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState('home');
   const [expanded, setExpanded] = useState(false);
   const railRef = useRef(null);
   const labelRef = useRef(null);
-  const stateRef = useRef({ isAnimating: false, lastWheelAt: 0 });
+  const stateRef = useRef({ isAnimating: false, lastWheelAt: 0, lastWheelDirection: 0 });
 
   const sections = useMemo(() => [
     { id: 'home', label: t('nav.home'), number: '00' },
@@ -108,7 +114,7 @@ export default function SectionNavigation() {
     if (!sectionIds.includes(id)) return;
     setExpanded(false);
     setRouteState(id, mode);
-    scrollToSection(id, { duration: 0.62 });
+    scrollToSection(id, { duration: CLICK_SCROLL_DURATION });
   };
 
   useLayoutEffect(() => {
@@ -118,8 +124,8 @@ export default function SectionNavigation() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         label,
-        { autoAlpha: 0, y: 8, clipPath: 'inset(0 0 35% 0)' },
-        { autoAlpha: 1, y: 0, clipPath: 'inset(0 0 0% 0)', duration: 0.34, ease: 'power3.out' },
+        { autoAlpha: 0, y: 4 },
+        { autoAlpha: 1, y: 0, duration: 0.18, ease: 'power2.out' },
       );
     }, label);
 
@@ -151,8 +157,12 @@ export default function SectionNavigation() {
           trigger: el,
           start: 'top center',
           end: 'bottom center',
-          onEnter: () => setRouteState(id),
-          onEnterBack: () => setRouteState(id),
+          onEnter: () => {
+            if (!isProgrammaticScroll()) setRouteState(id);
+          },
+          onEnterBack: () => {
+            if (!isProgrammaticScroll()) setRouteState(id);
+          },
         }));
       });
 
@@ -208,11 +218,11 @@ export default function SectionNavigation() {
         stateRef.current.isAnimating = true;
         setRouteState(nextSection.id || nextSection.dataset.section, 'replaceState');
         scrollToSection(nextSection.id || nextSection.dataset.section, {
-          duration: 0.68,
+          duration: STEP_SCROLL_DURATION,
           onComplete: () => {
             window.setTimeout(() => {
               stateRef.current.isAnimating = false;
-            }, 80);
+            }, 30);
           },
         });
 
@@ -222,18 +232,30 @@ export default function SectionNavigation() {
       const handleWheel = (event) => {
         if (isInteractiveTarget(event.target)) return;
 
-        event.preventDefault();
-
         const absDelta = Math.abs(event.deltaY);
         if (absDelta < 22) return;
 
-        if (stateRef.current.isAnimating) return;
+        if (stateRef.current.isAnimating) {
+          event.preventDefault();
+          return;
+        }
 
+        const direction = event.deltaY > 0 ? 1 : -1;
         const now = Date.now();
-        if (now - stateRef.current.lastWheelAt < 360) return;
+        const currentIndex = getCurrentIndex(sectionIds);
+        const canNavigateInDirection = currentIndex + direction >= 0 && currentIndex + direction < sectionIds.length;
 
-        const didNavigate = navigateByDirection(event.deltaY > 0 ? 1 : -1);
-        if (didNavigate) stateRef.current.lastWheelAt = now;
+        if (now - stateRef.current.lastWheelAt < 180 && stateRef.current.lastWheelDirection === direction) {
+          if (canNavigateInDirection) event.preventDefault();
+          return;
+        }
+
+        const didNavigate = navigateByDirection(direction);
+        if (didNavigate) {
+          event.preventDefault();
+          stateRef.current.lastWheelAt = now;
+          stateRef.current.lastWheelDirection = direction;
+        }
       };
 
       const handleKeyDown = (event) => {
@@ -256,8 +278,7 @@ export default function SectionNavigation() {
         if (!direction) return;
 
         event.preventDefault();
-        const didNavigate = navigateByDirection(direction);
-        if (!didNavigate) stateRef.current.isAnimating = false;
+        navigateByDirection(direction);
       };
 
       window.addEventListener('wheel', handleWheel, { passive: false });
@@ -307,7 +328,7 @@ export default function SectionNavigation() {
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease, opacity 0.18s ease, transform 0.18s ease',
     '&:disabled': { opacity: 0.28, cursor: 'not-allowed' },
     '&:not(:disabled):hover': { transform: 'translateY(-2px)', bgcolor: alpha('#0B5CAB', 0.1), color: 'primary.main' },
     '&:focus-visible': { outline: `3px solid ${alpha('#0B5CAB', 0.26)}`, outlineOffset: 3 },
@@ -373,7 +394,7 @@ export default function SectionNavigation() {
             alignItems: 'center',
             justifyItems: { xs: 'start', lg: 'center' },
             gap: { xs: 0.75, lg: 0.55 },
-            transition: 'all 0.22s ease',
+            transition: 'background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease, transform 0.18s ease',
             '&:hover': { borderColor: alpha('#0B5CAB', 0.34), transform: { xs: 'translateY(-1px)', lg: 'translateY(-2px)' } },
             '&:focus-visible': { outline: `3px solid ${alpha('#0B5CAB', 0.26)}`, outlineOffset: 3 },
           }}
@@ -468,7 +489,7 @@ export default function SectionNavigation() {
                   color: isCurrent ? 'primary.dark' : 'text.primary',
                   cursor: 'pointer',
                   textAlign: 'left',
-                  transition: 'all 0.18s ease',
+                  transition: 'background-color 0.16s ease, color 0.16s ease, transform 0.16s ease',
                   '&:hover': { bgcolor: alpha('#0B5CAB', 0.1), transform: 'translateX(-2px)' },
                   '&:focus-visible': { outline: `2px solid ${alpha('#0B5CAB', 0.28)}`, outlineOffset: 2 },
                 }}

@@ -16,6 +16,82 @@ import AnimatedBox from '../ui/AnimatedBox';
 import { experiences } from '../../data/experience';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
 
+function ExperienceAmbient() {
+  return (
+    <Box
+      aria-hidden="true"
+      sx={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}
+    >
+      <Box
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          position: 'absolute',
+          left: { md: '-12px', lg: '18px', xl: '4%' },
+          top: '13%',
+          bottom: '9%',
+          width: 2,
+          borderRadius: '999px',
+          background: 'linear-gradient(180deg, transparent, rgba(11,92,171,0.22), rgba(21,157,179,0.24), transparent)',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            left: -2,
+            top: 0,
+            width: 6,
+            height: '28%',
+            borderRadius: '999px',
+            background: 'linear-gradient(180deg, transparent, rgba(21,157,179,0.8), transparent)',
+            boxShadow: '0 0 24px rgba(21,157,179,0.28)',
+            animation: 'experienceTimelineScan 8.5s ease-in-out infinite',
+          },
+        }}
+      />
+
+      {experiences.slice(0, 5).map((exp, index) => (
+        <Box
+          key={exp.id}
+          sx={{
+            display: { xs: 'none', md: 'flex' },
+            position: 'absolute',
+            left: {
+              md: `${index % 2 === 0 ? 10 : 28}px`,
+              lg: `${index % 2 === 0 ? 42 : 62}px`,
+              xl: `calc(4% + ${index % 2 === 0 ? 18 : 44}px)`,
+            },
+            top: `${18 + index * 15}%`,
+            alignItems: 'center',
+            gap: 1,
+            color: alpha(exp.color, 0.46),
+            fontFamily: '"Fira Code", monospace',
+            fontSize: '0.62rem',
+            fontWeight: 850,
+            letterSpacing: '0.08em',
+            opacity: { md: 0.42, xl: 0.62 },
+          }}
+        >
+          <Box
+            sx={{
+              width: 12,
+              height: 12,
+              borderRadius: '50%',
+              bgcolor: alpha(exp.color, 0.18),
+              border: `1px solid ${alpha(exp.color, 0.42)}`,
+              boxShadow: `0 0 18px ${alpha(exp.color, 0.16)}`,
+            }}
+          />
+          {exp.company.slice(0, 12).toUpperCase()}
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
 /* ── Experience card ───────────────────────────────────── */
 function ExperienceCard({ exp, index, lang }) {
   const currentLabel = getLocalizedString({ pt: 'Atual', en: 'Current', es: 'Actual' }, lang);
@@ -200,9 +276,13 @@ export default function Experience() {
         alignItems: 'center',
         py: { xs: 6, md: 'var(--section-block-padding)' },
         background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-mid) 100%)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)' }}>
+      <ExperienceAmbient />
+
+      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle
           overline={t('experience.overline')}
           title={t('experience.title')}

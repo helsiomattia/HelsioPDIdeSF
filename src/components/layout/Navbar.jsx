@@ -52,7 +52,7 @@ export default function Navbar() {
             onClick={(event) => {
               event.preventDefault();
               window.history.pushState(null, '', getHomePath());
-              scrollToSection('home');
+              scrollToSection('home', { duration: 0.38 });
             }}
             sx={{
               cursor: 'pointer',
