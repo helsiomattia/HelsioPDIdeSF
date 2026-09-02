@@ -11,6 +11,7 @@ import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import { profile } from '../../data/profile';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
+import { scrollToSection } from '../../utils/scrollToSection';
 
 /* ── Gradient orb helper ─────────────────────────────────── */
 function Orb({ sx }) {
@@ -70,20 +71,16 @@ export default function Hero() {
       component="section"
       sx={{
         minHeight: '100vh',
-        '@supports (height: 100svh)': {
-          minHeight: '100svh',
-        },
-        '@supports (height: 100dvh)': {
-          minHeight: '100dvh',
-        },
+        '@supports (height: 100svh)': { minHeight: '100svh' },
+        '@supports (height: 100dvh)': { minHeight: '100dvh' },
         boxSizing: 'border-box',
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
         background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-end) 100%)',
-        pt: { xs: 9, md: 8 },
-        pb: { xs: 6, md: 7 },
+        pt: { xs: 'calc(var(--header-height) + 24px)', md: 'calc(var(--header-height) + 16px)' },
+        pb: { xs: 5, md: 5.5 },
       }}
     >
       {/* ── Background orbs ── */}
@@ -296,7 +293,7 @@ export default function Hero() {
                   flexWrap: 'wrap',
                   gap: 2,
                   alignItems: 'center',
-                  mb: 3.5,
+                  mb: 2.5,
                 }}
               >
                 <Button
@@ -312,6 +309,46 @@ export default function Hero() {
               </Box>
             </Box>
           )}
+
+          <Box component="div" className="hero-gsap-item">
+            <Box
+              component="button"
+              type="button"
+              onClick={() => scrollToSection('about')}
+              aria-label={t('hero.scroll')}
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+                mt: { xs: 0.5, md: 1 },
+                p: 0,
+                border: 0,
+                bgcolor: 'transparent',
+                color: 'primary.dark',
+                cursor: 'pointer',
+                fontFamily: '"Fira Code", monospace',
+                fontSize: { xs: '0.68rem', md: '0.72rem' },
+                fontWeight: 800,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                transition: 'color 0.2s ease, transform 0.2s ease',
+                '&:hover': {
+                  color: 'primary.main',
+                  transform: 'translateY(-2px)',
+                },
+                '&:focus-visible': {
+                  outline: `3px solid ${alpha('#0B5CAB', 0.26)}`,
+                  outlineOffset: 5,
+                  borderRadius: '999px',
+                },
+              }}
+            >
+              {t('hero.scroll')}
+              <Box component="span" aria-hidden="true" sx={{ fontSize: '1rem', lineHeight: 1 }}>
+                ↓
+              </Box>
+            </Box>
+          </Box>
 
         </Box>
       </Container>

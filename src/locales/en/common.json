@@ -3,13 +3,18 @@
     "label": "Select language"
   },
   "nav": {
+    "home": "Home",
     "about": "About",
     "experience": "Experience",
     "projects": "Credentials",
+    "portfolioProjects": "Projects",
     "skills": "Expertise",
     "contact": "Contact",
     "resume": "Resume",
     "downloadResume": "Download resume",
+    "sectionNavigation": "Section navigation",
+    "previousSection": "Go to previous section",
+    "nextSection": "Go to next section",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
@@ -45,8 +50,15 @@
     "title": "Specialties",
     "subtitle": "Domains I use to design, sustain and scale CRM, automation and service operations."
   },
+  "portfolioProjects": {
+    "overline": "05. projects",
+    "title": "Projects",
+    "subtitle": "Selected projects and practical studies in preparation.",
+    "status": "Under construction",
+    "body": "This section is being organized to present projects with context, goals, stack and outcomes."
+  },
   "contact": {
-    "overline": "05. contact",
+    "overline": "06. contact",
     "title": "Let's Talk",
     "subtitle": "A direct channel for conversations about Salesforce, CRM, automation, adoption and operational evolution.",
     "readyPrefix": "Ready to evolve",

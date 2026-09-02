@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Avatar,
   Box,
@@ -15,12 +16,49 @@ import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { profile } from '../../data/profile';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
+import mepic1 from '../../../images/mepic (1).jpeg';
+import mepic2 from '../../../images/mepic (2).jpeg';
+import mepic3 from '../../../images/mepic (3).jpeg';
+import mepic4 from '../../../images/mepic (4).jpeg';
+import mepic5 from '../../../images/mepic (5).jpeg';
+import mepic6 from '../../../images/mepic (6).jpeg';
+import mepic7 from '../../../images/mepic (7).jpeg';
+import mepic8 from '../../../images/mepic (8).jpeg';
+import mepic9 from '../../../images/mepic (9).jpeg';
+import mepic10 from '../../../images/mepic (10).jpeg';
+import mepic11 from '../../../images/mepic (11).jpeg';
 
 const badgeColors = ['#0B5CAB', '#159DB3', '#0B8F61', '#4A6478'];
+
+const profilePhotos = [
+  { src: mepic1, position: '52% 42%', scale: 1.38 },
+  { src: mepic2, position: '48% 34%', scale: 1.22 },
+  { src: mepic3, position: '50% 38%', scale: 1.24 },
+  { src: mepic4, position: '52% 35%', scale: 1.18 },
+  { src: mepic5, position: '66% 28%', scale: 1.48 },
+  { src: mepic6, position: '48% 35%', scale: 1.28 },
+  { src: mepic7, position: '50% 34%', scale: 1.22 },
+  { src: mepic8, position: '54% 36%', scale: 1.25 },
+  { src: mepic9, position: '50% 36%', scale: 1.24 },
+  { src: mepic10, position: '62% 38%', scale: 1.42 },
+  { src: mepic11, position: '50% 34%', scale: 1.26 },
+];
 
 export default function About() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
+  const [activePhoto, setActivePhoto] = useState(0);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || profilePhotos.length <= 1) return undefined;
+
+    const timer = window.setInterval(() => {
+      setActivePhoto((current) => (current + 1) % profilePhotos.length);
+    }, 3800);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <Box
@@ -110,8 +148,7 @@ export default function About() {
                     }}
                   />
                   <Avatar
-                    src={profile.avatar || undefined}
-                    alt={profile.name}
+                    aria-label={profile.name}
                     sx={{
                       width: { xs: 124, md: 136 },
                       height: { xs: 124, md: 136 },
@@ -123,9 +160,40 @@ export default function About() {
                       background: 'linear-gradient(135deg, var(--site-surface) 0%, var(--site-surface-muted) 100%)',
                       color: 'primary.main',
                       boxShadow: '0 12px 32px rgba(11,92,171,0.16)',
+                      overflow: 'hidden',
                     }}
                   >
-                    {profile.initials}
+                    {profilePhotos.map((photo, index) => (
+                      <Box
+                        key={photo.src}
+                        component="img"
+                        src={photo.src}
+                        alt=""
+                        aria-hidden={index !== activePhoto}
+                        sx={{
+                          position: 'absolute',
+                          inset: 0,
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          objectPosition: photo.position,
+                          opacity: index === activePhoto ? 1 : 0,
+                          transform: `scale(${photo.scale})`,
+                          transition: 'opacity 650ms ease, transform 650ms ease',
+                          filter: 'saturate(1.02) contrast(1.02)',
+                        }}
+                      />
+                    ))}
+                    <Box
+                      component="span"
+                      sx={{
+                        opacity: profilePhotos.length ? 0 : 1,
+                        position: 'relative',
+                        zIndex: 1,
+                      }}
+                    >
+                      {profile.initials}
+                    </Box>
                   </Avatar>
                 </Box>
 

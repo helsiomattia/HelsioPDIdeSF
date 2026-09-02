@@ -1,26 +1,26 @@
 import { createTheme, alpha } from '@mui/material/styles';
 
-const PRIMARY = '#084C8F';
-const SECONDARY = '#0E8198';
-const BG = '#C7D9E8';
-const SURFACE = '#E0ECF5';
-const SURFACE_2 = '#B8CDDD';
-const TEXT = '#061827';
+const PRIMARY = '#0D4DA5';
+const SECONDARY = '#1EACB8';
+const BG = '#F5F7F9';
+const SURFACE = '#FFFFFF';
+const SURFACE_2 = '#E7EAEE';
+const TEXT = '#141D2E';
 
 const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
       main: PRIMARY,
-      light: '#2479B8',
-      dark: '#063763',
-      contrastText: '#EAF3F9',
+      light: '#115FD4',
+      dark: '#092A76',
+      contrastText: '#FFFFFF',
     },
     secondary: {
       main: SECONDARY,
-      light: '#3BAFC2',
-      dark: '#075F6B',
-      contrastText: '#EAF3F9',
+      light: '#2FCADA',
+      dark: '#177E8C',
+      contrastText: '#FFFFFF',
     },
     background: {
       default: BG,
@@ -28,14 +28,14 @@ const theme = createTheme({
     },
     text: {
       primary: TEXT,
-      secondary: '#17364F',
-      disabled: '#4E6A80',
+      secondary: '#4F5E73',
+      disabled: '#6C778D',
     },
-    divider: 'rgba(11, 33, 51, 0.18)',
-    success: { main: '#0B8F61' },
-    error: { main: '#D94A5F' },
-    warning: { main: '#B7791F' },
-    info: { main: '#0B78B6' },
+    divider: '#DBE0E6',
+    success: { main: '#29A366' },
+    error: { main: '#DF3A3A' },
+    warning: { main: '#F2A60D' },
+    info: { main: '#0D4DA5' },
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',

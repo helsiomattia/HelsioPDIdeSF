@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   Container,
-  Grid,
   IconButton,
   Tooltip,
   Typography,
@@ -71,7 +70,7 @@ function ContactCard({ contact, index, t }) {
         sx={{
           p: 0,
           height: '100%',
-          minHeight: { xs: 108, md: 92 },
+          minHeight: { xs: 104, md: 86 },
           overflow: 'hidden',
           cursor: isClickable ? 'pointer' : 'default',
           position: 'relative',
@@ -79,8 +78,8 @@ function ContactCard({ contact, index, t }) {
           border: `1px solid ${isFeatured ? alpha(contact.color, 0.34) : 'rgba(15,37,55,0.12)'}`,
           borderRadius: 'var(--card-radius)',
           boxShadow: isFeatured
-              ? `0 4px 16px ${alpha(contact.color, 0.16)}`
-              : '0 8px 24px rgba(15,37,55,0.055)',
+            ? `0 4px 16px ${alpha(contact.color, 0.14)}`
+            : '0 8px 22px rgba(15,37,55,0.05)',
           backdropFilter: 'blur(5px)',
           WebkitBackdropFilter: 'blur(5px)',
           '@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))': {
@@ -150,18 +149,18 @@ function ContactCard({ contact, index, t }) {
             position: 'relative',
             zIndex: 1,
             height: '100%',
-            p: { xs: 2.2, md: 2.15 },
+            p: { xs: 2, md: 1.8 },
             display: 'flex',
             alignItems: 'center',
-            gap: { xs: 1.7, md: 1.8 },
+            gap: { xs: 1.55, md: 1.55 },
           }}
         >
           {/* Icon */}
           <Box
             className="contact-icon"
             sx={{
-              width: { xs: 48, md: 44 },
-              height: { xs: 48, md: 44 },
+              width: { xs: 46, md: 42 },
+              height: { xs: 46, md: 42 },
               borderRadius: '12px',
               bgcolor: alpha(contact.color, 0.12),
               border: `1.5px solid ${alpha(contact.color, 0.3)}`,
@@ -185,7 +184,7 @@ function ContactCard({ contact, index, t }) {
                 display: 'block',
                 mb: 0.3,
                 fontFamily: '"Fira Code", monospace',
-                fontSize: '0.72rem',
+                fontSize: '0.68rem',
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
                 fontWeight: 800,
@@ -339,7 +338,7 @@ export default function Contact() {
         }}
       />
 
-      <Container maxWidth={false} sx={{ maxWidth: 1040, px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
+      <Container maxWidth={false} sx={{ maxWidth: 1160, px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle
           overline={t('contact.overline')}
           title={t('contact.title')}
@@ -351,8 +350,8 @@ export default function Contact() {
           <Box
             sx={{
               textAlign: 'center',
-              mb: { xs: 3, md: 2.5 },
-              p: { xs: 2.5, md: 3 },
+              mb: { xs: 2.5, md: 1.8 },
+              p: { xs: 2.35, md: 2.25 },
               borderRadius: 'var(--card-radius)',
               background: 'linear-gradient(135deg, rgba(11,92,171,0.1) 0%, rgba(21,157,179,0.1) 100%)',
               border: '1px solid rgba(11,92,171,0.22)',
@@ -360,7 +359,7 @@ export default function Contact() {
           >
             <Typography
               variant="h4"
-              sx={{ fontWeight: 700, mb: 1.25, fontSize: { xs: '1.45rem', md: '1.9rem' } }}
+              sx={{ fontWeight: 750, mb: 0.9, fontSize: { xs: '1.45rem', md: '1.75rem' }, lineHeight: 1.22 }}
             >
               {t('contact.readyPrefix')}{' '}
               <Box
@@ -376,20 +375,27 @@ export default function Contact() {
               </Box>
             </Typography>
 
-            <Typography variant="body1" sx={{ color: 'text.primary', maxWidth: 540, mx: 'auto', lineHeight: 1.6, fontWeight: 500 }}>
+            <Typography variant="body1" sx={{ color: 'text.primary', maxWidth: 620, mx: 'auto', lineHeight: 1.52, fontWeight: 500, fontSize: { xs: '0.96rem', md: '1rem' } }}>
               {t('contact.body')}
             </Typography>
           </Box>
         </AnimatedBox>
 
         {/* Contact cards grid */}
-        <Grid container spacing={{ xs: 1.6, md: 1.75 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
+            gap: { xs: 1.5, md: 1.45 },
+            alignItems: 'stretch',
+          }}
+        >
           {contacts.map((contact, index) => (
-            <Grid item xs={12} sm={6} key={contact.label} sx={{ display: 'flex' }}>
+            <Box key={contact.label} sx={{ display: 'flex' }}>
               <ContactCard contact={contact} index={index} t={t} />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );

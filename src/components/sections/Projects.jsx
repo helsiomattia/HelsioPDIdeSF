@@ -4,7 +4,6 @@ import {
   CardContent,
   Chip,
   Container,
-  Grid,
   IconButton,
   Stack,
   Tooltip,
@@ -60,7 +59,7 @@ function ProjectCard({ project, index, lang, t }) {
           }}
         />
 
-        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: { xs: 2.25, md: 2.35 } }}>
+        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: { xs: 2.05, md: 2 } }}>
           {/* Top row: status + links */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.35 }}>
             <Chip
@@ -136,20 +135,20 @@ function ProjectCard({ project, index, lang, t }) {
           </Box>
 
           {/* Title */}
-          <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.75, fontSize: '0.98rem', lineHeight: 1.35, color: 'text.primary' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.65, fontSize: '0.95rem', lineHeight: 1.3, color: 'text.primary' }}>
             {getLocalizedString(project.title, lang)}
           </Typography>
 
           {/* Description */}
           <Typography
             variant="body2"
-            sx={{ color: 'text.primary', mb: 1.6, flex: 1, lineHeight: 1.55, fontSize: '0.84rem', fontWeight: 500 }}
+            sx={{ color: 'text.primary', mb: 1.25, flex: 1, lineHeight: 1.48, fontSize: '0.81rem', fontWeight: 500 }}
           >
             {getLocalizedString(project.description, lang)}
           </Typography>
 
           {/* Tech chips */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.55, mb: 1.6 }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 1.3 }}>
             {technologies.map((tech) => (
               <Chip
                 key={tech}
@@ -160,9 +159,9 @@ function ProjectCard({ project, index, lang, t }) {
                   border: '1px solid rgba(11,92,171,0.2)',
                   color: 'primary.dark',
                   fontFamily: '"Fira Code", monospace',
-                  fontSize: '0.66rem',
+                  fontSize: '0.64rem',
                   fontWeight: 700,
-                  height: 24,
+                  height: 22,
                   maxWidth: '100%',
                   '& .MuiChip-label': {
                     overflow: 'hidden',
@@ -224,14 +223,20 @@ export default function Projects() {
           subtitle={t('projects.subtitle')}
         />
 
-        {/* Cards grid */}
-        <Grid container spacing={{ xs: 2, md: 2.25 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
+            gap: 'var(--card-gap)',
+            alignItems: 'stretch',
+          }}
+        >
           {projects.map((project, index) => (
-            <Grid item xs={12} sm={6} md={4} key={project.id}>
+            <Box key={project.id}>
               <ProjectCard project={project} index={index} lang={lang} t={t} />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );

@@ -4,7 +4,6 @@ import {
   CardContent,
   Chip,
   Container,
-  Grid,
   Typography,
   alpha,
 } from '@mui/material';
@@ -23,7 +22,7 @@ function ExperienceCard({ exp, index, lang }) {
 
   return (
     <AnimatedBox delay={index * 0.06} style={{ height: '100%' }}>
-      <Card
+        <Card
         sx={{
           height: '100%',
           display: 'flex',
@@ -35,6 +34,7 @@ function ExperienceCard({ exp, index, lang }) {
           boxShadow: exp.current ? `0 10px 26px ${alpha(exp.color, 0.1)}` : undefined,
           '&:hover .experience-gradient': { opacity: 0.9 },
           '&:hover': {
+            transform: 'translateY(-2px)',
             borderColor: alpha(exp.color, 0.4),
             boxShadow: `0 12px 30px ${alpha(exp.color, 0.11)}`,
           },
@@ -49,7 +49,7 @@ function ExperienceCard({ exp, index, lang }) {
           }}
         />
 
-        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: { xs: 2.15, md: 2.25 } }}>
+        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: { xs: 2.05, md: 2 } }}>
           {/* Top row */}
           <Box
             sx={{
@@ -81,7 +81,7 @@ function ExperienceCard({ exp, index, lang }) {
                 {exp.company.charAt(0)}
               </Box>
               <Box sx={{ minWidth: 0 }}>
-                <Typography variant="h6" sx={{ fontWeight: 700, color: 'text.primary', fontSize: '0.96rem', lineHeight: 1.3 }}>
+                <Typography variant="h6" sx={{ fontWeight: 700, color: 'text.primary', fontSize: '0.94rem', lineHeight: 1.28 }}>
                   {getLocalizedString(exp.role, lang)}
                 </Typography>
                 <Typography
@@ -138,16 +138,16 @@ function ExperienceCard({ exp, index, lang }) {
           </Box>
 
           {/* Description */}
-          <Typography variant="body2" sx={{ color: 'text.primary', mb: 1.1, lineHeight: 1.45, fontSize: '0.79rem', fontWeight: 500 }}>
+          <Typography variant="body2" sx={{ color: 'text.primary', mb: 1.05, lineHeight: 1.43, fontSize: '0.78rem', fontWeight: 500 }}>
             {getLocalizedString(exp.description, lang)}
           </Typography>
 
           {/* Achievements */}
-          <Box sx={{ mb: 1.2 }}>
+          <Box sx={{ mb: 1.1 }}>
             {getLocalizedStringArray(exp.achievements, lang).map((item) => (
               <Box key={item} sx={{ display: 'flex', gap: 0.65, alignItems: 'flex-start', mb: 0.45 }}>
                 <CheckCircleOutlineIcon sx={{ fontSize: '0.82rem', color: exp.color, mt: '2px', flexShrink: 0 }} />
-                <Typography variant="body2" sx={{ color: 'text.primary', lineHeight: 1.4, fontSize: '0.76rem', fontWeight: 500 }}>
+                <Typography variant="body2" sx={{ color: 'text.primary', lineHeight: 1.38, fontSize: '0.75rem', fontWeight: 500 }}>
                   {item}
                 </Typography>
               </Box>
@@ -209,13 +209,20 @@ export default function Experience() {
           subtitle={t('experience.subtitle')}
         />
 
-        <Grid container spacing={{ xs: 2, md: 2.25 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
+            gap: 'var(--card-gap)',
+            alignItems: 'stretch',
+          }}
+        >
           {experiences.map((exp, index) => (
-            <Grid item xs={12} sm={6} md={4} key={exp.id}>
+            <Box key={exp.id}>
               <ExperienceCard exp={exp} index={index} lang={lang} />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );

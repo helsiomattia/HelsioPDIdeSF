@@ -4,7 +4,6 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 gsap.registerPlugin(ScrollToPlugin);
 
 const SECTION_ALIASES = {
-  projects: 'credentials',
   skills: 'expertise',
 };
 
@@ -17,12 +16,14 @@ export function getScrollBehavior() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
 }
 
-export function scrollToSection(id, attempt = 0) {
+export function scrollToSection(id, attemptOrOptions = 0, maybeOptions = {}) {
+  const attempt = typeof attemptOrOptions === 'number' ? attemptOrOptions : 0;
+  const options = typeof attemptOrOptions === 'object' ? attemptOrOptions : maybeOptions;
   const targetId = SECTION_ALIASES[id] || id;
   const el = document.getElementById(targetId) || document.querySelector(`[data-section="${targetId}"]`);
 
   if (!el) {
-    if (attempt < 20) window.setTimeout(() => scrollToSection(targetId, attempt + 1), 50);
+    if (attempt < 20) window.setTimeout(() => scrollToSection(targetId, attempt + 1, options), 50);
     return;
   }
 
@@ -35,6 +36,7 @@ export function scrollToSection(id, attempt = 0) {
 
   if (getScrollBehavior() === 'auto') {
     window.scrollTo({ top: fallbackY, behavior: 'auto' });
+    options.onComplete?.();
     return;
   }
 
@@ -42,21 +44,25 @@ export function scrollToSection(id, attempt = 0) {
     document.documentElement.classList.add('is-programmatic-scroll');
     gsap.killTweensOf(window);
     gsap.to(window, {
-      duration: 0.42,
+      duration: options.duration ?? 0.56,
       scrollTo: { y: el, offsetY, autoKill: false },
-      ease: 'power2.out',
+      ease: options.ease || 'power3.inOut',
       overwrite: 'auto',
       onComplete: () => {
         const distance = Math.abs(el.getBoundingClientRect().top - offsetY);
         if (distance > 4) window.scrollTo({ top: fallbackY, behavior: 'auto' });
         finishProgrammaticScroll();
+        options.onComplete?.();
       },
       onInterrupt: () => {
         finishProgrammaticScroll();
+        options.onInterrupt?.();
+        options.onComplete?.();
       },
     });
   } catch {
     finishProgrammaticScroll();
     fallbackScroll();
+    options.onComplete?.();
   }
 }

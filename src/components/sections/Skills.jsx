@@ -7,7 +7,6 @@ import {
   Container,
   Dialog,
   DialogContent,
-  Grid,
   IconButton,
   Typography,
   alpha,
@@ -84,6 +83,7 @@ function SkillCard({ category, cardIndex, lang, onOpen }) {
           cursor: 'pointer',
           outline: 'none',
           '&:hover': {
+            transform: 'translateY(-2px)',
             borderTop: `2px solid ${category.color}`,
             boxShadow: `0 10px 26px ${alpha(category.color, 0.13)}`,
           },
@@ -93,13 +93,13 @@ function SkillCard({ category, cardIndex, lang, onOpen }) {
           },
         }}
       >
-        <CardContent sx={{ p: { xs: 2.15, md: 2.35 } }}>
+        <CardContent sx={{ p: { xs: 2.05, md: 2 } }}>
           {/* Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.6 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.1, mb: 1.35 }}>
             <Box
               sx={{
-                width: 38,
-                height: 38,
+                width: 36,
+                height: 36,
                 borderRadius: '10px',
                 bgcolor: alpha(category.color, 0.15),
                 border: `1px solid ${alpha(category.color, 0.3)}`,
@@ -115,7 +115,7 @@ function SkillCard({ category, cardIndex, lang, onOpen }) {
               variant="h6"
               sx={{
                 fontWeight: 700,
-                fontSize: '1rem',
+                fontSize: '0.98rem',
                 color: 'text.primary',
                 flex: 1,
               }}
@@ -126,7 +126,7 @@ function SkillCard({ category, cardIndex, lang, onOpen }) {
           </Box>
 
           {/* Skills */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.65 }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.52 }}>
             {skills.map((skill) => (
               <Chip
                 key={skill}
@@ -138,9 +138,9 @@ function SkillCard({ category, cardIndex, lang, onOpen }) {
                   border: `1px solid ${alpha(category.color, 0.22)}`,
                   color: alpha(category.color, 1),
                   fontFamily: '"Fira Code", monospace',
-                  fontSize: '0.68rem',
+                  fontSize: '0.64rem',
                   fontWeight: 700,
-                  height: 25,
+                  height: 22,
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
                   '& .MuiChip-label': {
@@ -162,7 +162,7 @@ function SkillCard({ category, cardIndex, lang, onOpen }) {
             variant="caption"
             sx={{
               display: 'block',
-              mt: 1.35,
+              mt: 1.15,
               color: category.color,
               fontFamily: '"Fira Code", monospace',
               fontSize: '0.66rem',
@@ -333,18 +333,25 @@ export default function Skills() {
           subtitle={t('skills.subtitle')}
         />
 
-        <Grid container spacing={{ xs: 2, md: 2.25 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
+            gap: 'var(--card-gap)',
+            alignItems: 'stretch',
+          }}
+        >
           {skillCategories.map((category, index) => (
-            <Grid item xs={12} sm={6} md={4} key={category.id}>
+            <Box key={category.id}>
               <SkillCard
                 category={category}
                 cardIndex={index}
                 lang={lang}
                 onOpen={setActiveCategory}
               />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
         <ExpertiseDialog
           category={activeCategory}

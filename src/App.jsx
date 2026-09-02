@@ -2,37 +2,57 @@ import { lazy, Suspense } from 'react';
 import { ThemeProvider, CssBaseline, GlobalStyles, Box } from '@mui/material';
 import theme from './theme/theme';
 import Navbar from './components/layout/Navbar';
+import SectionNavigation from './components/layout/SectionNavigation';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
 
 const About = lazy(() => import('./components/sections/About'));
 const Experience = lazy(() => import('./components/sections/Experience'));
-const Projects = lazy(() => import('./components/sections/Projects'));
+const Credentials = lazy(() => import('./components/sections/Projects'));
 const Skills = lazy(() => import('./components/sections/Skills'));
+const PortfolioProjects = lazy(() => import('./components/sections/PortfolioProjects'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
 const globalStyles = `
   :root {
-    --header-height: 96px;
-    --page-max-width: 1320px;
-    --section-inline-padding: clamp(20px, 4vw, 64px);
-    --section-block-padding: clamp(24px, 4vh, 52px);
+    --header-height: 88px;
+    --page-max-width: 1380px;
+    --section-inline-padding: clamp(20px, 4.6vw, 76px);
+    --section-block-padding: clamp(22px, 4vh, 48px);
     --card-radius: 18px;
-    --card-gap: clamp(14px, 1.5vw, 24px);
+    --card-gap: clamp(12px, 1.35vw, 22px);
     --transition-fast: 200ms;
     --transition-normal: 280ms;
-    --site-bg-start: #D3E2EE;
-    --site-bg-mid: #C7D9E8;
-    --site-bg-end: #B8CDDD;
-    --site-surface: #E0ECF5;
-    --site-surface-strong: #D4E3EE;
-    --site-surface-muted: #C1D4E3;
-    --site-border: rgba(11, 33, 51, 0.16);
+    --background: 220 25% 97%;
+    --foreground: 220 40% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 40% 13%;
+    --primary: 215 85% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 185 72% 42%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 20% 92%;
+    --muted-foreground: 220 15% 50%;
+    --accent: 30 90% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 88%;
+    --ring: 215 85% 35%;
+    --success: 150 60% 40%;
+    --warning: 40 90% 50%;
+    --site-bg-start: hsl(var(--background));
+    --site-bg-mid: hsl(220 20% 92%);
+    --site-bg-end: hsl(220 20% 88%);
+    --site-surface: hsl(var(--card));
+    --site-surface-strong: hsl(220 25% 97%);
+    --site-surface-muted: hsl(var(--muted));
+    --site-border: hsl(var(--border) / 0.72);
   }
 
   @media (min-width: 900px) {
     :root {
-      --header-height: 68px;
+      --header-height: 64px;
     }
   }
 
@@ -47,7 +67,7 @@ const globalStyles = `
   }
 
   :focus-visible {
-    outline: 3px solid rgba(11, 92, 171, 0.3);
+    outline: 3px solid hsl(var(--ring) / 0.3);
     outline-offset: 3px;
   }
 
@@ -65,6 +85,7 @@ const globalStyles = `
 
   main > section[data-section] {
     scroll-margin-top: var(--header-height);
+    position: relative;
   }
 
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
@@ -78,6 +99,7 @@ const globalStyles = `
 
     main > section[data-section] {
       scroll-snap-align: start;
+      scroll-snap-stop: normal;
     }
   }
 
@@ -96,9 +118,9 @@ const globalStyles = `
     50%       { transform: translate(20px, 40px) scale(1.08); }
   }
   @keyframes pulse-ring {
-    0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(8, 76, 143, 0.3); }
-    70%  { transform: scale(1);    box-shadow: 0 0 0 10px rgba(8, 76, 143, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(8, 76, 143, 0); }
+    0%   { transform: scale(0.95); box-shadow: 0 0 0 0 hsl(var(--ring) / 0.3); }
+    70%  { transform: scale(1);    box-shadow: 0 0 0 10px hsl(var(--ring) / 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 hsl(var(--ring) / 0); }
   }
 
   @supports (overflow-x: clip) {
@@ -124,13 +146,15 @@ export default function App() {
       <GlobalStyles styles={globalStyles} />
       <Box sx={{ overflowX: 'hidden', '@supports (overflow-x: clip)': { overflowX: 'clip' } }}>
         <Navbar />
+        <SectionNavigation />
         <main>
           <Hero />
           <Suspense fallback={null}>
             <About />
             <Experience />
-            <Projects />
+            <Credentials />
             <Skills />
+            <PortfolioProjects />
             <Contact />
           </Suspense>
         </main>
