@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import { getLocalizedString } from '../../utils/i18nHelper';
 import { getPortfolioProjectById } from '../../data/portfolioProjects';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+const DEFAULT_IFRAME_HEIGHT = 640;
 
 function getHomeProjectsPath() {
   return `${BASE_PATH || ''}/projects${window.location.search}`;
@@ -23,6 +25,97 @@ export default function ProjectDetailPage({ projectId }) {
   const { i18n } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
   const project = getPortfolioProjectById(projectId);
+  const iframeRef = useRef(null);
+  const [iframeHeight, setIframeHeight] = useState(DEFAULT_IFRAME_HEIGHT);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+
+    if (!iframe || !project?.embedHtml) return undefined;
+
+    let animationFrameId = 0;
+    let resizeObserver;
+    let observedFrameWindow;
+    let observedFrameDocument;
+
+    const getFrameDocument = () => {
+      try {
+        return iframe.contentDocument || iframe.contentWindow?.document || null;
+      } catch {
+        return null;
+      }
+    };
+
+    const syncIframeHeight = () => {
+      window.cancelAnimationFrame(animationFrameId);
+      animationFrameId = window.requestAnimationFrame(() => {
+        const frameDocument = getFrameDocument();
+        const { body, documentElement } = frameDocument || {};
+
+        if (!body || !documentElement) return;
+
+        const nextHeight = Math.ceil(
+          Math.max(
+            body.scrollHeight,
+            body.offsetHeight,
+            body.getBoundingClientRect().height,
+            documentElement.offsetHeight,
+          ),
+        );
+        const safeHeight = Math.max(nextHeight, 1);
+
+        setIframeHeight((currentHeight) => (
+          Math.abs(currentHeight - safeHeight) > 1 ? safeHeight : currentHeight
+        ));
+      });
+    };
+
+    const handleFrameWheel = (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+
+      event.preventDefault();
+      window.scrollBy({ top: event.deltaY, behavior: 'auto' });
+    };
+
+    const setupHeightObserver = () => {
+      const frameDocument = getFrameDocument();
+      const { body, documentElement, defaultView } = frameDocument || {};
+
+      if (!body || !documentElement) return;
+
+      resizeObserver?.disconnect();
+      observedFrameWindow?.removeEventListener('resize', syncIframeHeight);
+      observedFrameDocument?.removeEventListener('wheel', handleFrameWheel);
+
+      const ResizeObserverConstructor = defaultView?.ResizeObserver || window.ResizeObserver;
+      if (!ResizeObserverConstructor) {
+        syncIframeHeight();
+      } else {
+        resizeObserver = new ResizeObserverConstructor(syncIframeHeight);
+        resizeObserver.observe(body);
+      }
+
+      observedFrameWindow = defaultView;
+      observedFrameDocument = frameDocument;
+      observedFrameWindow?.addEventListener('resize', syncIframeHeight);
+      observedFrameDocument.addEventListener('wheel', handleFrameWheel, { passive: false });
+      syncIframeHeight();
+    };
+
+    setIframeHeight(DEFAULT_IFRAME_HEIGHT);
+    iframe.addEventListener('load', setupHeightObserver);
+    window.addEventListener('resize', syncIframeHeight);
+    setupHeightObserver();
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+      iframe.removeEventListener('load', setupHeightObserver);
+      window.removeEventListener('resize', syncIframeHeight);
+      observedFrameWindow?.removeEventListener('resize', syncIframeHeight);
+      observedFrameDocument?.removeEventListener('wheel', handleFrameWheel);
+      resizeObserver?.disconnect();
+    };
+  }, [project?.embedHtml]);
 
   if (!project) {
     return (
@@ -53,7 +146,7 @@ export default function ProjectDetailPage({ projectId }) {
         pb: { xs: 5, md: 7 },
         background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-mid) 100%)',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'visible',
       }}
     >
       <Box
@@ -104,13 +197,16 @@ export default function ProjectDetailPage({ projectId }) {
         </Box>
 
         <Paper
+          className="embedded-html-view"
           elevation={0}
           sx={{
             borderRadius: { xs: '20px', md: '28px' },
             border: `1px solid ${alpha(project.accent, 0.24)}`,
             bgcolor: 'rgba(255,255,255,0.78)',
             boxShadow: `0 24px 80px ${alpha('#061827', 0.12)}`,
-            overflow: 'hidden',
+            height: 'auto',
+            maxHeight: 'none',
+            overflow: 'visible',
           }}
         >
           <Box
@@ -121,6 +217,8 @@ export default function ProjectDetailPage({ projectId }) {
               px: { xs: 1.5, md: 2 },
               py: 1.2,
               borderBottom: '1px solid rgba(15,37,55,0.12)',
+              borderTopLeftRadius: 'inherit',
+              borderTopRightRadius: 'inherit',
               background: 'rgba(224,236,245,0.68)',
             }}
           >
@@ -134,15 +232,21 @@ export default function ProjectDetailPage({ projectId }) {
 
           <Box
             component="iframe"
+            ref={iframeRef}
             title={`${getLocalizedString(project.title, lang)} preview`}
             srcDoc={project.embedHtml}
             sandbox="allow-scripts allow-same-origin"
+            scrolling="no"
             sx={{
               display: 'block',
               width: '100%',
-              height: { xs: 520, md: 640 },
+              height: `${iframeHeight}px`,
+              maxHeight: 'none',
               border: 0,
+              borderBottomLeftRadius: 'inherit',
+              borderBottomRightRadius: 'inherit',
               bgcolor: '#fff',
+              overflow: 'hidden',
             }}
           />
         </Paper>
