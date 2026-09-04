@@ -42,17 +42,17 @@ export const profile = {
 
   valuePillars: {
     pt: [
-      '5+ anos conectando CRM, ERP e operações',
+      '10+ anos conectando CRM, ERP e operações',
       'Sales & Service Cloud com foco em adoção',
       'Automação e processos orientados ao negócio',
     ],
     en: [
-      '5+ years connecting CRM, ERP and operations',
+      '10+ years connecting CRM, ERP and operations',
       'Sales & Service Cloud focused on adoption',
       'Business-driven automation and processes',
     ],
     es: [
-      '5+ años conectando CRM, ERP y operaciones',
+      '10+ años conectando CRM, ERP y operaciones',
       'Sales & Service Cloud con foco en adopción',
       'Automatización y procesos orientados al negocio',
     ],
