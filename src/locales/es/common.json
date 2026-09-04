@@ -54,8 +54,7 @@
     "overline": "05. proyectos",
     "title": "Proyectos",
     "subtitle": "Proyectos seleccionados, sitios externos y vistas HTML preparadas para demos.",
-    "status": "En construcción",
-    "body": "Los cards con vista interna ya están listos para recibir el HTML real de tus próximos proyectos."
+    "status": "En construcción"
   },
   "contact": {
     "overline": "06. contacto",

@@ -248,21 +248,6 @@ export default function PortfolioProjects() {
           })}
         </Box>
 
-        <AnimatedBox delay={0.4}>
-          <Box
-            sx={{
-              maxWidth: 720,
-              mx: 'auto',
-              textAlign: 'center',
-              mt: { xs: 2.5, md: 3 },
-              color: 'text.secondary',
-              fontSize: { xs: '0.86rem', md: '0.92rem' },
-              fontWeight: 600,
-            }}
-          >
-            {t('portfolioProjects.body')}
-          </Box>
-        </AnimatedBox>
       </Container>
     </Box>
   );
