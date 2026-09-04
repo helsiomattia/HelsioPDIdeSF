@@ -12,8 +12,10 @@ const Experience = lazy(() => import('./components/sections/Experience'));
 const Credentials = lazy(() => import('./components/sections/Projects'));
 const Skills = lazy(() => import('./components/sections/Skills'));
 const PortfolioProjects = lazy(() => import('./components/sections/PortfolioProjects'));
+const AboutProjectPage = lazy(() => import('./components/sections/AboutProjectPage'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ABOUT_PROJECT_ROUTE = 'about-project';
 
 function stripBasePath(pathname) {
   if (!BASE_PATH) return pathname;
@@ -22,17 +24,33 @@ function stripBasePath(pathname) {
   return pathname;
 }
 
-function getProjectRouteId() {
+function getAppRoute() {
   const redirectedPath = window.sessionStorage.getItem('personal-page-redirect');
 
-  if (redirectedPath?.startsWith('projects/')) {
+  if (redirectedPath) {
     window.sessionStorage.removeItem('personal-page-redirect');
-    return redirectedPath.split('/')[1] || null;
+
+    if (redirectedPath.startsWith('projects/')) {
+      return { type: 'project', projectId: redirectedPath.split('/')[1] || null };
+    }
+
+    if (redirectedPath === ABOUT_PROJECT_ROUTE) {
+      return { type: 'aboutProject' };
+    }
   }
 
   const pathname = stripBasePath(window.location.pathname);
   const [, route, projectId] = pathname.split('/');
-  return route === 'projects' && projectId ? projectId : null;
+
+  if (route === 'projects' && projectId) {
+    return { type: 'project', projectId };
+  }
+
+  if (route === ABOUT_PROJECT_ROUTE) {
+    return { type: 'aboutProject' };
+  }
+
+  return { type: 'home' };
 }
 
 const globalStyles = `
@@ -189,10 +207,10 @@ const globalStyles = `
 `;
 
 export default function App() {
-  const [projectRouteId, setProjectRouteId] = useState(() => getProjectRouteId());
+  const [appRoute, setAppRoute] = useState(() => getAppRoute());
 
   useEffect(() => {
-    const handleRouteChange = () => setProjectRouteId(getProjectRouteId());
+    const handleRouteChange = () => setAppRoute(getAppRoute());
 
     window.addEventListener('popstate', handleRouteChange);
     return () => window.removeEventListener('popstate', handleRouteChange);
@@ -204,8 +222,12 @@ export default function App() {
       <GlobalStyles styles={globalStyles} />
       <Box sx={{ overflowX: 'hidden', '@supports (overflow-x: clip)': { overflowX: 'clip' } }}>
         <Navbar />
-        {projectRouteId ? (
-          <ProjectDetailPage projectId={projectRouteId} />
+        {appRoute.type === 'project' ? (
+          <ProjectDetailPage projectId={appRoute.projectId} />
+        ) : appRoute.type === 'aboutProject' ? (
+          <Suspense fallback={null}>
+            <AboutProjectPage />
+          </Suspense>
         ) : (
           <>
             <SectionNavigation />
