@@ -8,11 +8,11 @@
   <body>
     <script>
       (function () {
-        var basePath = '/personal-page';
+        var basePath = '/crm-specialist';
         var path = window.location.pathname.replace(basePath, '').replace(/^\/+|\/+$/g, '');
 
         if (path) {
-          window.sessionStorage.setItem('personal-page-redirect', path);
+          window.sessionStorage.setItem('crm-specialist-redirect', path);
         }
 
         window.location.replace(basePath + '/' + window.location.search);

@@ -10,7 +10,7 @@ Portfólio pessoal de **Helsio Mattia**, Salesforce CRM Specialist com foco em *
 [![i18next](https://img.shields.io/badge/i18next-26-26A69A?style=flat-square)](https://www.i18next.com/)
 [![GSAP](https://img.shields.io/badge/GSAP-3-88CE02?style=flat-square&logo=greensock)](https://gsap.com/)
 
-**Acesse:** [helsiomattia.github.io/personal-page](https://helsiomattia.github.io/personal-page/)
+**Acesse:** [helsiomattia.github.io/crm-specialist](https://helsiomattia.github.io/crm-specialist/)
 
 </div>
 
@@ -273,14 +273,14 @@ title: {
 O projeto está configurado para ser publicado no GitHub Pages no caminho:
 
 ```text
-/personal-page/
+/crm-specialist/
 ```
 
 Essa configuração está em `vite.config.js`:
 
 ```js
 export default defineConfig({
-  base: '/personal-page/',
+  base: '/crm-specialist/',
 });
 ```
 

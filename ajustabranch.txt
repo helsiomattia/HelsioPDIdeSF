@@ -10,9 +10,9 @@ Objetivo:
 
 Projeto:
 - React + Vite
-- Repositório: https://github.com/helsiomattia/personal-page
-- URL final: https://helsiomattia.github.io/personal-page/
-- A configuração do Vite deve continuar com base: '/personal-page/'
+- Repositório: https://github.com/helsiomattia/crm-specialist
+- URL final: https://helsiomattia.github.io/crm-specialist/
+- A configuração do Vite deve continuar com base: '/crm-specialist/'
 
 Faça as seguintes alterações:
 
@@ -25,7 +25,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/personal-page/',
+  base: '/crm-specialist/',
 });
 
 Não remova o base.

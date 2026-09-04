@@ -30,9 +30,9 @@ function getSectionUrl(id) {
 }
 
 function getSectionFromLocation() {
-  const redirectedPath = window.sessionStorage.getItem('personal-page-redirect');
+  const redirectedPath = window.sessionStorage.getItem('crm-specialist-redirect');
   if (redirectedPath) {
-    window.sessionStorage.removeItem('personal-page-redirect');
+    window.sessionStorage.removeItem('crm-specialist-redirect');
     const redirectedId = redirectedPath.split('/').filter(Boolean).pop() || 'home';
     return PATH_ALIASES[redirectedId] || redirectedId;
   }

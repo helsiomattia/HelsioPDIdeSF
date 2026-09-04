@@ -1,10 +1,10 @@
 Você está trabalhando em um projeto React + Vite que será publicado no GitHub Pages no repositório:
 
-https://github.com/helsiomattia/personal-page
+https://github.com/helsiomattia/crm-specialist
 
 A URL final do site será:
 
-https://helsiomattia.github.io/personal-page/
+https://helsiomattia.github.io/crm-specialist/
 
 O projeto local está em:
 
@@ -23,10 +23,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/personal-page/',
+  base: '/crm-specialist/',
 });
 
-O campo base é obrigatório porque o site será servido dentro de /personal-page/ e não diretamente na raiz do domínio.
+O campo base é obrigatório porque o site será servido dentro de /crm-specialist/ e não diretamente na raiz do domínio.
 
 2. Corrigir src/main.jsx
 
@@ -166,7 +166,7 @@ Folder:
 
 A URL final deve ser:
 
-https://helsiomattia.github.io/personal-page/
+https://helsiomattia.github.io/crm-specialist/
 
 Importante:
 Não apague conteúdo útil do projeto sem necessidade.

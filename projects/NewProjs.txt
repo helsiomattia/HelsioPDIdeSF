@@ -22,3 +22,6 @@ tenho ainda na pasta de projetos o arquivo Customer_Journey_360_Generic, o Intel
 crie os cards e ajuste esses necessarios
 
 e como disse, use o padrao do CRM Customer 360 para esses novos
+
+
+"body": "Os cards com view interna já estão prontos para receber o HTML real dos seus próximos projetos."

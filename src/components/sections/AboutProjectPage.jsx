@@ -26,7 +26,7 @@ import WebRoundedIcon from '@mui/icons-material/WebRounded';
 import { profile } from '../../data/profile';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
-const siteUrl = 'https://helsiomattia.github.io/personal-page/';
+const siteUrl = 'https://helsiomattia.github.io/crm-specialist/';
 
 function getHomePath() {
   return `${BASE_PATH || ''}/${window.location.search}`;
@@ -60,7 +60,7 @@ const featureCards = [
   },
   {
     title: 'Deploy no GitHub Pages',
-    description: 'Configuração com `base: /personal-page/` e fallback em `public/404.html` para rotas internas.',
+    description: 'Configuração com `base: /crm-specialist/` e fallback em `public/404.html` para rotas internas.',
     icon: StorageRoundedIcon,
     color: '#B7791F',
   },
@@ -285,7 +285,7 @@ export default function AboutProjectPage() {
               <Button component="a" href={siteUrl} target="_blank" rel="noopener noreferrer" variant="contained" endIcon={<OpenInNewRoundedIcon />}>
                 Abrir site publicado
               </Button>
-              <Button component="a" href={`${profile.github}/personal-page`} target="_blank" rel="noopener noreferrer" variant="outlined" endIcon={<GitHubIcon />}>
+              <Button component="a" href={`${profile.github}/crm-specialist`} target="_blank" rel="noopener noreferrer" variant="outlined" endIcon={<GitHubIcon />}>
                 Repositório
               </Button>
             </Box>
@@ -417,14 +417,14 @@ export default function AboutProjectPage() {
               </Typography>
             </Box>
             <Typography sx={{ color: 'text.secondary', lineHeight: 1.75, fontWeight: 560, mb: 2.4 }}>
-              O site está configurado para o caminho `/personal-page/`, com redirecionamento para manter rotas internas funcionando mesmo quando abertas diretamente.
+              O site está configurado para o caminho `/crm-specialist/`, com redirecionamento para manter rotas internas funcionando mesmo quando abertas diretamente.
             </Typography>
             <Box sx={{ p: 1.8, borderRadius: '16px', bgcolor: alpha('#B7791F', 0.08), border: `1px solid ${alpha('#B7791F', 0.18)}` }}>
               <Typography sx={{ fontFamily: '"Fira Code", monospace', fontWeight: 850, color: '#B7791F', mb: 0.6 }}>
                 vite.config.js
               </Typography>
               <Typography sx={{ fontFamily: '"Fira Code", monospace', fontSize: '0.84rem', color: 'text.primary' }}>
-                base: '/personal-page/'
+                base: '/crm-specialist/'
               </Typography>
             </Box>
           </Paper>

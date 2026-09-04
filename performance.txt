@@ -1,10 +1,10 @@
 Você está trabalhando no meu projeto React + Vite do portfólio pessoal publicado em:
 
-https://helsiomattia.github.io/personal-page/
+https://helsiomattia.github.io/crm-specialist/
 
 Repositório:
 
-https://github.com/helsiomattia/personal-page
+https://github.com/helsiomattia/crm-specialist
 
 Pasta local do projeto:
 
@@ -59,7 +59,7 @@ Se existir Open Graph, ajuste também:
 <meta property="og:title" content="Helsio Mattia | Salesforce CRM Specialist" />
 <meta property="og:description" content="Portfólio profissional de Helsio Mattia, Salesforce CRM Specialist." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://helsiomattia.github.io/personal-page/" />
+<meta property="og:url" content="https://helsiomattia.github.io/crm-specialist/" />
 
 Não adicione imagens pesadas de preview agora, a não ser que já exista uma imagem otimizada no projeto.
 
@@ -229,7 +229,7 @@ Mantenha a configuração correta do Vite para GitHub Pages.
 
 No vite.config.js deve continuar existindo:
 
-base: '/personal-page/'
+base: '/crm-specialist/'
 
 Exemplo:
 
@@ -238,7 +238,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/personal-page/',
+  base: '/crm-specialist/',
 });
 
 Não remova isso.
