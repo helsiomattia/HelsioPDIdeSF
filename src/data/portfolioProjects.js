@@ -1,94 +1,9 @@
 import customer360Html from '../../projects/customer360_generico_interativo_v4.html?raw';
-
-const embeddedProjectShell = ({ title, eyebrow, accent = '#0D4DA5' }) => `
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      :root { color-scheme: light; font-family: Inter, Arial, sans-serif; }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #f7fbff 0%, #e4eef7 100%);
-        color: #132238;
-      }
-      main { padding: clamp(24px, 5vw, 56px); }
-      .shell {
-        max-width: 980px;
-        margin: 0 auto;
-        border: 1px solid rgba(13, 77, 165, 0.18);
-        border-radius: 28px;
-        background: rgba(255,255,255,0.78);
-        box-shadow: 0 26px 70px rgba(15,37,55,0.12);
-        overflow: hidden;
-      }
-      header {
-        padding: 28px;
-        background: linear-gradient(135deg, ${accent} 0%, #1EACB8 100%);
-        color: #fff;
-      }
-      .eyebrow {
-        margin: 0 0 8px;
-        font: 800 12px/1.4 "Fira Code", monospace;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        opacity: 0.84;
-      }
-      h1 { margin: 0; font-size: clamp(28px, 5vw, 52px); line-height: 1.04; }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        padding: 22px;
-      }
-      .card {
-        min-height: 132px;
-        padding: 18px;
-        border-radius: 18px;
-        border: 1px solid rgba(13, 77, 165, 0.14);
-        background: #fff;
-      }
-      .wide { grid-column: span 2; }
-      .metric { font-size: 34px; font-weight: 850; color: ${accent}; }
-      .label { margin-top: 8px; font-size: 13px; line-height: 1.5; color: #4f5e73; }
-      @media (max-width: 720px) {
-        .grid { grid-template-columns: 1fr; padding: 16px; }
-        .wide { grid-column: auto; }
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <section class="shell">
-        <header>
-          <p class="eyebrow">${eyebrow}</p>
-          <h1>${title}</h1>
-        </header>
-        <div class="grid">
-          <article class="card wide">
-            <div class="metric">View</div>
-            <div class="label">Substitua este HTML por uma tela real do projeto, protótipo exportado ou dashboard incorporado.</div>
-          </article>
-          <article class="card">
-            <div class="metric">01</div>
-            <div class="label">Objetivo principal do projeto.</div>
-          </article>
-          <article class="card">
-            <div class="metric">02</div>
-            <div class="label">Stack, integrações ou automações usadas.</div>
-          </article>
-          <article class="card wide">
-            <div class="metric">03</div>
-            <div class="label">Resultado, aprendizado ou próximo incremento planejado.</div>
-          </article>
-        </div>
-      </section>
-    </main>
-  </body>
-</html>`;
+import service360Html from '../../projects/Service360_Generic_Embed_V2.html?raw';
+import customerJourney360Html from '../../projects/Customer_Journey_360_Generic.html?raw';
+import intelligence360Html from '../../projects/Intelligence360_Generic.html?raw';
+import revenueChurnIntelligenceHtml from '../../projects/Revenue_Churn_Intelligence_Generic.html?raw';
+import salesforceArchitectureControlCenterHtml from '../../projects/Salesforce_Architecture_Control_Center_Generic.html?raw';
 
 export const portfolioProjects = [
   {
@@ -106,7 +21,7 @@ export const portfolioProjects = [
     },
     status: { pt: 'Site externo', en: 'External site', es: 'Sitio externo' },
     action: { pt: 'Acessar site', en: 'Open site', es: 'Abrir sitio' },
-    externalUrl: 'https://salesforceskillshine.com/',
+    externalUrl: 'https://helsiomattia.github.io/salesforce-skill-shine/',
     tags: ['Salesforce', 'Learning', 'CRM'],
     accent: '#0D4DA5',
     gradient: 'linear-gradient(135deg, #0D4DA5 0%, #1EACB8 100%)',
@@ -140,56 +55,96 @@ export const portfolioProjects = [
       es: 'Service Cloud Console',
     },
     description: {
-      pt: 'Espaço para demonstrar uma tela básica de atendimento, casos, filas e priorização.',
-      en: 'Space to demonstrate a basic service screen with cases, queues and prioritization.',
-      es: 'Espacio para demostrar una pantalla básica de atención, casos, colas y priorización.',
+      pt: 'Console de supervisão para atendimento digital, filas, SLAs, analistas, casos e indicadores de experiência.',
+      en: 'Supervisor console for digital service, queues, SLAs, agents, cases and experience indicators.',
+      es: 'Consola de supervisión para atención digital, colas, SLAs, analistas, casos e indicadores de experiencia.',
     },
-    status: { pt: 'Embed preparado', en: 'Embed ready', es: 'Embed listo' },
-    action: { pt: 'Abrir view', en: 'Open view', es: 'Abrir vista' },
+    status: { pt: 'Demo Salesforce', en: 'Salesforce demo', es: 'Demo Salesforce' },
+    action: { pt: 'Abrir Service 360', en: 'Open Service 360', es: 'Abrir Service 360' },
     tags: ['Service Cloud', 'Support', 'Cases'],
     accent: '#0B78B6',
     gradient: 'linear-gradient(135deg, #0B78B6 0%, #6A8FB1 100%)',
-    embedHtml: embeddedProjectShell({ title: 'Service Cloud Console', eyebrow: 'project embed', accent: '#0B78B6' }),
+    embedHtml: service360Html,
   },
   {
-    id: 'automation-flow-lab',
+    id: 'customer-journey-360',
     kind: 'embed',
     title: {
-      pt: 'Automation Flow Lab',
-      en: 'Automation Flow Lab',
-      es: 'Automation Flow Lab',
+      pt: 'Customer Journey 360',
+      en: 'Customer Journey 360',
+      es: 'Customer Journey 360',
     },
     description: {
-      pt: 'Página pronta para incorporar um fluxo, protótipo ou documentação visual de automação.',
-      en: 'Page ready to embed a flow, prototype or visual automation documentation.',
-      es: 'Página lista para incorporar un flujo, prototipo o documentación visual de automatización.',
+      pt: 'Demo interativa para analisar a jornada completa do cliente, touchpoints, momentos críticos e fricções.',
+      en: 'Interactive demo to analyze the full customer journey, touchpoints, critical moments and friction points.',
+      es: 'Demo interactiva para analizar la jornada completa del cliente, touchpoints, momentos críticos y fricciones.',
     },
-    status: { pt: 'Embed preparado', en: 'Embed ready', es: 'Embed listo' },
-    action: { pt: 'Abrir view', en: 'Open view', es: 'Abrir vista' },
-    tags: ['Flow', 'Automation', 'Process'],
-    accent: '#B7791F',
-    gradient: 'linear-gradient(135deg, #B7791F 0%, #0B8F61 100%)',
-    embedHtml: embeddedProjectShell({ title: 'Automation Flow Lab', eyebrow: 'project embed', accent: '#B7791F' }),
+    status: { pt: 'Demo Salesforce', en: 'Salesforce demo', es: 'Demo Salesforce' },
+    action: { pt: 'Abrir Journey 360', en: 'Open Journey 360', es: 'Abrir Journey 360' },
+    tags: ['Salesforce', 'Journey', 'CX'],
+    accent: '#FF6B2C',
+    gradient: 'linear-gradient(135deg, #032D60 0%, #FF6B2C 100%)',
+    embedHtml: customerJourney360Html,
   },
   {
-    id: 'analytics-dashboard',
+    id: 'intelligence-360',
     kind: 'embed',
     title: {
-      pt: 'Analytics Dashboard',
-      en: 'Analytics Dashboard',
-      es: 'Analytics Dashboard',
+      pt: 'Intelligence 360',
+      en: 'Intelligence 360',
+      es: 'Intelligence 360',
     },
     description: {
-      pt: 'Área para embutir uma view HTML de indicadores, BI, qualidade ou performance operacional.',
-      en: 'Area to embed an HTML view of metrics, BI, quality or operational performance.',
-      es: 'Área para incorporar una vista HTML de indicadores, BI, calidad o performance operacional.',
+      pt: 'Central de inteligência para priorizar risco, oportunidades, sinais e próximas melhores ações.',
+      en: 'Intelligence center to prioritize risk, opportunities, signals and next best actions.',
+      es: 'Centro de inteligencia para priorizar riesgo, oportunidades, señales y próximas mejores acciones.',
     },
-    status: { pt: 'Embed preparado', en: 'Embed ready', es: 'Embed listo' },
-    action: { pt: 'Abrir view', en: 'Open view', es: 'Abrir vista' },
-    tags: ['BI', 'Analytics', 'Quality'],
+    status: { pt: 'Demo Salesforce', en: 'Salesforce demo', es: 'Demo Salesforce' },
+    action: { pt: 'Abrir Intelligence 360', en: 'Open Intelligence 360', es: 'Abrir Intelligence 360' },
+    tags: ['Salesforce', 'Intelligence', 'NBA'],
     accent: '#7C5CFF',
     gradient: 'linear-gradient(135deg, #7C5CFF 0%, #1EACB8 100%)',
-    embedHtml: embeddedProjectShell({ title: 'Analytics Dashboard', eyebrow: 'project embed', accent: '#7C5CFF' }),
+    embedHtml: intelligence360Html,
+  },
+  {
+    id: 'revenue-churn-intelligence',
+    kind: 'embed',
+    title: {
+      pt: 'Revenue & Churn Intelligence',
+      en: 'Revenue & Churn Intelligence',
+      es: 'Revenue & Churn Intelligence',
+    },
+    description: {
+      pt: 'Dashboard executivo para visualizar receita em risco, churn, expansão e planos de retenção.',
+      en: 'Executive dashboard to visualize revenue at risk, churn, expansion and retention plays.',
+      es: 'Dashboard ejecutivo para visualizar ingresos en riesgo, churn, expansión y planes de retención.',
+    },
+    status: { pt: 'Demo Salesforce', en: 'Salesforce demo', es: 'Demo Salesforce' },
+    action: { pt: 'Abrir Revenue Intelligence', en: 'Open Revenue Intelligence', es: 'Abrir Revenue Intelligence' },
+    tags: ['Revenue', 'Churn', 'Retention'],
+    accent: '#BA0517',
+    gradient: 'linear-gradient(135deg, #032D60 0%, #BA0517 100%)',
+    embedHtml: revenueChurnIntelligenceHtml,
+  },
+  {
+    id: 'salesforce-architecture-control-center',
+    kind: 'embed',
+    title: {
+      pt: 'Salesforce Architecture Control Center',
+      en: 'Salesforce Architecture Control Center',
+      es: 'Salesforce Architecture Control Center',
+    },
+    description: {
+      pt: 'Observabilidade arquitetural da org Salesforce para limites, dados, automações, integrações e dívida técnica.',
+      en: 'Salesforce org architecture observability for limits, data, automations, integrations and technical debt.',
+      es: 'Observabilidad arquitectural de la org Salesforce para límites, datos, automatizaciones, integraciones y deuda técnica.',
+    },
+    status: { pt: 'Demo Salesforce', en: 'Salesforce demo', es: 'Demo Salesforce' },
+    action: { pt: 'Abrir Architecture Center', en: 'Open Architecture Center', es: 'Abrir Architecture Center' },
+    tags: ['Architecture', 'Platform', 'Governance'],
+    accent: '#032D60',
+    gradient: 'linear-gradient(135deg, #032D60 0%, #0176D3 100%)',
+    embedHtml: salesforceArchitectureControlCenterHtml,
   },
 ];
 

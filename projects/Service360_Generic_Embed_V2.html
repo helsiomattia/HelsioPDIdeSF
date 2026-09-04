@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Service 360 | Supervisor Console V2</title>
+<style>
+:root{--b:#0b5ed7;--bd:#052b61;--bs:#eef6ff;--bg:#f4f7fb;--card:#fff;--ln:#dfe7f1;--tx:#172033;--mt:#6b7a90;--g:#15803d;--gs:#edf9f0;--w:#b96800;--ws:#fff7e8;--r:#c81e3a;--rs:#fff0f3;--sh:0 2px 12px rgba(23,47,78,.07);--rad:14px}
+*{box-sizing:border-box}html,body{width:100%;min-height:100%;overflow-x:hidden}body{margin:0;background:radial-gradient(circle at 90% 0%,rgba(38,167,255,.08),transparent 28rem),var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--tx);font-size:13px}button,input,select{font:inherit}
+.top{height:58px;padding:0 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--ln)}.waffle{display:grid;grid-template-columns:repeat(3,4px);gap:3px;padding:8px}.waffle i{width:4px;height:4px;border-radius:50%;background:#66758b}.logo{font-weight:950;font-size:21px;letter-spacing:.08em;color:var(--b)}.app{font-weight:800;padding-left:12px;border-left:1px solid var(--ln)}.search{flex:1;max-width:560px;margin:auto}.search input{width:100%;height:36px;border:1px solid #cbd6e3;border-radius:10px;padding:0 12px}.tools{margin-left:auto;display:flex;align-items:center;gap:8px}.live{padding:6px 9px;border-radius:999px;background:var(--gs);color:var(--g);font-size:9px;font-weight:900}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--b),var(--bd));color:white;font-weight:800;font-size:10px}
+.page{max-width:1480px;margin:auto;padding:14px}.hero{display:grid;grid-template-columns:1.3fr .9fr 1fr;gap:18px;align-items:center;background:#fff;border:1px solid var(--ln);border-radius:var(--rad);box-shadow:var(--sh);padding:16px 18px}.ht{display:flex;gap:13px;align-items:center}.hi{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,var(--b),#26a7ff);color:#fff;font-size:17px;font-weight:900}.ey{font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:var(--b);font-weight:850}.hero h1{margin:3px 0;font-size:20px}.hero p{margin:0;color:var(--mt);font-size:10.5px}.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.filters span{display:block;font-size:8px;text-transform:uppercase;color:var(--mt);font-weight:800;margin-bottom:4px}.filters select{width:100%;height:34px;border:1px solid #cbd6e3;border-radius:8px;background:#fff;padding:0 8px;font-size:10px}.presence{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--ln)}.presence div{padding:2px 10px;border-right:1px solid var(--ln)}.presence strong{display:block;font-size:17px;margin:4px 0}.presence small{font-size:8px;color:var(--mt)}.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.dg{background:var(--g)}.db{background:var(--b)}.dw{background:#f2a100}.dn{background:#94a3b8}
+.decision{margin-top:10px;padding:15px 16px;border-radius:var(--rad);display:grid;grid-template-columns:2fr .62fr .62fr .62fr auto;gap:12px;align-items:center;background:linear-gradient(118deg,#052b61,#074a9e 52%,#0b5ed7);color:#fff;box-shadow:0 8px 24px rgba(5,43,97,.16)}.dc span{font-size:8.5px;text-transform:uppercase;letter-spacing:.1em;color:#add9ff;font-weight:800}.dc h2{margin:4px 0;font-size:14px}.dc p{margin:0;color:#dceeff;font-size:10px;line-height:1.45}.ds{padding-left:12px;border-left:1px solid rgba(255,255,255,.18)}.ds span{font-size:8.5px;color:#bce0ff}.ds strong{display:block;font-size:17px;margin:3px 0}.ds small{font-size:8px;color:#dbeeff}.primary{height:34px;border:0;border-radius:8px;background:#fff;color:var(--bd);font-size:10px;font-weight:800;padding:0 12px}
+.tabs{margin-top:10px;padding:5px;display:flex;gap:3px;background:#fff;border:1px solid var(--ln);border-radius:13px;box-shadow:var(--sh);position:sticky;top:68px;z-index:15;overflow:auto}.tabs button{height:32px;padding:0 11px;border:0;border-radius:9px;background:transparent;color:#41516a;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}.tabs .active{background:var(--bs);color:var(--bd)}
+.head{display:flex;justify-content:space-between;align-items:end;margin:10px 2px 8px}.head h2{margin:0;font-size:13px}.head p{margin:3px 0 0;color:var(--mt);font-size:9.5px}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}.card{background:#fff;border:1px solid var(--ln);border-radius:var(--rad);box-shadow:var(--sh);overflow:hidden}.metric{padding:12px;min-height:124px}.mh{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:850;text-transform:uppercase;color:#47566a}.mi{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--bs);color:var(--b);font-size:9px;font-weight:900}.metric strong{display:block;margin:9px 0 2px;font-size:22px}.meta{font-size:9px;color:var(--mt)}.trend{margin-top:10px;font-size:8.5px;font-weight:800}.good{color:var(--g)}.warn{color:var(--w)}.bad{color:var(--r)}.info{color:var(--b)}
+.strip{margin-top:9px;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border:1px solid var(--ln);border-radius:12px;box-shadow:var(--sh);overflow:hidden}.strip div{padding:9px 12px;border-right:1px solid var(--ln)}.strip span{display:block;font-size:8px;text-transform:uppercase;color:var(--mt);font-weight:800}.strip strong{display:inline-block;margin:3px 6px 0 0;font-size:14px}.strip small{font-size:8px;color:var(--mt)}
+.grid{margin-top:9px;display:grid;grid-template-columns:repeat(12,1fr);gap:9px}.s7{grid-column:span 7}.s5{grid-column:span 5}.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.ch{min-height:43px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--ln)}.cht{display:flex;align-items:center;gap:8px}.ci{min-width:24px;height:24px;padding:0 5px;border-radius:7px;display:grid;place-items:center;background:var(--bs);color:var(--b);font-size:8px;font-weight:900}.ch h3{margin:0;font-size:10px}.ch p{margin:2px 0 0;color:var(--mt);font-size:8px}.badge{display:inline-flex;padding:3px 7px;border-radius:999px;font-size:8px;font-weight:850}.bg{background:var(--gs);color:var(--g)}.bw{background:var(--ws);color:var(--w)}.br{background:var(--rs);color:var(--r)}.bb{background:var(--bs);color:var(--b)}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:650px}.table th{padding:7px 9px;text-align:left;background:#f8fbff;border-bottom:1px solid var(--ln);font-size:7.5px;text-transform:uppercase;color:var(--mt)}.table td{padding:8px 9px;border-bottom:1px solid #edf1f6;font-size:9px;white-space:nowrap}.progress{width:68px;height:5px;display:inline-block;background:#e9eef4;border-radius:999px;overflow:hidden;vertical-align:middle}.progress i{display:block;height:100%;border-radius:999px}.pg{background:var(--g)}.pw{background:#f2a100}.pr{background:var(--r)}
+.actions{padding:8px;display:grid;gap:6px}.action{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;padding:8px;border:1px solid var(--ln);border-radius:10px;background:#fbfdff}.action>span{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:9px;font-weight:900}.action b{font-size:9.5px}.action p{margin:2px 0 0;color:var(--mt);font-size:8px}.action button,.ghost{height:26px;border:1px solid #bdc9d8;border-radius:7px;background:#fff;color:var(--b);font-size:8px;font-weight:800;cursor:pointer;padding:0 10px}
+.nr{background:var(--rs);color:var(--r)}.nw{background:var(--ws);color:var(--w)}.nb{background:var(--bs);color:var(--b)}.ng{background:var(--gs);color:var(--g)}
+.agents{padding:8px;display:grid;gap:6px}.agent{display:flex;gap:8px;align-items:center;padding:8px;border:1px solid var(--ln);border-radius:10px;background:#fbfdff}.ma{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--b),#4a9fff);color:#fff;font-size:8px;font-weight:850}.am{flex:1}.at{display:flex;justify-content:space-between}.at b{font-size:9px}.at span{font-size:8px;color:var(--mt)}.ams{display:flex;gap:12px;margin:5px 0;color:var(--mt);font-size:8px}.agent .progress{width:100%;display:block}
+.panel{display:none}.panel.active{display:block}.toast{position:fixed;right:18px;bottom:18px;z-index:99;background:#052b61;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 8px 28px rgba(5,43,97,.24);font-size:10px;font-weight:750;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translateY(0)}.footer{padding:18px;text-align:center;color:#8a98aa;font-size:8px}
+.legend{padding:12px;display:grid;gap:8px}.legend .row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #edf1f6}.legend .row:last-child{border-bottom:0}.list{padding:10px 12px;display:grid;gap:8px}.list .item{padding:10px;border:1px solid var(--ln);border-radius:10px;background:#fbfdff}.list .item b{display:block;font-size:9.5px}.list .item p{margin:4px 0 0;color:var(--mt);font-size:8px;line-height:1.45}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:1100px){.hero{grid-template-columns:1fr 1fr}.presence{grid-column:1/-1;border-left:0;border-top:1px solid var(--ln);padding-top:10px}.kpis{grid-template-columns:repeat(4,1fr)}.decision{grid-template-columns:1fr 1fr}.dc{grid-column:1/-1}.primary{grid-column:1/-1}.s4,.s5,.s6,.s7{grid-column:span 12}.two-col{grid-template-columns:1fr}}
+@media(max-width:760px){.page{padding:8px}.hero{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.presence{grid-template-columns:1fr 1fr}.kpis,.strip{grid-template-columns:1fr 1fr}.decision{grid-template-columns:1fr}.search{display:none}}
+@media(max-width:520px){.kpis,.strip,.presence{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="waffle"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="logo">SERVICE 360</div><div class="app">Supervisor Console</div><div class="search"><input placeholder="Buscar sessão, case, analista ou cliente..."></div><div class="tools"><span class="live">● AO VIVO</span><span>↻</span><span>⚙</span><span>🔔</span><div class="avatar">SU</div></div></header>
+<main class="page">
+<section class="hero">
+  <div class="ht"><div class="hi">S</div><div><div class="ey">Service Cloud • Digital Engagement</div><h1>Central de Supervisão de Atendimento</h1><p>Operação digital, capacidade do time, qualidade e experiência do cliente em uma única visão.</p></div></div>
+  <div class="filters"><label><span>Período</span><select><option>Hoje</option><option>Últimas 24h</option><option>7 dias</option></select></label><label><span>Canal</span><select><option>Todos</option><option>Mensageria</option><option>Chat Web</option></select></label><label><span>Equipe</span><select><option>Todas</option><option>Suporte Geral</option><option>Pagamentos</option><option>Integrações</option><option>Financeiro</option><option>Segurança</option></select></label></div>
+  <div class="presence"><div><i class="dot dg"></i><strong>12</strong><small>Disponíveis</small></div><div><i class="dot db"></i><strong>17</strong><small>Em atendimento</small></div><div><i class="dot dw"></i><strong>2</strong><small>Em pausa</small></div><div><i class="dot dn"></i><strong>8</strong><small>Offline</small></div></div>
+</section>
+<section class="decision"><div class="dc"><span>Resumo para decisão</span><h2>Operação estável, com pressão concentrada na fila de Pagamentos</h2><p>Service Level geral em 91,8%, porém Pagamentos está em 78% e já possui cliente aguardando 03:41. Recomendação: redistribuir capacidade disponível de Geral e Financeiro.</p></div><div class="ds"><span>Fila crítica</span><strong>Pagamentos</strong><small>6 aguardando</small></div><div class="ds"><span>Ocupação</span><strong>78%</strong><small>3 analistas ≥ 90%</small></div><div class="ds"><span>Experiência</span><strong>4,72</strong><small>CSAT de hoje</small></div><button class="primary">Abrir Omni Supervisor</button></section>
+<nav class="tabs">
+  <button class="active" data-tab="overview">Visão geral</button>
+  <button data-tab="live">Operação ao vivo</button>
+  <button data-tab="analysts">Analistas</button>
+  <button data-tab="messaging">Messaging Sessions</button>
+  <button data-tab="agentwork">Agent Work</button>
+  <button data-tab="cx">CX & Qualidade</button>
+  <button data-tab="cases">Cases & SLA</button>
+</nav>
+
+<section id="overview" class="panel active">
+<div class="head"><div><h2>Visão executiva da operação</h2><p>Hoje • atualização simulada em tempo real • dados demonstrativos</p></div></div>
+<section class="kpis">
+<article class="card metric"><div class="mh"><span class="mi">Q</span>Em fila agora</div><strong>14</strong><div class="meta">3 filas com espera</div><div class="trend warn">+3 vs. 15 min</div></article>
+<article class="card metric"><div class="mh"><span class="mi">⏱</span>Maior espera</div><strong>03:41</strong><div class="meta">Fila Pagamentos</div><div class="trend bad">Meta ≤ 02:00</div></article>
+<article class="card metric"><div class="mh"><span class="mi">A</span>Espera média</div><strong>00:54</strong><div class="meta">ASA de hoje</div><div class="trend good">▼ 11s vs. ontem</div></article>
+<article class="card metric"><div class="mh"><span class="mi">%</span>Service Level</div><strong>91,8%</strong><div class="meta">Atendidos ≤ 60s</div><div class="trend good">+2,4 p.p.</div></article>
+<article class="card metric"><div class="mh"><span class="mi">M</span>Sessões ativas</div><strong>48</strong><div class="meta">Mensageria + Web</div><div class="trend info">Pico hoje: 67</div></article>
+<article class="card metric"><div class="mh"><span class="mi">H</span>TMA / Handle Time</div><strong>11:32</strong><div class="meta">AgentWork concluído</div><div class="trend good">▼ 00:46</div></article>
+<article class="card metric"><div class="mh"><span class="mi">!</span>Abandono</div><strong>4,1%</strong><div class="meta">Antes do aceite</div><div class="trend warn">Meta &lt; 5%</div></article>
+<article class="card metric"><div class="mh"><span class="mi">T</span>Transferências</div><strong>9,6%</strong><div class="meta">Sessões com troca</div><div class="trend warn">+1,2 p.p.</div></article>
+<article class="card metric"><div class="mh"><span class="mi">1</span>FCR</div><strong>82,4%</strong><div class="meta">Resolvido no 1º contato</div><div class="trend good">+3,1 p.p.</div></article>
+<article class="card metric"><div class="mh"><span class="mi">S</span>SLA cumprido</div><strong>94,7%</strong><div class="meta">Cases encerrados</div><div class="trend warn">Meta 95%</div></article>
+<article class="card metric"><div class="mh"><span class="mi">★</span>CSAT</div><strong>4,72</strong><div class="meta">de 5,00</div><div class="trend good">92% positivas</div></article>
+<article class="card metric"><div class="mh"><span class="mi">N</span>NPS</div><strong>+68</strong><div class="meta">Janela 30 dias</div><div class="trend good">+5 pts</div></article>
+</section>
+<section class="strip"><div><span>Ocupação</span><strong>78%</strong><small>meta 75–85%</small></div><div><span>ACW médio</span><strong>01:18</strong><small>pós-atendimento</small></div><div><span>Reabertura</span><strong>6,2%</strong><small>últimos 30 dias</small></div><div><span>Analistas online</span><strong>31</strong><small>12 disponíveis</small></div><div><span>Capacidade crítica</span><strong>3</strong><small>analistas ≥ 90%</small></div></section>
+<section class="grid">
+<article class="card s7"><div class="ch"><div class="cht"><span class="ci">Q</span><div><h3>Saúde das filas</h3><p>Volume, disponibilidade e nível de serviço</p></div></div><span class="badge br">1 crítica</span></div><div class="table-wrap"><table class="table"><thead><tr><th>Fila</th><th>Em espera</th><th>Ativos</th><th>Disponíveis</th><th>Maior espera</th><th>SL</th></tr></thead><tbody><tr><td><b>Suporte Geral</b></td><td>2</td><td>16</td><td>6</td><td><span class="badge bg">00:48</span></td><td>96% <span class="progress"><i class="pg" style="width:96%"></i></span></td></tr><tr><td><b>Pagamentos</b></td><td>6</td><td>12</td><td>2</td><td><span class="badge br">03:41</span></td><td>78% <span class="progress"><i class="pr" style="width:78%"></i></span></td></tr><tr><td><b>Integrações</b></td><td>3</td><td>8</td><td>2</td><td><span class="badge bw">01:32</span></td><td>92% <span class="progress"><i class="pw" style="width:92%"></i></span></td></tr><tr><td><b>Financeiro</b></td><td>1</td><td>7</td><td>1</td><td><span class="badge bg">00:37</span></td><td>97% <span class="progress"><i class="pg" style="width:97%"></i></span></td></tr><tr><td><b>Segurança</b></td><td>2</td><td>5</td><td>1</td><td><span class="badge bw">01:18</span></td><td>93% <span class="progress"><i class="pw" style="width:93%"></i></span></td></tr></tbody></table></div></article>
+<article class="card s5"><div class="ch"><div class="cht"><span class="ci">!</span><div><h3>Ações recomendadas</h3><p>Prioridades para o supervisor</p></div></div></div><div class="actions"><div class="action"><span class="nr">1</span><div><b>Reforçar a fila de Pagamentos</b><p>6 aguardando e Service Level de 78%.</p></div><button>Agir</button></div><div class="action"><span class="nw">2</span><div><b>Revisar capacidade de Eduarda</b><p>100% de capacidade e 92% de ocupação.</p></div><button>Ver</button></div><div class="action"><span class="nb">3</span><div><b>Investigar transferências</b><p>Taxa subiu para 9,6% no período.</p></div><button>Analisar</button></div><div class="action"><span class="ng">4</span><div><b>Replicar padrão de Conta/Cadastro</b><p>FCR 89% e CSAT 4,88.</p></div><button>Detalhes</button></div></div></article>
+<article class="card s5"><div class="ch"><div class="cht"><span class="ci">A</span><div><h3>Analistas em atenção</h3><p>Maior ocupação ou capacidade</p></div></div><span class="badge bw">3 analistas</span></div><div class="agents"><div class="agent"><div class="ma">EM</div><div class="am"><div class="at"><b>Analista 05</b><span>Pagamentos</span></div><div class="ams"><span>Ocupação <b>92%</b></span><span>Capacidade <b>100%</b></span><span>Work <b>4</b></span></div><span class="progress"><i class="pr" style="width:100%"></i></span></div></div><div class="agent"><div class="ma">HD</div><div class="am"><div class="at"><b>Analista 08</b><span>Pagamentos</span></div><div class="ams"><span>Ocupação <b>89%</b></span><span>Capacidade <b>75%</b></span><span>Work <b>3</b></span></div><span class="progress"><i class="pr" style="width:89%"></i></span></div></div><div class="agent"><div class="ma">BC</div><div class="am"><div class="at"><b>Analista 02</b><span>Pagamentos</span></div><div class="ams"><span>Ocupação <b>86%</b></span><span>Capacidade <b>75%</b></span><span>Work <b>3</b></span></div><span class="progress"><i class="pw" style="width:86%"></i></span></div></div></div></article>
+<article class="card s7"><div class="ch"><div class="cht"><span class="ci">CX</span><div><h3>CX por principal motivo</h3><p>Volume, FCR e satisfação</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Motivo</th><th>Volume</th><th>FCR</th><th>CSAT</th><th>Leitura</th></tr></thead><tbody><tr><td><b>Pagamentos / limite</b></td><td>29%</td><td>74%</td><td>4,41</td><td><span class="badge br">Atenção</span></td></tr><tr><td><b>PIX / APIs</b></td><td>22%</td><td>86%</td><td>4,82</td><td><span class="badge bg">Saudável</span></td></tr><tr><td><b>Financeiros</b></td><td>18%</td><td>84%</td><td>4,76</td><td><span class="badge bg">Saudável</span></td></tr><tr><td><b>Conta / cadastro</b></td><td>17%</td><td>89%</td><td>4,88</td><td><span class="badge bg">Excelente</span></td></tr><tr><td><b>Segurança</b></td><td>14%</td><td>79%</td><td>4,63</td><td><span class="badge bw">Monitorar</span></td></tr></tbody></table></div></article>
+<article class="card s12"><div class="ch"><div class="cht"><span class="ci">MS</span><div><h3>Atendimentos que exigem atenção agora</h3><p>MessagingSession • fila e jornada do atendimento</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Sessão</th><th>Canal</th><th>Cliente</th><th>Fila</th><th>Status</th><th>Espera</th><th>Conversa</th><th>Analista</th></tr></thead><tbody><tr><td class="info"><b>MS-105918</b></td><td>Mensageria</td><td>Cliente A</td><td>Pagamentos</td><td><span class="badge bw">Waiting</span></td><td><b>03:41</b></td><td>—</td><td>—</td></tr><tr><td class="info"><b>MS-105914</b></td><td>Chat Web</td><td>Cliente B</td><td>Integrações</td><td><span class="badge bb">Active</span></td><td>00:43</td><td>12:18</td><td>Analista 03</td></tr><tr><td class="info"><b>MS-105909</b></td><td>Mensageria</td><td>Cliente C</td><td>Suporte Geral</td><td><span class="badge bb">Active</span></td><td>00:31</td><td>08:44</td><td>Analista 02</td></tr><tr><td class="info"><b>MS-105901</b></td><td>Mensageria</td><td>Cliente D</td><td>Pagamentos</td><td><span class="badge bb">Active</span></td><td>01:06</td><td>19:21</td><td>Analista 05</td></tr></tbody></table></div></article>
+</section>
+</section>
+
+<section id="live" class="panel">
+  <div class="head"><div><h2>Operação ao vivo</h2><p>Visão tática do momento para tomada de decisão imediata</p></div></div>
+  <section class="grid">
+    <article class="card s6"><div class="ch"><div class="cht"><span class="ci">Q</span><div><h3>Prioridade por fila</h3><p>Onde atuar primeiro</p></div></div></div><div class="list"><div class="item"><b>1. Pagamentos</b><p>6 clientes aguardando, maior espera em 03:41 e apenas 2 analistas disponíveis.</p></div><div class="item"><b>2. Integrações</b><p>3 clientes em espera, SL em 92%, atenção para fila técnica de integrações.</p></div><div class="item"><b>3. Segurança</b><p>2 clientes aguardando com espera chegando a 01:18.</p></div></div></article>
+    <article class="card s6"><div class="ch"><div class="cht"><span class="ci">⚡</span><div><h3>Playbook do supervisor</h3><p>Botões rápidos de ação</p></div></div></div><div class="actions"><div class="action"><span class="nb">→</span><div><b>Redistribuir analistas</b><p>Mova 2 recursos de Geral para Pagamentos no próximo ciclo.</p></div><button>Executar</button></div><div class="action"><span class="nw">!</span><div><b>Conferir invisíveis</b><p>Existem 8 usuários offline/invisíveis fora da capacidade operacional.</p></div><button>Conferir</button></div><div class="action"><span class="ng">✓</span><div><b>Auditar transferências</b><p>Revise sessões com troca para reduzir atrito ao cliente.</p></div><button>Abrir</button></div></div></article>
+    <article class="card s12"><div class="ch"><div class="cht"><span class="ci">RT</span><div><h3>Painel ao vivo de filas</h3><p>Leitura rápida de volume, disponibilidade e risco</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Fila</th><th>Clientes esperando</th><th>Maior espera</th><th>Analistas ativos</th><th>Disponíveis</th><th>Leitura operacional</th></tr></thead><tbody><tr><td><b>Pagamentos</b></td><td>6</td><td>03:41</td><td>12</td><td>2</td><td><span class="badge br">Crítica</span></td></tr><tr><td><b>Integrações</b></td><td>3</td><td>01:32</td><td>8</td><td>2</td><td><span class="badge bw">Monitorar</span></td></tr><tr><td><b>Suporte Geral</b></td><td>2</td><td>00:48</td><td>16</td><td>6</td><td><span class="badge bg">Saudável</span></td></tr><tr><td><b>Financeiro</b></td><td>1</td><td>00:37</td><td>7</td><td>1</td><td><span class="badge bg">Saudável</span></td></tr></tbody></table></div></article>
+  </section>
+</section>
+
+<section id="analysts" class="panel">
+  <div class="head"><div><h2>Analistas</h2><p>Status, capacidade, carga atual e qualidade do atendimento</p></div></div>
+  <section class="grid">
+    <article class="card s12"><div class="ch"><div class="cht"><span class="ci">A</span><div><h3>Status detalhado dos analistas</h3><p>Equipe operacional</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Analista</th><th>Status</th><th>Fila</th><th>Work atual</th><th>Capacidade</th><th>Ocupação</th><th>Speed to Answer</th><th>CSAT</th></tr></thead><tbody><tr><td><b>Analista 01</b></td><td><span class="badge bg">Disponível</span></td><td>Suporte Geral</td><td>0</td><td>0%</td><td>64%</td><td>00:39</td><td>4,89</td></tr><tr><td><b>Analista 02</b></td><td><span class="badge bb">Em atendimento</span></td><td>Pagamentos</td><td>3</td><td>75%</td><td>86%</td><td>00:51</td><td>4,75</td></tr><tr><td><b>Analista 03</b></td><td><span class="badge bb">Em atendimento</span></td><td>Integrações</td><td>2</td><td>67%</td><td>81%</td><td>01:08</td><td>4,82</td></tr><tr><td><b>Analista 04</b></td><td><span class="badge bw">Pausa</span></td><td>Suporte Geral</td><td>0</td><td>0%</td><td>72%</td><td>00:44</td><td>4,66</td></tr><tr><td><b>Analista 05</b></td><td><span class="badge bb">Em atendimento</span></td><td>Pagamentos</td><td>4</td><td>100%</td><td>92%</td><td>01:21</td><td>4,54</td></tr><tr><td><b>Analista 06</b></td><td><span class="badge bg">Disponível</span></td><td>Financeiro</td><td>0</td><td>0%</td><td>69%</td><td>00:42</td><td>4,78</td></tr><tr><td><b>Analista 07</b></td><td><span class="badge bb">Em atendimento</span></td><td>Segurança</td><td>2</td><td>67%</td><td>84%</td><td>00:58</td><td>4,91</td></tr><tr><td><b>Analista 08</b></td><td><span class="badge bb">Em atendimento</span></td><td>Pagamentos</td><td>3</td><td>75%</td><td>89%</td><td>01:16</td><td>4,61</td></tr></tbody></table></div></article>
+  </section>
+</section>
+
+<section id="messaging" class="panel">
+  <div class="head"><div><h2>Messaging Sessions</h2><p>Jornada da conversa, fila de entrada e tempo de atendimento</p></div></div>
+  <section class="grid">
+    <article class="card s12"><div class="ch"><div class="cht"><span class="ci">MS</span><div><h3>Detalhe das sessões</h3><p>Dados por Messaging Session</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Sessão</th><th>Canal</th><th>Cliente</th><th>Fila</th><th>Status</th><th>Espera</th><th>Conversa</th><th>Analista</th></tr></thead><tbody><tr><td><b>MS-105918</b></td><td>Mensageria</td><td>Cliente A</td><td>Pagamentos</td><td><span class="badge bw">Waiting</span></td><td>03:41</td><td>—</td><td>—</td></tr><tr><td><b>MS-105914</b></td><td>Chat Web</td><td>Cliente B</td><td>Integrações</td><td><span class="badge bb">Active</span></td><td>00:43</td><td>12:18</td><td>Analista 03</td></tr><tr><td><b>MS-105909</b></td><td>Mensageria</td><td>Cliente C</td><td>Suporte Geral</td><td><span class="badge bb">Active</span></td><td>00:31</td><td>08:44</td><td>Analista 02</td></tr><tr><td><b>MS-105901</b></td><td>Mensageria</td><td>Cliente D</td><td>Pagamentos</td><td><span class="badge bb">Active</span></td><td>01:06</td><td>19:21</td><td>Analista 05</td></tr><tr><td><b>MS-105894</b></td><td>Chat Web</td><td>Cliente E</td><td>Financeiro</td><td><span class="badge bg">Ended</span></td><td>00:37</td><td>10:03</td><td>Analista 06</td></tr></tbody></table></div></article>
+  </section>
+</section>
+
+<section id="agentwork" class="panel">
+  <div class="head"><div><h2>Agent Work</h2><p>Roteamento e execução do trabalho por analista</p></div></div>
+  <section class="grid">
+    <article class="card s12"><div class="ch"><div class="cht"><span class="ci">AW</span><div><h3>Detalhe de Agent Work</h3><p>Speed to answer, handle time e active time</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>AgentWork</th><th>Analista</th><th>WorkItem</th><th>Status</th><th>Speed to Answer</th><th>Handle Time</th><th>Active Time</th><th>ACW</th></tr></thead><tbody><tr><td><b>0Bz-78491</b></td><td>Analista 05</td><td>MS-105901</td><td><span class="badge bb">Opened</span></td><td>01:06</td><td>19:21</td><td>17:42</td><td>—</td></tr><tr><td><b>0Bz-78487</b></td><td>Analista 03</td><td>MS-105914</td><td><span class="badge bb">Opened</span></td><td>00:43</td><td>12:18</td><td>10:51</td><td>—</td></tr><tr><td><b>0Bz-78480</b></td><td>Analista 07</td><td>MS-105883</td><td><span class="badge bg">Closed</span></td><td>00:55</td><td>14:48</td><td>13:22</td><td>01:14</td></tr><tr><td><b>0Bz-78472</b></td><td>Analista 06</td><td>MS-105894</td><td><span class="badge bg">Closed</span></td><td>00:37</td><td>10:03</td><td>09:18</td><td>00:52</td></tr><tr><td><b>0Bz-78463</b></td><td>Analista 08</td><td>MS-105871</td><td><span class="badge bg">Closed</span></td><td>01:12</td><td>13:39</td><td>12:45</td><td>01:23</td></tr></tbody></table></div></article>
+  </section>
+</section>
+
+<section id="cx" class="panel">
+  <div class="head"><div><h2>CX & Qualidade</h2><p>Temas de maior impacto na experiência do cliente</p></div></div>
+  <section class="grid">
+    <article class="card s7"><div class="ch"><div class="cht"><span class="ci">CX</span><div><h3>Qualidade por motivo</h3><p>FCR, CSAT e leitura do time de CX</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Motivo</th><th>Volume</th><th>FCR</th><th>CSAT</th><th>Leitura</th></tr></thead><tbody><tr><td><b>Pagamentos / limite</b></td><td>29%</td><td>74%</td><td>4,41</td><td><span class="badge br">Atenção</span></td></tr><tr><td><b>PIX / APIs</b></td><td>22%</td><td>86%</td><td>4,82</td><td><span class="badge bg">Saudável</span></td></tr><tr><td><b>Financeiros</b></td><td>18%</td><td>84%</td><td>4,76</td><td><span class="badge bg">Saudável</span></td></tr><tr><td><b>Conta / cadastro</b></td><td>17%</td><td>89%</td><td>4,88</td><td><span class="badge bg">Excelente</span></td></tr><tr><td><b>Segurança</b></td><td>14%</td><td>79%</td><td>4,63</td><td><span class="badge bw">Monitorar</span></td></tr></tbody></table></div></article>
+    <article class="card s5"><div class="ch"><div class="cht"><span class="ci">★</span><div><h3>Indicadores de qualidade</h3><p>Resumo do time de CX</p></div></div></div><div class="legend"><div class="row"><span>CSAT do dia</span><b>4,72 / 5,00</b></div><div class="row"><span>FCR</span><b>82,4%</b></div><div class="row"><span>Reabertura</span><b>6,2%</b></div><div class="row"><span>Transferências</span><b>9,6%</b></div><div class="row"><span>NPS (30 dias)</span><b>+68</b></div></div></article>
+  </section>
+</section>
+
+<section id="cases" class="panel">
+  <div class="head"><div><h2>Cases & SLA</h2><p>Risco de estouro e priorização de backlog</p></div></div>
+  <section class="grid">
+    <article class="card s12"><div class="ch"><div class="cht"><span class="ci">SLA</span><div><h3>Cases em atenção</h3><p>Status, SLA consumido e tempo restante</p></div></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Case</th><th>Assunto</th><th>Responsável</th><th>Status</th><th>SLA consumido</th><th>Tempo restante</th></tr></thead><tbody><tr><td><b>#00049218</b></td><td>Dúvida sobre transação</td><td>Time Pagamentos</td><td>Em análise</td><td><span class="badge br">96%</span></td><td><b>00:18</b></td></tr><tr><td><b>#00049204</b></td><td>Falha em integração</td><td>Integrações</td><td>Aguardando interno</td><td><span class="badge bw">84%</span></td><td><b>01:07</b></td></tr><tr><td><b>#00049192</b></td><td>Contestação financeira</td><td>Financeiro</td><td>Em análise</td><td><span class="badge bg">63%</span></td><td><b>03:42</b></td></tr><tr><td><b>#00049183</b></td><td>Validação de segurança</td><td>Segurança</td><td>Aguardando cliente</td><td><span class="badge bg">58%</span></td><td><b>04:18</b></td></tr><tr><td><b>#00049170</b></td><td>Atualização cadastral</td><td>Suporte Geral</td><td>Em análise</td><td><span class="badge bg">41%</span></td><td><b>06:51</b></td></tr></tbody></table></div></article>
+  </section>
+</section>
+
+<div class="footer">Service 360 • Supervisor Console • Versão genérica para operações de atendimento digital</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</main>
+<script>
+const tabs = document.querySelectorAll('.tabs button');
+const panels = document.querySelectorAll('.panel');
+const searchInput = document.querySelector('.search input');
+const selects = document.querySelectorAll('.filters select');
+const toast = document.getElementById('toast');
+
+function showToast(message){
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(window.__service360Toast);
+  window.__service360Toast = setTimeout(()=>toast.classList.remove('show'), 2200);
+}
+
+function applyFilters(){
+  const query = (searchInput?.value || '').trim().toLowerCase();
+  const channel = selects[1]?.value || 'Todos';
+  const team = selects[2]?.value || 'Todas';
+  const activePanel = document.querySelector('.panel.active');
+  if(!activePanel) return;
+
+  activePanel.querySelectorAll('tbody tr').forEach(row => {
+    const txt = row.textContent.toLowerCase();
+    const matchesQuery = !query || txt.includes(query);
+    const matchesChannel = channel === 'Todos' || row.textContent.includes(channel);
+    const matchesTeam = team === 'Todas' || row.textContent.includes(team);
+    row.style.display = matchesQuery && matchesChannel && matchesTeam ? '' : 'none';
+  });
+
+  activePanel.querySelectorAll('.item,.action,.agent').forEach(card => {
+    const txt = card.textContent.toLowerCase();
+    card.style.display = !query || txt.includes(query) ? '' : 'none';
+  });
+}
+
+tabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    tabs.forEach(b => b.classList.toggle('active', b === btn));
+    panels.forEach(panel => panel.classList.toggle('active', panel.id === tab));
+    applyFilters();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+searchInput?.addEventListener('input', applyFilters);
+selects.forEach(select => select.addEventListener('change', () => {
+  applyFilters();
+  showToast('Filtros atualizados.');
+}));
+
+document.querySelectorAll('.action button').forEach(button => {
+  button.addEventListener('click', () => showToast('Ação demonstrativa: ' + button.textContent.trim()));
+});
+
+document.querySelector('.primary')?.addEventListener('click', () => {
+  showToast('Abertura do console operacional preparada para integração.');
+});
+
+document.querySelectorAll('.tools span').forEach((item, index) => {
+  if(index > 0){
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => showToast(index === 1 ? 'Dados atualizados.' : 'Controle demonstrativo.'));
+  }
+});
+
+// Integração opcional para páginas hospedeiras que embutem este HTML em iframe.
+window.addEventListener('message', event => {
+  const data = event.data || {};
+  if(data.type === 'service360:setTab' && data.tab){
+    const target = document.querySelector(`.tabs button[data-tab="${data.tab}"]`);
+    target?.click();
+  }
+  if(data.type === 'service360:setSearch' && typeof data.value === 'string'){
+    searchInput.value = data.value;
+    applyFilters();
+  }
+});
+
+window.parent?.postMessage({type:'service360:ready', version:'2.0-generic'}, '*');
+</script>
+</body>
+</html>

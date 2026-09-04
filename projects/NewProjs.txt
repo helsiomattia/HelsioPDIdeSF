@@ -1,0 +1,24 @@
+primeira tarefa =
+
+arrume o link do card Salesforce Skill Shine
+
+o correto é esse
+
+https://helsiomattia.github.io/salesforce-skill-shine/
+
+
+
+segunda tarefa = 
+
+o card de CRM Customer 360 sera nossa referencia total de estrutura de paginas para os proximos cards de projetos
+
+para o card de Service Cloud Console que ja tem no site, use o arquivo Service360_Generic_Embed_V2 para montar a pagina dele
+
+os cards de Automation Flow Lab e Analytics Dashboard podem ser reaproveitados porem mudar os nomes de acordo com os novos projetos
+
+tenho ainda na pasta de projetos o arquivo Customer_Journey_360_Generic, o Intelligence360_Generic, o Revenue_Churn_Intelligence_Generic e o Salesforce_Architecture_Control_Center_Generic
+
+
+crie os cards e ajuste esses necessarios
+
+e como disse, use o padrao do CRM Customer 360 para esses novos
