@@ -74,6 +74,89 @@
       "location": "Ubicación"
     }
   },
+  "aboutProject": {
+    "terminalTitle": "portfolio/project-overview",
+    "actions": {
+      "backToPortfolio": "Volver al portafolio",
+      "viewGithub": "Ver GitHub",
+      "openPublishedSite": "Abrir sitio publicado",
+      "repository": "Repositorio",
+      "backToSite": "Volver al sitio"
+    },
+    "hero": {
+      "badge": "Página oculta del proyecto",
+      "title": "Sobre el proyecto que sostiene este portafolio",
+      "description": "Esta página presenta la arquitectura, los recursos y las decisiones detrás del portafolio profesional de Helsio Mattia. La idea es mostrar no solo el resultado visual, sino también cómo se organizó el proyecto para ser claro, escalable y fácil de mantener."
+    },
+    "metrics": {
+      "react": "Interfaz moderna y componentizada",
+      "vite": "Build rápido para producción",
+      "languagesValue": "3 idiomas",
+      "languages": "Portugués, inglés y español",
+      "spa": "Rutas internas y fallback en GitHub Pages"
+    },
+    "features": {
+      "overline": "recursos principales",
+      "title": "Una vitrina profesional construida para verse bien por fuera y estar organizada por dentro.",
+      "showcase": {
+        "title": "Vitrina profesional",
+        "description": "Presenta trayectoria, experiencia, credenciales, proyectos y canales de contacto en una experiencia única."
+      },
+      "content": {
+        "title": "Contenido centralizado",
+        "description": "La información principal queda en `src/data`, separada de la lógica visual y fácil de mantener."
+      },
+      "responsive": {
+        "title": "Visual responsivo",
+        "description": "Layout preparado para desktop, tablet y mobile, con cards, grids y navegación fluida."
+      },
+      "deploy": {
+        "title": "Deploy en GitHub Pages",
+        "description": "Configuración con `base: /crm-specialist/` y fallback en `public/404.html` para rutas internas."
+      }
+    },
+    "sections": {
+      "overline": "navegación",
+      "title": "Secciones del sitio",
+      "description": "La página principal fue pensada como una narrativa profesional, empezando por la propuesta de valor y terminando con contacto directo.",
+      "items": [
+        { "title": "Inicio", "description": "Presentación principal, cargo, posicionamiento profesional y llamadas a la acción." },
+        { "title": "Sobre mí", "description": "Bio profesional, pilares de valor, estadísticas y stack de actuación." },
+        { "title": "Experiencia", "description": "Línea de tiempo con empresas, funciones, períodos y principales entregas." },
+        { "title": "Credenciales", "description": "Certificaciones Salesforce, formación académica, bootcamps y logros." },
+        { "title": "Expertise", "description": "Competencias agrupadas por Salesforce, CRM, automatización, datos, calidad y métodos." },
+        { "title": "Proyectos", "description": "Cards para sitio externo, demos Salesforce y vistas HTML incorporadas." },
+        { "title": "Contacto", "description": "E-mail, teléfono, ubicación, LinkedIn, GitHub y Trailblazer." }
+      ]
+    },
+    "dataLayer": {
+      "overline": "data layer",
+      "title": "Contenido separado de la interfaz",
+      "description": "El proyecto evita esparcir información profesional por los componentes. El mantenimiento principal ocurre en pocos archivos claros.",
+      "files": [
+        { "file": "profile.js", "description": "Nombre, título, contactos, redes, bio, estadísticas y stack principal." },
+        { "file": "experience.js", "description": "Empresas, cargos, períodos, descripciones, tecnologías y principales entregas." },
+        { "file": "projects.js", "description": "Credenciales, certificaciones, formación, bootcamps y logros." },
+        { "file": "skills.js", "description": "Áreas de expertise, habilidades y detalles de cada competencia." },
+        { "file": "portfolioProjects.js", "description": "Proyectos, links externos, demos internas y HTML incorporado." },
+        { "file": "common.json", "description": "Textos fijos de la interfaz en portugués, inglés y español." }
+      ]
+    },
+    "stack": {
+      "overline": "stack utilizada",
+      "title": "Tecnologías del proyecto",
+      "description": "La stack fue elegida para entregar velocidad de desarrollo, buena experiencia visual, internacionalización simple y publicación estática compatible con GitHub Pages."
+    },
+    "deploy": {
+      "title": "Deploy preparado",
+      "description": "El sitio está configurado para el camino `/crm-specialist/`, con redirección para mantener rutas internas funcionando incluso cuando se abren directamente."
+    },
+    "summary": {
+      "overline": "resumen",
+      "title": "Un proyecto hecho para presentar valor profesional con claridad.",
+      "description": "Más que una página personal, este portafolio organiza narrativa, contenido, tecnología y publicación para reforzar el posicionamiento de Helsio Mattia en Salesforce CRM, automatización y evolución operacional."
+    }
+  },
   "footer": {
     "copyrightSuffix": "Salesforce CRM | Sales & Service Cloud"
   }

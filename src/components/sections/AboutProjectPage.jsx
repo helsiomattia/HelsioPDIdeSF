@@ -23,6 +23,7 @@ import StorageRoundedIcon from '@mui/icons-material/StorageRounded';
 import TerminalRoundedIcon from '@mui/icons-material/TerminalRounded';
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 import WebRoundedIcon from '@mui/icons-material/WebRounded';
+import { useTranslation } from 'react-i18next';
 import { profile } from '../../data/profile';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -33,56 +34,37 @@ function getHomePath() {
 }
 
 const metrics = [
-  { value: 'React 18', label: 'Interface moderna e componentizada', icon: CodeRoundedIcon },
-  { value: 'Vite 5', label: 'Build rápido para produção', icon: RocketLaunchRoundedIcon },
-  { value: '3 idiomas', label: 'Português, inglês e espanhol', icon: LanguageRoundedIcon },
-  { value: 'SPA', label: 'Rotas internas e fallback no GitHub Pages', icon: RouteRoundedIcon },
+  { value: 'React 18', labelKey: 'aboutProject.metrics.react', icon: CodeRoundedIcon },
+  { value: 'Vite 5', labelKey: 'aboutProject.metrics.vite', icon: RocketLaunchRoundedIcon },
+  { valueKey: 'aboutProject.metrics.languagesValue', labelKey: 'aboutProject.metrics.languages', icon: LanguageRoundedIcon },
+  { value: 'SPA', labelKey: 'aboutProject.metrics.spa', icon: RouteRoundedIcon },
 ];
 
 const featureCards = [
   {
-    title: 'Vitrine profissional',
-    description: 'Apresenta trajetória, experiência, credenciais, projetos e canais de contato em uma experiência única.',
+    titleKey: 'aboutProject.features.showcase.title',
+    descriptionKey: 'aboutProject.features.showcase.description',
     icon: WebRoundedIcon,
     color: '#0D4DA5',
   },
   {
-    title: 'Conteúdo centralizado',
-    description: 'As informações principais ficam em `src/data`, separadas da lógica visual e fáceis de manter.',
+    titleKey: 'aboutProject.features.content.title',
+    descriptionKey: 'aboutProject.features.content.description',
     icon: DataObjectRoundedIcon,
     color: '#0B8F61',
   },
   {
-    title: 'Visual responsivo',
-    description: 'Layout preparado para desktop, tablet e mobile, com cards, grids e navegação fluida.',
+    titleKey: 'aboutProject.features.responsive.title',
+    descriptionKey: 'aboutProject.features.responsive.description',
     icon: DevicesRoundedIcon,
     color: '#1EACB8',
   },
   {
-    title: 'Deploy no GitHub Pages',
-    description: 'Configuração com `base: /crm-specialist/` e fallback em `public/404.html` para rotas internas.',
+    titleKey: 'aboutProject.features.deploy.title',
+    descriptionKey: 'aboutProject.features.deploy.description',
     icon: StorageRoundedIcon,
     color: '#B7791F',
   },
-];
-
-const sections = [
-  ['Início', 'Apresentação principal, cargo, papéis profissionais e chamadas para ação.'],
-  ['Sobre', 'Bio profissional, pilares de valor, estatísticas e stack de atuação.'],
-  ['Experiência', 'Linha do tempo com empresas, funções, períodos e principais entregas.'],
-  ['Credenciais', 'Certificações Salesforce, formação acadêmica, bootcamps e conquistas.'],
-  ['Expertise', 'Competências agrupadas por Salesforce, CRM, automação, dados, qualidade e métodos.'],
-  ['Projetos', 'Cards para site externo, demos Salesforce e views HTML incorporadas.'],
-  ['Contato', 'E-mail, telefone, localização, LinkedIn, GitHub e Trailblazer.'],
-];
-
-const dataFiles = [
-  ['profile.js', 'Nome, título, contatos, redes, bio, estatísticas e stack principal.'],
-  ['experience.js', 'Empresas, cargos, períodos, descrições, tecnologias e principais entregas.'],
-  ['projects.js', 'Credenciais, certificações, formação, bootcamps e conquistas.'],
-  ['skills.js', 'Áreas de expertise, habilidades e detalhes de cada competência.'],
-  ['portfolioProjects.js', 'Projetos, links externos, demos internas e HTML incorporado.'],
-  ['common.json', 'Textos fixos da interface em português, inglês e espanhol.'],
 ];
 
 const stack = ['React 18', 'Vite 5', 'Material UI 5', 'Emotion', 'i18next', 'react-i18next', 'GSAP', 'GitHub Pages'];
@@ -134,7 +116,7 @@ function AmbientBackground() {
   );
 }
 
-function TerminalCard() {
+function TerminalCard({ terminalTitle }) {
   return (
     <Paper
       elevation={0}
@@ -153,7 +135,7 @@ function TerminalCard() {
         ))}
         <TerminalRoundedIcon sx={{ ml: 0.8, fontSize: '1rem', color: '#1EACB8' }} />
         <Typography sx={{ ml: 0.8, fontFamily: '"Fira Code", monospace', fontSize: '0.72rem', color: 'rgba(234,243,249,0.72)', fontWeight: 800 }}>
-          portfolio/project-overview
+          {terminalTitle}
         </Typography>
       </Box>
 
@@ -224,6 +206,10 @@ function InfoCard({ title, description, icon: Icon, color }) {
 }
 
 export default function AboutProjectPage() {
+  const { t } = useTranslation();
+  const sections = t('aboutProject.sections.items', { returnObjects: true });
+  const dataFiles = t('aboutProject.dataLayer.files', { returnObjects: true });
+
   return (
     <Box
       component="main"
@@ -241,10 +227,10 @@ export default function AboutProjectPage() {
       <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 2, mb: { xs: 3, md: 5 } }}>
           <Button component="a" href={getHomePath()} startIcon={<ArrowBackRoundedIcon />} variant="outlined">
-            Voltar ao portfólio
+            {t('aboutProject.actions.backToPortfolio')}
           </Button>
           <Button component="a" href={profile.github} target="_blank" rel="noopener noreferrer" endIcon={<GitHubIcon />}>
-            Ver GitHub
+            {t('aboutProject.actions.viewGithub')}
           </Button>
         </Box>
 
@@ -259,7 +245,7 @@ export default function AboutProjectPage() {
         >
           <Box>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
-              <Chip icon={<AutoAwesomeRoundedIcon />} label="Página oculta do projeto" color="primary" />
+              <Chip icon={<AutoAwesomeRoundedIcon />} label={t('aboutProject.hero.badge')} color="primary" />
               <Chip label="React + Vite" variant="outlined" color="primary" />
               <Chip label="GitHub Pages" variant="outlined" color="secondary" />
             </Box>
@@ -274,30 +260,30 @@ export default function AboutProjectPage() {
                 letterSpacing: '-0.06em',
               }}
             >
-              Sobre o projeto que sustenta este portfólio
+              {t('aboutProject.hero.title')}
             </Typography>
 
             <Typography sx={{ maxWidth: 780, color: 'text.primary', fontSize: { xs: '1rem', md: '1.18rem' }, lineHeight: 1.75, fontWeight: 560, mb: 3 }}>
-              Esta página apresenta a arquitetura, os recursos e as decisões por trás do portfólio profissional de Helsio Mattia. A ideia é mostrar não só o resultado visual, mas também como o projeto foi organizado para ser claro, escalável e fácil de manter.
+              {t('aboutProject.hero.description')}
             </Typography>
 
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.2 }}>
               <Button component="a" href={siteUrl} target="_blank" rel="noopener noreferrer" variant="contained" endIcon={<OpenInNewRoundedIcon />}>
-                Abrir site publicado
+                {t('aboutProject.actions.openPublishedSite')}
               </Button>
               <Button component="a" href={`${profile.github}/crm-specialist`} target="_blank" rel="noopener noreferrer" variant="outlined" endIcon={<GitHubIcon />}>
-                Repositório
+                {t('aboutProject.actions.repository')}
               </Button>
             </Box>
           </Box>
 
-          <TerminalCard />
+          <TerminalCard terminalTitle={t('aboutProject.terminalTitle')} />
         </Box>
 
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(4, minmax(0, 1fr))' }, gap: 'var(--card-gap)', mb: { xs: 5, md: 8 } }}>
-          {metrics.map(({ value, label, icon: Icon }) => (
+          {metrics.map(({ value, valueKey, labelKey, icon: Icon }) => (
             <Paper
-              key={value}
+              key={value || valueKey}
               elevation={0}
               sx={{
                 p: 2.4,
@@ -309,10 +295,10 @@ export default function AboutProjectPage() {
             >
               <Icon sx={{ color: 'primary.main', mb: 1.4 }} />
               <Typography variant="h4" sx={{ fontSize: '1.35rem', fontWeight: 900, mb: 0.5 }}>
-                {value}
+                {valueKey ? t(valueKey) : value}
               </Typography>
               <Typography sx={{ color: 'text.secondary', fontSize: '0.86rem', fontWeight: 650, lineHeight: 1.5 }}>
-                {label}
+                {t(labelKey)}
               </Typography>
             </Paper>
           ))}
@@ -320,14 +306,20 @@ export default function AboutProjectPage() {
 
         <Box sx={{ mb: { xs: 5, md: 8 } }}>
           <Typography variant="overline" sx={{ color: 'primary.main' }}>
-            principais recursos
+            {t('aboutProject.features.overline')}
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: '2rem', md: '3.2rem' }, maxWidth: 760, mb: 3 }}>
-            Uma vitrine profissional construída para ser bonita por fora e organizada por dentro.
+            {t('aboutProject.features.title')}
           </Typography>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))', xl: 'repeat(4, minmax(0, 1fr))' }, gap: 'var(--card-gap)' }}>
             {featureCards.map((card) => (
-              <InfoCard key={card.title} {...card} />
+              <InfoCard
+                key={card.titleKey}
+                title={t(card.titleKey)}
+                description={t(card.descriptionKey)}
+                icon={card.icon}
+                color={card.color}
+              />
             ))}
           </Box>
         </Box>
@@ -335,17 +327,17 @@ export default function AboutProjectPage() {
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '0.9fr 1.1fr' }, gap: { xs: 3, md: 4 }, mb: { xs: 5, md: 8 }, alignItems: 'stretch' }}>
           <Paper elevation={0} sx={{ p: { xs: 2.4, md: 3.2 }, borderRadius: '28px', bgcolor: 'rgba(255,255,255,0.78)', border: '1px solid rgba(13,77,165,0.14)' }}>
             <Typography variant="overline" sx={{ color: 'primary.main' }}>
-              navegação
+              {t('aboutProject.sections.overline')}
             </Typography>
             <Typography variant="h3" sx={{ fontSize: { xs: '1.75rem', md: '2.35rem' }, mb: 1 }}>
-              Seções do site
+              {t('aboutProject.sections.title')}
             </Typography>
             <Typography sx={{ color: 'text.secondary', fontWeight: 560, lineHeight: 1.7, mb: 2.5 }}>
-              A página principal foi pensada como uma narrativa profissional, começando pela proposta de valor e terminando com contato direto.
+              {t('aboutProject.sections.description')}
             </Typography>
 
             <Box sx={{ display: 'grid', gap: 1.1 }}>
-              {sections.map(([title, description], index) => (
+              {sections.map(({ title, description }, index) => (
                 <Box key={title} sx={{ display: 'grid', gridTemplateColumns: '42px 1fr', gap: 1.4, alignItems: 'start' }}>
                   <Box sx={{ width: 34, height: 34, borderRadius: '11px', display: 'grid', placeItems: 'center', bgcolor: alpha('#0D4DA5', 0.09), color: 'primary.main', fontFamily: '"Fira Code", monospace', fontWeight: 900, fontSize: '0.72rem' }}>
                     {String(index + 1).padStart(2, '0')}
@@ -363,17 +355,17 @@ export default function AboutProjectPage() {
             <Box sx={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at top right, rgba(30,172,184,0.22), transparent 38%)', pointerEvents: 'none' }} />
             <Box sx={{ position: 'relative', zIndex: 1 }}>
               <Typography variant="overline" sx={{ color: '#1EACB8' }}>
-                data layer
+                {t('aboutProject.dataLayer.overline')}
               </Typography>
               <Typography variant="h3" sx={{ color: '#fff', fontSize: { xs: '1.75rem', md: '2.35rem' }, mb: 1 }}>
-                Conteúdo separado da interface
+                {t('aboutProject.dataLayer.title')}
               </Typography>
               <Typography sx={{ color: 'rgba(234,243,249,0.72)', fontWeight: 560, lineHeight: 1.7, mb: 3 }}>
-                O projeto evita espalhar informações profissionais pelos componentes. A manutenção principal acontece em poucos arquivos claros.
+                {t('aboutProject.dataLayer.description')}
               </Typography>
 
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' }, gap: 1.2 }}>
-                {dataFiles.map(([file, description]) => (
+                {dataFiles.map(({ file, description }) => (
                   <Box key={file} sx={{ p: 1.6, borderRadius: '16px', bgcolor: 'rgba(234,243,249,0.06)', border: '1px solid rgba(234,243,249,0.1)' }}>
                     <Typography sx={{ fontFamily: '"Fira Code", monospace', color: '#1EACB8', fontWeight: 850, fontSize: '0.82rem', mb: 0.8 }}>
                       src/data/{file}
@@ -391,10 +383,10 @@ export default function AboutProjectPage() {
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1.05fr 0.95fr' }, gap: { xs: 3, md: 4 }, mb: { xs: 5, md: 8 } }}>
           <Paper elevation={0} sx={{ p: { xs: 2.4, md: 3.2 }, borderRadius: '28px', bgcolor: 'rgba(255,255,255,0.8)', border: '1px solid rgba(13,77,165,0.14)' }}>
             <Typography variant="overline" sx={{ color: 'primary.main' }}>
-              stack utilizada
+              {t('aboutProject.stack.overline')}
             </Typography>
             <Typography variant="h3" sx={{ fontSize: { xs: '1.75rem', md: '2.35rem' }, mb: 2 }}>
-              Tecnologias do projeto
+              {t('aboutProject.stack.title')}
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
               {stack.map((item) => (
@@ -403,7 +395,7 @@ export default function AboutProjectPage() {
             </Box>
             <Divider sx={{ my: 3 }} />
             <Typography sx={{ color: 'text.secondary', lineHeight: 1.75, fontWeight: 560 }}>
-              A stack foi escolhida para entregar velocidade de desenvolvimento, boa experiência visual, internacionalização simples e publicação estática compatível com GitHub Pages.
+              {t('aboutProject.stack.description')}
             </Typography>
           </Paper>
 
@@ -413,11 +405,11 @@ export default function AboutProjectPage() {
                 <VerifiedRoundedIcon />
               </Box>
               <Typography variant="h3" sx={{ fontSize: { xs: '1.55rem', md: '2rem' } }}>
-                Deploy preparado
+                {t('aboutProject.deploy.title')}
               </Typography>
             </Box>
             <Typography sx={{ color: 'text.secondary', lineHeight: 1.75, fontWeight: 560, mb: 2.4 }}>
-              O site está configurado para o caminho `/crm-specialist/`, com redirecionamento para manter rotas internas funcionando mesmo quando abertas diretamente.
+              {t('aboutProject.deploy.description')}
             </Typography>
             <Box sx={{ p: 1.8, borderRadius: '16px', bgcolor: alpha('#B7791F', 0.08), border: `1px solid ${alpha('#B7791F', 0.18)}` }}>
               <Typography sx={{ fontFamily: '"Fira Code", monospace', fontWeight: 850, color: '#B7791F', mb: 0.6 }}>
@@ -445,17 +437,17 @@ export default function AboutProjectPage() {
           <Box sx={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr auto' }, gap: 3, alignItems: 'center' }}>
             <Box>
               <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.78)' }}>
-                resumo
+                {t('aboutProject.summary.overline')}
               </Typography>
               <Typography variant="h2" sx={{ color: '#fff', fontSize: { xs: '2rem', md: '3.05rem' }, mb: 1 }}>
-                Um projeto feito para apresentar valor profissional com clareza.
+                {t('aboutProject.summary.title')}
               </Typography>
               <Typography sx={{ maxWidth: 760, color: 'rgba(255,255,255,0.82)', lineHeight: 1.75, fontWeight: 560 }}>
-                Mais do que uma página pessoal, este portfólio organiza narrativa, conteúdo, tecnologia e publicação para reforçar o posicionamento de Helsio Mattia em Salesforce CRM, automação e evolução operacional.
+                {t('aboutProject.summary.description')}
               </Typography>
             </Box>
             <Button component="a" href={getHomePath()} variant="contained" color="secondary" startIcon={<ArrowBackRoundedIcon />} sx={{ bgcolor: '#fff', color: '#0D4DA5', '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' } }}>
-              Voltar ao site
+              {t('aboutProject.actions.backToSite')}
             </Button>
           </Box>
         </Paper>

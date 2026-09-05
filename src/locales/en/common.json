@@ -74,6 +74,89 @@
       "location": "Location"
     }
   },
+  "aboutProject": {
+    "terminalTitle": "portfolio/project-overview",
+    "actions": {
+      "backToPortfolio": "Back to portfolio",
+      "viewGithub": "View GitHub",
+      "openPublishedSite": "Open published site",
+      "repository": "Repository",
+      "backToSite": "Back to site"
+    },
+    "hero": {
+      "badge": "Hidden project page",
+      "title": "About the project behind this portfolio",
+      "description": "This page presents the architecture, features and decisions behind Helsio Mattia's professional portfolio. The goal is to show not only the visual result, but also how the project was organized to be clear, scalable and easy to maintain."
+    },
+    "metrics": {
+      "react": "Modern component-based interface",
+      "vite": "Fast production build",
+      "languagesValue": "3 languages",
+      "languages": "Portuguese, English and Spanish",
+      "spa": "Internal routes and GitHub Pages fallback"
+    },
+    "features": {
+      "overline": "key features",
+      "title": "A professional showcase built to look polished outside and stay organized inside.",
+      "showcase": {
+        "title": "Professional showcase",
+        "description": "Presents career path, experience, credentials, projects and contact channels in one unified experience."
+      },
+      "content": {
+        "title": "Centralized content",
+        "description": "Core information lives in `src/data`, separated from visual logic and easy to maintain."
+      },
+      "responsive": {
+        "title": "Responsive visuals",
+        "description": "Layout prepared for desktop, tablet and mobile, with cards, grids and fluid navigation."
+      },
+      "deploy": {
+        "title": "GitHub Pages deploy",
+        "description": "Configuration with `base: /crm-specialist/` and fallback in `public/404.html` for internal routes."
+      }
+    },
+    "sections": {
+      "overline": "navigation",
+      "title": "Site sections",
+      "description": "The main page was designed as a professional narrative, starting with the value proposition and ending with direct contact.",
+      "items": [
+        { "title": "Home", "description": "Main presentation, role, professional positioning and calls to action." },
+        { "title": "About", "description": "Professional bio, value pillars, statistics and working stack." },
+        { "title": "Experience", "description": "Timeline with companies, roles, periods and key deliveries." },
+        { "title": "Credentials", "description": "Salesforce certifications, academic background, bootcamps and achievements." },
+        { "title": "Expertise", "description": "Capabilities grouped by Salesforce, CRM, automation, data, quality and methods." },
+        { "title": "Projects", "description": "Cards for external site, Salesforce demos and embedded HTML views." },
+        { "title": "Contact", "description": "Email, phone, location, LinkedIn, GitHub and Trailblazer." }
+      ]
+    },
+    "dataLayer": {
+      "overline": "data layer",
+      "title": "Content separated from the interface",
+      "description": "The project avoids scattering professional information across components. Main maintenance happens in a few clear files.",
+      "files": [
+        { "file": "profile.js", "description": "Name, title, contacts, networks, bio, statistics and main stack." },
+        { "file": "experience.js", "description": "Companies, roles, periods, descriptions, technologies and key deliveries." },
+        { "file": "projects.js", "description": "Credentials, certifications, education, bootcamps and achievements." },
+        { "file": "skills.js", "description": "Expertise areas, skills and details for each capability." },
+        { "file": "portfolioProjects.js", "description": "Projects, external links, internal demos and embedded HTML." },
+        { "file": "common.json", "description": "Fixed interface copy in Portuguese, English and Spanish." }
+      ]
+    },
+    "stack": {
+      "overline": "technology stack",
+      "title": "Project technologies",
+      "description": "The stack was chosen to deliver development speed, strong visual experience, simple internationalization and static publishing compatible with GitHub Pages."
+    },
+    "deploy": {
+      "title": "Deploy ready",
+      "description": "The site is configured for the `/crm-specialist/` path, with redirection to keep internal routes working even when opened directly."
+    },
+    "summary": {
+      "overline": "summary",
+      "title": "A project built to present professional value with clarity.",
+      "description": "More than a personal page, this portfolio organizes narrative, content, technology and publishing to reinforce Helsio Mattia's positioning in Salesforce CRM, automation and operational evolution."
+    }
+  },
   "footer": {
     "copyrightSuffix": "Salesforce CRM | Sales & Service Cloud"
   }
