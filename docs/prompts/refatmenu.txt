@@ -1,0 +1,972 @@
+Quero refatorar COMPLETAMENTE apenas o sistema de navegação principal
+do meu portfólio React.
+
+IMPORTANTE:
+
+Não quero alterar o conteúdo das páginas/sections.
+Não quero alterar a identidade visual geral.
+Não quero redesenhar os cards.
+Não quero alterar o sistema PT / EN / ES.
+
+Esta tarefa é especificamente sobre transformar a navegação superior atual
+em uma navegação lateral moderna e minimalista.
+
+GSAP já está instalado no projeto.
+
+===========================================================
+1. SITUAÇÃO ATUAL
+===========================================================
+
+Hoje o header possui:
+
+[ HM Helsio.crm ]
+
+01. Sobre
+02. Experiência
+03. Credenciais
+04. Expertise
+05. Contato
+
+                                    PT EN ES
+
+
+Quero REMOVER do header os links:
+
+01. Sobre
+02. Experiência
+03. Credenciais
+04. Expertise
+05. Contato
+
+
+O header deverá ficar muito mais limpo:
+
+[ HM Helsio.crm ]                           [ PT EN ES ]
+
+
+A navegação entre sections passará para uma barra lateral flutuante.
+
+===========================================================
+2. CONCEITO VISUAL
+===========================================================
+
+Quero implementar algo próximo dos conceitos:
+
+- Vertical Section Navigation
+- Floating Side Navigation
+- Navigation Rail
+- Scrollspy Navigation
+- Section Indicator
+
+MAS não quero uma sidebar tradicional.
+
+NÃO quero:
+
+┌──────────────┐
+│ Sobre        │
+│ Experiência  │
+│ Credenciais  │
+│ Expertise    │
+│ Contato      │
+└──────────────┘
+
+ocupando permanentemente uma parte da tela.
+
+Quero um componente extremamente minimalista que mostre principalmente
+APENAS A SECTION ATUAL.
+
+Exemplo:
+
+                    ┌─────────┐
+                    │   01    │
+                    │         │
+                    │  SOBRE  │
+                    │         │
+                    │   ↓     │
+                    └─────────┘
+
+ou uma interpretação visual ainda melhor.
+
+===========================================================
+3. POSICIONAMENTO
+===========================================================
+
+No desktop, quero a navegação posicionada na lateral direita do conteúdo.
+
+Algo próximo de:
+
+position: fixed;
+right: clamp(20px, 3vw, 56px);
+top: 50%;
+transform: translateY(-50%);
+
+Mas analise a estrutura real antes de implementar.
+
+Ela deve ficar fora do conteúdo principal,
+sem sobrepor cards e sem consumir largura excessiva.
+
+Visualmente:
+
+┌──────────────────────────────────────────────────────────────┐
+
+                         CONTEÚDO
+
+                                               ┌────────────┐
+                                               │     01     │
+                                               │   SOBRE    │
+                                               └────────────┘
+
+└──────────────────────────────────────────────────────────────┘
+
+===========================================================
+4. NÃO QUERO TEXTO LETRA POR LETRA
+===========================================================
+
+NÃO faça:
+
+S
+O
+B
+R
+E
+
+como se cada letra estivesse em uma linha.
+
+Isso fica visualmente estranho.
+
+Se quisermos texto vertical, utilize algo sofisticado como:
+
+writing-mode: vertical-rl;
+
+ou:
+
+transform: rotate(90deg);
+
+Mas avalie qual solução fica mais elegante.
+
+Minha preferência é um pequeno rail vertical,
+mas com o texto continuando visualmente legível.
+
+Exemplos possíveis:
+
+01
+SOBRE
+
+ou
+
+01 — SOBRE
+
+rotacionado como um único conjunto.
+
+===========================================================
+5. DESIGN DO COMPONENTE
+===========================================================
+
+Quero um componente premium e discreto.
+
+Visual aproximado:
+
+╭────────────╮
+│            │
+│     01     │
+│     ──     │
+│   SOBRE    │
+│            │
+│     ↓      │
+│            │
+╰────────────╯
+
+
+Ou:
+
+      01
+      │
+      │
+    SOBRE
+      │
+      ↓
+
+
+Ou ainda uma solução minimalista:
+
+      ┃
+  01  ┃  SOBRE
+      ┃
+
+
+Escolha a alternativa que mais combine com a identidade existente.
+
+Características:
+
+- fundo translúcido muito sutil;
+- borda delicada;
+- sombra muito leve;
+- azul/cyan existente no projeto;
+- border-radius consistente;
+- tipografia mono atualmente utilizada nos elementos técnicos;
+- aparência extremamente limpa.
+
+Não quero glassmorphism exagerado.
+
+===========================================================
+6. ESTADO ATUAL DA SECTION
+===========================================================
+
+O componente deve detectar automaticamente qual section está ativa.
+
+Sections:
+
+home
+about
+experience
+credentials
+expertise
+contact
+
+
+Mapeamento PT:
+
+00 — INÍCIO
+01 — SOBRE
+02 — EXPERIÊNCIA
+03 — CREDENCIAIS
+04 — EXPERTISE
+05 — CONTATO
+
+
+EN:
+
+00 — HOME
+01 — ABOUT
+02 — EXPERIENCE
+03 — CREDENTIALS
+04 — EXPERTISE
+05 — CONTACT
+
+
+ES:
+
+00 — INICIO
+01 — SOBRE MÍ
+02 — EXPERIENCIA
+03 — CREDENCIALES
+04 — EXPERIENCIA / ESPECIALIDADES, conforme tradução existente
+05 — CONTACTO
+
+
+Utilize o sistema de internacionalização JÁ existente no projeto.
+
+Não criar traduções paralelas hardcoded se o projeto já possui estrutura
+de tradução.
+
+===========================================================
+7. SCROLLSPY
+===========================================================
+
+O indicador deve acompanhar automaticamente o scroll.
+
+Por exemplo:
+
+Hero
+
+00
+INÍCIO
+
+
+scroll ↓
+
+
+Sobre
+
+01
+SOBRE
+
+
+scroll ↓
+
+
+Experiência
+
+02
+EXPERIÊNCIA
+
+
+etc.
+
+Utilize preferencialmente o ScrollTrigger do GSAP,
+já existente no projeto.
+
+Também pode utilizar IntersectionObserver caso a arquitetura atual
+já use essa abordagem.
+
+Não implemente duas soluções concorrentes.
+
+===========================================================
+8. TRANSIÇÃO DO NOME
+===========================================================
+
+Quando mudar de section:
+
+SOBRE
+↓
+EXPERIÊNCIA
+
+não quero apenas substituir instantaneamente o texto.
+
+Quero uma microanimação elegante.
+
+Exemplo:
+
+texto atual:
+
+opacity: 1 → 0
+y: 0 → -8px
+
+novo texto:
+
+opacity: 0 → 1
+y: 8px → 0
+
+duration aproximadamente:
+
+250–400ms
+
+ease:
+
+power2.out
+ou
+power3.out
+
+
+O número também pode mudar com uma pequena transição.
+
+Nada exagerado.
+
+===========================================================
+9. INDICADOR DE PROGRESSO
+===========================================================
+
+Gostaria de integrar uma pequena linha de progresso vertical.
+
+Exemplo:
+
+      02
+      │
+      █
+      █
+      │
+ EXPERIÊNCIA
+      │
+      ↓
+
+
+A linha pode representar aproximadamente a posição atual dentro do site.
+
+Outra alternativa:
+
+○
+●
+○
+○
+○
+
+Mas NÃO quero mostrar 5 textos simultaneamente.
+
+Pode mostrar pequenos markers sem label.
+
+Algo como:
+
+│
+●  02 EXPERIÊNCIA
+│
+○
+│
+○
+
+desde que seja muito discreto.
+
+Escolha a solução mais elegante.
+
+===========================================================
+10. NAVEGAÇÃO ANTERIOR / PRÓXIMA
+===========================================================
+
+Como removeremos os links superiores,
+preciso preservar boa navegação.
+
+Inclua controles muito discretos:
+
+↑
+↓
+
+ou
+
+chevrons.
+
+Exemplo:
+
+        ↑
+
+   02
+   EXPERIÊNCIA
+
+        ↓
+
+
+Clicar ↑:
+
+section anterior.
+
+Clicar ↓:
+
+próxima section.
+
+Utilize o sistema de scroll já implementado,
+preferencialmente GSAP ScrollToPlugin.
+
+===========================================================
+11. EXPANSÃO OPCIONAL AO HOVER
+===========================================================
+
+Quero testar uma interação interessante:
+
+ESTADO NORMAL:
+
+mostrar somente:
+
+02
+EXPERIÊNCIA
+
+
+HOVER / FOCUS:
+
+expandir horizontalmente e mostrar:
+
+01 Sobre
+02 Experiência
+03 Credenciais
+04 Expertise
+05 Contato
+
+
+MAS isso deve ser extremamente compacto.
+
+Exemplo:
+
+NORMAL:
+
+                    ╭──────────────╮
+                    │02 EXPERIÊNCIA│
+                    ╰──────────────╯
+
+
+HOVER:
+
+          ╭──────────────────────────────╮
+          │ 01 Sobre                    │
+          │ 02 Experiência        ●     │
+          │ 03 Credenciais              │
+          │ 04 Expertise                │
+          │ 05 Contato                  │
+          ╰──────────────────────────────╯
+
+
+IMPORTANTE:
+
+Se essa expansão deixar o resultado visualmente pior,
+não implemente.
+
+O requisito obrigatório é somente mostrar a section atual.
+
+A expansão é uma melhoria opcional.
+
+===========================================================
+12. UMA ALTERNATIVA AINDA MELHOR
+===========================================================
+
+Também avalie este comportamento:
+
+NORMAL:
+
+[ 02 | EXPERIÊNCIA ]
+
+
+Ao clicar:
+
+[ 01 SOBRE       ]
+[ 02 EXPERIÊNCIA ] ← atual
+[ 03 CREDENCIAIS ]
+[ 04 EXPERTISE   ]
+[ 05 CONTATO     ]
+
+
+Ao clicar fora:
+
+volta para:
+
+[ 02 | EXPERIÊNCIA ]
+
+
+Isso preserva:
+
+minimalismo
++
+navegação direta.
+
+Se adotar esse modelo, implemente acessibilidade corretamente.
+
+===========================================================
+13. HEADER
+===========================================================
+
+Depois de remover a navegação central,
+reorganize o header.
+
+Quero:
+
+┌─────────────────────────────────────────────────────────┐
+│ HM Helsio.crm                              PT  EN  ES    │
+└─────────────────────────────────────────────────────────┘
+
+
+IMPORTANTE:
+
+Não quero que:
+
+Helsio.crm fique no centro da página.
+
+Ele deve continuar alinhado ao container principal.
+
+O seletor de idioma permanece alinhado do outro lado.
+
+O header deverá parecer proposital,
+e não simplesmente vazio após remover o menu.
+
+Pode reduzir levemente sua altura.
+
+===========================================================
+14. HOME / HERO
+===========================================================
+
+Na HOME o indicador pode aparecer como:
+
+00
+INÍCIO
+
+ou simplesmente:
+
+00
+HOME
+
+Mas quero que ele fique ainda mais discreto nessa página,
+porque o Hero já é visualmente forte.
+
+===========================================================
+15. POSIÇÃO RELATIVA AO CONTEÚDO
+===========================================================
+
+Muito importante:
+
+não deixe o indicador muito próximo da borda direita da janela.
+
+Também não deixe colado nos cards.
+
+Quero que ele ocupe a "zona vazia" entre:
+
+conteúdo principal
+
+e
+
+borda do viewport.
+
+Algo semelhante ao espaço que marquei visualmente na imagem.
+
+O componente deve parecer deliberadamente posicionado,
+e não flutuando aleatoriamente.
+
+===========================================================
+16. RESPONSIVIDADE
+===========================================================
+
+DESKTOP >= 1200px
+
+Mostrar navigation rail lateral completo.
+
+
+TABLET
+
+Pode aproximar mais da borda.
+
+Se o espaço lateral ficar insuficiente,
+transformar em indicador compacto.
+
+
+MOBILE
+
+NÃO colocar um elemento vertical ocupando a lateral.
+
+No mobile utilize uma alternativa compacta.
+
+Por exemplo:
+
+header:
+
+HM                         PT
+
+e abaixo discretamente:
+
+02 / 05  EXPERIÊNCIA
+
+ou um pequeno botão de navegação.
+
+
+Não prejudicar área útil do mobile.
+
+===========================================================
+17. ACESSIBILIDADE
+===========================================================
+
+Todos os controles devem funcionar por teclado.
+
+Utilizar:
+
+button
+
+quando houver ação.
+
+Adicionar:
+
+aria-label="Ir para seção anterior"
+aria-label="Ir para próxima seção"
+
+O item atual deve poder utilizar:
+
+aria-current="page"
+
+ou:
+
+aria-current="true"
+
+conforme semântica adequada.
+
+Hover precisa possuir equivalente em:
+
+focus
+focus-visible
+
+===========================================================
+18. REDUCED MOTION
+===========================================================
+
+Respeitar:
+
+@media (prefers-reduced-motion: reduce)
+
+Nesse caso:
+
+- remover animações de slide;
+- trocar conteúdo imediatamente;
+- scroll pode ser instantâneo;
+- funcionalidade deve permanecer completa.
+
+===========================================================
+19. COMPONENTIZAÇÃO
+===========================================================
+
+Se fizer sentido, criar algo semelhante a:
+
+SectionNavigationRail.tsx
+
+ou:
+
+FloatingSectionNav.tsx
+
+Com responsabilidades claras.
+
+Possíveis props:
+
+currentSection
+sections
+onNavigate
+locale
+
+Mas use a arquitetura existente do projeto como referência.
+
+Não criar abstração excessiva.
+
+===========================================================
+20. ESTILO SUGERIDO
+===========================================================
+
+Quero algo na linha:
+
+background:
+rgba(..., 0.45);
+
+backdrop-filter:
+blur pequeno;
+
+border:
+1px solid var(--border-color);
+
+box-shadow:
+extremamente leve;
+
+border-radius:
+12px – 18px;
+
+
+Mas NÃO copie valores cegamente.
+
+Use os design tokens existentes.
+
+===========================================================
+21. POSSÍVEL VERSÃO VISUAL
+===========================================================
+
+Minha preferência inicial é algo parecido com:
+
+                     ↑
+                     │
+
+               ┌──────────────┐
+               │      02      │
+               │              │
+               │ EXPERIÊNCIA  │
+               │              │
+               │      ━       │
+               └──────────────┘
+
+                     │
+                     ↓
+
+
+Mas quero que você refine isso visualmente.
+
+Outra opção:
+
+                       ↑
+
+                  02 ━━━━━
+                  EXPERIÊNCIA
+
+                       ↓
+
+
+Essa segunda versão pode até ser mais sofisticada
+por utilizar menos elementos.
+
+===========================================================
+22. NÃO FAZER
+===========================================================
+
+NÃO:
+
+- criar sidebar larga;
+- manter menu superior e lateral simultaneamente;
+- mostrar permanentemente os cinco nomes;
+- usar texto letra por letra vertical;
+- criar menu hamburger no desktop;
+- adicionar biblioteca nova;
+- adicionar animações exageradas;
+- usar neon;
+- adicionar ícones desnecessários;
+- aumentar drasticamente o header;
+- alterar conteúdo das sections.
+
+===========================================================
+23. GSAP
+===========================================================
+
+GSAP já está instalado.
+
+Utilize o que já existe:
+
+gsap
+ScrollTrigger
+ScrollToPlugin
+
+Não instalar Framer Motion.
+
+Não instalar Lenis.
+
+Não instalar AOS.
+
+Não instalar outra biblioteca somente para essa navegação.
+
+===========================================================
+24. COMPORTAMENTO COM O SCROLL FULL-PAGE
+===========================================================
+
+O site já possui / está implementando navegação baseada em sections.
+
+A lateral deve INTEGRAR-SE a essa lógica.
+
+Não crie um segundo sistema independente de navegação.
+
+Deve existir uma única fonte para:
+
+currentSection.
+
+Por exemplo:
+
+currentSectionIndex
+
+ou equivalente.
+
+Wheel:
+
+muda section
+
+↓
+
+currentSection muda
+
+↓
+
+navigation rail atualiza
+
+↓
+
+GSAP anima label
+
+
+Clique ↓:
+
+altera section
+
+↓
+
+scroll ocorre
+
+↓
+
+rail atualiza
+
+
+Clique em item expandido:
+
+navega section
+
+↓
+
+rail fecha
+
+↓
+
+novo item aparece.
+
+===========================================================
+25. DETALHE MUITO IMPORTANTE
+===========================================================
+
+Quero que a navegação lateral também funcione como um elemento
+de IDENTIDADE VISUAL.
+
+Não quero que pareça apenas:
+
+"um botão escrito SOBRE".
+
+Quero que pareça parte proposital da linguagem do portfolio.
+
+Pode explorar:
+
+número da seção;
+linha;
+small caps;
+fonte mono;
+accent cyan;
+micro indicador;
+progress line;
+
+mantendo a estética técnica já existente no site.
+
+===========================================================
+26. RESULTADO ESPERADO
+===========================================================
+
+ANTES:
+
+┌──────────────────────────────────────────────────────────┐
+│ HM    Sobre Experiência Credenciais Expertise Contato   │
+│                                                   PT EN  │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│                       CONTEÚDO                           │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+
+
+DEPOIS:
+
+┌──────────────────────────────────────────────────────────┐
+│ HM Helsio.crm                                   PT EN ES │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│                    CONTEÚDO                              │
+│                                               ↑          │
+│                                         02 ━━━━━         │
+│                                         EXPERIÊNCIA      │
+│                                               ↓          │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+
+
+Quero um layout mais editorial,
+mais moderno,
+com melhor uso do espaço horizontal
+e menos aparência de site tradicional.
+
+===========================================================
+27. IMPLEMENTAÇÃO
+===========================================================
+
+Não quero apenas sugestões.
+
+Analise o projeto atual e IMPLEMENTE.
+
+Ordem:
+
+1. localizar componente do Header;
+2. localizar lógica atual de navegação;
+3. localizar estado atual da section;
+4. remover links centrais do Header;
+5. reorganizar Header;
+6. criar FloatingSectionNav / SectionNavigationRail;
+7. conectar ao estado atual das sections;
+8. adicionar prev/next;
+9. adicionar animação GSAP;
+10. garantir PT/EN/ES;
+11. testar responsividade;
+12. testar teclado;
+13. testar reduced-motion;
+14. executar build/lint;
+15. corrigir regressões.
+
+===========================================================
+28. CRITÉRIO FINAL
+===========================================================
+
+Considere concluído somente quando:
+
+[ ] Links centrais não aparecem mais no header.
+[ ] Logo Helsio.crm continua funcionando.
+[ ] PT / EN / ES continuam funcionando.
+[ ] Existe navigation rail lateral no desktop.
+[ ] Rail mostra corretamente a section atual.
+[ ] Número da section muda corretamente.
+[ ] Nome muda corretamente.
+[ ] Transição GSAP funciona.
+[ ] ↑ navega para section anterior.
+[ ] ↓ navega para próxima section.
+[ ] Primeira/última section tratam limites corretamente.
+[ ] Clique direto em outra section continua possível através
+    da solução expandida, caso implementada.
+[ ] Scroll atualiza o rail.
+[ ] Menu lateral não cobre conteúdo.
+[ ] Tablet funciona.
+[ ] Mobile possui versão adaptada.
+[ ] Nenhum conteúdo das sections foi alterado.
+[ ] Nenhuma biblioteca desnecessária foi adicionada.
+[ ] npm run build funciona.
+[ ] Console não apresenta erros.

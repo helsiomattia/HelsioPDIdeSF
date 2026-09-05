@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/about-project</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/projects/crm-customer-360</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/projects/service-cloud-console</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/projects/customer-journey-360</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/projects/intelligence-360</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/projects/revenue-churn-intelligence</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://helsiomattia.github.io/crm-specialist/projects/salesforce-architecture-control-center</loc>
+    <priority>0.6</priority>
+  </url>
+</urlset>

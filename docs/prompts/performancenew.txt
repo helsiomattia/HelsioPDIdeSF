@@ -1,0 +1,11 @@
+Foque nas correções invisíveis para o usuário:
+
+Roteamento: centralizar parsing de rota e redirecionamento (itens 2 do report), sem alterar comportamento visível de navegação.
+Performance: lazy-load de ProjectDetailPage e dos HTMLs ?raw sob demanda, ajuste de manualChunks para reduzir o bundle.
+Otimização de imagens do About (gerar WebP/AVIF, carregar só a ativa), desde que o resultado visual seja idêntico.
+Segurança: endurecer o sandbox dos iframes (allow-same-origin, postMessage).
+Vulnerabilidades: atualizar Vite/tooling e resolver o npm audit sem quebrar o build.
+Engenharia: adicionar statusType estável nos projetos, .catch no clipboard, scripts de lint/format/test, tipagem leve se fizer sentido.
+SEO técnico: canonical, og:image/twitter:image, robots.txt, sitemap.xml, document.title/metas e html lang por rota/idioma.
+Acessibilidade que não altera aparência: aria-pressed, aria-label, semântica de links/botões que continue com o mesmo visual.
+Infra: incluir audit/lint/test no workflow do GitHub Actions, preservar hash no fallback 404, atualizar SHA256SUMS.txt, renomear name no package.json, organizar arquivos soltos da raiz.

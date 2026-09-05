@@ -1,0 +1,29 @@
+Corrigir o SectionNavigation: scroll livre, menu só como indicador
+
+Leia SECTION_NAVIGATION_AUDIT.md. Ele descreve o menu (src/components/layout/SectionNavigation.jsx) e a causa dos travamentos. Quero aplicar a opção recomendada do relatório (menu determinístico), com este comportamento final:
+
+Objetivo
+
+O scroll da página volta a ser livre e natural, com mouse e trackpad. Nada de interceptar a roda do mouse.
+O menu (card com número/label e as setas, e o painel lateral que abre no hover mostrando a lista 00→06) serve só como indicador e atalho de navegação, não controla mais o scroll da página.
+O painel abre ao passar o mouse (hover), como já era antes, mostrando as seções.
+Clicar numa seção do painel ou nas setas leva à seção com scroll animado (GSAP, via scrollToSection.js), direto ao destino, sem passar por labels intermediários.
+
+O que corrigir (causa dos travamentos)
+
+Remover a interceptação global de wheel (SectionNavigation.jsx:192-219, 244). O scroll volta a ser nativo.
+Remover a interceptação global de teclado (SectionNavigation.jsx:221-242, 245), pra setas, PageUp/PageDown, Home/End voltarem ao comportamento normal do navegador.
+Uma única fonte de verdade para a seção ativa. Trocar a atualização por evento de scroll por um IntersectionObserver que só atualiza o indicador conforme a seção visível, sem alterar a URL durante o scroll.
+Durante um scroll programático (clique numa seção), manter o label fixo no destino e não recalcular por scroll até a animação terminar.
+Corrigir scrollToSection.js para não chamar onComplete no onInterrupt (item do relatório), pra o lock não liberar cedo e gerar labels intermediários.
+Atualizar a URL apenas em clique de menu/seta e em popstate, nunca durante scroll passivo.
+
+Manter o hover como antes
+
+O painel abre no onMouseEnter e fecha no onMouseLeave, mostrando a lista de seções (como no print atual). Não troque pra abertura só por clique.
+
+Regras invioláveis
+
+Não mude nada visual: o card do menu, as setas ▲ ▼, o painel lateral, cores, blur, espaçamentos, o transform do hover dos itens e o layout das páginas ficam idênticos ao que está hoje. Ignore as recomendações do relatório que pedem remover backdropFilter, remover transform de hover ou mudar o fundo do painel: isso é visual e fica como está.
+Não mude conteúdo de nenhuma página.
+Mexa só no comportamento (scroll, teclado, atualização de estado/URL), não na aparência.

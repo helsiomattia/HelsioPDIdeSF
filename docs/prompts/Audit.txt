@@ -1,0 +1,59 @@
+Auditoria completa do projeto de portfólio
+
+Faça uma auditoria técnica completa deste projeto. Percorra todo o código e me entregue um relatório estruturado por área, com problemas encontrados, gravidade (crítico / alto / médio / baixo) e recomendação de correção. Priorize os itens por impacto.
+
+1. Arquitetura e estrutura
+
+Organização de pastas e arquivos, separação de responsabilidades, acoplamento.
+Padrões de componentização e reuso.
+Gestão de estado, roteamento e fluxo de dados.
+Escolhas de stack e dependências: o que está desatualizado, redundante ou sem uso.
+
+2. Engenharia e qualidade de código
+
+Legibilidade, consistência de estilo, nomes e convenções.
+Duplicação, funções longas, complexidade desnecessária.
+Tratamento de erros e casos de borda.
+Cobertura de testes (unitário, integração, e2e) e o que falta testar.
+Configuração de lint, formatação e tipagem.
+
+3. Performance
+
+Tamanho do bundle, code splitting, lazy loading.
+Otimização de imagens e assets (formato, dimensões, compressão).
+Métricas Core Web Vitals (LCP, CLS, INP) e o que as impacta.
+Renderização (CSR/SSR/SSG), cache e requisições redundantes.
+
+4. Segurança
+
+Exposição de chaves, tokens ou segredos no código.
+Dependências com vulnerabilidades conhecidas.
+Sanitização de entradas, XSS, links externos sem proteção.
+Headers de segurança e configuração de HTTPS.
+
+5. SEO
+
+Meta tags, títulos, descrições e Open Graph.
+Estrutura semântica de HTML e hierarquia de headings.
+Sitemap, robots.txt, dados estruturados (schema.org).
+URLs, canonical e indexação.
+
+6. Acessibilidade
+
+Contraste, navegação por teclado, foco visível.
+Uso de ARIA, textos alternativos, labels.
+Conformidade com WCAG.
+
+7. Responsividade e UX
+
+Comportamento em mobile, tablet e desktop.
+Estados de carregamento, erro e vazio.
+Consistência visual.
+
+8. Infra e deploy
+
+Configuração de build e variáveis de ambiente.
+Pipeline de CI/CD, se houver.
+Estratégia de hospedagem e domínio.
+
+Ao final, monte um resumo executivo com os 10 itens mais importantes para eu resolver primeiro, e um plano de ação em ordem de prioridade.

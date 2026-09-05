@@ -1,0 +1,162 @@
+Quero corrigir a renderização do componente CRM Customer 360 embedado nesta página.
+
+Atualmente o componente possui uma scrollbar vertical interna, porque aparentemente o iframe, wrapper ou container do embedded-html-view possui uma altura fixa ou max-height.
+
+OBJETIVO
+
+Quero que o Customer 360 seja renderizado por inteiro verticalmente, expandindo sua altura automaticamente conforme o conteúdo.
+
+A página principal do site deve ser responsável pelo scroll.
+
+Portanto:
+
+NÃO quero scroll vertical dentro do Customer 360.
+
+COMPORTAMENTO ESPERADO
+
+Atualmente está assim:
+
+Página do projeto
+└── Customer 360
+    ├── conteúdo
+    ├── conteúdo
+    ├── conteúdo
+    └── scrollbar interna ❌
+
+Quero:
+
+Página do projeto
+├── Customer 360
+│   ├── conteúdo
+│   ├── conteúdo
+│   ├── conteúdo
+│   └── conteúdo completo
+│
+└── footer
+
+scrollbar somente da página principal ✅
+
+IMPLEMENTAÇÃO
+
+Primeiro analise como o embed está sendo implementado e identifique:
+
+- iframe
+- wrapper do iframe
+- embedded-html-view
+- containers pais
+- propriedades height
+- max-height
+- min-height
+- overflow
+- overflow-y
+
+Remova qualquer limitação desnecessária como:
+
+height: 600px;
+height: 70vh;
+max-height: ...;
+overflow-y: auto;
+overflow-y: scroll;
+
+Não resolva simplesmente com overflow: hidden, pois isso apenas esconderia conteúdo.
+
+O componente precisa realmente assumir a altura total necessária.
+
+SE FOR UM IFRAME
+
+Lembre que:
+
+iframe {
+  height: auto;
+}
+
+sozinho normalmente não faz o iframe assumir a altura do documento interno.
+
+Implemente sincronização automática da altura.
+
+Se o iframe for same-origin, obtenha:
+
+iframe.contentDocument.documentElement.scrollHeight
+
+ou o maior valor apropriado entre body.scrollHeight e documentElement.scrollHeight.
+
+Depois aplique essa altura ao próprio iframe.
+
+A atualização deve acontecer:
+
+- no load;
+- quando o conteúdo interno mudar;
+- quando trocar abas do Customer 360;
+- quando componentes expandirem/recolherem;
+- no resize responsivo da janela.
+
+Preferencialmente utilize ResizeObserver para detectar mudanças na altura do documento interno.
+
+Não quero um setInterval rodando continuamente.
+
+Se o iframe estiver em origem diferente e não for possível acessar contentDocument, implemente comunicação por window.postMessage, onde o HTML embedado informa sua altura ao componente pai.
+
+CSS DO CONTAINER
+
+O wrapper externo também deve permitir crescimento natural:
+
+.embedded-html-view {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.embedded-html-view iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  overflow: hidden;
+}
+
+Ajuste os seletores para os nomes reais existentes no projeto.
+
+IMPORTANTE
+
+Preserve completamente o visual atual:
+
+- moldura estilo navegador;
+- cabeçalho embedded-html-view;
+- largura atual;
+- bordas;
+- border-radius;
+- espaçamentos;
+- conteúdo do Customer 360;
+- responsividade;
+- comportamento das abas;
+- footer da página;
+- demais elementos do site.
+
+Não redesenhe a página.
+
+A alteração é exclusivamente estrutural para permitir que o embed tenha altura dinâmica baseada no conteúdo.
+
+Também valide que não existe nenhum ancestral do iframe utilizando algo como:
+
+overflow: hidden;
+overflow: auto;
+max-height: ...;
+height: ...;
+
+que continue limitando a expansão.
+
+RESULTADO FINAL
+
+Quero que, independentemente do tamanho do conteúdo do Customer 360, o embedded-html-view aumente de altura automaticamente até mostrar todo o app.
+
+O usuário deve conseguir visualizar:
+
+cabeçalho → Customer 360 inteiro → footer
+
+usando apenas a scrollbar principal do navegador.
+
+Faça a implementação diretamente no projeto e altere somente os arquivos necessários.
+
+DIRETRIZ TÉCNICA PRINCIPAL
+
+Implemente um iframe auto-resize baseado no scrollHeight usando ResizeObserver, sem scroll interno.

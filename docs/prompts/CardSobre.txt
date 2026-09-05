@@ -1,0 +1,132 @@
+Quero corrigir especificamente o card de texto da seção "Sobre".
+
+Observe o componente atual e encontre o motivo pelo qual existe uma grande área
+vazia à direita do conteúdo, mesmo havendo espaço disponível dentro do card.
+
+NÃO quero aumentar o card.
+
+Quero que o TEXTO aproveite melhor a largura interna que já existe.
+
+Faça uma auditoria no CSS desse componente procurando principalmente por:
+
+- max-width aplicado no texto ou wrapper interno;
+- width fixa;
+- grid-template-columns;
+- flex-basis;
+- padding-right excessivo;
+- margin-right;
+- wrapper intermediário limitando a largura;
+- classes responsivas que estejam restringindo o texto.
+
+O objetivo é fazer o conteúdo textual ocupar praticamente toda a largura útil
+do card, respeitando apenas o padding interno.
+
+Visualmente quero algo próximo de:
+
+ANTES:
+
+┌───────────────────────────────────────────────────────┐
+│ Texto texto texto texto texto               espaço   │
+│ Texto texto texto texto texto               vazio    │
+│ Texto texto texto texto texto                        │
+│                                                       │
+└───────────────────────────────────────────────────────┘
+
+
+DEPOIS:
+
+┌───────────────────────────────────────────────────────┐
+│ Texto texto texto texto texto texto texto texto       │
+│ Texto texto texto texto texto texto texto texto       │
+│ Texto texto texto texto texto texto texto texto       │
+│                                                       │
+└───────────────────────────────────────────────────────┘
+
+
+IMPORTANTE:
+
+Não deixe o texto encostado nas bordas.
+
+Preserve um padding interno confortável, algo equivalente a aproximadamente:
+
+padding-inline: clamp(24px, 3vw, 40px);
+
+mas analise os valores existentes antes de alterar.
+
+O bloco textual deve poder utilizar:
+
+width: 100%;
+max-width: none;
+
+caso atualmente exista alguma limitação desnecessária.
+
+Não aplique isso globalmente sem necessidade.
+Corrija somente o wrapper responsável por esse componente.
+
+
+CORRIGIR TAMBÉM AS QUEBRAS DE PALAVRAS
+
+Atualmente estão aparecendo quebras visualmente ruins como:
+
+Sis-temas
+do-cumentadas
+confiá-veis
+tecnolo-gia
+
+Não quero esse comportamento.
+
+Verifique se existem regras como:
+
+hyphens: auto;
+word-break;
+overflow-wrap;
+text-align: justify;
+
+causando isso.
+
+Para esse texto corrido, prefiro leitura natural.
+
+Use preferencialmente algo equivalente a:
+
+text-align: left;
+hyphens: none;
+word-break: normal;
+overflow-wrap: normal;
+
+desde que não cause overflow em telas pequenas.
+
+Se for necessário proteger mobile, pode usar:
+
+overflow-wrap: break-word;
+
+mas somente como fallback.
+
+
+RESPONSIVIDADE
+
+Em desktop, quero aproveitar significativamente melhor a largura do card.
+
+Em telas menores, o texto deve continuar responsivo e quebrar naturalmente
+entre palavras.
+
+Não reduza a fonte apenas para fazer o conteúdo caber.
+
+Não altere o conteúdo textual.
+
+Não altere as cores, bordas ou identidade visual do card.
+
+
+RESULTADO ESPERADO
+
+Quero que o card fique visualmente mais equilibrado:
+
+- menos espaço morto à direita;
+- linhas de texto um pouco mais longas;
+- menor altura total do componente;
+- melhor aproveitamento da tela;
+- nenhuma palavra hifenizada artificialmente;
+- leitura mais natural;
+- preservação do padding confortável.
+
+Faça a alteração diretamente no código e depois verifique o componente
+em desktop e mobile.

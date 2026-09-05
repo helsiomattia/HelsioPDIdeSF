@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://helsiomattia.github.io/crm-specialist/sitemap.xml

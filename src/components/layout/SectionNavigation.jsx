@@ -29,6 +29,10 @@ function getSectionUrl(id) {
   return `${path}${window.location.search}`;
 }
 
+function getAboutProjectUrl() {
+  return `${BASE_PATH || ''}/about-project${window.location.search}`;
+}
+
 function getSectionFromLocation() {
   const redirectedPath = window.sessionStorage.getItem('crm-specialist-redirect');
   if (redirectedPath) {
@@ -96,6 +100,10 @@ export default function SectionNavigation() {
   ], [t]);
 
   const sectionIds = useMemo(() => sections.map((section) => section.id), [sections]);
+  const menuItems = useMemo(() => [
+    ...sections,
+    { id: 'about-project', label: t('nav.aboutProject'), number: '07', type: 'page' },
+  ], [sections, t]);
   const activeIndex = Math.max(0, sections.findIndex((section) => section.id === activeSection));
   const active = sections[activeIndex] || sections[0];
   const canGoPrevious = activeIndex > 0;
@@ -115,6 +123,12 @@ export default function SectionNavigation() {
     setExpanded(false);
     setRouteState(id, mode);
     scrollToSection(id, { duration: CLICK_SCROLL_DURATION });
+  };
+
+  const navigateToAboutProject = () => {
+    setExpanded(false);
+    window.history.pushState(null, '', getAboutProjectUrl());
+    window.dispatchEvent(new Event('popstate'));
   };
 
   useLayoutEffect(() => {
@@ -465,15 +479,16 @@ export default function SectionNavigation() {
             transition: 'opacity 0.2s ease, transform 0.2s ease',
           }}
         >
-          {sections.map((section) => {
+          {menuItems.map((section) => {
             const isCurrent = active.id === section.id;
+            const isPageLink = section.type === 'page';
 
             return (
               <Box
                 key={section.id}
                 component="button"
                 type="button"
-                onClick={() => navigateTo(section.id)}
+                onClick={() => (isPageLink ? navigateToAboutProject() : navigateTo(section.id))}
                 aria-current={isCurrent ? 'page' : undefined}
                 sx={{
                   width: '100%',
