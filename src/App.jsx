@@ -5,7 +5,6 @@ import Navbar from './components/layout/Navbar';
 import SectionNavigation from './components/layout/SectionNavigation';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
-import ProjectDetailPage from './components/sections/ProjectDetailPage';
 
 const About = lazy(() => import('./components/sections/About'));
 const Experience = lazy(() => import('./components/sections/Experience'));
@@ -14,6 +13,7 @@ const Skills = lazy(() => import('./components/sections/Skills'));
 const PortfolioProjects = lazy(() => import('./components/sections/PortfolioProjects'));
 const AboutProjectPage = lazy(() => import('./components/sections/AboutProjectPage'));
 const Contact = lazy(() => import('./components/sections/Contact'));
+const ProjectDetailPage = lazy(() => import('./components/sections/ProjectDetailPage'));
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
 const ABOUT_PROJECT_ROUTE = 'about-project';
 
@@ -194,6 +194,13 @@ const globalStyles = `
     body { overflow-x: clip; }
   }
 
+  @-moz-document url-prefix() {
+    * {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     html { scroll-snap-type: none; }
@@ -208,6 +215,7 @@ const globalStyles = `
 
 export default function App() {
   const [appRoute, setAppRoute] = useState(() => getAppRoute());
+  const [loadHomeSections, setLoadHomeSections] = useState(false);
 
   useEffect(() => {
     const handleRouteChange = () => setAppRoute(getAppRoute());
@@ -216,6 +224,21 @@ export default function App() {
     return () => window.removeEventListener('popstate', handleRouteChange);
   }, []);
 
+  useEffect(() => {
+    if (appRoute.type !== 'home') return undefined;
+
+    const loadSections = () => setLoadHomeSections(true);
+    const idleCallback = window.requestIdleCallback;
+
+    if (idleCallback) {
+      const id = idleCallback(loadSections, { timeout: 900 });
+      return () => window.cancelIdleCallback?.(id);
+    }
+
+    const id = window.setTimeout(loadSections, 350);
+    return () => window.clearTimeout(id);
+  }, [appRoute.type]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -223,7 +246,9 @@ export default function App() {
       <Box sx={{ overflowX: 'hidden', '@supports (overflow-x: clip)': { overflowX: 'clip' } }}>
         <Navbar />
         {appRoute.type === 'project' ? (
-          <ProjectDetailPage projectId={appRoute.projectId} />
+          <Suspense fallback={null}>
+            <ProjectDetailPage projectId={appRoute.projectId} />
+          </Suspense>
         ) : appRoute.type === 'aboutProject' ? (
           <Suspense fallback={null}>
             <AboutProjectPage />
@@ -233,14 +258,16 @@ export default function App() {
             <SectionNavigation />
             <main>
               <Hero />
-              <Suspense fallback={null}>
-                <About />
-                <Experience />
-                <Credentials />
-                <Skills />
-                <PortfolioProjects />
-                <Contact />
-              </Suspense>
+              {loadHomeSections ? (
+                <Suspense fallback={null}>
+                  <About />
+                  <Experience />
+                  <Credentials />
+                  <Skills />
+                  <PortfolioProjects />
+                  <Contact />
+                </Suspense>
+              ) : null}
             </main>
           </>
         )}

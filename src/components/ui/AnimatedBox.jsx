@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function AnimatedBox({ children, delay = 0, viewport, style, ...rest }) {
   const elRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const el = elRef.current;
     if (!el) return undefined;
 
@@ -23,11 +23,10 @@ export default function AnimatedBox({ children, delay = 0, viewport, style, ...r
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { autoAlpha: 0, y: 18, clipPath: 'inset(10% 0 0 0)' },
+        { autoAlpha: 0, y: 18 },
         {
           autoAlpha: 1,
           y: 0,
-          clipPath: 'inset(0% 0 0 0)',
           duration: 0.58,
           delay,
           ease: 'power3.out',
@@ -38,7 +37,7 @@ export default function AnimatedBox({ children, delay = 0, viewport, style, ...r
             toggleActions: viewport?.once === false ? 'play none none reverse' : 'play none none none',
           },
           onComplete: () => {
-            gsap.set(el, { clipPath: 'none', willChange: 'auto' });
+            gsap.set(el, { willChange: 'auto' });
           },
         },
       );

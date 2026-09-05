@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Typography, alpha } from '@mui/material';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
@@ -131,7 +131,7 @@ export default function SectionNavigation() {
     window.dispatchEvent(new Event('popstate'));
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const label = labelRef.current;
     if (!label || window.matchMedia(REDUCE_MOTION_QUERY).matches) return undefined;
 

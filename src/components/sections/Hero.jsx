@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Box,
   Button,
@@ -329,20 +329,20 @@ export default function Hero() {
   const valuePillars = getLocalizedStringArray(profile.valuePillars, lang);
   const roleText = getLocalizedString(profile.title, lang);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!sectionRef.current) return undefined;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return undefined;
+    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.hero-gsap-item',
-        { autoAlpha: 0, y: 24, clipPath: 'inset(12% 0 0 0)' },
+        { autoAlpha: 0, y: 24 },
         {
           autoAlpha: 1,
           y: 0,
-          clipPath: 'inset(0% 0 0 0)',
           duration: 0.78,
           stagger: 0.12,
           delay: 0.18,
@@ -364,6 +364,8 @@ export default function Hero() {
           ease: 'power2.out',
         },
       );
+
+      if (isFirefox) return;
 
       gsap.to('.hero-ambient-float', {
         y: -10,

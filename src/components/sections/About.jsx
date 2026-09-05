@@ -15,17 +15,17 @@ import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { profile } from '../../data/profile';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
-import mepic1 from '../../../images/mepic (1).jpeg';
-import mepic2 from '../../../images/mepic (2).jpeg';
-import mepic3 from '../../../images/mepic (3).jpeg';
-import mepic4 from '../../../images/mepic (4).jpeg';
-import mepic5 from '../../../images/mepic (5).jpeg';
-import mepic6 from '../../../images/mepic (6).jpeg';
-import mepic7 from '../../../images/mepic (7).jpeg';
-import mepic8 from '../../../images/mepic (8).jpeg';
-import mepic9 from '../../../images/mepic (9).jpeg';
-import mepic10 from '../../../images/mepic (10).jpeg';
-import mepic11 from '../../../images/mepic (11).jpeg';
+import mepic1 from '../../../images/optimized/mepic-1.webp';
+import mepic2 from '../../../images/optimized/mepic-2.webp';
+import mepic3 from '../../../images/optimized/mepic-3.webp';
+import mepic4 from '../../../images/optimized/mepic-4.webp';
+import mepic5 from '../../../images/optimized/mepic-5.webp';
+import mepic6 from '../../../images/optimized/mepic-6.webp';
+import mepic7 from '../../../images/optimized/mepic-7.webp';
+import mepic8 from '../../../images/optimized/mepic-8.webp';
+import mepic9 from '../../../images/optimized/mepic-9.webp';
+import mepic10 from '../../../images/optimized/mepic-10.webp';
+import mepic11 from '../../../images/optimized/mepic-11.webp';
 
 const badgeColors = ['#0B5CAB', '#159DB3', '#0B8F61', '#4A6478'];
 
@@ -67,6 +67,8 @@ function AboutAmbient() {
           component="img"
           src={photo.src}
           alt=""
+          loading="lazy"
+          decoding="async"
           sx={{
             display: { xs: 'none', md: 'block' },
             position: 'absolute',
@@ -95,6 +97,7 @@ export default function About() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
   const [activePhoto, setActivePhoto] = useState(0);
+  const activeProfilePhoto = profilePhotos[activePhoto];
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -216,27 +219,26 @@ export default function About() {
                       overflow: 'hidden',
                     }}
                   >
-                    {profilePhotos.map((photo, index) => (
+                    {activeProfilePhoto ? (
                       <Box
-                        key={photo.src}
+                        key={activeProfilePhoto.src}
                         component="img"
-                        src={photo.src}
+                        src={activeProfilePhoto.src}
                         alt=""
-                        aria-hidden={index !== activePhoto}
+                        loading="lazy"
+                        decoding="async"
                         sx={{
                           position: 'absolute',
                           inset: 0,
                           width: '100%',
                           height: '100%',
                           objectFit: 'cover',
-                          objectPosition: photo.position,
-                          opacity: index === activePhoto ? 1 : 0,
-                          transform: `scale(${photo.scale})`,
-                          transition: 'opacity 650ms ease, transform 650ms ease',
+                          objectPosition: activeProfilePhoto.position,
+                          transform: `scale(${activeProfilePhoto.scale})`,
                           filter: 'saturate(1.02) contrast(1.02)',
                         }}
                       />
-                    ))}
+                    ) : null}
                     <Box
                       component="span"
                       sx={{

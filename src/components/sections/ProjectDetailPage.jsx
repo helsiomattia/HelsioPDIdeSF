@@ -16,6 +16,14 @@ import { getPortfolioProjectById } from '../../data/portfolioProjects';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
 const DEFAULT_IFRAME_HEIGHT = 640;
+const PROJECT_EMBED_LOADERS = {
+  'crm-customer-360': () => import('../../../projects/customer360_generico_interativo_v4.html?raw'),
+  'service-cloud-console': () => import('../../../projects/Service360_Generic_Embed_V2.html?raw'),
+  'customer-journey-360': () => import('../../../projects/Customer_Journey_360_Generic.html?raw'),
+  'intelligence-360': () => import('../../../projects/Intelligence360_Generic.html?raw'),
+  'revenue-churn-intelligence': () => import('../../../projects/Revenue_Churn_Intelligence_Generic.html?raw'),
+  'salesforce-architecture-control-center': () => import('../../../projects/Salesforce_Architecture_Control_Center_Generic.html?raw'),
+};
 
 function getHomeProjectsPath() {
   return `${BASE_PATH || ''}/projects${window.location.search}`;
@@ -27,11 +35,45 @@ export default function ProjectDetailPage({ projectId }) {
   const project = getPortfolioProjectById(projectId);
   const iframeRef = useRef(null);
   const [iframeHeight, setIframeHeight] = useState(DEFAULT_IFRAME_HEIGHT);
+  const [embedHtml, setEmbedHtml] = useState('');
+  const [isLoadingEmbed, setIsLoadingEmbed] = useState(false);
+
+  useEffect(() => {
+    if (!project || project.kind !== 'embed') {
+      setEmbedHtml('');
+      return undefined;
+    }
+
+    const loadEmbed = PROJECT_EMBED_LOADERS[project.id];
+    if (!loadEmbed) {
+      setEmbedHtml('');
+      return undefined;
+    }
+
+    let cancelled = false;
+    setIsLoadingEmbed(true);
+    setEmbedHtml('');
+
+    loadEmbed()
+      .then((module) => {
+        if (!cancelled) setEmbedHtml(module.default || '');
+      })
+      .catch(() => {
+        if (!cancelled) setEmbedHtml('');
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoadingEmbed(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [project]);
 
   useEffect(() => {
     const iframe = iframeRef.current;
 
-    if (!iframe || !project?.embedHtml) return undefined;
+    if (!iframe || !embedHtml) return undefined;
 
     let animationFrameId = 0;
     let resizeObserver;
@@ -115,7 +157,7 @@ export default function ProjectDetailPage({ projectId }) {
       observedFrameDocument?.removeEventListener('wheel', handleFrameWheel);
       resizeObserver?.disconnect();
     };
-  }, [project?.embedHtml]);
+  }, [embedHtml]);
 
   if (!project) {
     return (
@@ -230,25 +272,33 @@ export default function ProjectDetailPage({ projectId }) {
             </Typography>
           </Box>
 
-          <Box
-            component="iframe"
-            ref={iframeRef}
-            title={`${getLocalizedString(project.title, lang)} preview`}
-            srcDoc={project.embedHtml}
-            sandbox="allow-scripts allow-same-origin"
-            scrolling="no"
-            sx={{
-              display: 'block',
-              width: '100%',
-              height: `${iframeHeight}px`,
-              maxHeight: 'none',
-              border: 0,
-              borderBottomLeftRadius: 'inherit',
-              borderBottomRightRadius: 'inherit',
-              bgcolor: '#fff',
-              overflow: 'hidden',
-            }}
-          />
+          {embedHtml ? (
+            <Box
+              component="iframe"
+              ref={iframeRef}
+              title={`${getLocalizedString(project.title, lang)} preview`}
+              srcDoc={embedHtml}
+              sandbox="allow-scripts allow-same-origin"
+              scrolling="no"
+              sx={{
+                display: 'block',
+                width: '100%',
+                height: `${iframeHeight}px`,
+                maxHeight: 'none',
+                border: 0,
+                borderBottomLeftRadius: 'inherit',
+                borderBottomRightRadius: 'inherit',
+                bgcolor: '#fff',
+                overflow: 'hidden',
+              }}
+            />
+          ) : (
+            <Box sx={{ p: { xs: 3, md: 5 }, textAlign: 'center', bgcolor: '#fff' }}>
+              <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>
+                {isLoadingEmbed ? 'Carregando demo...' : 'Demo indisponivel.'}
+              </Typography>
+            </Box>
+          )}
         </Paper>
       </Container>
     </Box>

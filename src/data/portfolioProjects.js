@@ -1,10 +1,3 @@
-import customer360Html from '../../projects/customer360_generico_interativo_v4.html?raw';
-import service360Html from '../../projects/Service360_Generic_Embed_V2.html?raw';
-import customerJourney360Html from '../../projects/Customer_Journey_360_Generic.html?raw';
-import intelligence360Html from '../../projects/Intelligence360_Generic.html?raw';
-import revenueChurnIntelligenceHtml from '../../projects/Revenue_Churn_Intelligence_Generic.html?raw';
-import salesforceArchitectureControlCenterHtml from '../../projects/Salesforce_Architecture_Control_Center_Generic.html?raw';
-
 export const portfolioProjects = [
   {
     id: 'salesforce-skill-shine',
@@ -44,7 +37,6 @@ export const portfolioProjects = [
     tags: ['Salesforce', 'Customer 360', 'CRM'],
     accent: '#0176D3',
     gradient: 'linear-gradient(135deg, #032D60 0%, #0176D3 100%)',
-    embedHtml: customer360Html,
   },
   {
     id: 'service-cloud-console',
@@ -64,7 +56,6 @@ export const portfolioProjects = [
     tags: ['Service Cloud', 'Support', 'Cases'],
     accent: '#0B78B6',
     gradient: 'linear-gradient(135deg, #0B78B6 0%, #6A8FB1 100%)',
-    embedHtml: service360Html,
   },
   {
     id: 'customer-journey-360',
@@ -84,7 +75,6 @@ export const portfolioProjects = [
     tags: ['Salesforce', 'Journey', 'CX'],
     accent: '#FF6B2C',
     gradient: 'linear-gradient(135deg, #032D60 0%, #FF6B2C 100%)',
-    embedHtml: customerJourney360Html,
   },
   {
     id: 'intelligence-360',
@@ -104,7 +94,6 @@ export const portfolioProjects = [
     tags: ['Salesforce', 'Intelligence', 'NBA'],
     accent: '#7C5CFF',
     gradient: 'linear-gradient(135deg, #7C5CFF 0%, #1EACB8 100%)',
-    embedHtml: intelligence360Html,
   },
   {
     id: 'revenue-churn-intelligence',
@@ -124,7 +113,6 @@ export const portfolioProjects = [
     tags: ['Revenue', 'Churn', 'Retention'],
     accent: '#BA0517',
     gradient: 'linear-gradient(135deg, #032D60 0%, #BA0517 100%)',
-    embedHtml: revenueChurnIntelligenceHtml,
   },
   {
     id: 'salesforce-architecture-control-center',
@@ -144,7 +132,6 @@ export const portfolioProjects = [
     tags: ['Architecture', 'Platform', 'Governance'],
     accent: '#032D60',
     gradient: 'linear-gradient(135deg, #032D60 0%, #0176D3 100%)',
-    embedHtml: salesforceArchitectureControlCenterHtml,
   },
 ];
 
