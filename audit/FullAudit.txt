@@ -1,0 +1,1098 @@
+# AUDITORIA TÉCNICA COMPLETA DO PROJETO
+
+Quero que você atue como um **Staff Software Engineer + Frontend Architect + especialista em Performance, Segurança, SEO, Acessibilidade e DevOps** e realize uma auditoria técnica profunda deste projeto.
+
+## OBJETIVO
+
+Analise **todo o projeto**, não apenas os arquivos principais.
+
+Antes de gerar qualquer recomendação:
+
+1. Percorra toda a estrutura de diretórios.
+2. Identifique a stack, frameworks, bibliotecas e ferramentas utilizadas.
+3. Leia os arquivos de configuração.
+4. Analise os componentes, páginas, hooks, serviços, utilitários, estilos e assets.
+5. Analise `package.json` e arquivos de lock.
+6. Verifique configurações de build, deploy, lint, TypeScript, roteamento e variáveis de ambiente.
+7. Identifique código morto, arquivos não utilizados e dependências desnecessárias.
+8. Verifique possíveis problemas que só aparecem em produção.
+9. Execute, quando possível, as ferramentas de validação disponíveis no projeto.
+10. Só depois monte o relatório.
+
+Não faça uma análise superficial baseada apenas em boas práticas genéricas.
+
+Toda conclusão importante deve estar ligada a **evidências encontradas neste projeto**.
+
+---
+
+# REGRAS DA AUDITORIA
+
+Para cada problema encontrado informe:
+
+* **Área**
+* **Problema**
+* **Gravidade:** CRÍTICO / ALTO / MÉDIO / BAIXO
+* **Arquivo(s) afetado(s)**
+* **Linha ou trecho relevante**, quando possível
+* **Evidência**
+* **Impacto real**
+* **Por que isso é um problema**
+* **Recomendação**
+* **Como corrigir**
+* **Esforço estimado:** baixo / médio / alto
+* **Prioridade de execução**
+
+Não classifique algo como problema apenas porque existe uma abordagem diferente.
+
+Diferencie claramente:
+
+* erro real;
+* risco;
+* débito técnico;
+* melhoria recomendada;
+* melhoria opcional.
+
+Evite recomendações vagas como:
+
+> "melhorar performance"
+
+Explique exatamente **o que deve mudar, onde deve mudar e por quê**.
+
+Não altere arquivos durante esta etapa.
+
+Primeiro quero apenas a auditoria.
+
+---
+
+# 0. INVENTÁRIO DO PROJETO
+
+Antes da auditoria, apresente um diagnóstico inicial contendo:
+
+* stack identificada;
+* versão das principais tecnologias;
+* estrutura de diretórios;
+* estratégia de renderização;
+* sistema de roteamento;
+* gerenciamento de estado;
+* sistema de estilos;
+* bibliotecas de animação;
+* bibliotecas de UI;
+* ferramentas de build;
+* ferramentas de testes;
+* estratégia de deploy;
+* integrações externas;
+* APIs utilizadas;
+* serviços externos;
+* variáveis de ambiente;
+* dependências principais.
+
+Crie também uma visão simplificada da arquitetura:
+
+```text
+Usuário
+  ↓
+Aplicação
+  ↓
+Rotas
+  ↓
+Páginas
+  ↓
+Componentes
+  ↓
+Hooks / Services / Utils
+  ↓
+APIs / Assets / Integrações
+```
+
+Adapte essa estrutura ao projeto real encontrado.
+
+---
+
+# 1. ARQUITETURA E ESTRUTURA
+
+Audite:
+
+### Estrutura de pastas
+
+* organização;
+* responsabilidades;
+* modularidade;
+* arquivos em locais inadequados;
+* componentes grandes demais;
+* componentes com responsabilidades demais.
+
+### Componentização
+
+Verifique:
+
+* reutilização;
+* composição;
+* componentes duplicados;
+* componentes excessivamente genéricos;
+* componentes excessivamente específicos;
+* prop drilling;
+* separação entre apresentação e lógica.
+
+### Fluxo de dados
+
+Analise:
+
+* gerenciamento de estado;
+* estado local vs global;
+* efeitos colaterais;
+* comunicação entre componentes;
+* Context API;
+* stores;
+* hooks;
+* serviços;
+* event listeners.
+
+### Acoplamento
+
+Procure:
+
+* imports circulares;
+* dependências excessivas entre módulos;
+* componentes dependentes demais uns dos outros;
+* lógica de negócio misturada com apresentação.
+
+### Escalabilidade
+
+Avalie se a arquitetura atual permite adicionar novas:
+
+* páginas;
+* seções;
+* funcionalidades;
+* integrações;
+* componentes;
+
+sem aumentar excessivamente a complexidade.
+
+---
+
+# 2. ENGENHARIA E QUALIDADE DE CÓDIGO
+
+Analise:
+
+* legibilidade;
+* consistência;
+* nomes de variáveis;
+* nomes de componentes;
+* convenções;
+* tamanho de arquivos;
+* tamanho de funções;
+* complexidade;
+* duplicação;
+* magic numbers;
+* condicionais complexas;
+* abstrações desnecessárias;
+* abstrações ausentes.
+
+Procure especificamente:
+
+### Código morto
+
+Identifique:
+
+* componentes não utilizados;
+* funções não utilizadas;
+* imports não utilizados;
+* CSS não utilizado;
+* assets não utilizados;
+* hooks não utilizados;
+* páginas abandonadas;
+* arquivos antigos;
+* código comentado;
+* feature flags abandonadas.
+
+### Tratamento de erros
+
+Verifique:
+
+* promises sem tratamento;
+* chamadas assíncronas;
+* estados de erro;
+* fallbacks;
+* timeout;
+* falhas de API;
+* erros silenciosos.
+
+### TypeScript
+
+Caso exista:
+
+* `any` desnecessário;
+* casts perigosos;
+* tipos duplicados;
+* interfaces inconsistentes;
+* falta de tipagem;
+* `@ts-ignore`;
+* `@ts-expect-error`;
+* configuração do `tsconfig`.
+
+### Lint e formatação
+
+Audite:
+
+* ESLint;
+* Prettier;
+* regras;
+* scripts;
+* warnings ignorados.
+
+---
+
+# 3. DEPENDÊNCIAS
+
+Analise completamente o `package.json`.
+
+Classifique as dependências em:
+
+* necessárias;
+* possivelmente desnecessárias;
+* duplicadas;
+* substituíveis;
+* desatualizadas;
+* abandonadas;
+* potencialmente problemáticas.
+
+Identifique também bibliotecas grandes utilizadas para tarefas simples.
+
+Verifique se existem funcionalidades que poderiam usar recursos nativos da plataforma em vez de uma biblioteca externa.
+
+Se possível execute ou considere:
+
+```bash
+npm outdated
+npm audit
+```
+
+Não recomende atualização major automaticamente.
+
+Explique riscos de breaking changes.
+
+---
+
+# 4. PERFORMANCE
+
+Faça uma auditoria focada em performance real.
+
+## Bundle
+
+Analise:
+
+* tamanho;
+* dependências pesadas;
+* imports completos;
+* tree shaking;
+* chunks;
+* dynamic imports;
+* code splitting;
+* lazy loading.
+
+Procure oportunidades para:
+
+```javascript
+lazy()
+import()
+```
+
+ou mecanismos equivalentes da stack.
+
+## Renderizações
+
+Procure:
+
+* renderizações desnecessárias;
+* estados mal posicionados;
+* efeitos disparando excessivamente;
+* cálculos repetidos;
+* listeners duplicados;
+* atualizações excessivas do DOM.
+
+## Assets
+
+Audite:
+
+* PNG;
+* JPG;
+* SVG;
+* WebP;
+* AVIF;
+* GIF;
+* vídeos;
+* fontes.
+
+Verifique:
+
+* tamanho;
+* compressão;
+* dimensões;
+* lazy loading;
+* preload;
+* formatos modernos.
+
+## Fontes
+
+Analise:
+
+* fontes externas;
+* pesos carregados;
+* preload;
+* `font-display`;
+* quantidade de arquivos.
+
+## Core Web Vitals
+
+Avalie possíveis impactos em:
+
+* LCP;
+* CLS;
+* INP;
+* FCP;
+* TTFB.
+
+Para cada risco identificado, informe qual elemento provavelmente contribui para a métrica.
+
+---
+
+# 5. ANIMAÇÕES
+
+Caso existam animações com:
+
+* GSAP;
+* Framer Motion;
+* CSS;
+* Canvas;
+* WebGL;
+* outras bibliotecas;
+
+audite especificamente:
+
+* animações desnecessariamente pesadas;
+* animações disparadas fora da viewport;
+* listeners;
+* observers;
+* timelines;
+* ScrollTrigger;
+* cleanup;
+* memory leaks;
+* layout thrashing;
+* transform vs propriedades que causam reflow;
+* animações em mobile;
+* impacto sobre INP;
+* impacto sobre FPS.
+
+Verifique também suporte a:
+
+```css
+prefers-reduced-motion
+```
+
+---
+
+# 6. MEMORY LEAKS
+
+Procure especificamente por:
+
+* `addEventListener` sem remoção;
+* timers;
+* intervals;
+* observers;
+* IntersectionObserver;
+* ResizeObserver;
+* MutationObserver;
+* animações;
+* subscriptions;
+* WebSockets;
+* callbacks;
+* efeitos sem cleanup.
+
+Informe qualquer risco potencial de vazamento de memória.
+
+---
+
+# 7. SEGURANÇA
+
+Audite:
+
+### Segredos
+
+Procure:
+
+* API keys;
+* tokens;
+* secrets;
+* senhas;
+* IDs sensíveis;
+* credenciais;
+* arquivos `.env` enviados para o repositório.
+
+Verifique também histórico/configuração de `.gitignore` quando possível.
+
+### Frontend
+
+Analise riscos de:
+
+* XSS;
+* `dangerouslySetInnerHTML`;
+* HTML dinâmico;
+* parâmetros de URL;
+* query strings;
+* inputs;
+* conteúdo externo.
+
+### Links externos
+
+Verifique links usando:
+
+```html
+target="_blank"
+```
+
+sem proteção apropriada como:
+
+```html
+rel="noopener noreferrer"
+```
+
+### Headers
+
+Avalie necessidade/configuração de:
+
+* Content-Security-Policy;
+* Strict-Transport-Security;
+* X-Content-Type-Options;
+* Referrer-Policy;
+* Permissions-Policy.
+
+---
+
+# 8. SEO
+
+Audite cada página relevante.
+
+Verifique:
+
+### Metadata
+
+* `<title>`;
+* description;
+* canonical;
+* Open Graph;
+* Twitter Cards;
+* favicon;
+* theme-color.
+
+### HTML semântico
+
+Verifique:
+
+* header;
+* nav;
+* main;
+* section;
+* article;
+* footer.
+
+### Headings
+
+Analise hierarquia:
+
+```text
+H1
+ ├ H2
+ │  └ H3
+ └ H2
+```
+
+Identifique headings usados apenas para estilo.
+
+### Indexação
+
+Verifique:
+
+* robots.txt;
+* sitemap.xml;
+* canonical;
+* redirects;
+* páginas duplicadas;
+* URLs.
+
+### Structured Data
+
+Avalie oportunidade de utilizar Schema.org, por exemplo:
+
+* Person;
+* WebSite;
+* ProfilePage;
+* CreativeWork;
+* SoftwareApplication;
+* BreadcrumbList.
+
+Adapte ao conteúdo real do site.
+
+---
+
+# 9. ACESSIBILIDADE
+
+Avalie com referência à **WCAG 2.2**.
+
+Analise:
+
+* navegação por teclado;
+* ordem de foco;
+* foco visível;
+* contraste;
+* textos alternativos;
+* labels;
+* buttons;
+* links;
+* formulários;
+* modais;
+* menus;
+* landmarks;
+* ARIA;
+* headings;
+* leitores de tela.
+
+Procure também:
+
+* elementos clicáveis implementados como `div`;
+* eventos somente de mouse;
+* foco preso;
+* conteúdo invisível para leitores de tela;
+* ARIA redundante ou incorreto.
+
+---
+
+# 10. RESPONSIVIDADE
+
+Avalie o projeto em:
+
+```text
+320px
+375px
+390px
+430px
+768px
+1024px
+1280px
+1440px
+1920px
+```
+
+Procure:
+
+* overflow horizontal;
+* elementos cortados;
+* textos quebrados;
+* containers estreitos;
+* espaços excessivos;
+* grids inconsistentes;
+* imagens deformadas;
+* problemas de `100vh`;
+* problemas com mobile browser;
+* scroll interno desnecessário;
+* valores fixos de largura/altura.
+
+Não analise apenas breakpoints existentes.
+
+Analise o comportamento entre breakpoints.
+
+---
+
+# 11. UX E UI
+
+Avalie:
+
+* hierarquia visual;
+* consistência;
+* espaçamento;
+* tipografia;
+* densidade;
+* navegação;
+* feedback;
+* affordance;
+* estados interativos.
+
+Verifique estados:
+
+* hover;
+* focus;
+* active;
+* disabled;
+* loading;
+* empty;
+* error;
+* success.
+
+Procure inconsistências de design entre páginas e componentes.
+
+---
+
+# 12. CSS
+
+Audite:
+
+* CSS global;
+* CSS modules;
+* Tailwind;
+* styled-components;
+* CSS-in-JS;
+
+conforme o projeto encontrado.
+
+Procure:
+
+* regras duplicadas;
+* especificidade excessiva;
+* `!important`;
+* estilos mortos;
+* valores repetidos;
+* breakpoints inconsistentes;
+* z-index excessivo;
+* posicionamento absoluto desnecessário;
+* largura fixa;
+* altura fixa;
+* overflow desnecessário.
+
+---
+
+# 13. HTML E SEMÂNTICA
+
+Procure:
+
+* DOM excessivamente profundo;
+* wrappers desnecessários;
+* elementos incorretos;
+* IDs duplicados;
+* estrutura semântica ruim;
+* links usados como botões;
+* botões usados como links.
+
+---
+
+# 14. ROUTING E NAVEGAÇÃO
+
+Analise:
+
+* rotas;
+* fallback;
+* página 404;
+* deep linking;
+* redirects;
+* links internos;
+* refresh direto em uma rota;
+* navegação mobile;
+* scroll restoration.
+
+Verifique especificamente se abrir diretamente:
+
+```text
+/determinada-rota
+```
+
+funciona em produção.
+
+---
+
+# 15. BUILD E PRODUÇÃO
+
+Execute, quando possível:
+
+```bash
+npm install
+npm run build
+```
+
+Utilize os comandos equivalentes se o projeto utilizar outra ferramenta.
+
+Informe:
+
+* erros;
+* warnings;
+* bundle gerado;
+* chunks;
+* assets;
+* possíveis problemas em produção.
+
+Diferencie:
+
+```text
+erro de desenvolvimento
+erro de build
+erro de runtime
+erro de deploy
+```
+
+---
+
+# 16. INFRAESTRUTURA E DEPLOY
+
+Analise:
+
+* estratégia de build;
+* hospedagem;
+* domínio;
+* HTTPS;
+* redirects;
+* cache;
+* headers;
+* compressão;
+* assets;
+* SPA fallback.
+
+Se o projeto utilizar GitHub Pages, valide especialmente:
+
+* `base`;
+* URLs relativas;
+* assets;
+* rotas;
+* refresh direto;
+* custom domain;
+* arquivo CNAME;
+* pipeline de publicação.
+
+---
+
+# 17. GITHUB E REPOSITÓRIO
+
+Analise:
+
+* `.gitignore`;
+* README;
+* organização;
+* arquivos que não deveriam estar versionados;
+* build outputs;
+* `.env`;
+* logs;
+* arquivos temporários.
+
+Avalie também se faria sentido adicionar:
+
+* CI;
+* lint automático;
+* build automático;
+* testes;
+* validações de Pull Request.
+
+---
+
+# 18. TESTES
+
+Identifique testes existentes.
+
+Classifique em:
+
+* unitários;
+* integração;
+* E2E;
+* visuais.
+
+Não avalie apenas porcentagem de cobertura.
+
+Identifique os **fluxos de maior risco que deveriam obrigatoriamente possuir testes**.
+
+Sugira uma estratégia mínima de testes para este projeto.
+
+---
+
+# 19. COMPATIBILIDADE ENTRE NAVEGADORES
+
+Analise possíveis problemas em:
+
+* Chrome;
+* Firefox;
+* Edge;
+* Safari;
+* Safari iOS;
+* Chrome Android.
+
+Procure APIs utilizadas sem suporte adequado ou sem fallback.
+
+---
+
+# 20. QUALIDADE PERCEBIDA DO PORTFÓLIO
+
+Além da engenharia, avalie este projeto especificamente como um **site de portfólio profissional**.
+
+Analise se o site comunica bem:
+
+* identidade profissional;
+* especialização;
+* competências;
+* projetos;
+* experiência;
+* tecnologias;
+* diferenciais;
+* contato.
+
+Identifique elementos técnicos ou visuais que possam prejudicar:
+
+* credibilidade;
+* clareza;
+* leitura;
+* experiência;
+* percepção profissional.
+
+Não altere conteúdo pessoal nesta etapa.
+
+Apenas identifique oportunidades.
+
+---
+
+# RELATÓRIO FINAL
+
+Depois da análise, entregue o resultado nesta estrutura.
+
+## 1. Diagnóstico geral
+
+Dê notas de **0 a 10** para:
+
+| Área                | Nota |
+| ------------------- | ---: |
+| Arquitetura         |      |
+| Qualidade de código |      |
+| Performance         |      |
+| Segurança           |      |
+| SEO                 |      |
+| Acessibilidade      |      |
+| Responsividade      |      |
+| UX/UI               |      |
+| Testes              |      |
+| Infraestrutura      |      |
+| Manutenibilidade    |      |
+
+Inclua uma:
+
+**NOTA TÉCNICA GLOBAL DO PROJETO: X/10**
+
+Explique brevemente a nota.
+
+---
+
+# 2. PROBLEMAS ENCONTRADOS
+
+Crie uma tabela:
+
+| ID | Gravidade | Área | Problema | Arquivo | Impacto | Esforço |
+| -- | --------- | ---- | -------- | ------- | ------- | ------- |
+
+Ordene:
+
+```text
+CRÍTICO
+↓
+ALTO
+↓
+MÉDIO
+↓
+BAIXO
+```
+
+Dentro da mesma gravidade, ordene pelo impacto.
+
+Depois da tabela, explique detalhadamente cada problema.
+
+---
+
+# 3. TOP 10 PRIORIDADES
+
+Liste os **10 problemas que eu deveria resolver primeiro**.
+
+Para cada um explique:
+
+```text
+Problema
+↓
+Impacto
+↓
+Correção
+↓
+Resultado esperado
+```
+
+---
+
+# 4. QUICK WINS
+
+Crie uma seção:
+
+## Quick Wins
+
+Liste melhorias que:
+
+* possuem baixo risco;
+* levam pouco esforço;
+* geram impacto perceptível.
+
+---
+
+# 5. PLANO DE AÇÃO
+
+Monte um plano em fases.
+
+### FASE 1 — Problemas críticos
+
+Itens que podem causar:
+
+* falhas;
+* vulnerabilidades;
+* quebra de produção;
+* perda de funcionalidade.
+
+### FASE 2 — Arquitetura e manutenção
+
+Corrigir:
+
+* estrutura;
+* duplicações;
+* acoplamento;
+* dependências;
+* código morto.
+
+### FASE 3 — Performance
+
+Melhorar:
+
+* bundle;
+* imagens;
+* carregamento;
+* animações;
+* renderização.
+
+### FASE 4 — SEO e acessibilidade
+
+Corrigir:
+
+* metadata;
+* HTML;
+* headings;
+* Schema.org;
+* WCAG.
+
+### FASE 5 — UX e refinamento
+
+Melhorar:
+
+* responsividade;
+* consistência;
+* estados;
+* experiência.
+
+---
+
+# 6. ARQUIVOS QUE MAIS PRECISAM DE REFATORAÇÃO
+
+Crie um ranking:
+
+```text
+1. arquivo
+2. arquivo
+3. arquivo
+...
+```
+
+Explique por que cada arquivo aparece no ranking.
+
+---
+
+# 7. CÓDIGO MORTO E LIMPEZA
+
+Crie uma lista específica contendo:
+
+* arquivos potencialmente removíveis;
+* componentes não utilizados;
+* imports não utilizados;
+* assets não utilizados;
+* dependências possivelmente removíveis;
+* código comentado;
+* implementações antigas.
+
+Não recomende exclusão definitiva sem verificar dependências.
+
+---
+
+# 8. DEPENDÊNCIAS
+
+Crie uma tabela:
+
+| Dependência | Versão | Situação | Utilização | Recomendação |
+| ----------- | ------ | -------- | ---------- | ------------ |
+
+Classifique como:
+
+```text
+OK
+ATUALIZAR
+REVISAR
+REMOVER
+SUBSTITUIR
+```
+
+---
+
+# 9. RISCOS DE PRODUÇÃO
+
+Crie uma seção específica:
+
+## Riscos que podem aparecer apenas em produção
+
+Procure problemas envolvendo:
+
+* build;
+* URLs;
+* rotas;
+* cache;
+* assets;
+* environment variables;
+* domínio;
+* CORS;
+* HTTPS;
+* GitHub Pages ou plataforma utilizada;
+* diferenças entre desenvolvimento e produção.
+
+---
+
+# 10. ESTADO IDEAL DO PROJETO
+
+Por último descreva como deveria ficar a arquitetura depois das melhorias.
+
+Mostre uma árvore de diretórios sugerida apenas se a estrutura atual realmente justificar uma reorganização.
+
+Não proponha refatoração estrutural apenas por preferência estética.
+
+---
+
+# PRINCÍPIO MAIS IMPORTANTE
+
+Quero uma auditoria baseada neste projeto real.
+
+Não quero uma checklist genérica de boas práticas.
+
+Sempre siga:
+
+```text
+ENCONTRE
+↓
+MOSTRE A EVIDÊNCIA
+↓
+EXPLIQUE O IMPACTO
+↓
+PROPONHA A CORREÇÃO
+↓
+DEFINA A PRIORIDADE
+```
+
+Se algo não puder ser validado apenas analisando o código, marque claramente como:
+
+**"Necessita validação em runtime"**
+
+ou
+
+**"Necessita validação no ambiente de produção"**
+
+Não invente problemas para preencher o relatório.
+
+Se determinada área estiver corretamente implementada, diga explicitamente que **nenhum problema relevante foi identificado** nela.

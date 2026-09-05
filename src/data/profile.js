@@ -4,57 +4,44 @@ export const profile = {
   initials: 'HM',
 
   title: {
-    pt: 'Salesforce CRM Specialist | Sales & Service Cloud | Automação',
-    en: 'Salesforce CRM Specialist | Sales & Service Cloud | Automation',
-    es: 'Salesforce CRM Specialist | Sales & Service Cloud | Automatización',
-  },
-
-  /** Roles displayed in the Hero typewriter effect */
-  roles: {
-    pt: [
-      'Consultor Salesforce',
-      'Especialista CRM',
-      'Sales Cloud',
-      'Service Cloud',
-      'Automação de Processos',
-    ],
-    en: [
-      'Salesforce Consultant',
-      'CRM Specialist',
-      'Sales Cloud',
-      'Service Cloud',
-      'Process Automation',
-    ],
-    es: [
-      'Consultor Salesforce',
-      'Especialista CRM',
-      'Sales Cloud',
-      'Service Cloud',
-      'Automatización de Procesos',
-    ],
+    pt: 'Salesforce CRM & Solution Architecture',
+    en: 'Salesforce CRM & Solution Architecture',
+    es: 'CRM Salesforce y Arquitectura de Soluciones',
   },
 
   description: {
-    pt: 'Evoluo operações de CRM em Salesforce conectando processos, automação e adoção de usuários para tornar Sales e Service Cloud mais escaláveis, confiáveis e úteis ao negócio.',
-    en: 'I evolve Salesforce CRM operations by connecting processes, automation and user adoption to make Sales and Service Cloud more scalable, reliable and valuable to the business.',
-    es: 'Evoluciono operaciones de CRM en Salesforce conectando procesos, automatización y adopción de usuarios para hacer Sales y Service Cloud más escalables, confiables y útiles al negocio.',
+    pt: [
+      'Projeto ecossistemas Salesforce que conectam negócio, dados, automação e experiência — com foco em operações de Service, integrações, governança e arquiteturas preparadas para IA.',
+      'Da modelagem de processos à operação em produção, transformo necessidades complexas em soluções escaláveis, observáveis e sustentáveis.',
+    ],
+    en: [
+      'I design Salesforce ecosystems that connect business, data, automation, and customer experience — with a focus on service operations, integrations, governance, and AI-ready architectures.',
+      'From process design to production operations, I turn complex requirements into scalable, observable, and maintainable solutions.',
+    ],
+    es: [
+      'Diseño ecosistemas Salesforce que conectan negocio, datos, automatización y experiencia del cliente, con foco en operaciones de Service, integraciones, gobierno y arquitecturas preparadas para IA.',
+      'Desde el diseño de procesos hasta la operación en producción, transformo necesidades complejas en soluciones escalables, observables y sostenibles.',
+    ],
   },
 
   valuePillars: {
     pt: [
-      '10+ anos conectando CRM, ERP e operações',
-      'Sales & Service Cloud com foco em adoção',
-      'Automação e processos orientados ao negócio',
+      'Solution Architecture',
+      'Service Operations',
+      'Automation & Integration',
+      'Data & AI Readiness',
     ],
     en: [
-      '10+ years connecting CRM, ERP and operations',
-      'Sales & Service Cloud focused on adoption',
-      'Business-driven automation and processes',
+      'Solution Architecture',
+      'Service Operations',
+      'Automation & Integration',
+      'Data & AI Readiness',
     ],
     es: [
-      '10+ años conectando CRM, ERP y operaciones',
-      'Sales & Service Cloud con foco en adopción',
-      'Automatización y procesos orientados al negocio',
+      'Arquitectura de Soluciones',
+      'Operaciones de Service',
+      'Automatización e Integración',
+      'Datos e IA',
     ],
   },
 
@@ -62,12 +49,6 @@ export const profile = {
     pt: 'Brasil',
     en: 'Brazil',
     es: 'Brasil',
-  },
-  available: true,
-  availableLabel: {
-    pt: 'Salesforce CRM no Efí Bank',
-    en: 'Salesforce CRM at Efí Bank',
-    es: 'Salesforce CRM en Efí Bank',
   },
 
   email: 'helsiomattia@gmail.com',
@@ -86,7 +67,7 @@ export const profile = {
   avatar: null,
 
   stats: [
-    { label: { pt: 'Anos de Experiência', en: 'Years of Experience', es: 'Años de Experiencia' }, value: '5+' },
+    { label: { pt: 'Anos de Experiência', en: 'Years of Experience', es: 'Años de Experiencia' }, value: '10+' },
     { label: { pt: 'Certificações Salesforce', en: 'Salesforce Certifications', es: 'Certificaciones Salesforce' }, value: '3' },
     { label: { pt: 'Empresas', en: 'Companies', es: 'Empresas' }, value: '5' },
     { label: { pt: 'Idiomas', en: 'Languages', es: 'Idiomas' }, value: '2' },
@@ -94,33 +75,22 @@ export const profile = {
 
   about: {
     pt: [
-      'Atua no Efí Bank na evolução de operações de CRM em Salesforce, conectando Sales Cloud, Service Cloud, automação, suporte a usuários e eficiência operacional com foco em impacto prático para o negócio, melhoria de processos e maior previsibilidade operacional.',
-      'Combina experiência profissional em CRM, ERP e QA com uma base acadêmica em Sistemas de Informação, Engenharia de Software, Gestão de Projetos, Business Intelligence e Administração para traduzir processos complexos em soluções sustentáveis, bem documentadas e alinhadas à estratégia.',
-      'Une visão técnica, leitura de negócio e mentalidade de melhoria contínua para estruturar dados, documentar decisões, apoiar adoção da plataforma e entregar soluções confiáveis, escaláveis e fáceis de manter, sempre considerando pessoas, processos e tecnologia como parte da mesma operação.',
+      'Minha carreira foi construída na interseção entre tecnologia, processos e operação. São mais de 10 anos trabalhando com CRM, ERP, qualidade e melhoria de processos, experiência que me deu uma visão prática de como sistemas impactam atendimento, receita, experiência do cliente e produtividade.',
+      'Atualmente atuo com Salesforce em ambiente corporativo, especialmente na evolução de operações de Sales e Service. Meu trabalho conecta modelagem de dados, automação, omnichannel, integrações, segurança, governança e adoção da plataforma para transformar necessidades de negócio em soluções que funcionem de forma consistente no dia a dia.',
+      'Minha abordagem vai além da configuração da ferramenta. Procuro entender o problema antes da solução, definir responsabilidades entre sistemas, reduzir acoplamento, estruturar dados com qualidade, documentar decisões e criar automações que sejam previsíveis, observáveis e fáceis de manter. É essa visão de sistema como um todo que direciona minha evolução para arquitetura de soluções.',
+      'Em paralelo, aprofundo conhecimentos em engenharia de software, arquitetura de dados e IA aplicada ao CRM. A evolução do ecossistema Salesforce para Agentforce, Data 360, experiências headless e arquiteturas orientadas a agentes reforça uma direção que considero essencial: combinar automação determinística, dados confiáveis, integração segura, governança e inteligência para construir plataformas capazes de evoluir com o negócio.',
     ],
     en: [
-      'Works at Efí Bank evolving Salesforce CRM operations, connecting Sales Cloud, Service Cloud, automation, user support and operational efficiency with a practical business impact mindset, process improvement and greater operational predictability.',
-      'Combines professional experience in CRM, ERP and QA with an academic background in Information Systems, Software Engineering, Project Management, Business Intelligence and Business Administration to translate complex processes into sustainable, well-documented solutions aligned with strategy.',
-      'Brings together technical perspective, business understanding and a continuous improvement mindset to structure data, document decisions, support platform adoption and deliver reliable, scalable and maintainable solutions, always considering people, processes and technology as part of the same operation.',
+      'My career has been built at the intersection of technology, process, and operations. I have more than 10 years of experience across CRM, ERP, quality, and process improvement, which has given me a practical view of how systems affect service, revenue, customer experience, and productivity.',
+      'Today I work with Salesforce in an enterprise environment, especially on the evolution of Sales and Service operations. My work connects data modeling, automation, omnichannel, integrations, security, governance, and user adoption to turn business needs into solutions that perform consistently in day-to-day operations.',
+      'My approach goes beyond platform configuration. I focus on understanding the problem before choosing the solution, defining system responsibilities, reducing coupling, structuring trustworthy data, documenting decisions, and building automations that are predictable, observable, and maintainable. This system-level perspective is what guides my progression toward solution architecture.',
+      'In parallel, I continue to deepen my knowledge of software engineering, data architecture, and AI applied to CRM. Salesforce\'s evolution toward Agentforce, Data 360, headless experiences, and agent-oriented architectures reinforces a direction I consider essential: combining deterministic automation, trusted data, secure integration, governance, and intelligence to build platforms that can evolve with the business.',
     ],
     es: [
-      'Trabaja en Efí Bank evolucionando operaciones de CRM en Salesforce, conectando Sales Cloud, Service Cloud, automatización, soporte a usuarios y eficiencia operacional con foco en impacto práctico para el negocio, mejora de procesos y mayor previsibilidad operacional.',
-      'Combina experiencia profesional en CRM, ERP y QA con una base académica en Sistemas de Información, Ingeniería de Software, Gestión de Proyectos, Business Intelligence y Administración para traducir procesos complejos en soluciones sostenibles, bien documentadas y alineadas con la estrategia.',
-      'Une visión técnica, lectura de negocio y mentalidad de mejora continua para estructurar datos, documentar decisiones, apoyar adopción de la plataforma y entregar soluciones confiables, escalables y fáciles de mantener, siempre considerando personas, procesos y tecnología como parte de la misma operación.',
+      'Mi carrera se ha construido en la intersección entre tecnología, procesos y operación. Tengo más de 10 años de experiencia en CRM, ERP, calidad y mejora de procesos, lo que me dio una visión práctica de cómo los sistemas impactan la atención, los ingresos, la experiencia del cliente y la productividad.',
+      'Actualmente trabajo con Salesforce en un entorno corporativo, especialmente en la evolución de operaciones de Sales y Service. Mi trabajo conecta modelado de datos, automatización, omnicanalidad, integraciones, seguridad, gobierno y adopción de la plataforma para convertir necesidades de negocio en soluciones consistentes para la operación diaria.',
+      'Mi enfoque va más allá de configurar la herramienta. Busco comprender el problema antes de elegir la solución, definir responsabilidades entre sistemas, reducir acoplamiento, estructurar datos confiables, documentar decisiones y construir automatizaciones predecibles, observables y fáciles de mantener. Esta visión integral del sistema es la que orienta mi evolución hacia la arquitectura de soluciones.',
+      'En paralelo, continúo profundizando mis conocimientos en ingeniería de software, arquitectura de datos e IA aplicada al CRM. La evolución del ecosistema Salesforce hacia Agentforce, Data 360, experiencias headless y arquitecturas orientadas a agentes refuerza una dirección que considero esencial: combinar automatización determinística, datos confiables, integración segura, gobierno e inteligencia para construir plataformas capaces de evolucionar con el negocio.',
     ],
   },
-
-  /** Tech stack displayed in the About section */
-  techStack: [
-    { name: 'Salesforce Ecosystem', color: '#0B5CAB' },
-    { name: 'Sales Cloud', color: '#0B78B6' },
-    { name: 'Service Cloud', color: '#159DB3' },
-    { name: 'CRM Strategy', color: '#0B8F61' },
-    { name: 'Process Automation', color: '#B7791F' },
-    { name: 'Flow Builder', color: '#D48806' },
-    { name: 'Data Modeling', color: '#284B68' },
-    { name: 'Omni-Channel', color: '#159DB3' },
-    { name: 'Business Analysis', color: '#4A7C2E' },
-    { name: 'User Adoption', color: '#B83258' },
-  ],
 };

@@ -29,8 +29,7 @@
   "about": {
     "overline": "01. about me",
     "title": "Who I Am",
-    "subtitle": "How I connect technology, processes and business context to evolve CRM operations with Salesforce.",
-    "expertise": "EXPERTISE"
+    "subtitle": "Career path, operating mindset and system-level perspective to turn complex needs into sustainable solutions."
   },
   "experience": {
     "overline": "02. experience",
@@ -49,7 +48,7 @@
   "skills": {
     "overline": "04. expertise",
     "title": "Specialties",
-    "subtitle": "Domains I use to design, sustain and scale CRM, automation and service operations."
+    "subtitle": "Domains I use to design, sustain and scale platform, data and service operations."
   },
   "portfolioProjects": {
     "overline": "05. projects",
@@ -60,10 +59,10 @@
   "contact": {
     "overline": "06. contact",
     "title": "Let's Talk",
-    "subtitle": "A direct channel for conversations about Salesforce, CRM, automation, adoption and operational evolution.",
+    "subtitle": "A direct channel for conversations about Salesforce, solution architecture, integrations and operational evolution.",
     "readyPrefix": "Ready to evolve",
     "readyHighlight": "your CRM?",
-    "body": "If the challenge involves Salesforce, Sales Cloud, Service Cloud, automation or operational efficiency, let's talk.",
+    "body": "If the challenge involves Salesforce, service operations, data, integrations or operational efficiency, let's talk.",
     "sendMessage": "Send message",
     "copy": "Copy",
     "copied": "Copied!",
@@ -158,6 +157,6 @@
     }
   },
   "footer": {
-    "copyrightSuffix": "Salesforce CRM | Sales & Service Cloud"
+    "copyrightSuffix": "Salesforce CRM & Solution Architecture"
   }
 }

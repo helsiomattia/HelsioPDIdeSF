@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import {
   Avatar,
   Box,
-  Chip,
   Container,
   Paper,
   Typography,
   alpha,
 } from '@mui/material';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined';
+import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
@@ -27,8 +26,6 @@ import mepic9 from '../../../images/optimized/mepic-9.webp';
 import mepic10 from '../../../images/optimized/mepic-10.webp';
 import mepic11 from '../../../images/optimized/mepic-11.webp';
 
-const badgeColors = ['#0B5CAB', '#159DB3', '#0B8F61', '#4A6478'];
-
 const profilePhotos = [
   { src: mepic1, position: '52% 42%', scale: 1.38 },
   { src: mepic2, position: '48% 34%', scale: 1.22 },
@@ -42,6 +39,63 @@ const profilePhotos = [
   { src: mepic10, position: '62% 38%', scale: 1.42 },
   { src: mepic11, position: '50% 34%', scale: 1.26 },
 ];
+
+function preloadAndDecodeImage(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    let settled = false;
+
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+
+      const decode = image.decode ? image.decode().catch(() => undefined) : Promise.resolve();
+      decode.then(resolve);
+    };
+
+    image.onload = finish;
+    image.onerror = reject;
+    image.src = src;
+
+    if (image.complete && image.naturalWidth > 0) {
+      finish();
+    }
+  });
+}
+
+const ProfilePhotoLayer = forwardRef(function ProfilePhotoLayer({ photo, eager = false, sx }, ref) {
+  return (
+    <Box
+      ref={ref}
+      sx={{
+        position: 'absolute',
+        inset: 0,
+        overflow: 'hidden',
+        backfaceVisibility: 'hidden',
+        ...sx,
+      }}
+    >
+      <Box
+        component="img"
+        src={photo.src}
+        alt=""
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: photo.position,
+          transform: `scale(${photo.scale})`,
+          filter: 'saturate(1.02) contrast(1.02)',
+          backfaceVisibility: 'hidden',
+        }}
+      />
+    </Box>
+  );
+});
 
 function AboutAmbient() {
   const backgroundPhotos = [
@@ -96,19 +150,71 @@ function AboutAmbient() {
 export default function About() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
-  const [activePhoto, setActivePhoto] = useState(0);
-  const activeProfilePhoto = profilePhotos[activePhoto];
+  const [basePhotoIndex, setBasePhotoIndex] = useState(0);
+  const [transitionPhotoIndex, setTransitionPhotoIndex] = useState(null);
+  const basePhotoIndexRef = useRef(0);
+  const isTransitioningRef = useRef(false);
+  const mountedRef = useRef(false);
+  const overlayRef = useRef(null);
+  const tweenRef = useRef(null);
+  const baseProfilePhoto = profilePhotos[basePhotoIndex];
+  const transitionProfilePhoto = transitionPhotoIndex === null ? null : profilePhotos[transitionPhotoIndex];
+
+  useEffect(() => {
+    basePhotoIndexRef.current = basePhotoIndex;
+  }, [basePhotoIndex]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion || profilePhotos.length <= 1) return undefined;
 
-    const timer = window.setInterval(() => {
-      setActivePhoto((current) => (current + 1) % profilePhotos.length);
+    mountedRef.current = true;
+
+    const timer = window.setInterval(async () => {
+      if (isTransitioningRef.current) return;
+
+      const nextPhotoIndex = (basePhotoIndexRef.current + 1) % profilePhotos.length;
+      isTransitioningRef.current = true;
+
+      try {
+        await preloadAndDecodeImage(profilePhotos[nextPhotoIndex].src);
+        if (!mountedRef.current) return;
+        setTransitionPhotoIndex(nextPhotoIndex);
+      } catch {
+        isTransitioningRef.current = false;
+      }
     }, 3800);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      mountedRef.current = false;
+      window.clearInterval(timer);
+      tweenRef.current?.kill();
+    };
   }, []);
+
+  useEffect(() => {
+    if (transitionPhotoIndex === null || !overlayRef.current) return undefined;
+
+    tweenRef.current?.kill();
+    tweenRef.current = gsap.fromTo(
+      overlayRef.current,
+      { autoAlpha: 0, scale: 1.02 },
+      {
+        autoAlpha: 1,
+        scale: 1,
+        duration: 0.65,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          basePhotoIndexRef.current = transitionPhotoIndex;
+          setBasePhotoIndex(transitionPhotoIndex);
+          setTransitionPhotoIndex(null);
+          isTransitioningRef.current = false;
+        },
+      },
+    );
+
+    return () => tweenRef.current?.kill();
+  }, [transitionPhotoIndex]);
 
   return (
     <Box
@@ -219,24 +325,14 @@ export default function About() {
                       overflow: 'hidden',
                     }}
                   >
-                    {activeProfilePhoto ? (
-                      <Box
-                        key={activeProfilePhoto.src}
-                        component="img"
-                        src={activeProfilePhoto.src}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        sx={{
-                          position: 'absolute',
-                          inset: 0,
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          objectPosition: activeProfilePhoto.position,
-                          transform: `scale(${activeProfilePhoto.scale})`,
-                          filter: 'saturate(1.02) contrast(1.02)',
-                        }}
+                    {baseProfilePhoto ? (
+                      <ProfilePhotoLayer photo={baseProfilePhoto} eager />
+                    ) : null}
+                    {transitionProfilePhoto ? (
+                      <ProfilePhotoLayer
+                        photo={transitionProfilePhoto}
+                        ref={overlayRef}
+                        sx={{ opacity: 0, willChange: 'opacity, transform' }}
                       />
                     ) : null}
                     <Box
@@ -256,18 +352,6 @@ export default function About() {
                 <Box sx={{ textAlign: 'center', maxWidth: 300, mt: { xs: 1, md: 1.4 } }}>
                   <Typography variant="h5" sx={{ fontWeight: 800, mb: 0.5, letterSpacing: '-0.02em' }}>
                     {profile.name}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: 'primary.main',
-                      fontFamily: '"Fira Code", monospace',
-                      fontSize: { xs: '0.76rem', sm: '0.8rem' },
-                      lineHeight: 1.55,
-                      mb: 1.2,
-                    }}
-                  >
-                    {getLocalizedString(profile.title, lang)}
                   </Typography>
                   <Box
                     sx={{
@@ -335,66 +419,6 @@ export default function About() {
               </Paper>
               </AnimatedBox>
 
-              {/* Tech stack */}
-              <AnimatedBox delay={0.3}>
-              <Paper
-                elevation={0}
-                sx={{
-                  p: { xs: 2.25, sm: 2.75, md: 3 },
-                  borderRadius: 'var(--card-radius)',
-                  bgcolor: 'rgba(224,236,245,0.78)',
-                  border: '1px solid rgba(11,92,171,0.16)',
-                  boxShadow: '0 12px 34px rgba(15,37,55,0.055)',
-                }}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-                  <CodeOutlinedIcon sx={{ color: 'primary.main', fontSize: '1.1rem' }} />
-                  <Typography
-                    variant="overline"
-                    sx={{
-                      color: 'primary.main',
-                      fontFamily: '"Fira Code", monospace',
-                      letterSpacing: '0.12em',
-                    }}
-                  >
-                    {t('about.expertise')}
-                  </Typography>
-                </Box>
-
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                  {profile.techStack.map((tech, i) => (
-                    <Chip
-                      key={tech.name}
-                      label={tech.name}
-                      sx={{
-                        maxWidth: '100%',
-                        bgcolor: alpha(badgeColors[i % badgeColors.length], 0.08),
-                        border: `1px solid ${alpha(badgeColors[i % badgeColors.length], 0.18)}`,
-                        color: alpha(badgeColors[i % badgeColors.length], 1),
-                        fontFamily: '"Fira Code", monospace',
-                        fontSize: '0.74rem',
-                        fontWeight: 700,
-                        height: 32,
-                        px: 0.75,
-                        borderRadius: '999px',
-                        transition: 'all 0.2s ease',
-                        '& .MuiChip-label': {
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        },
-                        '&:hover': {
-                          bgcolor: alpha(badgeColors[i % badgeColors.length], 0.14),
-                          borderColor: alpha(badgeColors[i % badgeColors.length], 0.3),
-                          transform: 'translateY(-2px)',
-                          boxShadow: `0 6px 16px ${alpha(badgeColors[i % badgeColors.length], 0.1)}`,
-                        },
-                        cursor: 'default',
-                      }}
-                    />
-                  ))}
-                </Box>
-              </Paper>
-              </AnimatedBox>
             </Box>
           </Box>
         </Box>

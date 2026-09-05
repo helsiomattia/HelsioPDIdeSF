@@ -29,8 +29,7 @@
   "about": {
     "overline": "01. sobre mí",
     "title": "Quién Soy",
-    "subtitle": "Cómo conecto tecnología, procesos y negocio para evolucionar operaciones de CRM con Salesforce.",
-    "expertise": "EXPERTISE"
+    "subtitle": "Trayectoria, forma de pensar y visión de sistema para transformar necesidades complejas en soluciones sostenibles."
   },
   "experience": {
     "overline": "02. experiencia",
@@ -49,7 +48,7 @@
   "skills": {
     "overline": "04. expertise",
     "title": "Especialidades",
-    "subtitle": "Dominios que uso para diseñar, sostener y escalar operaciones en CRM, automatización y atención."
+    "subtitle": "Dominios que uso para diseñar, sostener y escalar operaciones de plataforma, datos y atención."
   },
   "portfolioProjects": {
     "overline": "05. proyectos",
@@ -60,10 +59,10 @@
   "contact": {
     "overline": "06. contacto",
     "title": "Hablemos",
-    "subtitle": "Un canal directo para conversar sobre Salesforce, CRM, automatización, adopción y evolución operacional.",
+    "subtitle": "Un canal directo para conversar sobre Salesforce, arquitectura de soluciones, integraciones y evolución operacional.",
     "readyPrefix": "Listo para evolucionar",
     "readyHighlight": "tu CRM?",
-    "body": "Si el desafío involucra Salesforce, Sales Cloud, Service Cloud, automatización o eficiencia operacional, hablemos.",
+    "body": "Si el desafío involucra Salesforce, operaciones de Service, datos, integraciones o eficiencia operacional, hablemos.",
     "sendMessage": "Enviar mensaje",
     "copy": "Copiar",
     "copied": "Copiado!",
@@ -158,6 +157,6 @@
     }
   },
   "footer": {
-    "copyrightSuffix": "Salesforce CRM | Sales & Service Cloud"
+    "copyrightSuffix": "CRM Salesforce y Arquitectura de Soluciones"
   }
 }

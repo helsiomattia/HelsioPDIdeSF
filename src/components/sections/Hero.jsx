@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import {
   Box,
   Button,
-  Chip,
   Container,
   Typography,
   alpha,
@@ -14,13 +13,13 @@ import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHel
 import { scrollToSection } from '../../utils/scrollToSection';
 
 const ambientSnippets = [
-  '{ object: "CRM" }',
-  'flow: automation.active',
-  'api.sync = true',
-  'case.route("support")',
+  '{ platform: "Salesforce" }',
+  'automation.run()',
+  'integration.sync = true',
+  'data.readyForAI()',
 ];
 
-const ambientTags = ['Salesforce', 'Service Cloud', 'Flow Builder', 'CRM Ops', 'API'];
+const ambientTags = ['Salesforce Platform', 'Service Cloud', 'Automation', 'Integration', 'Data', 'AI Ready'];
 
 /* ── Technical ambient layer ─────────────────────────────── */
 function HeroTechAmbient() {
@@ -328,6 +327,7 @@ export default function Hero() {
   const lang = i18n.resolvedLanguage || 'pt';
   const valuePillars = getLocalizedStringArray(profile.valuePillars, lang);
   const roleText = getLocalizedString(profile.title, lang);
+  const description = getLocalizedStringArray(profile.description, lang);
 
   useEffect(() => {
     if (!sectionRef.current) return undefined;
@@ -485,38 +485,6 @@ export default function Hero() {
       {/* ── Main content ── */}
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box component="div">
-          {/* Available badge */}
-          {profile.available && (
-            <Box component="div" className="hero-gsap-item">
-              <Chip
-                icon={
-                  <Box
-                    component="span"
-                    sx={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: '50%',
-                      bgcolor: '#0B8F61',
-                      animation: 'pulse-ring 2s infinite',
-                    }}
-                  />
-                }
-                label={getLocalizedString(profile.availableLabel, lang)}
-                size="small"
-                sx={{
-                  mb: 2,
-                  bgcolor: alpha('#0B8F61', 0.13),
-                  border: `1px solid ${alpha('#0B8F61', 0.36)}`,
-                  color: '#0B8F61',
-                  fontFamily: '"Fira Code", monospace',
-                  fontSize: '0.75rem',
-                  letterSpacing: '0.03em',
-                  cursor: 'default',
-                }}
-              />
-            </Box>
-          )}
-
           {/* Name */}
           <Box component="div" className="hero-gsap-item">
             <Typography
@@ -596,7 +564,15 @@ export default function Hero() {
                 lineHeight: 1.75,
               }}
             >
-              {getLocalizedString(profile.description, lang)}
+              {description.map((paragraph) => (
+                <Box
+                  key={paragraph}
+                  component="span"
+                  sx={{ display: 'block', mb: 1.1, '&:last-of-type': { mb: 0 } }}
+                >
+                  {paragraph}
+                </Box>
+              ))}
             </Typography>
           </Box>
 
