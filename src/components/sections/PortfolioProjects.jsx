@@ -15,6 +15,7 @@ import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { portfolioProjects } from '../../data/portfolioProjects';
 import { getLocalizedString } from '../../utils/i18nHelper';
+import { visualColors } from '../../theme/tokens';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -102,6 +103,205 @@ function PortfolioAmbient() {
   );
 }
 
+function PortfolioProjectCard({ project, index, lang }) {
+  const isExternal = project.kind === 'external';
+  const href = isExternal ? project.externalUrl : getProjectPath(project.id);
+
+  return (
+    <AnimatedBox delay={index * 0.06} style={{ height: '100%', width: '100%' }}>
+      <Card
+        sx={{
+          height: '100%',
+          minHeight: { xs: 224, lg: 238 },
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          bgcolor: 'rgba(255,255,255,0.86)',
+          border: `1px solid ${alpha(project.accent, isExternal ? 0.34 : 0.22)}`,
+          boxShadow: '0 12px 30px rgba(15,37,55,0.06)',
+          position: 'relative',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            background: `linear-gradient(145deg, ${alpha(project.accent, 0.11)} 0%, transparent 42%)`,
+            opacity: isExternal ? 0.92 : 0.68,
+            pointerEvents: 'none',
+          },
+          '&:hover': {
+            borderColor: alpha(project.accent, 0.45),
+            boxShadow: `0 18px 44px ${alpha(project.accent, 0.14)}`,
+          },
+        }}
+      >
+        <Box sx={{ height: 7, background: project.gradient }} />
+
+        <CardContent
+          sx={{
+            p: { xs: 1.75, md: 1.85 },
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1, mb: 1.25 }}>
+            <Chip
+              label={getLocalizedString(project.status, lang)}
+              size="small"
+              sx={{
+                bgcolor: alpha(project.accent, 0.1),
+                color: project.accent,
+                border: `1px solid ${alpha(project.accent, 0.24)}`,
+                fontSize: '0.58rem',
+                fontWeight: 850,
+                height: 22,
+              }}
+            />
+            {isExternal ? (
+              <OpenInNewRoundedIcon sx={{ color: project.accent, fontSize: '1rem' }} />
+            ) : (
+              <ArrowForwardRoundedIcon sx={{ color: project.accent, fontSize: '1rem' }} />
+            )}
+          </Box>
+
+          <Typography variant="h5" sx={{ fontSize: { xs: '1.03rem', md: '0.98rem' }, fontWeight: 850, lineHeight: 1.16, mb: 0.85, color: 'text.primary' }}>
+            {getLocalizedString(project.title, lang)}
+          </Typography>
+
+          <Typography
+            sx={{
+              color: 'text.primary',
+              fontSize: '0.76rem',
+              lineHeight: 1.45,
+              fontWeight: 500,
+              mb: 1.15,
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 3,
+              overflow: 'hidden',
+            }}
+          >
+            {getLocalizedString(project.description, lang)}
+          </Typography>
+
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.45, mt: 'auto', mb: 1.35 }}>
+            {project.tags.slice(0, 3).map((tag) => (
+              <Chip
+                key={tag}
+                label={tag}
+                size="small"
+                sx={{
+                  bgcolor: alpha(project.accent, 0.07),
+                  border: `1px solid ${alpha(project.accent, 0.16)}`,
+                  color: 'text.primary',
+                  fontSize: '0.56rem',
+                  fontWeight: 750,
+                  height: 21,
+                }}
+              />
+            ))}
+          </Box>
+
+          <Button
+            component="a"
+            href={href}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
+            onClick={isExternal ? undefined : (event) => openInternalProject(event, project.id)}
+            endIcon={isExternal ? <OpenInNewRoundedIcon /> : <ArrowForwardRoundedIcon />}
+            variant="outlined"
+            color="primary"
+            size="small"
+            sx={{
+              width: '100%',
+              minHeight: 34,
+              justifyContent: 'center',
+              borderColor: alpha(project.accent, 0.34),
+              color: project.accent,
+              fontSize: '0.72rem',
+              '&:hover': {
+                borderColor: project.accent,
+                bgcolor: alpha(project.accent, 0.08),
+              },
+            }}
+          >
+            {getLocalizedString(project.action, lang)}
+          </Button>
+        </CardContent>
+      </Card>
+    </AnimatedBox>
+  );
+}
+
+function PortfolioProjectsBoard({ projects, lang }) {
+  return (
+    <Box
+      sx={{
+        position: 'relative',
+        minHeight: { xs: 'auto', lg: 560 },
+        borderRadius: '30px',
+        border: `1px solid ${alpha(visualColors.salesforceLegacy, 0.18)}`,
+        bgcolor: 'rgba(224,236,245,0.62)',
+        overflow: 'hidden',
+        p: { xs: 1.2, sm: 1.5, lg: 3.2 },
+        boxShadow: `inset 0 0 0 1px ${alpha(visualColors.surfaceWhite, 0.48)}`,
+        '&::before': {
+          content: '""',
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          inset: '13% 8% 14%',
+          borderRadius: '34px',
+          border: `1px dashed ${alpha(visualColors.salesforceLegacy, 0.2)}`,
+        },
+        '&::after': {
+          content: '""',
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          left: '8%',
+          right: '8%',
+          top: '51%',
+          height: 2,
+          bgcolor: alpha(visualColors.flowCyan, 0.16),
+          transform: 'rotate(-7deg)',
+        },
+      }}
+    >
+      <Box
+        aria-hidden="true"
+        sx={{
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          right: '8%',
+          top: '12%',
+          width: 96,
+          height: 96,
+          borderRadius: '24px',
+          border: `1px solid ${alpha(visualColors.signalAmber, 0.24)}`,
+          boxShadow: `0 0 0 30px ${alpha(visualColors.signalAmber, 0.04)}`,
+        }}
+      />
+
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(4, minmax(0, 1fr))' },
+          gap: { xs: 1.1, sm: 1.3, lg: 1.8 },
+          position: 'relative',
+          zIndex: 1,
+          height: '100%',
+          alignItems: 'stretch',
+        }}
+      >
+        {projects.map((project, index) => (
+          <PortfolioProjectCard key={project.id} project={project} index={index} lang={lang} />
+        ))}
+      </Box>
+    </Box>
+  );
+}
+
 export default function PortfolioProjects() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
@@ -126,127 +326,10 @@ export default function PortfolioProjects() {
       <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle
           overline={t('portfolioProjects.overline')}
-          title={t('portfolioProjects.title')}
           subtitle={t('portfolioProjects.subtitle')}
         />
 
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))', xl: 'repeat(4, minmax(0, 1fr))' },
-            gap: 'var(--card-gap)',
-            alignItems: 'stretch',
-          }}
-        >
-          {portfolioProjects.map((project, index) => {
-            const isExternal = project.kind === 'external';
-            const href = isExternal ? project.externalUrl : getProjectPath(project.id);
-
-            return (
-              <AnimatedBox key={project.id} delay={index * 0.06} style={{ height: '100%' }}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    minHeight: { xs: 270, md: 310 },
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'hidden',
-                    bgcolor: 'rgba(255,255,255,0.86)',
-                    border: `1px solid ${alpha(project.accent, isExternal ? 0.34 : 0.2)}`,
-                    boxShadow: isExternal
-                      ? `0 16px 42px ${alpha(project.accent, 0.13)}`
-                      : '0 12px 34px rgba(15,37,55,0.06)',
-                    position: 'relative',
-                    '&::before': {
-                      content: '""',
-                      position: 'absolute',
-                      inset: 0,
-                      background: `linear-gradient(145deg, ${alpha(project.accent, 0.14)} 0%, transparent 44%)`,
-                      opacity: isExternal ? 1 : 0.72,
-                      pointerEvents: 'none',
-                    },
-                    '&:hover': {
-                      borderColor: alpha(project.accent, 0.45),
-                      boxShadow: `0 18px 44px ${alpha(project.accent, 0.14)}`,
-                    },
-                  }}
-                >
-                  <Box sx={{ height: 8, background: project.gradient }} />
-
-                  <CardContent sx={{ p: { xs: 2.15, md: 2.25 }, flex: 1, display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1, mb: 1.6 }}>
-                      <Chip
-                        label={getLocalizedString(project.status, lang)}
-                        size="small"
-                        sx={{
-                          bgcolor: alpha(project.accent, 0.1),
-                          color: project.accent,
-                          border: `1px solid ${alpha(project.accent, 0.24)}`,
-                          fontSize: '0.62rem',
-                          fontWeight: 850,
-                        }}
-                      />
-                      {isExternal ? (
-                        <OpenInNewRoundedIcon sx={{ color: project.accent, fontSize: '1.05rem' }} />
-                      ) : (
-                        <ArrowForwardRoundedIcon sx={{ color: project.accent, fontSize: '1.05rem' }} />
-                      )}
-                    </Box>
-
-                    <Typography variant="h5" sx={{ fontSize: { xs: '1.18rem', md: '1.15rem' }, fontWeight: 850, lineHeight: 1.2, mb: 1.05, color: 'text.primary' }}>
-                      {getLocalizedString(project.title, lang)}
-                    </Typography>
-
-                    <Typography sx={{ color: 'text.primary', fontSize: '0.86rem', lineHeight: 1.58, fontWeight: 500, mb: 1.5, flex: 1 }}>
-                      {getLocalizedString(project.description, lang)}
-                    </Typography>
-
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.55, mb: 2 }}>
-                      {project.tags.map((tag) => (
-                        <Chip
-                          key={tag}
-                          label={tag}
-                          size="small"
-                          sx={{
-                            bgcolor: alpha(project.accent, 0.07),
-                            border: `1px solid ${alpha(project.accent, 0.16)}`,
-                            color: 'text.primary',
-                            fontSize: '0.6rem',
-                            fontWeight: 750,
-                          }}
-                        />
-                      ))}
-                    </Box>
-
-                    <Button
-                      component="a"
-                      href={href}
-                      target={isExternal ? '_blank' : undefined}
-                      rel={isExternal ? 'noopener noreferrer' : undefined}
-                      onClick={isExternal ? undefined : (event) => openInternalProject(event, project.id)}
-                      endIcon={isExternal ? <OpenInNewRoundedIcon /> : <ArrowForwardRoundedIcon />}
-                      variant={isExternal ? 'contained' : 'outlined'}
-                      color="primary"
-                      sx={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        borderColor: alpha(project.accent, 0.44),
-                        color: isExternal ? undefined : project.accent,
-                        background: isExternal ? project.gradient : undefined,
-                        '&:hover': {
-                          borderColor: project.accent,
-                          bgcolor: isExternal ? undefined : alpha(project.accent, 0.08),
-                        },
-                      }}
-                    >
-                      {getLocalizedString(project.action, lang)}
-                    </Button>
-                  </CardContent>
-                </Card>
-              </AnimatedBox>
-            );
-          })}
-        </Box>
+        <PortfolioProjectsBoard projects={portfolioProjects} lang={lang} />
 
       </Container>
     </Box>

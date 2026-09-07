@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import { profile } from '../../data/profile';
+import { visualGradients } from '../../theme/tokens';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -30,7 +31,7 @@ export default function Footer() {
                 width: 28,
                 height: 28,
                 borderRadius: '8px',
-                background: 'linear-gradient(135deg, #0B5CAB 0%, #159DB3 100%)',
+                background: visualGradients.crmFlow,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

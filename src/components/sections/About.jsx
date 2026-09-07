@@ -13,7 +13,9 @@ import { useTranslation } from 'react-i18next';
 import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { profile } from '../../data/profile';
+import { visualColors, visualGradients } from '../../theme/tokens';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
+import { renderHighlightedText } from '../../utils/renderHighlightedText';
 import mepic1 from '../../../images/optimized/mepic-1.webp';
 import mepic2 from '../../../images/optimized/mepic-2.webp';
 import mepic3 from '../../../images/optimized/mepic-3.webp';
@@ -39,6 +41,108 @@ const profilePhotos = [
   { src: mepic10, position: '62% 38%', scale: 1.42 },
   { src: mepic11, position: '50% 34%', scale: 1.26 },
 ];
+
+const ABOUT_ATS_TERMS = {
+  pt: [
+    'especialista em tecnologia',
+    'tecnologia',
+    'processos',
+    'operação',
+    'CRM',
+    'ERP',
+    'qualidade',
+    'melhoria de processos',
+    'Salesforce CRM',
+    'ambiente corporativo',
+    'Sales Cloud',
+    'Service Cloud',
+    'modelagem de dados',
+    'automação',
+    'omnichannel',
+    'integrações',
+    'segurança',
+    'governança',
+    'adoção da plataforma',
+    'necessidades de negócio',
+    'arquitetura de soluções',
+    'engenharia de software',
+    'arquitetura de dados',
+    'IA aplicada ao CRM',
+    'Agentforce',
+    'Data 360',
+    'experiências headless',
+    'arquiteturas orientadas a agentes',
+    'automação determinística',
+    'dados confiáveis',
+    'integração segura',
+  ],
+  en: [
+    'technology specialist',
+    'technology',
+    'process',
+    'operations',
+    'CRM',
+    'ERP',
+    'quality',
+    'process improvement',
+    'Salesforce CRM',
+    'enterprise environment',
+    'Sales Cloud',
+    'Service Cloud',
+    'data modeling',
+    'automation',
+    'omnichannel',
+    'integrations',
+    'security',
+    'governance',
+    'user adoption',
+    'business needs',
+    'solution architecture',
+    'software engineering',
+    'data architecture',
+    'AI applied to CRM',
+    'Agentforce',
+    'Data 360',
+    'headless experiences',
+    'agent-oriented architectures',
+    'deterministic automation',
+    'trusted data',
+    'secure integration',
+  ],
+  es: [
+    'especialista en tecnología',
+    'tecnología',
+    'procesos',
+    'operación',
+    'CRM',
+    'ERP',
+    'calidad',
+    'mejora de procesos',
+    'Salesforce CRM',
+    'entorno corporativo',
+    'Sales Cloud',
+    'Service Cloud',
+    'modelado de datos',
+    'automatización',
+    'omnicanalidad',
+    'integraciones',
+    'seguridad',
+    'gobierno',
+    'adopción de la plataforma',
+    'necesidades de negocio',
+    'arquitectura de soluciones',
+    'ingeniería de software',
+    'arquitectura de datos',
+    'IA aplicada al CRM',
+    'Agentforce',
+    'Data 360',
+    'experiencias headless',
+    'arquitecturas orientadas a agentes',
+    'automatización determinística',
+    'datos confiables',
+    'integración segura',
+  ],
+};
 
 function preloadAndDecodeImage(src) {
   return new Promise((resolve, reject) => {
@@ -150,6 +254,7 @@ function AboutAmbient() {
 export default function About() {
   const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
+  const aboutAtsTerms = ABOUT_ATS_TERMS[lang] || ABOUT_ATS_TERMS.pt;
   const [basePhotoIndex, setBasePhotoIndex] = useState(0);
   const [transitionPhotoIndex, setTransitionPhotoIndex] = useState(null);
   const basePhotoIndexRef = useRef(0);
@@ -245,7 +350,6 @@ export default function About() {
       >
         <SectionTitle
           overline={t('about.overline')}
-          title={t('about.title')}
           subtitle={t('about.subtitle')}
           subtitleMaxWidth="560px"
           dividerHeight={3}
@@ -305,7 +409,7 @@ export default function About() {
                       position: 'absolute',
                       inset: -3,
                       borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #0B5CAB 0%, #159DB3 100%)',
+                      background: visualGradients.crmFlow,
                       zIndex: 0,
                     }}
                   />
@@ -362,7 +466,7 @@ export default function About() {
                       px: 1.25,
                       py: 0.55,
                       borderRadius: '999px',
-                      bgcolor: alpha('#0B5CAB', 0.1),
+                      bgcolor: alpha(visualColors.salesforceLegacy, 0.1),
                       border: '1px solid rgba(11,92,171,0.18)',
                     }}
                   >
@@ -413,7 +517,7 @@ export default function About() {
                         overflowWrap: { xs: 'break-word', sm: 'normal' },
                       }}
                     >
-                    {paragraph}
+                    {renderHighlightedText(paragraph, aboutAtsTerms, visualColors.salesforceCore)}
                   </Typography>
                 ))}
               </Paper>

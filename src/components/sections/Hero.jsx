@@ -9,8 +9,10 @@ import {
 import gsap from 'gsap';
 import { useTranslation } from 'react-i18next';
 import { profile } from '../../data/profile';
+import { visualColors, visualGradients } from '../../theme/tokens';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
 import { scrollToSection } from '../../utils/scrollToSection';
+import OperationalSignal from '../ui/OperationalSignal';
 
 const ambientSnippets = [
   '{ platform: "Salesforce" }',
@@ -20,6 +22,24 @@ const ambientSnippets = [
 ];
 
 const ambientTags = ['Salesforce Platform', 'Service Cloud', 'Automation', 'Integration', 'Data', 'AI Ready'];
+
+const COCKPIT_LABELS = {
+  title: {
+    pt: 'CRM control room',
+    en: 'CRM control room',
+    es: 'CRM control room',
+  },
+  subtitle: {
+    pt: 'Sinais que conectam operação, arquitetura e evolução da plataforma.',
+    en: 'Signals connecting operations, architecture and platform evolution.',
+    es: 'Señales que conectan operación, arquitectura y evolución de plataforma.',
+  },
+  route: {
+    pt: 'plataforma Salesforce em operação',
+    en: 'Salesforce platform in operation',
+    es: 'plataforma Salesforce en operación',
+  },
+};
 
 /* ── Technical ambient layer ─────────────────────────────── */
 function HeroTechAmbient() {
@@ -320,6 +340,75 @@ function Orb({ sx }) {
   );
 }
 
+function HeroCockpit({ lang }) {
+  const signals = getLocalizedStringArray(profile.operationalSignals, lang);
+
+  return (
+    <Box
+      className="hero-gsap-item"
+      sx={{
+        display: { xs: 'none', md: 'block' },
+        justifySelf: 'end',
+        width: '100%',
+        maxWidth: 390,
+        borderRadius: '28px',
+        border: '1px solid rgba(6,24,39,0.14)',
+        bgcolor: 'rgba(255,255,255,0.68)',
+        boxShadow: '0 28px 90px rgba(6,24,39,0.12)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        sx={{
+          px: 2.2,
+          py: 1.6,
+          background: `linear-gradient(135deg, ${visualColors.commandNavy} 0%, ${visualColors.salesforceCore} 100%)`,
+          color: '#EAF3F9',
+        }}
+      >
+        <Typography sx={{ fontSize: '0.78rem', fontWeight: 850, lineHeight: 1.2 }}>
+          {getLocalizedString(COCKPIT_LABELS.title, lang)}
+        </Typography>
+        <Typography sx={{ fontSize: '0.72rem', color: 'rgba(234,243,249,0.76)', lineHeight: 1.45, mt: 0.45 }}>
+          {getLocalizedString(COCKPIT_LABELS.subtitle, lang)}
+        </Typography>
+      </Box>
+
+      <Box sx={{ p: 1.35 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            gap: 0.85,
+          }}
+        >
+          {signals.map((signal) => (
+            <OperationalSignal key={signal.label} signal={signal} dense />
+          ))}
+        </Box>
+
+        <Box
+          sx={{
+            mt: 1.2,
+            px: 1,
+            py: 0.85,
+            borderRadius: '12px',
+            bgcolor: alpha(visualColors.consoleMist, 0.72),
+            color: 'text.secondary',
+            fontFamily: '"Fira Code", monospace',
+            fontSize: '0.68rem',
+            fontWeight: 800,
+          }}
+        >
+          {getLocalizedString(COCKPIT_LABELS.route, lang)}
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
 /* ── Hero component ──────────────────────────────────────── */
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -484,7 +573,16 @@ export default function Hero() {
 
       {/* ── Main content ── */}
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        <Box component="div">
+        <Box
+          component="div"
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.15fr) minmax(320px, 0.85fr)' },
+            alignItems: 'center',
+            gap: { md: 4 },
+          }}
+        >
+          <Box component="div" sx={{ minWidth: 0 }}>
           {/* Name */}
           <Box component="div" className="hero-gsap-item">
             <Typography
@@ -502,9 +600,8 @@ export default function Hero() {
                   color: 'text.primary',
                   fontSize: { xs: '1rem', md: '1.15rem' },
                   fontWeight: 650,
-                  fontFamily: '"Fira Code", monospace',
                   mb: 1,
-                  letterSpacing: '0.05em',
+                  letterSpacing: '-0.01em',
                 }}
               >
                 {t('hero.greeting')}
@@ -512,7 +609,7 @@ export default function Hero() {
               <Box
                 component="span"
                 sx={{
-                  background: 'linear-gradient(135deg, #061827 24%, #17364F 100%)',
+                  background: visualGradients.commandText,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -540,7 +637,7 @@ export default function Hero() {
               <Box
                 component="span"
                 sx={{
-                  background: 'linear-gradient(90deg, #0B5CAB 0%, #159DB3 100%)',
+                  background: visualGradients.crmFlow,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -581,35 +678,60 @@ export default function Hero() {
               sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: 1,
+                gap: 1.25,
+                alignItems: 'center',
                 maxWidth: { xs: '100%', md: 680 },
+                mb: 2.8,
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                onClick={() => scrollToSection('projects')}
+                sx={{ minWidth: { xs: '100%', sm: 156 } }}
+              >
+                {t('hero.viewProjects')}
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                size="large"
+                onClick={() => scrollToSection('contact')}
+                sx={{ minWidth: { xs: '100%', sm: 172 } }}
+              >
+                {t('hero.contact')}
+              </Button>
+            </Box>
+          </Box>
+
+          <Box component="div" className="hero-gsap-item">
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
+                gap: { xs: 0.7, sm: 0 },
+                maxWidth: { xs: '100%', md: 620 },
                 mb: 3,
+                borderLeft: `3px solid ${visualColors.flowCyan}`,
+                pl: { xs: 1.4, md: 1.7 },
               }}
             >
               {valuePillars.map((pillar) => (
-                <Box
+                <Typography
                   key={pillar}
                   component="span"
                   sx={{
-                    px: { xs: 1.15, sm: 1.4 },
-                    py: 0.75,
-                    maxWidth: '100%',
-                    borderRadius: '999px',
-                    border: '1px solid rgba(11,92,171,0.24)',
-                    bgcolor: 'rgba(224,236,245,0.72)',
                     color: 'text.primary',
-                    fontFamily: '"Fira Code", monospace',
-                    fontSize: { xs: '0.68rem', sm: '0.72rem' },
-                    fontWeight: 700,
-                    lineHeight: 1.4,
-                    boxShadow: '0 8px 24px rgba(15,37,55,0.06)',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: { xs: 'normal', sm: 'nowrap' },
+                    fontSize: { xs: '0.78rem', md: '0.82rem' },
+                    fontWeight: 680,
+                    lineHeight: 1.35,
+                    pr: { sm: 2 },
+                    py: { sm: 0.35 },
                   }}
                 >
                   {pillar}
-                </Box>
+                </Typography>
               ))}
             </Box>
           </Box>
@@ -655,18 +777,16 @@ export default function Hero() {
                 bgcolor: 'transparent',
                 color: 'primary.dark',
                 cursor: 'pointer',
-                fontFamily: '"Fira Code", monospace',
-                fontSize: { xs: '0.68rem', md: '0.72rem' },
-                fontWeight: 800,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
+                fontSize: { xs: '0.78rem', md: '0.84rem' },
+                fontWeight: 750,
+                letterSpacing: '0.01em',
                 transition: 'color 0.2s ease, transform 0.2s ease',
                 '&:hover': {
                   color: 'primary.main',
                   transform: 'translateY(-2px)',
                 },
                 '&:focus-visible': {
-                  outline: `3px solid ${alpha('#0B5CAB', 0.26)}`,
+                  outline: `3px solid ${alpha(visualColors.salesforceLegacy, 0.26)}`,
                   outlineOffset: 5,
                   borderRadius: '999px',
                 },
@@ -679,6 +799,9 @@ export default function Hero() {
             </Box>
           </Box>
 
+          </Box>
+
+          <HeroCockpit lang={lang} />
         </Box>
       </Container>
     </Box>

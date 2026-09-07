@@ -5,19 +5,17 @@ import {
   Chip,
   Container,
   IconButton,
-  Stack,
   Tooltip,
   Typography,
   alpha,
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import ForkRightOutlinedIcon from '@mui/icons-material/ForkRightOutlined';
 import { useTranslation } from 'react-i18next';
 import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { projects } from '../../data/projects';
+import { visualColors } from '../../theme/tokens';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
 
 function CredentialsAmbient() {
@@ -99,7 +97,6 @@ function CredentialsAmbient() {
   );
 }
 
-/* ── Project card ──────────────────────────────────────── */
 function ProjectCard({ project, index, lang, t }) {
   const status = getLocalizedString(project.status, lang);
   const technologies = getLocalizedStringArray(project.technologies, lang);
@@ -107,69 +104,67 @@ function ProjectCard({ project, index, lang, t }) {
   return (
     <AnimatedBox
       delay={index * 0.06}
-      style={{ height: '100%' }}
+      style={{ height: '100%', width: '100%' }}
     >
       <Card
         sx={{
           height: '100%',
+          minHeight: { xs: 218, lg: 224 },
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
           overflow: 'hidden',
           cursor: 'default',
-          bgcolor: 'rgba(224,236,245,0.94)',
-          borderColor: project.featured ? alpha('#0B5CAB', 0.26) : 'rgba(15,37,55,0.12)',
-          boxShadow: project.featured ? '0 10px 26px rgba(11,92,171,0.09)' : undefined,
-          '&:hover .project-overlay': { opacity: 1 },
+          bgcolor: 'rgba(255,255,255,0.84)',
+          borderColor: project.featured ? alpha(visualColors.salesforceLegacy, 0.22) : 'rgba(15,37,55,0.11)',
+          boxShadow: '0 10px 24px rgba(15,37,55,0.055)',
           '&:hover .project-gradient': { opacity: 0.9 },
           '&:hover': {
-            borderColor: alpha('#0B5CAB', 0.36),
-            boxShadow: '0 12px 30px rgba(11,92,171,0.11)',
+            borderColor: alpha(visualColors.salesforceLegacy, 0.3),
+            boxShadow: '0 12px 28px rgba(11,92,171,0.08)',
           },
         }}
       >
-        {/* Gradient header */}
         <Box
           className="project-gradient"
           sx={{
-            height: 8,
+            height: 6,
             background: project.gradient,
             transition: 'opacity 0.3s ease',
           }}
         />
 
-        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: { xs: 2.05, md: 2 } }}>
-          {/* Top row: status + links */}
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.35 }}>
+        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: { xs: 1.65, md: 1.75 } }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1, mb: 1 }}>
             <Chip
               label={status}
               size="small"
               sx={{
-                fontSize: '0.7rem',
-                height: 22,
+                fontSize: '0.58rem',
+                height: 21,
                 bgcolor: alpha(
                   status === 'In production'
-                    ? '#0B8F61'
+                    ? visualColors.successGreen
                     : status === 'Active'
-                    ? '#0B78B6'
+                    ? visualColors.serviceBlue
                     : '#6B8194',
                   0.15,
                 ),
                 color:
                   status === 'In production'
-                    ? '#0B8F61'
+                    ? visualColors.successGreen
                     : status === 'Active'
-                    ? '#0B78B6'
+                    ? visualColors.serviceBlue
                     : '#5C7183',
                 border: `1px solid ${alpha(
                   status === 'In production'
-                    ? '#0B8F61'
+                    ? visualColors.successGreen
                     : status === 'Active'
-                    ? '#0B78B6'
+                    ? visualColors.serviceBlue
                     : '#6B8194',
                   0.3,
                 )}`,
-                fontFamily: '"Fira Code", monospace',
+                fontWeight: 750,
               }}
             />
 
@@ -182,10 +177,12 @@ function ProjectCard({ project, index, lang, t }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     size="small"
-                    aria-label="GitHub"
+                    aria-label={t('projects.repository')}
                     sx={{
+                      width: 28,
+                      height: 28,
                       color: 'text.secondary',
-                      '&:hover': { color: 'primary.main', bgcolor: alpha('#0B5CAB', 0.1) },
+                      '&:hover': { color: 'primary.main', bgcolor: alpha(visualColors.salesforceLegacy, 0.1) },
                     }}
                   >
                     <GitHubIcon fontSize="small" />
@@ -200,10 +197,12 @@ function ProjectCard({ project, index, lang, t }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     size="small"
-                    aria-label="Demo"
+                    aria-label={t('projects.viewDemo')}
                     sx={{
+                      width: 28,
+                      height: 28,
                       color: 'text.secondary',
-                      '&:hover': { color: 'secondary.main', bgcolor: alpha('#159DB3', 0.1) },
+                      '&:hover': { color: 'secondary.main', bgcolor: alpha(visualColors.flowCyanLegacy, 0.1) },
                     }}
                   >
                     <OpenInNewIcon fontSize="small" />
@@ -213,34 +212,40 @@ function ProjectCard({ project, index, lang, t }) {
             </Box>
           </Box>
 
-          {/* Title */}
-          <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.65, fontSize: '0.95rem', lineHeight: 1.3, color: 'text.primary' }}>
+          <Typography variant="h6" sx={{ fontWeight: 790, mb: 0.6, fontSize: { xs: '0.98rem', md: '0.94rem' }, lineHeight: 1.18, color: 'text.primary' }}>
             {getLocalizedString(project.title, lang)}
           </Typography>
 
-          {/* Description */}
           <Typography
             variant="body2"
-            sx={{ color: 'text.primary', mb: 1.25, flex: 1, lineHeight: 1.48, fontSize: '0.81rem', fontWeight: 500 }}
+            sx={{
+              color: 'text.primary',
+              mb: 1,
+              lineHeight: 1.42,
+              fontSize: '0.74rem',
+              fontWeight: 500,
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 3,
+              overflow: 'hidden',
+            }}
           >
             {getLocalizedString(project.description, lang)}
           </Typography>
 
-          {/* Tech chips */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 1.3 }}>
-            {technologies.map((tech) => (
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.42, mt: 'auto' }}>
+            {technologies.slice(0, 4).map((tech) => (
               <Chip
                 key={tech}
                 label={tech}
                 size="small"
                 sx={{
-                  bgcolor: 'rgba(11,92,171,0.08)',
-                  border: '1px solid rgba(11,92,171,0.2)',
-                  color: 'primary.dark',
-                  fontFamily: '"Fira Code", monospace',
-                  fontSize: '0.64rem',
-                  fontWeight: 700,
-                  height: 22,
+                  bgcolor: alpha(visualColors.salesforceLegacy, 0.08),
+                  border: `1px solid ${alpha(visualColors.salesforceLegacy, 0.18)}`,
+                  color: 'text.primary',
+                  fontSize: '0.56rem',
+                  fontWeight: 650,
+                  height: 20,
                   maxWidth: '100%',
                   '& .MuiChip-label': {
                     overflow: 'hidden',
@@ -250,30 +255,84 @@ function ProjectCard({ project, index, lang, t }) {
               />
             ))}
           </Box>
-
-          {(project.stars !== null || project.forks !== null) && (
-            <Stack direction="row" spacing={1.5} sx={{ pt: 1.1, borderTop: '1px solid rgba(15,37,55,0.12)' }}>
-              {project.stars !== null && (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  <StarOutlineIcon sx={{ fontSize: '0.9rem', color: '#B7791F' }} />
-                  <Typography variant="caption" sx={{ color: 'text.primary', fontFamily: '"Fira Code", monospace', fontWeight: 700 }}>
-                    {project.stars}
-                  </Typography>
-                </Box>
-              )}
-              {project.forks !== null && (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  <ForkRightOutlinedIcon sx={{ fontSize: '0.9rem', color: 'text.secondary' }} />
-                  <Typography variant="caption" sx={{ color: 'text.primary', fontFamily: '"Fira Code", monospace', fontWeight: 700 }}>
-                    {project.forks}
-                  </Typography>
-                </Box>
-              )}
-            </Stack>
-          )}
         </CardContent>
       </Card>
     </AnimatedBox>
+  );
+}
+
+function CredentialsBoard({ credentials, lang, t }) {
+  return (
+    <Box
+      sx={{
+        position: 'relative',
+        minHeight: { xs: 'auto', lg: 500 },
+        borderRadius: '30px',
+        border: `1px solid ${alpha(visualColors.salesforceLegacy, 0.18)}`,
+        bgcolor: 'rgba(224,236,245,0.6)',
+        overflow: 'hidden',
+        p: { xs: 1.1, sm: 1.35, lg: 2.4 },
+        boxShadow: `inset 0 0 0 1px ${alpha(visualColors.surfaceWhite, 0.5)}`,
+        '&::before': {
+          content: '""',
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          inset: '12% 8% 14%',
+          borderRadius: '34px',
+          border: `1px dashed ${alpha(visualColors.salesforceLegacy, 0.2)}`,
+        },
+        '&::after': {
+          content: '""',
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          left: '10%',
+          right: '10%',
+          top: '51%',
+          height: 2,
+          bgcolor: alpha(visualColors.signalAmber, 0.15),
+          transform: 'rotate(7deg)',
+        },
+      }}
+    >
+      <Box
+        aria-hidden="true"
+        sx={{
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          width: 90,
+          height: 90,
+          borderRadius: '22px',
+          transform: 'translate(-50%, -50%) rotate(-8deg)',
+          border: `1px solid ${alpha(visualColors.flowCyan, 0.22)}`,
+          boxShadow: `0 0 0 28px ${alpha(visualColors.flowCyan, 0.04)}`,
+        }}
+      />
+
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
+          gridTemplateRows: { lg: 'repeat(2, minmax(224px, 1fr))' },
+          gap: { xs: 1, sm: 1.15, lg: 1.45 },
+          position: 'relative',
+          zIndex: 1,
+          height: '100%',
+          minHeight: { lg: 452 },
+        }}
+      >
+        {credentials.map((project, index) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            index={index}
+            lang={lang}
+            t={t}
+          />
+        ))}
+      </Box>
+    </Box>
   );
 }
 
@@ -291,7 +350,7 @@ export default function Projects() {
         minHeight: { md: 'calc(100dvh - var(--header-height))' },
         display: 'flex',
         alignItems: 'center',
-        py: { xs: 6, md: 'var(--section-block-padding)' },
+        py: { xs: 5, md: 'clamp(28px, 4vh, 52px)' },
         background: 'linear-gradient(180deg, var(--site-bg-mid) 0%, var(--site-bg-start) 100%)',
         position: 'relative',
         overflow: 'hidden',
@@ -302,24 +361,10 @@ export default function Projects() {
       <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle
           overline={t('projects.overline')}
-          title={t('projects.title')}
           subtitle={t('projects.subtitle')}
         />
 
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
-            gap: 'var(--card-gap)',
-            alignItems: 'stretch',
-          }}
-        >
-          {projects.map((project, index) => (
-            <Box key={project.id}>
-              <ProjectCard project={project} index={index} lang={lang} t={t} />
-            </Box>
-          ))}
-        </Box>
+        <CredentialsBoard credentials={projects} lang={lang} t={t} />
       </Container>
     </Box>
   );

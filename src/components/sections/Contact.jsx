@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import SectionTitle from '../ui/SectionTitle';
 import AnimatedBox from '../ui/AnimatedBox';
 import { profile } from '../../data/profile';
+import { visualColors, visualGradients } from '../../theme/tokens';
 import { getLocalizedString } from '../../utils/i18nHelper';
 
 function ContactAmbient() {
@@ -389,7 +390,7 @@ export default function Contact() {
       value: getLocalizedString(profile.location, lang),
       href: null,
       copyable: false,
-      color: '#B7791F',
+      color: visualColors.signalAmber,
     },
   ];
 
@@ -415,6 +416,7 @@ export default function Contact() {
           overline={t('contact.overline')}
           title={t('contact.title')}
           subtitle={t('contact.subtitle')}
+          align="center"
         />
 
         {/* Main CTA block */}
@@ -437,7 +439,7 @@ export default function Contact() {
               <Box
                 component="span"
                 sx={{
-                  background: 'linear-gradient(90deg, #0B5CAB, #159DB3)',
+                  background: visualGradients.crmFlow,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',

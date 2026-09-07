@@ -1,11 +1,13 @@
+import { visualColors } from '../theme/tokens';
+
 export const skillCategories = [
   {
     id: 'salesforce',
     title: { pt: 'Ecossistema Salesforce', en: 'Salesforce Ecosystem', es: 'Ecosistema Salesforce' },
     icon: 'Web',
-    color: '#0B5CAB',
-    gradient: 'linear-gradient(135deg, #0B5CAB1F 0%, #159DB31A 100%)',
-    borderColor: '#0B5CAB',
+    color: visualColors.salesforceLegacy,
+    gradient: `linear-gradient(135deg, ${visualColors.salesforceLegacy}1F 0%, ${visualColors.flowCyanLegacy}1A 100%)`,
+    borderColor: visualColors.salesforceLegacy,
     skills: {
       pt: ['Ecossistema Salesforce', 'Sales Cloud', 'Service Cloud', 'Administração CRM', 'Customização de Plataforma', 'Suporte a Usuários'],
       en: ['Salesforce Ecosystem', 'Sales Cloud', 'Service Cloud', 'CRM Administration', 'Platform Customization', 'User Support'],
@@ -42,9 +44,9 @@ export const skillCategories = [
     id: 'crm-strategy',
     title: { pt: 'Estratégia CRM', en: 'CRM Strategy', es: 'Estrategia CRM' },
     icon: 'Storage',
-    color: '#0B8F61',
-    gradient: 'linear-gradient(135deg, #0B8F611A 0%, #159DB318 100%)',
-    borderColor: '#0B8F61',
+    color: visualColors.successGreen,
+    gradient: `linear-gradient(135deg, ${visualColors.successGreen}1A 0%, ${visualColors.flowCyanLegacy}18 100%)`,
+    borderColor: visualColors.successGreen,
     skills: {
       pt: ['Estratégia CRM', 'Análise de Negócios', 'Mapeamento de Processos', 'Tradução de Requisitos', 'Processos Corporativos', 'Adoção de Usuários'],
       en: ['CRM Strategy', 'Business Analysis', 'Process Mapping', 'Requirements Translation', 'Corporate Processes', 'User Adoption'],
@@ -81,9 +83,9 @@ export const skillCategories = [
     id: 'automation',
     title: { pt: 'Automação', en: 'Automation', es: 'Automatización' },
     icon: 'TableChart',
-    color: '#B7791F',
-    gradient: 'linear-gradient(135deg, #B7791F1C 0%, #D4880616 100%)',
-    borderColor: '#B7791F',
+    color: visualColors.signalAmber,
+    gradient: `linear-gradient(135deg, ${visualColors.signalAmber}1C 0%, #D4880616 100%)`,
+    borderColor: visualColors.signalAmber,
     skills: {
       pt: ['Automação de Processos', 'Flow Builder', 'Operações de Atendimento', 'Operações de Vendas', 'Resolução de Problemas', 'Escalabilidade'],
       en: ['Process Automation', 'Flow Builder', 'Service Operations', 'Sales Operations', 'Troubleshooting', 'Scalability'],

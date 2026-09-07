@@ -1,11 +1,12 @@
 import { createTheme, alpha } from '@mui/material/styles';
+import { visualColors, visualGradients, visualMotion, visualRadii, visualShadows } from './tokens';
 
-const PRIMARY = '#0D4DA5';
-const SECONDARY = '#1EACB8';
-const BG = '#F5F7F9';
-const SURFACE = '#FFFFFF';
-const SURFACE_2 = '#E7EAEE';
-const TEXT = '#141D2E';
+const PRIMARY = visualColors.salesforceCore;
+const SECONDARY = visualColors.flowCyan;
+const BG = visualColors.appBackground;
+const SURFACE = visualColors.surfaceWhite;
+const SURFACE_2 = visualColors.consoleMistSoft;
+const TEXT = visualColors.textPrimary;
 
 const theme = createTheme({
   palette: {
@@ -28,14 +29,14 @@ const theme = createTheme({
     },
     text: {
       primary: TEXT,
-      secondary: '#4F5E73',
-      disabled: '#6C778D',
+      secondary: visualColors.textSecondary,
+      disabled: '#59687C',
     },
     divider: '#DBE0E6',
     success: { main: '#29A366' },
     error: { main: '#DF3A3A' },
     warning: { main: '#F2A60D' },
-    info: { main: '#0D4DA5' },
+      info: { main: PRIMARY },
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -50,7 +51,7 @@ const theme = createTheme({
     button: { textTransform: 'none', fontWeight: 700, letterSpacing: '0.01em' },
     overline: { letterSpacing: '0.15em', fontWeight: 750, fontSize: '0.7rem' },
   },
-  shape: { borderRadius: 12 },
+  shape: { borderRadius: visualRadii.control },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -65,6 +66,12 @@ const theme = createTheme({
           borderRadius: '3px',
         },
         '*::-webkit-scrollbar-thumb:hover': { background: PRIMARY },
+        'a': {
+          color: 'inherit',
+        },
+        'button, a, [role="button"]': {
+          WebkitTapHighlightColor: 'transparent',
+        },
         '::selection': {
           backgroundColor: alpha(PRIMARY, 0.2),
           color: TEXT,
@@ -76,16 +83,20 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           fontWeight: 600,
-          borderRadius: '8px',
+          borderRadius: visualRadii.control,
           padding: '10px 28px',
           fontSize: '0.95rem',
-          transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: `background-color ${visualMotion.normal}, border-color ${visualMotion.normal}, box-shadow ${visualMotion.normal}, color ${visualMotion.normal}, transform ${visualMotion.normal}`,
+          '&:focus-visible': {
+            outline: `3px solid ${alpha(PRIMARY, 0.28)}`,
+            outlineOffset: 3,
+          },
         },
         containedPrimary: {
-          background: `linear-gradient(135deg, ${PRIMARY} 0%, ${SECONDARY} 100%)`,
+          background: visualGradients.crmFlowCurrent,
           boxShadow: `0 4px 18px ${alpha(PRIMARY, 0.22)}`,
           '&:hover': {
-            boxShadow: `0 8px 28px ${alpha(PRIMARY, 0.28)}`,
+            boxShadow: visualShadows.panel,
             transform: 'translateY(-2px)',
           },
         },
@@ -117,12 +128,15 @@ const theme = createTheme({
           backgroundImage: 'none',
           backgroundColor: SURFACE,
           border: `1px solid ${alpha(TEXT, 0.12)}`,
-          borderRadius: '18px',
-          transition: 'all 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
+          borderRadius: visualRadii.card,
+          transition: `border-color ${visualMotion.normal}, box-shadow ${visualMotion.normal}, transform ${visualMotion.normal}`,
           '&:hover': {
             border: `1px solid ${alpha(PRIMARY, 0.28)}`,
             transform: 'translateY(-3px)',
-            boxShadow: `0 12px 28px ${alpha(PRIMARY, 0.09)}`,
+            boxShadow: visualShadows.cardHover,
+          },
+          '&:focus-within': {
+            borderColor: alpha(PRIMARY, 0.28),
           },
         },
       },
@@ -131,10 +145,13 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: '0.78rem',
-          fontWeight: 500,
-          borderRadius: '6px',
+          fontWeight: 650,
+          borderRadius: 6,
           height: '26px',
-          fontFamily: '"Fira Code", monospace',
+          color: TEXT,
+        },
+        label: {
+          lineHeight: 1.35,
         },
       },
     },
@@ -153,14 +170,18 @@ const theme = createTheme({
     },
     MuiTooltip: {
       styleOverrides: {
-        tooltip: { borderRadius: '6px', fontSize: '0.8rem' },
+        tooltip: { borderRadius: 6, fontSize: '0.8rem', fontWeight: 600 },
       },
     },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          transition: 'all 0.2s ease',
+          transition: `background-color ${visualMotion.fast}, color ${visualMotion.fast}, transform ${visualMotion.fast}`,
           '&:hover': { transform: 'scale(1.04)' },
+          '&:focus-visible': {
+            outline: `3px solid ${alpha(PRIMARY, 0.28)}`,
+            outlineOffset: 2,
+          },
         },
       },
     },

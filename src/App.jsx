@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { ThemeProvider, CssBaseline, GlobalStyles, Box } from '@mui/material';
 import theme from './theme/theme';
+import { visualColors, visualMotion, visualRadii, visualShadows } from './theme/tokens';
 import Navbar from './components/layout/Navbar';
 import SectionNavigation from './components/layout/SectionNavigation';
 import Footer from './components/layout/Footer';
@@ -55,14 +56,36 @@ function getAppRoute() {
 
 const globalStyles = `
   :root {
-    --header-height: 88px;
+    --header-height: 0px;
     --page-max-width: 1380px;
     --section-inline-padding: clamp(20px, 4.6vw, 76px);
-    --section-block-padding: clamp(22px, 4vh, 48px);
+    --section-block-padding: clamp(40px, 6vh, 72px);
     --card-radius: 18px;
-    --card-gap: clamp(12px, 1.35vw, 22px);
+    --card-gap: clamp(14px, 1.45vw, 24px);
     --transition-fast: 200ms;
     --transition-normal: 280ms;
+    --radius-control: ${visualRadii.control}px;
+    --radius-card: ${visualRadii.card}px;
+    --radius-panel: ${visualRadii.panel}px;
+    --motion-fast: ${visualMotion.fast};
+    --motion-normal: ${visualMotion.normal};
+    --motion-deliberate: ${visualMotion.deliberate};
+    --shadow-card: ${visualShadows.card};
+    --shadow-card-hover: ${visualShadows.cardHover};
+    --shadow-panel: ${visualShadows.panel};
+    --color-command-navy: ${visualColors.commandNavy};
+    --color-command-navy-soft: ${visualColors.commandNavySoft};
+    --color-salesforce-core: ${visualColors.salesforceCore};
+    --color-salesforce-legacy: ${visualColors.salesforceLegacy};
+    --color-salesforce-bright: ${visualColors.salesforceBright};
+    --color-flow-cyan: ${visualColors.flowCyan};
+    --color-flow-cyan-legacy: ${visualColors.flowCyanLegacy};
+    --color-console-mist: ${visualColors.consoleMist};
+    --color-console-mist-deep: ${visualColors.consoleMistDeep};
+    --color-surface-white: ${visualColors.surfaceWhite};
+    --color-signal-amber: ${visualColors.signalAmber};
+    --color-success-green: ${visualColors.successGreen};
+    --color-service-blue: ${visualColors.serviceBlue};
     --background: 220 25% 97%;
     --foreground: 220 40% 13%;
     --card: 0 0% 100%;
@@ -92,7 +115,7 @@ const globalStyles = `
 
   @media (min-width: 900px) {
     :root {
-      --header-height: 64px;
+      --header-height: 0px;
     }
   }
 
@@ -190,6 +213,11 @@ const globalStyles = `
     to { stroke-dashoffset: -64; }
   }
 
+  @keyframes loadingSignal {
+    0%, 100% { transform: translateX(-42%); opacity: 0.28; }
+    50% { transform: translateX(42%); opacity: 0.88; }
+  }
+
   @supports (overflow-x: clip) {
     body { overflow-x: clip; }
   }
@@ -212,6 +240,44 @@ const globalStyles = `
     }
   }
 `;
+
+function LoadingFallback() {
+  return (
+    <Box
+      role="status"
+      aria-label="Carregando conteúdo"
+      sx={{
+        minHeight: 180,
+        display: 'grid',
+        placeItems: 'center',
+        px: 'var(--section-inline-padding)',
+      }}
+    >
+      <Box component="span" className="sr-only">
+        Carregando conteúdo
+      </Box>
+      <Box
+        sx={{
+          width: { xs: 156, md: 220 },
+          height: 8,
+          borderRadius: '999px',
+          bgcolor: 'rgba(224,236,245,0.78)',
+          overflow: 'hidden',
+          border: '1px solid rgba(13,77,165,0.16)',
+          '&::before': {
+            content: '""',
+            display: 'block',
+            width: '48%',
+            height: '100%',
+            borderRadius: 'inherit',
+            background: 'linear-gradient(90deg, var(--color-salesforce-core), var(--color-flow-cyan))',
+            animation: 'loadingSignal 1.2s ease-in-out infinite',
+          },
+        }}
+      />
+    </Box>
+  );
+}
 
 export default function App() {
   const [appRoute, setAppRoute] = useState(() => getAppRoute());
@@ -246,11 +312,11 @@ export default function App() {
       <Box sx={{ overflowX: 'hidden', '@supports (overflow-x: clip)': { overflowX: 'clip' } }}>
         <Navbar />
         {appRoute.type === 'project' ? (
-          <Suspense fallback={null}>
+          <Suspense fallback={<LoadingFallback />}>
             <ProjectDetailPage projectId={appRoute.projectId} />
           </Suspense>
         ) : appRoute.type === 'aboutProject' ? (
-          <Suspense fallback={null}>
+          <Suspense fallback={<LoadingFallback />}>
             <AboutProjectPage />
           </Suspense>
         ) : (
@@ -259,7 +325,7 @@ export default function App() {
             <main>
               <Hero />
               {loadHomeSections ? (
-                <Suspense fallback={null}>
+                <Suspense fallback={<LoadingFallback />}>
                   <About />
                   <Experience />
                   <Credentials />

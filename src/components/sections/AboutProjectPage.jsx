@@ -25,6 +25,7 @@ import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 import WebRoundedIcon from '@mui/icons-material/WebRounded';
 import { useTranslation } from 'react-i18next';
 import { profile } from '../../data/profile';
+import { visualColors, visualGradients, visualShadows } from '../../theme/tokens';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
 const siteUrl = 'https://helsiomattia.github.io/crm-specialist/';
@@ -34,10 +35,10 @@ function getHomePath() {
 }
 
 const metrics = [
-  { value: 'React 18', labelKey: 'aboutProject.metrics.react', icon: CodeRoundedIcon },
-  { value: 'Vite 5', labelKey: 'aboutProject.metrics.vite', icon: RocketLaunchRoundedIcon },
+  { value: 'HM.crm', labelKey: 'aboutProject.metrics.react', icon: CodeRoundedIcon },
+  { value: 'React + Vite', labelKey: 'aboutProject.metrics.vite', icon: RocketLaunchRoundedIcon },
   { valueKey: 'aboutProject.metrics.languagesValue', labelKey: 'aboutProject.metrics.languages', icon: LanguageRoundedIcon },
-  { value: 'SPA', labelKey: 'aboutProject.metrics.spa', icon: RouteRoundedIcon },
+  { value: 'SPA + SEO', labelKey: 'aboutProject.metrics.spa', icon: RouteRoundedIcon },
 ];
 
 const featureCards = [
@@ -45,29 +46,29 @@ const featureCards = [
     titleKey: 'aboutProject.features.showcase.title',
     descriptionKey: 'aboutProject.features.showcase.description',
     icon: WebRoundedIcon,
-    color: '#0D4DA5',
+    color: visualColors.salesforceCore,
   },
   {
     titleKey: 'aboutProject.features.content.title',
     descriptionKey: 'aboutProject.features.content.description',
     icon: DataObjectRoundedIcon,
-    color: '#0B8F61',
+    color: visualColors.successGreen,
   },
   {
     titleKey: 'aboutProject.features.responsive.title',
     descriptionKey: 'aboutProject.features.responsive.description',
     icon: DevicesRoundedIcon,
-    color: '#1EACB8',
+    color: visualColors.flowCyan,
   },
   {
     titleKey: 'aboutProject.features.deploy.title',
     descriptionKey: 'aboutProject.features.deploy.description',
     icon: StorageRoundedIcon,
-    color: '#B7791F',
+    color: visualColors.signalAmber,
   },
 ];
 
-const stack = ['React 18', 'Vite 5', 'Material UI 5', 'Emotion', 'i18next', 'react-i18next', 'GSAP', 'GitHub Pages'];
+const stack = ['React 18', 'Vite 5', 'Material UI 5', 'Emotion', 'i18next', 'GSAP', 'Design tokens', 'SVG flags', 'Open Graph', 'GitHub Pages'];
 
 const commands = ['npm install', 'npm run dev', 'npm run build', 'npm run preview'];
 
@@ -126,14 +127,14 @@ function TerminalCard({ terminalTitle }) {
         border: '1px solid rgba(13,77,165,0.18)',
         bgcolor: 'rgba(6,24,39,0.94)',
         color: '#EAF3F9',
-        boxShadow: '0 30px 90px rgba(6,24,39,0.22)',
+        boxShadow: visualShadows.panel,
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.8, p: 1.5, borderBottom: '1px solid rgba(234,243,249,0.12)' }}>
         {['#D94A5F', '#F2A60D', '#29A366'].map((color) => (
           <Box key={color} sx={{ width: 11, height: 11, borderRadius: '50%', bgcolor: color }} />
         ))}
-        <TerminalRoundedIcon sx={{ ml: 0.8, fontSize: '1rem', color: '#1EACB8' }} />
+        <TerminalRoundedIcon sx={{ ml: 0.8, fontSize: '1rem', color: visualColors.flowCyan }} />
         <Typography sx={{ ml: 0.8, fontFamily: '"Fira Code", monospace', fontSize: '0.72rem', color: 'rgba(234,243,249,0.72)', fontWeight: 800 }}>
           {terminalTitle}
         </Typography>
@@ -141,15 +142,19 @@ function TerminalCard({ terminalTitle }) {
 
       <Box sx={{ p: { xs: 2.2, md: 3 } }}>
         <Typography sx={{ fontFamily: '"Fira Code", monospace', fontSize: { xs: '0.82rem', md: '0.9rem' }, lineHeight: 1.9 }}>
-          <Box component="span" sx={{ color: '#1EACB8' }}>const</Box> project = {'{'}
+          <Box component="span" sx={{ color: visualColors.flowCyan }}>const</Box> project = {'{'}
           <br />
           &nbsp;&nbsp;owner: <Box component="span" sx={{ color: '#F2A60D' }}>'Helsio Mattia'</Box>,
           <br />
-          &nbsp;&nbsp;focus: <Box component="span" sx={{ color: '#F2A60D' }}>'Salesforce CRM'</Box>,
+          &nbsp;&nbsp;identity: <Box component="span" sx={{ color: '#F2A60D' }}>'HM.crm control room'</Box>,
           <br />
           &nbsp;&nbsp;sections: <Box component="span" sx={{ color: '#29A366' }}>7</Box>,
           <br />
+          &nbsp;&nbsp;layout: <Box component="span" sx={{ color: '#F2A60D' }}>'compact visual boards'</Box>,
+          <br />
           &nbsp;&nbsp;languages: [<Box component="span" sx={{ color: '#F2A60D' }}>'pt'</Box>, <Box component="span" sx={{ color: '#F2A60D' }}>'en'</Box>, <Box component="span" sx={{ color: '#F2A60D' }}>'es'</Box>],
+          <br />
+          &nbsp;&nbsp;navigation: <Box component="span" sx={{ color: '#F2A60D' }}>'left rail + SVG flags'</Box>
           <br />
           &nbsp;&nbsp;deploy: <Box component="span" sx={{ color: '#F2A60D' }}>'GitHub Pages'</Box>
           <br />
@@ -161,7 +166,7 @@ function TerminalCard({ terminalTitle }) {
         <Box sx={{ display: 'grid', gap: 1 }}>
           {commands.map((command) => (
             <Typography key={command} sx={{ fontFamily: '"Fira Code", monospace', fontSize: '0.8rem', color: 'rgba(234,243,249,0.82)' }}>
-              <Box component="span" sx={{ color: '#1EACB8' }}>$</Box> {command}
+              <Box component="span" sx={{ color: visualColors.flowCyan }}>$</Box> {command}
             </Typography>
           ))}
         </Box>
@@ -339,7 +344,7 @@ export default function AboutProjectPage() {
             <Box sx={{ display: 'grid', gap: 1.1 }}>
               {sections.map(({ title, description }, index) => (
                 <Box key={title} sx={{ display: 'grid', gridTemplateColumns: '42px 1fr', gap: 1.4, alignItems: 'start' }}>
-                  <Box sx={{ width: 34, height: 34, borderRadius: '11px', display: 'grid', placeItems: 'center', bgcolor: alpha('#0D4DA5', 0.09), color: 'primary.main', fontFamily: '"Fira Code", monospace', fontWeight: 900, fontSize: '0.72rem' }}>
+                  <Box sx={{ width: 34, height: 34, borderRadius: '11px', display: 'grid', placeItems: 'center', bgcolor: alpha(visualColors.salesforceCore, 0.09), color: 'primary.main', fontFamily: '"Fira Code", monospace', fontWeight: 900, fontSize: '0.72rem' }}>
                     {String(index + 1).padStart(2, '0')}
                   </Box>
                   <Box>
@@ -354,7 +359,7 @@ export default function AboutProjectPage() {
           <Paper elevation={0} sx={{ p: { xs: 2.4, md: 3.2 }, borderRadius: '28px', bgcolor: 'rgba(6,24,39,0.95)', color: '#EAF3F9', border: '1px solid rgba(234,243,249,0.1)', position: 'relative', overflow: 'hidden' }}>
             <Box sx={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at top right, rgba(30,172,184,0.22), transparent 38%)', pointerEvents: 'none' }} />
             <Box sx={{ position: 'relative', zIndex: 1 }}>
-              <Typography variant="overline" sx={{ color: '#1EACB8' }}>
+              <Typography variant="overline" sx={{ color: visualColors.flowCyan }}>
                 {t('aboutProject.dataLayer.overline')}
               </Typography>
               <Typography variant="h3" sx={{ color: '#fff', fontSize: { xs: '1.75rem', md: '2.35rem' }, mb: 1 }}>
@@ -365,10 +370,10 @@ export default function AboutProjectPage() {
               </Typography>
 
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' }, gap: 1.2 }}>
-                {dataFiles.map(({ file, description }) => (
-                  <Box key={file} sx={{ p: 1.6, borderRadius: '16px', bgcolor: 'rgba(234,243,249,0.06)', border: '1px solid rgba(234,243,249,0.1)' }}>
-                    <Typography sx={{ fontFamily: '"Fira Code", monospace', color: '#1EACB8', fontWeight: 850, fontSize: '0.82rem', mb: 0.8 }}>
-                      src/data/{file}
+                {dataFiles.map(({ file, path, description }) => (
+                  <Box key={path || file} sx={{ p: 1.6, borderRadius: '16px', bgcolor: 'rgba(234,243,249,0.06)', border: '1px solid rgba(234,243,249,0.1)' }}>
+                    <Typography sx={{ fontFamily: '"Fira Code", monospace', color: visualColors.flowCyan, fontWeight: 850, fontSize: '0.82rem', mb: 0.8 }}>
+                      {path || `src/data/${file}`}
                     </Typography>
                     <Typography sx={{ color: 'rgba(234,243,249,0.74)', lineHeight: 1.55, fontSize: '0.84rem', fontWeight: 540 }}>
                       {description}
@@ -399,9 +404,9 @@ export default function AboutProjectPage() {
             </Typography>
           </Paper>
 
-          <Paper elevation={0} sx={{ p: { xs: 2.4, md: 3.2 }, borderRadius: '28px', bgcolor: 'rgba(255,255,255,0.8)', border: '1px solid rgba(183,121,31,0.18)', boxShadow: '0 18px 48px rgba(183,121,31,0.08)' }}>
+          <Paper elevation={0} sx={{ p: { xs: 2.4, md: 3.2 }, borderRadius: '28px', bgcolor: 'rgba(255,255,255,0.8)', border: `1px solid ${alpha(visualColors.signalAmber, 0.18)}`, boxShadow: `0 18px 48px ${alpha(visualColors.signalAmber, 0.08)}` }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2, mb: 1 }}>
-              <Box sx={{ width: 42, height: 42, borderRadius: '14px', display: 'grid', placeItems: 'center', bgcolor: alpha('#B7791F', 0.12), color: '#B7791F' }}>
+              <Box sx={{ width: 42, height: 42, borderRadius: '14px', display: 'grid', placeItems: 'center', bgcolor: alpha(visualColors.signalAmber, 0.12), color: visualColors.signalAmber }}>
                 <VerifiedRoundedIcon />
               </Box>
               <Typography variant="h3" sx={{ fontSize: { xs: '1.55rem', md: '2rem' } }}>
@@ -411,8 +416,8 @@ export default function AboutProjectPage() {
             <Typography sx={{ color: 'text.secondary', lineHeight: 1.75, fontWeight: 560, mb: 2.4 }}>
               {t('aboutProject.deploy.description')}
             </Typography>
-            <Box sx={{ p: 1.8, borderRadius: '16px', bgcolor: alpha('#B7791F', 0.08), border: `1px solid ${alpha('#B7791F', 0.18)}` }}>
-              <Typography sx={{ fontFamily: '"Fira Code", monospace', fontWeight: 850, color: '#B7791F', mb: 0.6 }}>
+            <Box sx={{ p: 1.8, borderRadius: '16px', bgcolor: alpha(visualColors.signalAmber, 0.08), border: `1px solid ${alpha(visualColors.signalAmber, 0.18)}` }}>
+              <Typography sx={{ fontFamily: '"Fira Code", monospace', fontWeight: 850, color: visualColors.signalAmber, mb: 0.6 }}>
                 vite.config.js
               </Typography>
               <Typography sx={{ fontFamily: '"Fira Code", monospace', fontSize: '0.84rem', color: 'text.primary' }}>
@@ -427,7 +432,7 @@ export default function AboutProjectPage() {
           sx={{
             p: { xs: 3, md: 4.5 },
             borderRadius: { xs: '26px', md: '36px' },
-            background: 'linear-gradient(135deg, #0D4DA5 0%, #1EACB8 100%)',
+            background: visualGradients.crmFlowCurrent,
             color: '#fff',
             overflow: 'hidden',
             position: 'relative',
@@ -446,7 +451,7 @@ export default function AboutProjectPage() {
                 {t('aboutProject.summary.description')}
               </Typography>
             </Box>
-            <Button component="a" href={getHomePath()} variant="contained" color="secondary" startIcon={<ArrowBackRoundedIcon />} sx={{ bgcolor: '#fff', color: '#0D4DA5', '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' } }}>
+            <Button component="a" href={getHomePath()} variant="contained" color="secondary" startIcon={<ArrowBackRoundedIcon />} sx={{ bgcolor: '#fff', color: visualColors.salesforceCore, '&:hover': { bgcolor: 'rgba(255,255,255,0.92)' } }}>
               {t('aboutProject.actions.backToSite')}
             </Button>
           </Box>

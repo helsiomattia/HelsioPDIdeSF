@@ -22,8 +22,10 @@
   "hero": {
     "greeting": "Hola, soy",
     "viewCredentials": "Ver credenciales",
+    "viewProjects": "Ver proyectos",
+    "contact": "Entrar en contacto",
     "downloadResume": "Descargar currículum",
-    "scroll": "VER TRAYECTORIA",
+    "scroll": "Ver trayectoria",
     "locationKey": "ubicacion"
   },
   "about": {
@@ -41,7 +43,7 @@
     "title": "Formación y Logros",
     "subtitle": "Credenciales, formación y aprendizajes que respaldan decisiones técnicas con visión de negocio.",
     "repository": "Repositorio",
-    "viewDemo": "Ver demo",
+    "viewDemo": "Ver en el sitio",
     "noResults": "No se encontraron credenciales para este filtro.",
     "viewMoreGithub": "Ver más en GitHub"
   },
@@ -54,7 +56,13 @@
     "overline": "05. proyectos",
     "title": "Proyectos",
     "subtitle": "Proyectos seleccionados, sitios externos y vistas HTML preparadas para demos.",
-    "status": "En construcción"
+    "status": "En construcción",
+    "frameTitle": "Central de demo CRM",
+    "loadingDemo": "Cargando demo...",
+    "demoUnavailable": "Demo no disponible.",
+    "notFoundTitle": "Proyecto no encontrado",
+    "notFoundBody": "Verifica la dirección o vuelve a la sección de proyectos.",
+    "backToProjects": "Volver a proyectos"
   },
   "contact": {
     "overline": "06. contacto",
@@ -74,7 +82,7 @@
     }
   },
   "aboutProject": {
-    "terminalTitle": "portfolio/project-overview",
+    "terminalTitle": "hm.crm/project-overview",
     "actions": {
       "backToPortfolio": "Volver al portafolio",
       "viewGithub": "Ver GitHub",
@@ -84,34 +92,34 @@
     },
     "hero": {
       "badge": "Página oculta del proyecto",
-      "title": "Sobre el proyecto que sostiene este portafolio",
-      "description": "Esta página presenta la arquitectura, los recursos y las decisiones detrás del portafolio profesional de Helsio Mattia. La idea es mostrar no solo el resultado visual, sino también cómo se organizó el proyecto para ser claro, escalable y fácil de mantener."
+      "title": "Sobre el sistema visual HM.crm",
+      "description": "Esta página documenta la evolución reciente del portafolio: identidad CRM control room, boards compactos, navegación lateral, banderas SVG, textos con foco ATS, tokens visuales, SEO social y estados de carga más claros."
     },
     "metrics": {
-      "react": "Interfaz moderna y componentizada",
-      "vite": "Build rápido para producción",
+      "react": "Identidad visual propia para Salesforce CRM",
+      "vite": "Interfaz componentizada con build rápido",
       "languagesValue": "3 idiomas",
       "languages": "Portugués, inglés y español",
-      "spa": "Rutas internas y fallback en GitHub Pages"
+      "spa": "Rutas internas, metatags sociales y fallback"
     },
     "features": {
       "overline": "recursos principales",
-      "title": "Una vitrina profesional construida para verse bien por fuera y estar organizada por dentro.",
+      "title": "Un portafolio tratado como producto visual, no como template personal.",
       "showcase": {
-        "title": "Vitrina profesional",
-        "description": "Presenta trayectoria, experiencia, credenciales, proyectos y canales de contacto en una experiencia única."
+        "title": "Identidad HM.crm",
+        "description": "El lenguaje CRM control room conecta Salesforce, operaciones, datos, automatización, gobierno y arquitectura en una firma visual propia."
       },
       "content": {
-        "title": "Contenido centralizado",
-        "description": "La información principal queda en `src/data`, separada de la lógica visual y fácil de mantener."
+        "title": "Contenido orientado a ATS",
+        "description": "Sobre mí y Experiencia usan textos corridos con términos técnicos destacados semánticamente, preservando claridad visual y palabras clave."
       },
       "responsive": {
-        "title": "Visual responsivo",
-        "description": "Layout preparado para desktop, tablet y mobile, con cards, grids y navegación fluida."
+        "title": "Boards compactos",
+        "description": "Experiencia, Credenciales, Expertise y Proyectos usan paneles visuales organizados, con cards uniformes y contenido más minimalista."
       },
       "deploy": {
-        "title": "Deploy en GitHub Pages",
-        "description": "Configuración con `base: /crm-specialist/` y fallback en `public/404.html` para rutas internas."
+        "title": "Pulido de producción",
+        "description": "Incluye navegación lateral compacta, selector por banderas SVG, favicon, Open Graph, fallback de rutas y estados de carga."
       }
     },
     "sections": {
@@ -119,41 +127,43 @@
       "title": "Secciones del sitio",
       "description": "La página principal fue pensada como una narrativa profesional, empezando por la propuesta de valor y terminando con contacto directo.",
       "items": [
-        { "title": "Inicio", "description": "Presentación principal, cargo, posicionamiento profesional y llamadas a la acción." },
-        { "title": "Sobre mí", "description": "Bio profesional, pilares de valor, estadísticas y stack de actuación." },
-        { "title": "Experiencia", "description": "Línea de tiempo con empresas, funciones, períodos y principales entregas." },
-        { "title": "Credenciales", "description": "Certificaciones Salesforce, formación académica, bootcamps y logros." },
-        { "title": "Expertise", "description": "Competencias agrupadas por Salesforce, CRM, automatización, datos, calidad y métodos." },
-        { "title": "Proyectos", "description": "Cards para sitio externo, demos Salesforce y vistas HTML incorporadas." },
+        { "title": "Inicio", "description": "Hero con posicionamiento Salesforce CRM, CTAs directos y panel visual de control room." },
+        { "title": "Sobre mí", "description": "Bio profesional con énfasis ATS en tecnología, Salesforce CRM, datos, automatización y arquitectura." },
+        { "title": "Experiencia", "description": "Board compacto con empresas, períodos, descripciones corridas, términos ATS y stacks." },
+        { "title": "Credenciales", "description": "Board minimalista para certificaciones Salesforce, formación académica y aprendizajes complementarios." },
+        { "title": "Expertise", "description": "Board de capacidades en Salesforce, CRM, automatización, datos, calidad y métodos, con detalles en modal." },
+        { "title": "Proyectos", "description": "Board uniforme para sitio externo y demos Salesforce/CRM con acciones directas." },
         { "title": "Contacto", "description": "E-mail, teléfono, ubicación, LinkedIn, GitHub y Trailblazer." }
       ]
     },
     "dataLayer": {
       "overline": "data layer",
       "title": "Contenido separado de la interfaz",
-      "description": "El proyecto evita esparcir información profesional por los componentes. El mantenimiento principal ocurre en pocos archivos claros.",
+      "description": "El proyecto separa contenido, tokens visuales, helpers y componentes para evolucionar rápido sin esparcir decisiones importantes por la interfaz.",
       "files": [
-        { "file": "profile.js", "description": "Nombre, título, contactos, redes, bio, estadísticas y stack principal." },
-        { "file": "experience.js", "description": "Empresas, cargos, períodos, descripciones, tecnologías y principales entregas." },
-        { "file": "projects.js", "description": "Credenciales, certificaciones, formación, bootcamps y logros." },
-        { "file": "skills.js", "description": "Áreas de expertise, habilidades y detalles de cada competencia." },
-        { "file": "portfolioProjects.js", "description": "Proyectos, links externos, demos internas y HTML incorporado." },
-        { "file": "common.json", "description": "Textos fijos de la interfaz en portugués, inglés y español." }
+        { "path": "src/data/profile.js", "file": "profile.js", "description": "Nombre, título, contactos, bio, señales operacionales y textos de Sobre mí con foco ATS." },
+        { "path": "src/data/experience.js", "file": "experience.js", "description": "Empresas, cargos, períodos, descripciones corridas, tecnologías y colores por experiencia." },
+        { "path": "src/data/projects.js", "file": "projects.js", "description": "Credenciales, certificaciones, formación, bootcamps y logros." },
+        { "path": "src/data/skills.js", "file": "skills.js", "description": "Áreas de expertise, habilidades, detalles y colores de los cards de capacidad." },
+        { "path": "src/data/portfolioProjects.js", "file": "portfolioProjects.js", "description": "Proyectos, links externos, demos internas y HTML incorporado." },
+        { "path": "src/theme/tokens.js", "file": "tokens.js", "description": "Colores, gradientes, radios, motion y sombras de la identidad HM.crm." },
+        { "path": "src/utils/renderHighlightedText.jsx", "file": "renderHighlightedText.jsx", "description": "Helper que transforma términos ATS en destacados semánticos dentro de los párrafos." },
+        { "path": "src/locales/*/common.json", "file": "common.json", "description": "Textos fijos de la interfaz en portugués, inglés y español." }
       ]
     },
     "stack": {
       "overline": "stack utilizada",
       "title": "Tecnologías del proyecto",
-      "description": "La stack fue elegida para entregar velocidad de desarrollo, buena experiencia visual, internacionalización simple y publicación estática compatible con GitHub Pages."
+      "description": "La stack combina React, Vite, MUI, Emotion, i18n, GSAP y tokens propios para entregar una experiencia visual controlada, multilingüe, responsiva y lista para GitHub Pages."
     },
     "deploy": {
       "title": "Deploy preparado",
-      "description": "El sitio está configurado para el camino `/crm-specialist/`, con redirección para mantener rutas internas funcionando incluso cuando se abren directamente."
+      "description": "El sitio está configurado para el camino `/crm-specialist/`, con redirección para rutas internas, metatags sociales, favicon SVG y fallbacks para páginas de demo."
     },
     "summary": {
       "overline": "resumen",
-      "title": "Un proyecto hecho para presentar valor profesional con claridad.",
-      "description": "Más que una página personal, este portafolio organiza narrativa, contenido, tecnología y publicación para reforzar el posicionamiento de Helsio Mattia en Salesforce CRM, automatización y evolución operacional."
+      "title": "Un portafolio diseñado como sistema de posicionamiento.",
+      "description": "La versión actual une narrativa profesional, lenguaje visual propio, boards compactos, contenido ATS, internacionalización, SEO y publicación estática para reforzar el posicionamiento de Helsio Mattia en Salesforce CRM, automatización y arquitectura de soluciones."
     }
   },
   "footer": {

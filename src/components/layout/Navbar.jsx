@@ -1,14 +1,11 @@
 import {
-  AppBar,
   Box,
-  Container,
-  Toolbar,
   Typography,
-  useScrollTrigger,
   alpha,
 } from '@mui/material';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { profile } from '../../data/profile';
+import { visualColors, visualGradients } from '../../theme/tokens';
 import { scrollToSection } from '../../utils/scrollToSection';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -18,93 +15,92 @@ function getHomePath() {
 }
 
 export default function Navbar() {
-  const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 18 });
-
   return (
-    <AppBar
-      position="fixed"
-      elevation={0}
+    <Box
+      component="nav"
+      aria-label="HM.crm"
       sx={{
-        transition: 'all 0.35s ease',
-        backgroundColor: scrolled ? alpha('#E0ECF5', 0.92) : alpha('#D3E2EE', 0.74),
-        backdropFilter: scrolled ? 'blur(8px)' : 'blur(5px)',
-        WebkitBackdropFilter: scrolled ? 'blur(8px)' : 'blur(5px)',
-        borderBottom: scrolled ? '1px solid rgba(15,37,55,0.12)' : '1px solid rgba(15,37,55,0.06)',
+        position: 'fixed',
+        zIndex: 1200,
+        left: { xs: 12, md: 16 },
+        top: { xs: 12, md: '50%' },
+        transform: { xs: 'none', md: 'translateY(-50%)' },
+        width: { xs: 'auto', md: 58 },
+        p: { xs: 0.7, md: 0.8 },
+        borderRadius: { xs: '999px', md: '22px' },
+        border: `1px solid ${alpha(visualColors.commandNavy, 0.14)}`,
+        bgcolor: alpha(visualColors.consoleMist, 0.78),
+        boxShadow: `0 18px 46px ${alpha(visualColors.commandNavy, 0.1)}`,
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        display: 'flex',
+        flexDirection: { xs: 'row', md: 'column' },
+        alignItems: 'center',
+        gap: { xs: 0.85, md: 1 },
         '@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))': {
-          backgroundColor: scrolled ? alpha('#E0ECF5', 0.98) : alpha('#D3E2EE', 0.94),
+          bgcolor: alpha(visualColors.consoleMist, 0.96),
         },
       }}
     >
-      <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)' }}>
-        <Toolbar
-          disableGutters
+      <Box
+        component="a"
+        href={getHomePath()}
+        onClick={(event) => {
+          event.preventDefault();
+          window.history.pushState(null, '', getHomePath());
+          scrollToSection('home', { duration: 0.38 });
+        }}
+        aria-label="Ir para o início"
+        sx={{
+          cursor: 'pointer',
+          textDecoration: 'none',
+          display: 'grid',
+          placeItems: 'center',
+          width: 40,
+          height: 40,
+          borderRadius: { xs: '999px', md: '15px' },
+          background: visualGradients.crmFlow,
+          color: visualColors.surfaceWhite,
+          boxShadow: `0 10px 24px ${alpha(visualColors.salesforceCore, 0.2)}`,
+          flexShrink: 0,
+          transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+          '&:hover': {
+            transform: 'translateY(-1px)',
+            boxShadow: `0 14px 30px ${alpha(visualColors.salesforceCore, 0.24)}`,
+          },
+          '&:focus-visible': {
+            outline: `3px solid ${alpha(visualColors.salesforceCore, 0.26)}`,
+            outlineOffset: 3,
+          },
+        }}
+      >
+        <Typography
+          component="span"
           sx={{
-            minHeight: 'var(--header-height)',
-            py: 0,
-            display: 'flex',
-            justifyContent: 'space-between',
-            gap: 2,
+            fontFamily: '"Fira Code", monospace',
+            fontSize: '0.78rem',
+            fontWeight: 850,
+            lineHeight: 1,
+            letterSpacing: '-0.04em',
           }}
         >
-          <Box
-            component="a"
-            href={getHomePath()}
-            onClick={(event) => {
-              event.preventDefault();
-              window.history.pushState(null, '', getHomePath());
-              scrollToSection('home', { duration: 0.38 });
-            }}
-            sx={{
-              cursor: 'pointer',
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              minWidth: 0,
-            }}
-          >
-            <Box
-              sx={{
-                width: 34,
-                height: 34,
-                borderRadius: '8px',
-                background: 'linear-gradient(135deg, #0B5CAB 0%, #159DB3 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: '"Fira Code", monospace',
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                color: '#EAF3F9',
-                flexShrink: 0,
-              }}
-            >
-              {profile.initials}
-            </Box>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 700,
-                fontSize: '1rem',
-                background: 'linear-gradient(90deg, #061827 35%, #17364F 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                display: { xs: 'none', sm: 'block' },
-              }}
-            >
-              {profile.firstName}
-              <Typography component="span" sx={{ color: 'primary.main', WebkitTextFillColor: 'initial' }}>
-                .crm
-              </Typography>
-            </Typography>
-          </Box>
+          {profile.initials}
+        </Typography>
+      </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.75, sm: 1 } }}>
-            <LanguageSwitcher />
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+      <Box
+        aria-hidden="true"
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          width: 2,
+          height: 28,
+          borderRadius: 999,
+          background: `linear-gradient(180deg, ${alpha(visualColors.commandNavy, 0.16)}, ${alpha(visualColors.flowCyan, 0.52)})`,
+        }}
+      />
+
+      <LanguageSwitcher orientation="horizontal" sx={{ display: { xs: 'flex', md: 'none' } }} />
+      <LanguageSwitcher orientation="vertical" sx={{ display: { xs: 'none', md: 'flex' } }} />
+    </Box>
   );
 }

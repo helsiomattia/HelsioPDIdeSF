@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import {
   Box,
-  Card,
-  CardContent,
-  Chip,
   Container,
   Dialog,
   DialogContent,
@@ -12,7 +9,6 @@ import {
   alpha,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import OpenInFullOutlinedIcon from '@mui/icons-material/OpenInFullOutlined';
 import WebIcon from '@mui/icons-material/Web';
 import StorageIcon from '@mui/icons-material/Storage';
 import TableChartIcon from '@mui/icons-material/TableChart';
@@ -20,9 +16,9 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import BuildIcon from '@mui/icons-material/Build';
 import { useTranslation } from 'react-i18next';
-import AnimatedBox from '../ui/AnimatedBox';
 import SectionTitle from '../ui/SectionTitle';
 import { skillCategories } from '../../data/skills';
+import { visualColors } from '../../theme/tokens';
 import { getLocalizedString, getLocalizedStringArray } from '../../utils/i18nHelper';
 
 const ICON_MAP = {
@@ -155,130 +151,107 @@ function SkillsAmbient({ lang }) {
   );
 }
 
-function SkillCard({ category, cardIndex, lang, onOpen }) {
-  const IconComponent = ICON_MAP[category.icon] || BuildIcon;
-  const skills = getLocalizedStringArray(category.skills, lang);
+function CapabilityMap({ lang, onOpen }) {
   const openLabel = getLocalizedString(UI_LABELS.open, lang);
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      onOpen(category);
-    }
-  };
-
   return (
-    <AnimatedBox
-      delay={cardIndex * 0.08}
-      style={{ height: '100%' }}
+    <Box
+      sx={{
+        position: 'relative',
+        minHeight: { xs: 'auto', lg: 500 },
+        borderRadius: '30px',
+        border: `1px solid ${alpha(visualColors.salesforceLegacy, 0.18)}`,
+        bgcolor: 'rgba(224,236,245,0.62)',
+        overflow: 'hidden',
+        p: { xs: 1.1, sm: 1.35, lg: 2.4 },
+        boxShadow: `inset 0 0 0 1px ${alpha(visualColors.surfaceWhite, 0.48)}`,
+        '&::before': {
+          content: '""',
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          inset: '12% 8% 14%',
+          borderRadius: '34px',
+          border: `1px dashed ${alpha(visualColors.salesforceLegacy, 0.2)}`,
+        },
+        '&::after': {
+          content: '""',
+          display: { xs: 'none', lg: 'block' },
+          position: 'absolute',
+          left: '12%',
+          right: '12%',
+          top: '50%',
+          height: 2,
+          bgcolor: alpha(visualColors.flowCyan, 0.16),
+          transform: 'rotate(-9deg)',
+        },
+      }}
     >
-      <Card
-        role="button"
-        tabIndex={0}
-        aria-haspopup="dialog"
-        aria-label={`${openLabel}: ${getLocalizedString(category.title, lang)}`}
-        onClick={() => onOpen(category)}
-        onKeyDown={handleKeyDown}
-        sx={{
-          height: '100%',
-          background: category.gradient,
-          borderTop: `2px solid ${alpha(category.color, 0.5)}`,
-          cursor: 'pointer',
-          outline: 'none',
-          '&:hover': {
-            transform: 'translateY(-2px)',
-            borderTop: `2px solid ${category.color}`,
-            boxShadow: `0 10px 26px ${alpha(category.color, 0.13)}`,
-          },
-          '&:focus-visible': {
-            boxShadow: `0 0 0 3px ${alpha(category.color, 0.24)}`,
-            borderColor: alpha(category.color, 0.48),
-          },
-        }}
-      >
-        <CardContent sx={{ p: { xs: 2.05, md: 2 } }}>
-          {/* Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.1, mb: 1.35 }}>
-            <Box
-              sx={{
-                width: 36,
-                height: 36,
-                borderRadius: '10px',
-                bgcolor: alpha(category.color, 0.15),
-                border: `1px solid ${alpha(category.color, 0.3)}`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <IconComponent sx={{ color: category.color, fontSize: '1.2rem' }} />
-            </Box>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 700,
-                fontSize: '0.98rem',
-                color: 'text.primary',
-                flex: 1,
-              }}
-            >
-              {getLocalizedString(category.title, lang)}
-            </Typography>
-            <OpenInFullOutlinedIcon sx={{ color: category.color, fontSize: '1rem', opacity: 0.82 }} />
-          </Box>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
+            gridTemplateRows: { lg: 'repeat(2, minmax(150px, 1fr))' },
+            gap: { xs: 1, sm: 1.15, lg: 1.45 },
+            position: 'relative',
+            zIndex: 1,
+            height: '100%',
+            minHeight: { lg: 306 },
+          }}
+        >
+          {skillCategories.map((category, index) => {
+            const IconComponent = ICON_MAP[category.icon] || BuildIcon;
+            const title = getLocalizedString(category.title, lang);
+            const skills = getLocalizedStringArray(category.skills, lang).slice(0, 3);
 
-          {/* Skills */}
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.52 }}>
-            {skills.map((skill) => (
-              <Chip
-                key={skill}
-                label={skill}
-                size="small"
+            return (
+              <Box
+                key={category.id}
+                component="button"
+                type="button"
+                aria-haspopup="dialog"
+                aria-label={`${openLabel}: ${title}`}
+                onClick={() => onOpen(category)}
                 sx={{
-                  maxWidth: '100%',
-                  bgcolor: alpha(category.color, 0.1),
-                  border: `1px solid ${alpha(category.color, 0.22)}`,
-                  color: alpha(category.color, 1),
-                  fontFamily: '"Fira Code", monospace',
-                  fontSize: '0.64rem',
-                  fontWeight: 700,
-                  height: 22,
-                  transition: 'all 0.2s ease',
+                  width: '100%',
+                  minHeight: { xs: 124, lg: 150 },
+                  textAlign: 'left',
+                  border: `1px solid ${alpha(category.color, 0.24)}`,
+                  borderTop: `3px solid ${category.color}`,
+                  borderRadius: '18px',
+                  bgcolor: 'rgba(255,255,255,0.84)',
+                  boxShadow: '0 10px 24px rgba(15,37,55,0.055)',
+                  p: { xs: 1.35, md: 1.45 },
                   cursor: 'pointer',
-                  '& .MuiChip-label': {
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  },
+                  color: 'text.primary',
+                  fontFamily: 'inherit',
+                  transition: 'transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease',
                   '&:hover': {
-                    bgcolor: alpha(category.color, 0.2),
-                    borderColor: category.color,
-                    color: '#EAF3F9',
                     transform: 'translateY(-2px)',
+                    borderColor: alpha(category.color, 0.46),
+                    boxShadow: `0 12px 28px ${alpha(category.color, 0.1)}`,
+                  },
+                  '&:focus-visible': {
+                    outline: `3px solid ${alpha(category.color, 0.28)}`,
+                    outlineOffset: 3,
                   },
                 }}
-              />
-            ))}
-          </Box>
-
-          <Typography
-            variant="caption"
-            sx={{
-              display: 'block',
-              mt: 1.15,
-              color: category.color,
-              fontFamily: '"Fira Code", monospace',
-              fontSize: '0.66rem',
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-            }}
-          >
-            {openLabel}
-          </Typography>
-        </CardContent>
-      </Card>
-    </AnimatedBox>
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.85 }}>
+                  <Box sx={{ width: 32, height: 32, borderRadius: '11px', display: 'grid', placeItems: 'center', bgcolor: alpha(category.color, 0.11), color: category.color, flexShrink: 0 }}>
+                    <IconComponent sx={{ fontSize: '1rem' }} />
+                  </Box>
+                  <Typography component="span" sx={{ fontSize: { xs: '0.9rem', md: '0.92rem' }, fontWeight: 820, lineHeight: 1.18 }}>
+                    {title}
+                  </Typography>
+                </Box>
+                <Typography component="span" sx={{ display: '-webkit-box', color: 'text.secondary', fontSize: '0.68rem', lineHeight: 1.35, fontWeight: 650, WebkitBoxOrient: 'vertical', WebkitLineClamp: 2, overflow: 'hidden' }}>
+                  {skills.join(' · ')}
+                </Typography>
+              </Box>
+            );
+          })}
+        </Box>
+    </Box>
   );
 }
 
@@ -304,13 +277,13 @@ function ExpertiseDialog({ category, lang, onClose }) {
           bgcolor: 'var(--site-surface)',
           border: `1px solid ${alpha(category.color, 0.28)}`,
           backgroundImage: `linear-gradient(135deg, ${alpha(category.color, 0.1)} 0%, rgba(224,236,245,0.98) 42%, rgba(193,212,227,0.96) 100%)`,
-          boxShadow: `0 24px 80px ${alpha('#061827', 0.28)}`,
+          boxShadow: `0 24px 80px ${alpha(visualColors.commandNavy, 0.28)}`,
           overflow: 'hidden',
         },
       }}
       BackdropProps={{
         sx: {
-          bgcolor: alpha('#061827', 0.42),
+          bgcolor: alpha(visualColors.commandNavy, 0.42),
           backdropFilter: 'blur(3px)',
         },
       }}
@@ -382,9 +355,9 @@ function ExpertiseDialog({ category, lang, onClose }) {
               sx={{
                 p: { xs: 1.55, md: 1.75 },
                 borderRadius: '16px',
-                bgcolor: alpha('#E0ECF5', 0.72),
+                bgcolor: alpha(visualColors.consoleMist, 0.72),
                 border: `1px solid ${alpha(category.color, 0.16)}`,
-                boxShadow: `0 8px 22px ${alpha('#061827', 0.055)}`,
+                boxShadow: `0 8px 22px ${alpha(visualColors.commandNavy, 0.055)}`,
               }}
             >
               <Typography
@@ -425,7 +398,7 @@ export default function Skills() {
         minHeight: { md: 'calc(100dvh - var(--header-height))' },
         display: 'flex',
         alignItems: 'center',
-        py: { xs: 6, md: 'var(--section-block-padding)' },
+        py: { xs: 5, md: 'clamp(28px, 4vh, 52px)' },
         background: 'linear-gradient(180deg, var(--site-bg-start) 0%, var(--site-bg-mid) 100%)',
         position: 'relative',
         overflow: 'hidden',
@@ -436,29 +409,10 @@ export default function Skills() {
       <Container maxWidth={false} sx={{ maxWidth: 'var(--page-max-width)', px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <SectionTitle
           overline={t('skills.overline')}
-          title={t('skills.title')}
           subtitle={t('skills.subtitle')}
         />
 
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
-            gap: 'var(--card-gap)',
-            alignItems: 'stretch',
-          }}
-        >
-          {skillCategories.map((category, index) => (
-            <Box key={category.id}>
-              <SkillCard
-                category={category}
-                cardIndex={index}
-                lang={lang}
-                onOpen={setActiveCategory}
-              />
-            </Box>
-          ))}
-        </Box>
+        <CapabilityMap lang={lang} onOpen={setActiveCategory} />
 
         <ExpertiseDialog
           category={activeCategory}

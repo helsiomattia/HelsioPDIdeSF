@@ -1,3 +1,5 @@
+import { visualColors, visualGradients } from '../theme/tokens';
+
 export const portfolioProjects = [
   {
     id: 'salesforce-skill-shine',
@@ -16,8 +18,8 @@ export const portfolioProjects = [
     action: { pt: 'Acessar site', en: 'Open site', es: 'Abrir sitio' },
     externalUrl: 'https://helsiomattia.github.io/salesforce-skill-shine/',
     tags: ['Salesforce', 'Learning', 'CRM'],
-    accent: '#0D4DA5',
-    gradient: 'linear-gradient(135deg, #0D4DA5 0%, #1EACB8 100%)',
+    accent: visualColors.salesforceCore,
+    gradient: visualGradients.crmFlowCurrent,
   },
   {
     id: 'crm-customer-360',
@@ -35,7 +37,7 @@ export const portfolioProjects = [
     status: { pt: 'Demo Salesforce', en: 'Salesforce demo', es: 'Demo Salesforce' },
     action: { pt: 'Abrir Customer 360', en: 'Open Customer 360', es: 'Abrir Customer 360' },
     tags: ['Salesforce', 'Customer 360', 'CRM'],
-    accent: '#0176D3',
+    accent: visualColors.salesforceBright,
     gradient: 'linear-gradient(135deg, #032D60 0%, #0176D3 100%)',
   },
   {
@@ -54,8 +56,8 @@ export const portfolioProjects = [
     status: { pt: 'Demo Salesforce', en: 'Salesforce demo', es: 'Demo Salesforce' },
     action: { pt: 'Abrir Service 360', en: 'Open Service 360', es: 'Abrir Service 360' },
     tags: ['Service Cloud', 'Support', 'Cases'],
-    accent: '#0B78B6',
-    gradient: 'linear-gradient(135deg, #0B78B6 0%, #6A8FB1 100%)',
+    accent: visualColors.serviceBlue,
+    gradient: `linear-gradient(135deg, ${visualColors.serviceBlue} 0%, ${visualColors.slateBlue} 100%)`,
   },
   {
     id: 'customer-journey-360',
@@ -93,7 +95,7 @@ export const portfolioProjects = [
     action: { pt: 'Abrir Intelligence 360', en: 'Open Intelligence 360', es: 'Abrir Intelligence 360' },
     tags: ['Salesforce', 'Intelligence', 'NBA'],
     accent: '#7C5CFF',
-    gradient: 'linear-gradient(135deg, #7C5CFF 0%, #1EACB8 100%)',
+    gradient: `linear-gradient(135deg, #7C5CFF 0%, ${visualColors.flowCyan} 100%)`,
   },
   {
     id: 'revenue-churn-intelligence',

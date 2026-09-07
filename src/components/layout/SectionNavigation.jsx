@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslation } from 'react-i18next';
 import { scrollToSection } from '../../utils/scrollToSection';
+import { visualColors } from '../../theme/tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -336,16 +337,16 @@ export default function SectionNavigation() {
     height: { xs: 32, lg: 34 },
     border: '1px solid rgba(11,92,171,0.2)',
     borderRadius: '999px',
-    bgcolor: alpha('#E0ECF5', 0.74),
+    bgcolor: alpha(visualColors.consoleMist, 0.74),
     color: 'primary.dark',
-    display: 'inline-flex',
+    display: { xs: 'none', sm: 'inline-flex' },
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
     transition: 'background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease, opacity 0.18s ease, transform 0.18s ease',
     '&:disabled': { opacity: 0.28, cursor: 'not-allowed' },
-    '&:not(:disabled):hover': { transform: 'translateY(-2px)', bgcolor: alpha('#0B5CAB', 0.1), color: 'primary.main' },
-    '&:focus-visible': { outline: `3px solid ${alpha('#0B5CAB', 0.26)}`, outlineOffset: 3 },
+    '&:not(:disabled):hover': { transform: 'translateY(-2px)', bgcolor: alpha(visualColors.salesforceLegacy, 0.1), color: 'primary.main' },
+    '&:focus-visible': { outline: `3px solid ${alpha(visualColors.salesforceLegacy, 0.26)}`, outlineOffset: 3 },
   };
 
   return (
@@ -360,9 +361,9 @@ export default function SectionNavigation() {
       sx={{
         position: 'fixed',
         zIndex: 1090,
-        top: { xs: 'calc(var(--header-height) + 8px)', lg: '50%' },
-        right: { xs: 'var(--section-inline-padding)', lg: 'clamp(18px, 2.3vw, 48px)' },
-        left: { xs: 'var(--section-inline-padding)', sm: 'auto', lg: 'auto' },
+        top: { xs: 'calc(var(--header-height) + 10px)', lg: '50%' },
+        right: { xs: 16, sm: 'var(--section-inline-padding)', lg: 'clamp(18px, 2.3vw, 48px)' },
+        left: { xs: 'auto', lg: 'auto' },
         transform: { xs: 'none', lg: 'translateY(-50%)' },
         display: 'flex',
         flexDirection: { xs: 'row', lg: 'column' },
@@ -391,26 +392,26 @@ export default function SectionNavigation() {
           aria-expanded={expanded}
           aria-current="page"
           sx={{
-            minWidth: { xs: 156, sm: 188, lg: 118 },
-            minHeight: { xs: 38, lg: 112 },
-            px: { xs: 1.35, lg: 1.5 },
+            minWidth: { xs: 42, sm: 188, lg: 118 },
+            minHeight: { xs: 36, lg: 112 },
+            px: { xs: 1, sm: 1.35, lg: 1.5 },
             py: { xs: 0.8, lg: 1.45 },
             border: '1px solid rgba(11,92,171,0.2)',
             borderRadius: { xs: '999px', lg: '16px' },
-            bgcolor: alpha('#E0ECF5', active.id === 'home' ? 0.58 : 0.78),
+            bgcolor: alpha(visualColors.consoleMist, active.id === 'home' ? 0.58 : 0.78),
             color: 'text.primary',
             boxShadow: '0 10px 28px rgba(15,37,55,0.075)',
             backdropFilter: 'blur(6px)',
             WebkitBackdropFilter: 'blur(6px)',
             cursor: 'pointer',
             display: 'grid',
-            gridTemplateColumns: { xs: 'auto auto 1fr', lg: '1fr' },
+            gridTemplateColumns: { xs: '1fr', sm: 'auto auto 1fr', lg: '1fr' },
             alignItems: 'center',
-            justifyItems: { xs: 'start', lg: 'center' },
+            justifyItems: { xs: 'center', sm: 'start', lg: 'center' },
             gap: { xs: 0.75, lg: 0.55 },
             transition: 'background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease, transform 0.18s ease',
-            '&:hover': { borderColor: alpha('#0B5CAB', 0.34), transform: { xs: 'translateY(-1px)', lg: 'translateY(-2px)' } },
-            '&:focus-visible': { outline: `3px solid ${alpha('#0B5CAB', 0.26)}`, outlineOffset: 3 },
+            '&:hover': { borderColor: alpha(visualColors.salesforceLegacy, 0.34), transform: { xs: 'translateY(-1px)', lg: 'translateY(-2px)' } },
+            '&:focus-visible': { outline: `3px solid ${alpha(visualColors.salesforceLegacy, 0.26)}`, outlineOffset: 3 },
           }}
         >
           <Typography
@@ -429,6 +430,7 @@ export default function SectionNavigation() {
           <Box
             aria-hidden="true"
             sx={{
+              display: { xs: 'none', sm: 'block' },
               width: { xs: 18, lg: 32 },
               height: { xs: 2, lg: 3 },
               borderRadius: 2,
@@ -442,15 +444,14 @@ export default function SectionNavigation() {
             component="span"
             sx={{
               color: 'text.primary',
-              fontFamily: '"Fira Code", monospace',
+              display: { xs: 'none', sm: 'block' },
               fontSize: { xs: '0.66rem', sm: '0.7rem', lg: '0.72rem' },
-              fontWeight: 850,
-              letterSpacing: '0.08em',
+              fontWeight: 750,
+              letterSpacing: '0.01em',
               lineHeight: 1.2,
               maxWidth: { xs: 108, lg: 96 },
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-              textTransform: 'uppercase',
               whiteSpace: 'nowrap',
               textAlign: { xs: 'left', lg: 'center' },
             }}
@@ -464,13 +465,13 @@ export default function SectionNavigation() {
             position: 'absolute',
             top: { xs: 'calc(100% + 8px)', lg: '50%' },
             right: { xs: 0, lg: 'calc(100% + 10px)' },
-            left: { xs: 0, sm: 'auto', lg: 'auto' },
-            width: { xs: '100%', sm: 230, lg: 224 },
+            left: { xs: 'auto', lg: 'auto' },
+            width: { xs: 230, sm: 230, lg: 224 },
             transform: { xs: 'none', lg: 'translateY(-50%)' },
             p: 0.75,
             borderRadius: '16px',
             border: '1px solid rgba(11,92,171,0.18)',
-            bgcolor: alpha('#E0ECF5', 0.94),
+            bgcolor: alpha(visualColors.consoleMist, 0.94),
             boxShadow: '0 16px 36px rgba(15,37,55,0.12)',
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
@@ -500,19 +501,19 @@ export default function SectionNavigation() {
                   py: 0.8,
                   border: 0,
                   borderRadius: '11px',
-                  bgcolor: isCurrent ? alpha('#0B5CAB', 0.11) : 'transparent',
+                  bgcolor: isCurrent ? alpha(visualColors.salesforceLegacy, 0.11) : 'transparent',
                   color: isCurrent ? 'primary.dark' : 'text.primary',
                   cursor: 'pointer',
                   textAlign: 'left',
                   transition: 'background-color 0.16s ease, color 0.16s ease, transform 0.16s ease',
-                  '&:hover': { bgcolor: alpha('#0B5CAB', 0.1), transform: 'translateX(-2px)' },
-                  '&:focus-visible': { outline: `2px solid ${alpha('#0B5CAB', 0.28)}`, outlineOffset: 2 },
+                  '&:hover': { bgcolor: alpha(visualColors.salesforceLegacy, 0.1), transform: 'translateX(-2px)' },
+                  '&:focus-visible': { outline: `2px solid ${alpha(visualColors.salesforceLegacy, 0.28)}`, outlineOffset: 2 },
                 }}
               >
                 <Typography component="span" sx={{ color: 'primary.main', fontFamily: '"Fira Code", monospace', fontSize: '0.7rem', fontWeight: 850 }}>
                   {section.number}
                 </Typography>
-                <Typography component="span" sx={{ fontFamily: '"Fira Code", monospace', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                <Typography component="span" sx={{ fontSize: '0.76rem', fontWeight: 700, letterSpacing: '0.01em' }}>
                   {section.label}
                 </Typography>
                 <Box
@@ -523,7 +524,7 @@ export default function SectionNavigation() {
                     height: 7,
                     borderRadius: '50%',
                     justifySelf: 'center',
-                    bgcolor: isCurrent ? 'primary.main' : alpha('#0B5CAB', 0.18),
+                    bgcolor: isCurrent ? 'primary.main' : alpha(visualColors.salesforceLegacy, 0.18),
                   }}
                 />
               </Box>

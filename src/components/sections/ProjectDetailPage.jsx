@@ -13,6 +13,7 @@ import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import { useTranslation } from 'react-i18next';
 import { getLocalizedString } from '../../utils/i18nHelper';
 import { getPortfolioProjectById } from '../../data/portfolioProjects';
+import { visualColors } from '../../theme/tokens';
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
 const DEFAULT_IFRAME_HEIGHT = 640;
@@ -30,7 +31,7 @@ function getHomeProjectsPath() {
 }
 
 export default function ProjectDetailPage({ projectId }) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || 'pt';
   const project = getPortfolioProjectById(projectId);
   const iframeRef = useRef(null);
@@ -165,13 +166,13 @@ export default function ProjectDetailPage({ projectId }) {
         <Container maxWidth="md">
           <Paper elevation={0} sx={{ p: { xs: 3, md: 5 }, borderRadius: '24px', bgcolor: 'rgba(224,236,245,0.9)' }}>
             <Typography variant="h3" sx={{ mb: 1, fontWeight: 850 }}>
-              Projeto não encontrado
+              {t('portfolioProjects.notFoundTitle')}
             </Typography>
             <Typography sx={{ mb: 3, color: 'text.secondary' }}>
-              Verifique o endereço ou volte para a seção de projetos.
+              {t('portfolioProjects.notFoundBody')}
             </Typography>
             <Button component="a" href={getHomeProjectsPath()} startIcon={<ArrowBackRoundedIcon />}>
-              Voltar para projetos
+              {t('portfolioProjects.backToProjects')}
             </Button>
           </Paper>
         </Container>
@@ -209,7 +210,7 @@ export default function ProjectDetailPage({ projectId }) {
       <Container maxWidth={false} sx={{ maxWidth: 1220, px: 'var(--section-inline-padding)', position: 'relative', zIndex: 1 }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 2, mb: 3 }}>
           <Button component="a" href={getHomeProjectsPath()} startIcon={<ArrowBackRoundedIcon />} variant="outlined" color="primary">
-            Voltar para projetos
+            {t('portfolioProjects.backToProjects')}
           </Button>
 
           {project.externalUrl && (
@@ -244,8 +245,8 @@ export default function ProjectDetailPage({ projectId }) {
           sx={{
             borderRadius: { xs: '20px', md: '28px' },
             border: `1px solid ${alpha(project.accent, 0.24)}`,
-            bgcolor: 'rgba(255,255,255,0.78)',
-            boxShadow: `0 24px 80px ${alpha('#061827', 0.12)}`,
+            bgcolor: 'rgba(255,255,255,0.88)',
+            boxShadow: `0 24px 80px ${alpha(visualColors.commandNavy, 0.12)}`,
             height: 'auto',
             maxHeight: 'none',
             overflow: 'visible',
@@ -261,14 +262,14 @@ export default function ProjectDetailPage({ projectId }) {
               borderBottom: '1px solid rgba(15,37,55,0.12)',
               borderTopLeftRadius: 'inherit',
               borderTopRightRadius: 'inherit',
-              background: 'rgba(224,236,245,0.68)',
+              background: `linear-gradient(90deg, ${alpha(visualColors.consoleMist, 0.78)} 0%, ${alpha(project.accent, 0.08)} 100%)`,
             }}
           >
-            {['#D94A5F', '#B7791F', '#0B8F61'].map((color) => (
+            {['#D94A5F', visualColors.signalAmber, visualColors.successGreen].map((color) => (
               <Box key={color} sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: color }} />
             ))}
             <Typography sx={{ ml: 0.6, fontFamily: '"Fira Code", monospace', fontSize: '0.72rem', fontWeight: 850, color: 'text.secondary' }}>
-              embedded-html-view
+              {t('portfolioProjects.frameTitle')}
             </Typography>
           </Box>
 
@@ -295,7 +296,7 @@ export default function ProjectDetailPage({ projectId }) {
           ) : (
             <Box sx={{ p: { xs: 3, md: 5 }, textAlign: 'center', bgcolor: '#fff' }}>
               <Typography sx={{ color: 'text.primary', fontWeight: 700 }}>
-                {isLoadingEmbed ? 'Carregando demo...' : 'Demo indisponivel.'}
+                {isLoadingEmbed ? t('portfolioProjects.loadingDemo') : t('portfolioProjects.demoUnavailable')}
               </Typography>
             </Box>
           )}

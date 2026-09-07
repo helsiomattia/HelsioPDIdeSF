@@ -1,3 +1,5 @@
+import { visualColors } from '../theme/tokens';
+
 export const experiences = [
   {
     id: 1,
@@ -11,28 +13,13 @@ export const experiences = [
       en: 'Management and optimization of the Salesforce platform, aligning CRM with business processes and needs with a focus on performance, scalability and automation.',
       es: 'Gestión y optimización de la plataforma Salesforce, alineando el CRM con procesos y necesidades del negocio con foco en rendimiento, escalabilidad y automatización.',
     },
-    achievements: {
-      pt: [
-        'Lidera iniciativas para melhorar operações de atendimento e eficiência do CRM',
-        'Atua com customizações, resolução de problemas e documentação técnica',
-        'Apoia usuários na adoção da plataforma e na evolução dos processos internos',
-        'Desenvolve fluxos de automação orientados às necessidades do negócio',
-      ],
-      en: [
-        'Leads initiatives to improve service operations and CRM efficiency',
-        'Works on customizations, troubleshooting and technical documentation',
-        'Supports users in platform adoption and internal process evolution',
-        'Develops automation flows driven by business needs',
-      ],
-      es: [
-        'Lidera iniciativas para mejorar operaciones de atención y eficiencia del CRM',
-        'Trabaja con personalizaciones, resolución de problemas y documentación técnica',
-        'Apoya a usuarios en la adopción de la plataforma y evolución de procesos internos',
-        'Desarrolla flujos de automatización orientados a las necesidades del negocio',
-      ],
+    summary: {
+      pt: 'Administro Salesforce CRM para alinhar Sales Cloud, Service Cloud e Flow Builder aos processos de atendimento, com foco em automação, performance, documentação técnica, suporte a usuários e adoção da plataforma.',
+      en: 'I administer Salesforce CRM by aligning Sales Cloud, Service Cloud and Flow Builder with service operations, focusing on automation, performance, technical documentation, user support and platform adoption.',
+      es: 'Administro Salesforce CRM para alinear Sales Cloud, Service Cloud y Flow Builder con procesos de atención, con foco en automatización, rendimiento, documentación técnica, soporte a usuarios y adopción de la plataforma.',
     },
     technologies: ['Salesforce', 'Sales Cloud', 'Service Cloud', 'Flow Builder', 'CRM', 'Automation'],
-    color: '#0B5CAB',
+    color: visualColors.salesforceLegacy,
     current: true,
   },
   {
@@ -47,28 +34,13 @@ export const experiences = [
       en: 'Evolution of the Salesforce platform focused on objects, fields, layouts, automations, documentation, support and translating requirements into practical solutions.',
       es: 'Evolución de la plataforma Salesforce con foco en objetos, campos, layouts, automatizaciones, documentación, soporte y traducción de requisitos en soluciones prácticas.',
     },
-    achievements: {
-      pt: [
-        'Traduzia requisitos de negócio em configurações e melhorias no CRM',
-        'Apoiava a manutenção de objetos, campos, layouts e automações',
-        'Produzia documentação para sustentar governança e continuidade das soluções',
-        'Prestava suporte aos usuários para aumentar eficiência operacional',
-      ],
-      en: [
-        'Translated business requirements into CRM configurations and improvements',
-        'Supported maintenance of objects, fields, layouts and automations',
-        'Produced documentation to sustain governance and solution continuity',
-        'Provided user support to increase operational efficiency',
-      ],
-      es: [
-        'Traducía requisitos de negocio en configuraciones y mejoras en el CRM',
-        'Apoyaba el mantenimiento de objetos, campos, layouts y automatizaciones',
-        'Producía documentación para sostener gobernanza y continuidad de las soluciones',
-        'Brindaba soporte a usuarios para aumentar la eficiencia operacional',
-      ],
+    summary: {
+      pt: 'Evoluí Salesforce CRM traduzindo requisitos de negócio em objetos, campos, layouts e automações, com documentação técnica, governança da solução e suporte a usuários para eficiência operacional.',
+      en: 'I evolved Salesforce CRM by translating business requirements into objects, fields, layouts and automations, with technical documentation, solution governance and user support for operational efficiency.',
+      es: 'Evolucioné Salesforce CRM traduciendo requisitos de negocio en objetos, campos, layouts y automatizaciones, con documentación técnica, gobierno de solución y soporte a usuarios para eficiencia operacional.',
     },
     technologies: ['Salesforce', 'CRM', 'Objects', 'Layouts', 'Automation', 'Documentation'],
-    color: '#159DB3',
+    color: visualColors.flowCyanLegacy,
     current: false,
   },
   {
@@ -83,25 +55,13 @@ export const experiences = [
       en: 'International experience that marked the beginning of the Salesforce journey, collaborating with teams from different regions to adapt the platform to local needs.',
       es: 'Experiencia internacional que marcó el inicio de la trayectoria en Salesforce, colaborando con equipos de diferentes regiones para adaptar la plataforma a necesidades locales.',
     },
-    achievements: {
-      pt: [
-        'Colaborou em ambiente multicultural com equipes distribuídas',
-        'Apoiou adaptações da plataforma às demandas e processos locais',
-        'Fortaleceu a base prática em CRM e ecossistema Salesforce',
-      ],
-      en: [
-        'Collaborated in a multicultural environment with distributed teams',
-        'Supported platform adaptations to local demands and processes',
-        'Strengthened practical foundations in CRM and the Salesforce ecosystem',
-      ],
-      es: [
-        'Colaboró en un entorno multicultural con equipos distribuidos',
-        'Apoyó adaptaciones de la plataforma a demandas y procesos locales',
-        'Fortaleció la base práctica en CRM y el ecosistema Salesforce',
-      ],
+    summary: {
+      pt: 'Atuei em ambiente internacional com Salesforce CRM, colaborando com times distribuídos para adaptar a plataforma a processos locais, demandas de negócio e suporte a usuários.',
+      en: 'I worked in an international Salesforce CRM environment, collaborating with distributed teams to adapt the platform to local processes, business needs and user support.',
+      es: 'Actué en un entorno internacional de Salesforce CRM, colaborando con equipos distribuidos para adaptar la plataforma a procesos locales, demandas de negocio y soporte a usuarios.',
     },
     technologies: ['Salesforce', 'CRM', 'Business Requirements', 'User Support', 'International Teams'],
-    color: '#0B8F61',
+    color: visualColors.successGreen,
     current: false,
   },
   {
@@ -116,25 +76,13 @@ export const experiences = [
       en: 'Planning, execution and reporting of tests in agribusiness ERP, focused on quality, reliability and critical data validation.',
       es: 'Planificación, ejecución y reporte de pruebas en ERP del agronegocio, con foco en calidad, confiabilidad y validación de datos críticos.',
     },
-    achievements: {
-      pt: [
-        'Planejou e executou cenários de teste para processos de ERP',
-        'Reportou inconsistências com foco em confiabilidade operacional',
-        'Validou dados críticos para apoiar a qualidade das entregas',
-      ],
-      en: [
-        'Planned and executed test scenarios for ERP processes',
-        'Reported inconsistencies with a focus on operational reliability',
-        'Validated critical data to support delivery quality',
-      ],
-      es: [
-        'Planificó y ejecutó escenarios de prueba para procesos ERP',
-        'Reportó inconsistencias con foco en confiabilidad operacional',
-        'Validó datos críticos para apoyar la calidad de las entregas',
-      ],
+    summary: {
+      pt: 'Planejei e executei QA em ERP para agronegócio, cobrindo cenários de teste, reporte de inconsistências, validação de dados críticos e confiabilidade operacional.',
+      en: 'I planned and executed QA for agribusiness ERP, covering test scenarios, inconsistency reporting, critical data validation and operational reliability.',
+      es: 'Planifiqué y ejecuté QA en ERP para agronegocio, cubriendo escenarios de prueba, reporte de inconsistencias, validación de datos críticos y confiabilidad operacional.',
     },
     technologies: ['ERP', 'QA', 'Test Planning', 'Data Validation', 'Agribusiness'],
-    color: '#B7791F',
+    color: visualColors.signalAmber,
     current: false,
   },
   {
@@ -149,22 +97,10 @@ export const experiences = [
       en: 'ERP implementation in industrial companies, mapping processes, providing support, training teams and documenting solutions to optimize operational efficiency.',
       es: 'Implementación de ERP en industrias, mapeando procesos, brindando soporte, capacitando equipos y documentando soluciones para optimizar la eficiencia operacional.',
     },
-    achievements: {
-      pt: [
-        'Liderou implementações de ERP em ambientes industriais',
-        'Mapeou processos corporativos e traduziu necessidades em soluções práticas',
-        'Treinou equipes e documentou entregas para sustentar a operação',
-      ],
-      en: [
-        'Led ERP implementations in industrial environments',
-        'Mapped corporate processes and translated needs into practical solutions',
-        'Trained teams and documented deliveries to sustain operations',
-      ],
-      es: [
-        'Lideró implementaciones de ERP en entornos industriales',
-        'Mapeó procesos corporativos y tradujo necesidades en soluciones prácticas',
-        'Capacitó equipos y documentó entregas para sostener la operación',
-      ],
+    summary: {
+      pt: 'Conduzi implementação de ERP em indústrias, com mapeamento de processos, suporte funcional, treinamento de equipes, documentação de soluções e melhoria de eficiência operacional.',
+      en: 'I led ERP implementation in industrial companies, with process mapping, functional support, team training, solution documentation and operational efficiency improvement.',
+      es: 'Conduje implementación de ERP en industrias, con mapeo de procesos, soporte funcional, capacitación de equipos, documentación de soluciones y mejora de eficiencia operacional.',
     },
     technologies: ['ERP', 'Process Mapping', 'Implementation', 'Training', 'Documentation'],
     color: '#B83258',
